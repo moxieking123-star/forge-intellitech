@@ -18,7 +18,16 @@ export default function ProductCard({
   icon 
 }: ProductCardProps) {
   
-  // Status badge colors
+  /* 
+   * Status badge colors remain hardcoded as they are semantic:
+   * - Green = live/active
+   * - Yellow = pilot/testing
+   * - Blue = scaling
+   * - Purple = development
+   * 
+   * These should NOT change with chapter themes as they 
+   * communicate specific meaning to users.
+   */
   const statusColors = {
     live: "bg-green-500/20 text-green-400 border-green-500/30",
     pilot: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
@@ -36,31 +45,31 @@ export default function ProductCard({
 
   return (
     <Link href={href} className="block group">
-      <div className="h-full p-6 md:p-8 rounded-2xl bg-white/5 border border-forge-border hover:border-primary-500/50 transition-smooth hover:bg-white/[0.07]">
+      <div className="h-full p-6 md:p-8 rounded-2xl bg-env-surface border border-env-border hover:border-chapter-accent/50 transition-smooth hover:bg-env-surface-hover hover-lift hover-glow">
         
         {/* Icon and Status */}
         <div className="flex items-start justify-between mb-4">
-          <span className="text-4xl">{icon}</span>
+          <span className="text-4xl group-hover:scale-110 transition-transform">{icon}</span>
           <span className={`px-3 py-1 text-xs font-medium rounded-full border ${statusColors[status]}`}>
             {statusText[status]}
           </span>
         </div>
         
         {/* Name and Tagline */}
-        <h3 className="text-xl font-bold text-forge-light mb-2 group-hover:text-primary-400 transition-smooth">
+        <h3 className="text-xl font-bold text-env-primary mb-2 group-hover:text-chapter-accent transition-smooth">
           {name}
         </h3>
-        <p className="text-primary-400 text-sm font-medium mb-3">
+        <p className="text-chapter-accent text-sm font-medium mb-3">
           {tagline}
         </p>
         
         {/* Description */}
-        <p className="text-forge-muted text-sm leading-relaxed">
+        <p className="text-env-secondary text-sm leading-relaxed">
           {description}
         </p>
         
         {/* Learn More Link */}
-        <div className="mt-4 flex items-center text-sm text-primary-400 group-hover:text-primary-300 transition-smooth">
+        <div className="mt-4 flex items-center text-sm text-chapter-accent font-medium transition-smooth">
           <span>Learn more</span>
           <svg 
             className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" 

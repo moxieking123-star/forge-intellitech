@@ -2,13 +2,17 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { ThemeToggle } from "./ThemeProvider";
 
+// UPDATED: Added Gallery to navigation links
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Products", href: "/products" },
   { name: "TechUp", href: "/techup" },
   { name: "LaunchPad", href: "/launchpad" },
+  { name: "Gallery", href: "/gallery" },  // ← NEW: Added Gallery link
   { name: "Blog", href: "/blog" },
 ];
 
@@ -20,18 +24,31 @@ export default function Navbar() {
       <div className="container-forge">
         <div className="flex items-center justify-between h-16 md:h-20">
           
-          {/* Logo */}
+          {/* 
+            UPDATED: Logo Only (Text Removed)
+            - Removed the "Forge" and "ITS" text spans
+            - Logo image now serves as the sole brand identifier
+            - Increased logo visibility with proper sizing
+          */}
           <Link 
             href="/" 
-            className="flex items-center space-x-2 transition-smooth hover:opacity-80"
+            className="flex items-center transition-smooth hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-chapter-accent rounded-lg"
+            aria-label="Forge Intellitech - Home"
           >
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
-              <span className="text-white font-bold text-xl">F</span>
-            </div>
-            <div className="hidden sm:block">
-              <span className="text-xl font-bold text-forge-light">Forge</span>
-              <span className="text-xl font-light text-primary-400 ml-1">Intellitech</span>
-            </div>
+            <Image
+              src="/images/logo.png"
+              alt="Forge Intellitech"
+              width={140}
+              height={45}
+              className="h-10 md:h-12 w-auto object-contain"
+              priority
+            />
+            {/* 
+              REMOVED: Text labels
+              Previously had:
+              <span className="text-xl font-bold text-env-primary">Forge</span>
+              <span className="text-xl font-light text-chapter-accent">ITS</span>
+            */}
           </Link>
 
           {/* Desktop Navigation */}
@@ -40,18 +57,22 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="px-4 py-2 text-sm font-medium text-forge-muted hover:text-forge-light transition-smooth rounded-lg hover:bg-white/5"
+                className="px-4 py-2 text-sm font-medium text-env-secondary hover:text-env-primary transition-smooth rounded-lg hover:bg-env-surface"
               >
                 {link.name}
               </Link>
             ))}
           </div>
 
-          {/* CTA Button - Desktop */}
-          <div className="hidden md:flex items-center">
+          {/* Right side actions */}
+          <div className="hidden md:flex items-center space-x-3">
+            {/* Theme toggle */}
+            <ThemeToggle />
+            
+            {/* CTA Button */}
             <Link
               href="/contact"
-              className="px-5 py-2.5 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-smooth glow"
+              className="px-5 py-2.5 text-sm font-medium text-env-text-inverse bg-chapter-accent hover:bg-chapter-accent-hover rounded-lg transition-smooth glow"
             >
               Get In Touch
             </Link>
@@ -60,8 +81,9 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-forge-muted hover:text-forge-light transition-smooth"
+            className="md:hidden p-2 text-env-secondary hover:text-env-primary transition-smooth rounded-lg hover:bg-env-surface"
             aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
           >
             {isMenuOpen ? (
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -77,23 +99,26 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-forge-border">
+          <div className="md:hidden py-4 border-t border-env-border animate-fade-in">
             <div className="flex flex-col space-y-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="px-4 py-3 text-forge-muted hover:text-forge-light hover:bg-white/5 rounded-lg transition-smooth"
+                  className="px-4 py-3 text-env-secondary hover:text-env-primary hover:bg-env-surface rounded-lg transition-smooth"
                 >
                   {link.name}
                 </Link>
               ))}
-              <div className="pt-4 px-4">
+              
+              {/* Mobile: Theme toggle and CTA */}
+              <div className="pt-4 px-4 flex items-center justify-between border-t border-env-border mt-2">
+                <ThemeToggle />
                 <Link
                   href="/contact"
                   onClick={() => setIsMenuOpen(false)}
-                  className="block w-full py-3 text-center font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-smooth"
+                  className="px-5 py-3 text-center font-medium text-env-text-inverse bg-chapter-accent hover:bg-chapter-accent-hover rounded-lg transition-smooth"
                 >
                   Get In Touch
                 </Link>

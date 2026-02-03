@@ -1,10 +1,14 @@
+// ADD THIS IMPORT AT THE TOP (after line 1)
+import Image from "next/image";
 import SectionHeader from "../../components/SectionHeader";
 import Link from "next/link";
+import { ChapterWrapper } from "../../components/ChapterWrapper";
+import { AnimatedSection, StaggeredChildren } from "../../components/AnimatedSection";
 
-// Metadata for SEO (this page's title and description)
+// Metadata for SEO
 export const metadata = {
   title: "About Us",
-  description: "Learn about Forge Intellitech - an African technology company building solutions rooted in local realities for global impact.",
+  description: "Forge Intellitech is an African technology company shaping the next generation of thinkers, builders, and innovators through in-school programs and scalable software solutions designed for Africa's realities and future.",
 };
 
 // Company values
@@ -12,37 +16,37 @@ const values = [
   {
     title: "Ubuntu",
     meaning: "I am because we are",
-    description: "We believe in collective success. When Africa wins, we all win. Our technology is built to uplift communities, not just individuals.",
+    description: "Progress is never solitary. At Forge, every line of code, every platform, every initiative is measured by how it uplifts communities, students, and partners together.",
     icon: "🤝",
   },
   {
     title: "Excellence",
     meaning: "World-class, homegrown",
-    description: "We refuse to accept 'good enough for Africa.' We build to global standards because Africans deserve nothing less.",
+    description: "We craft technology that meets global standards but grows from African soil — rigorous, thoughtful, and purpose-built for our context.",
     icon: "⭐",
   },
   {
     title: "Integrity",
     meaning: "Trust as foundation",
-    description: "In a continent where trust is often broken, we build it. Transparent operations, honest communication, reliable products.",
+    description: "Transparency, honesty, and accountability guide everything we do — forging long-term trust with every school, partner, and community we serve.",
     icon: "🛡️",
   },
   {
     title: "Innovation",
     meaning: "Solutions from within",
-    description: "The best solutions to African problems come from African minds. We innovate from understanding, not assumption.",
+    description: "Our innovations are born from lived experience — African classrooms, local markets, and community needs inform every design decision.",
     icon: "💡",
   },
   {
     title: "Persistence",
     meaning: "Building for generations",
-    description: "Real change takes time. We're not here for quick wins — we're building infrastructure that will serve our children's children.",
+    description: "We do not chase quick wins. We build systems that endure, nurturing value that grows and multiplies over time.",
     icon: "🔥",
   },
   {
     title: "Accessibility",
     meaning: "Technology for everyone",
-    description: "If it only works for the privileged few, we haven't succeeded. Our products must reach those who need them most.",
+    description: "True technology is inclusive. We design with affordability, reach, and usability in mind, ensuring everyone can participate in progress.",
     icon: "🌍",
   },
 ];
@@ -52,127 +56,164 @@ const journey = [
   {
     year: "2024",
     title: "The Vision",
-    description: "Forge Intellitech was born from a simple question: Why does Africa keep waiting for solutions from elsewhere?",
+    description: "Forge Intellitech was born from a question: why wait for the future when Africa can build it? A vision rooted in self-determination and ingenuity.",
   },
   {
     year: "2025",
-    title: "Building Foundations",
-    description: "Development begins on TechUp and LaunchPad. The team expands. The mission becomes clearer with each line of code.",
+    title: "Laying the Foundation",
+    description: "TechUp and LaunchPad took flight. Partnerships formed. Ideas began transforming into tangible systems shaping education and innovation.",
   },
   {
     year: "2025+",
-    title: "The Future",
-    description: "BiteBank and Trego enter development. Partnerships form. The ecosystem grows. Africa starts building its own digital future.",
+    title: "Scaling Impact",
+    description: "BiteBank and Trego began to extend our ecosystem, connecting communities through technology that understands their world and empowers their future.",
   },
 ];
 
-// Team members (placeholders - you'll add real info later)
+// Team members
 const team = [
   {
-    name: "Founder Name",
+    name: "Adeniyi Moxie",
     role: "Founder & CEO",
-    bio: "Visionary leader with a passion for African technology and sustainable development.",
-    image: null,
+    bio: "A visionary builder turning ideas into real systems. Adeniyi bridges African ingenuity with scalable solutions that prepare youth for tomorrow's opportunities.",
+    image: "/images/team/founder.jpg", // CHANGED: lowercase .jpg for consistency
   },
   {
-    name: "Co-Founder Name",
-    role: "Co-Founder & CTO",
-    bio: "Technical architect building scalable solutions for Africa's unique challenges.",
-    image: null,
-  },
-  {
-    name: "Team Member 1",
-    role: "Head of Product",
-    bio: "Product strategist focused on user-centered design and impact measurement.",
-    image: null,
+    name: "Adeola Oyewoler",
+    role: "Chairman",
+    bio: "A strategic thinker nurturing African-led institutions. Adeola ensures Forge's initiatives empower youth to create lasting, meaningful systems.",
+    image: "/images/team/chairman.jpg", // CHANGED: lowercase .jpg for consistency
   },
 ];
+
+// ============================================
+// UPDATED: Team Member Card Component
+// ============================================
+// Changes made:
+// - Increased image container from w-24 h-24 to w-40 h-40 (mobile)
+// - Added responsive sizing: md:w-48 md:h-48 (desktop)
+// - Added ring/border effect for polish
+// - Improved hover state
+
+interface TeamMemberCardProps {
+  member: {
+    name: string;
+    role: string;
+    bio: string;
+    image: string;
+  };
+}
+
+function TeamMemberCard({ member }: TeamMemberCardProps) {
+  return (
+    <div className="p-8 rounded-2xl bg-env-surface border border-env-border hover:border-chapter-accent/30 transition-smooth hover-lift">
+      {/* 
+        UPDATED: Team member photo container
+        - Increased from w-24 h-24 to w-40 h-40 (160px)
+        - Desktop size: w-48 h-48 (192px)
+        - Added ring effect for visual polish
+        - Centered on all screen sizes
+      */}
+      <div className="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden bg-gradient-to-br from-chapter-accent-soft to-chapter-accent-softer border-4 border-env-border ring-4 ring-chapter-accent/10 mb-8 mx-auto relative group">
+        <Image
+          src={member.image}
+          alt={`${member.name} - ${member.role}`}
+          fill
+          sizes="(max-width: 768px) 160px, 192px"
+          className="object-cover transition-transform duration-500 group-hover:scale-110"
+          priority // Load these images immediately since they're above the fold
+        />
+      </div>
+      
+      {/* Center-aligned text for better visual balance with larger image */}
+      <div className="text-center">
+        <h3 className="text-2xl font-semibold text-env-primary mb-2">
+          {member.name}
+        </h3>
+        <p className="text-chapter-accent font-medium mb-4 text-lg">
+          {member.role}
+        </p>
+        <p className="text-env-secondary leading-relaxed">
+          {member.bio}
+        </p>
+      </div>
+    </div>
+  );
+}
 
 export default function AboutPage() {
   return (
-    <div>
+    <ChapterWrapper chapter="foundation">
       
       {/* ==================== HERO SECTION ==================== */}
       <section className="section-padding flex items-center min-h-[60vh]">
         <div className="container-forge">
-          <div className="max-w-4xl">
-            
-            <span className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold uppercase tracking-wider text-primary-400 bg-primary-500/10 rounded-full border border-primary-500/20">
-              About Forge
-            </span>
-            
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-forge-light mb-6">
-              We're not just building products.
-              <br />
-              <span className="gradient-text">We're building possibilities.</span>
-            </h1>
-            
-            <p className="text-xl text-forge-muted leading-relaxed max-w-3xl">
-              Forge Intellitech is an African technology company on a mission to create 
-              digital solutions that truly understand and serve our continent. We believe 
-              Africa's greatest innovations will come from within — built by those who 
-              live its realities every day.
-            </p>
-            
-          </div>
+          <AnimatedSection animation="fade-up">
+            <div className="max-w-4xl">
+              
+              <span className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent-soft rounded-full border border-chapter-accent/20">
+                About Forge
+              </span>
+              
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-env-primary mb-6">
+                We do more than build technology.
+                <br />
+                <span className="gradient-text">We forge systems that endure.</span>
+              </h1>
+              
+              <p className="text-xl text-env-secondary leading-relaxed max-w-3xl">
+                Forge Intellitech empowers African youth and institutions through digital education programs and scalable software solutions — designed in Africa, for Africa, and for a future that belongs to us.
+              </p>
+              
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* ==================== OUR STORY SECTION ==================== */}
-      <section className="section-padding bg-forge-darker">
+      <section className="section-padding bg-env-secondary">
         <div className="container-forge">
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             
-            {/* Story Text */}
-            <div>
-              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-primary-400 bg-primary-500/10 rounded-full border border-primary-500/20">
-                Our Story
-              </span>
-              
-              <h2 className="text-3xl md:text-4xl font-bold text-forge-light mb-6">
-                Born from a question that needed answering
-              </h2>
-              
-              <div className="space-y-4 text-forge-muted leading-relaxed">
-                <p>
-                  For too long, Africa has been on the receiving end of technology. 
-                  Solutions designed in distant boardrooms, by people who've never 
-                  experienced load shedding, or understood why mobile money matters 
-                  more than credit cards, or felt the weight of a continent's 
-                  untapped potential.
-                </p>
-                <p>
-                  Forge was born from frustration — and hope. Frustration with 
-                  watching brilliant African minds solve African problems with 
-                  borrowed tools. Hope that we could do better. That we 
-                  <em> must</em> do better.
-                </p>
-                <p>
-                  We started with a simple belief: <strong className="text-forge-light">the best 
-                  solutions for Africa will come from Africa.</strong> Not adapted 
-                  solutions. Not localized solutions. Solutions built from the 
-                  ground up, by those who understand the ground.
-                </p>
-                <p>
-                  Today, we're building that future — one product at a time.
-                </p>
-              </div>
-            </div>
-            
-            {/* Story Image Placeholder */}
-            <div className="relative">
-              <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary-500/20 to-accent-500/20 border border-forge-border flex items-center justify-center">
-                <div className="text-center p-8">
-                  <span className="text-6xl mb-4 block">🌍</span>
-                  <p className="text-forge-muted text-sm">
-                    [Your team or office image here]
+            <AnimatedSection animation="fade-right">
+              <div>
+                <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent-soft rounded-full border border-chapter-accent/20">
+                  Our Story
+                </span>
+                
+                <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-6">
+                  Crafted from lived experience
+                </h2>
+                
+                <div className="space-y-4 text-env-secondary leading-relaxed prose-forge">
+                  <p>
+                    Too often, technology in Africa has been imported, designed for worlds we do not live in. Education, finance, transport, and governance demanded solutions that understand us first.
+                  </p>
+                  <p>
+                    Forge was created to shift that story. Every system, every platform, every program emerges from deep understanding of African classrooms, communities, and challenges.
+                  </p>
+                  <p>
+                    We hold this truth: <strong className="text-env-primary">Africa's most powerful technologies will be built by Africans</strong>, for Africans, and scaled with intention.
+                  </p>
+                  <p>
+                    That belief shapes every product, every initiative, every journey we undertake.
                   </p>
                 </div>
               </div>
-              {/* Decorative element */}
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-primary-500/20 rounded-2xl -z-10"></div>
-            </div>
+            </AnimatedSection>
+            
+            <AnimatedSection animation="fade-left" delay={200}>
+              <div className="relative">
+                <div className="aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-chapter-accent-soft via-chapter-accent-softer to-chapter-accent-soft border border-env-border flex items-center justify-center">
+                  <div className="text-center p-8">
+                    <span className="text-6xl block mb-4">🌍</span>
+                    <p className="text-env-tertiary text-sm">[Team or office image]</p>
+                  </div>
+                </div>
+                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-chapter-accent-soft rounded-2xl -z-10"></div>
+              </div>
+            </AnimatedSection>
             
           </div>
           
@@ -185,33 +226,33 @@ export default function AboutPage() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             
-            {/* Mission */}
-            <div className="p-8 md:p-10 rounded-2xl bg-gradient-to-br from-primary-500/10 to-primary-500/5 border border-primary-500/20">
-              <div className="w-14 h-14 rounded-xl bg-primary-500/20 flex items-center justify-center mb-6">
-                <span className="text-2xl">🎯</span>
+            <AnimatedSection animation="fade-up">
+              <div className="p-8 md:p-10 rounded-2xl bg-gradient-to-br from-blue-500/10 to-blue-500/5 border border-blue-500/20 h-full hover-lift transition-smooth">
+                <div className="w-14 h-14 rounded-xl bg-blue-500/20 flex items-center justify-center mb-6">
+                  <span className="text-2xl">🎯</span>
+                </div>
+                <h3 className="text-sm font-semibold uppercase tracking-wider text-blue-400 mb-2">
+                  Our Mission
+                </h3>
+                <p className="text-2xl md:text-3xl font-bold text-env-primary leading-snug">
+                  To equip African youth and institutions with the tools, skills, and systems they need to create opportunity, independence, and enduring growth.
+                </p>
               </div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-primary-400 mb-2">
-                Our Mission
-              </h3>
-              <p className="text-2xl md:text-3xl font-bold text-forge-light leading-snug">
-                To build technology that empowers African communities to solve their 
-                own challenges and create their own opportunities.
-              </p>
-            </div>
+            </AnimatedSection>
             
-            {/* Vision */}
-            <div className="p-8 md:p-10 rounded-2xl bg-gradient-to-br from-accent-500/10 to-accent-500/5 border border-accent-500/20">
-              <div className="w-14 h-14 rounded-xl bg-accent-500/20 flex items-center justify-center mb-6">
-                <span className="text-2xl">🔭</span>
+            <AnimatedSection animation="fade-up" delay={150}>
+              <div className="p-8 md:p-10 rounded-2xl bg-gradient-to-br from-purple-500/10 to-purple-500/5 border border-purple-500/20 h-full hover-lift transition-smooth">
+                <div className="w-14 h-14 rounded-xl bg-purple-500/20 flex items-center justify-center mb-6">
+                  <span className="text-2xl">🔭</span>
+                </div>
+                <h3 className="text-sm font-semibold uppercase tracking-wider text-purple-400 mb-2">
+                  Our Vision
+                </h3>
+                <p className="text-2xl md:text-3xl font-bold text-env-primary leading-snug">
+                  An Africa where education, innovation, and technology are homegrown, globally competitive, and built for communities to thrive.
+                </p>
               </div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-accent-400 mb-2">
-                Our Vision
-              </h3>
-              <p className="text-2xl md:text-3xl font-bold text-forge-light leading-snug">
-                An Africa where technology is built by Africans, for Africans — 
-                becoming a global leader in homegrown innovation.
-              </p>
-            </div>
+            </AnimatedSection>
             
           </div>
           
@@ -219,32 +260,37 @@ export default function AboutPage() {
       </section>
 
       {/* ==================== VALUES SECTION ==================== */}
-      <section className="section-padding bg-forge-darker">
+      <section className="section-padding bg-env-secondary">
         <div className="container-forge">
           
-          <SectionHeader
-            label="Our Values"
-            title="What We Stand For"
-            description="These aren't just words on a wall. They're the principles that guide every decision we make."
-          />
+          <AnimatedSection animation="fade-up">
+            <SectionHeader
+              label="Our Values"
+              title="What We Stand For"
+              description="These principles guide every decision and product, shaping the world we create."
+            />
+          </AnimatedSection>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {values.map((value) => (
-              <div 
-                key={value.title}
-                className="p-6 rounded-xl bg-white/5 border border-forge-border hover:border-primary-500/30 transition-smooth"
+            {values.map((value, index) => (
+              <AnimatedSection 
+                key={value.title} 
+                animation="fade-up" 
+                delay={index * 100}
               >
-                <span className="text-3xl mb-4 block">{value.icon}</span>
-                <h3 className="text-xl font-bold text-forge-light mb-1">
-                  {value.title}
-                </h3>
-                <p className="text-primary-400 text-sm font-medium mb-3 italic">
-                  "{value.meaning}"
-                </p>
-                <p className="text-forge-muted text-sm leading-relaxed">
-                  {value.description}
-                </p>
-              </div>
+                <div className="p-6 rounded-xl bg-env-surface border border-env-border hover:border-chapter-accent/30 hover-lift hover-glow transition-smooth h-full">
+                  <span className="text-4xl mb-4 block">{value.icon}</span>
+                  <h3 className="text-xl font-semibold text-env-primary mb-1">
+                    {value.title}
+                  </h3>
+                  <p className="text-sm text-chapter-accent mb-3 italic">
+                    "{value.meaning}"
+                  </p>
+                  <p className="text-env-secondary text-sm leading-relaxed">
+                    {value.description}
+                  </p>
+                </div>
+              </AnimatedSection>
             ))}
           </div>
           
@@ -255,84 +301,78 @@ export default function AboutPage() {
       <section className="section-padding">
         <div className="container-forge">
           
-          <SectionHeader
-            label="Our Journey"
-            title="Building Step by Step"
-            description="Every great journey begins with a single step. Here's ours."
-          />
+          <AnimatedSection animation="fade-up">
+            <SectionHeader
+              label="Our Journey"
+              title="Building for the Long Term"
+              description="Forge is a marathon, not a sprint. Here's where we started and where we are headed."
+            />
+          </AnimatedSection>
           
           <div className="max-w-3xl mx-auto">
-            {journey.map((milestone, index) => (
-              <div key={milestone.year} className="relative pl-8 pb-12 last:pb-0">
-                {/* Timeline line */}
-                {index !== journey.length - 1 && (
-                  <div className="absolute left-[11px] top-8 bottom-0 w-0.5 bg-forge-border"></div>
-                )}
-                {/* Timeline dot */}
-                <div className="absolute left-0 top-1 w-6 h-6 rounded-full bg-primary-500 border-4 border-forge-dark"></div>
-                {/* Content */}
-                <div className="pt-0">
-                  <span className="text-primary-400 font-bold text-lg">{milestone.year}</span>
-                  <h3 className="text-xl font-semibold text-forge-light mt-1 mb-2">
-                    {milestone.title}
-                  </h3>
-                  <p className="text-forge-muted leading-relaxed">
-                    {milestone.description}
-                  </p>
-                </div>
-              </div>
-            ))}
+            <div className="relative">
+              {/* Timeline line */}
+              <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-env-border md:-translate-x-px"></div>
+              
+              {journey.map((milestone, index) => (
+                <AnimatedSection 
+                  key={milestone.year} 
+                  animation={index % 2 === 0 ? "fade-right" : "fade-left"}
+                  delay={index * 150}
+                >
+                  <div className={`relative flex items-start mb-12 last:mb-0 ${
+                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                  }`}>
+                    {/* Timeline dot */}
+                    <div className="absolute left-4 md:left-1/2 w-3 h-3 rounded-full bg-chapter-accent md:-translate-x-1.5 mt-2 ring-4 ring-env-bg-primary"></div>
+                    
+                    {/* Content */}
+                    <div className={`ml-12 md:ml-0 md:w-1/2 ${
+                      index % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12'
+                    }`}>
+                      <span className="inline-block px-3 py-1 text-sm font-bold text-chapter-accent bg-chapter-accent-soft rounded-full mb-2">
+                        {milestone.year}
+                      </span>
+                      <h3 className="text-xl font-semibold text-env-primary mb-2">
+                        {milestone.title}
+                      </h3>
+                      <p className="text-env-secondary leading-relaxed">
+                        {milestone.description}
+                      </p>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
           </div>
           
         </div>
       </section>
 
       {/* ==================== TEAM SECTION ==================== */}
-      <section className="section-padding bg-forge-darker">
+      {/* UPDATED: Now uses TeamMemberCard component with actual images */}
+      <section className="section-padding bg-env-secondary">
         <div className="container-forge">
           
-          <SectionHeader
-            label="Our Team"
-            title="The People Behind the Vision"
-            description="A diverse team united by a common purpose: building Africa's digital future."
-          />
+          <AnimatedSection animation="fade-up">
+            <SectionHeader
+              label="Leadership"
+              title="The People Behind Forge"
+              description="Meet the team creating Africa's technology future."
+            />
+          </AnimatedSection>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {team.map((member) => (
-              <div 
-                key={member.name}
-                className="text-center p-6 rounded-xl bg-white/5 border border-forge-border"
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {team.map((member, index) => (
+              <AnimatedSection 
+                key={member.name} 
+                animation="fade-up" 
+                delay={index * 150}
               >
-                {/* Avatar placeholder */}
-                <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary-500/30 to-accent-500/30 flex items-center justify-center">
-                  <span className="text-3xl">👤</span>
-                </div>
-                <h3 className="text-lg font-semibold text-forge-light mb-1">
-                  {member.name}
-                </h3>
-                <p className="text-primary-400 text-sm font-medium mb-3">
-                  {member.role}
-                </p>
-                <p className="text-forge-muted text-sm">
-                  {member.bio}
-                </p>
-              </div>
+                {/* CHANGED: Using TeamMemberCard component instead of inline JSX */}
+                <TeamMemberCard member={member} />
+              </AnimatedSection>
             ))}
-          </div>
-          
-          <div className="text-center mt-10">
-            <p className="text-forge-muted mb-4">
-              Want to join our team?
-            </p>
-            <Link
-              href="/join#talent"
-              className="inline-flex items-center text-primary-400 hover:text-primary-300 font-medium transition-smooth"
-            >
-              View open positions
-              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
           </div>
           
         </div>
@@ -342,34 +382,39 @@ export default function AboutPage() {
       <section className="section-padding">
         <div className="container-forge">
           
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-forge-light mb-6">
-              This is just the 
-              <span className="gradient-text"> beginning.</span>
-            </h2>
-            <p className="text-lg text-forge-muted mb-10">
-              We're building something bigger than a company. We're building a movement. 
-              A proof of concept that Africa can — and will — lead its own technological revolution.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/products"
-                className="px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-smooth glow"
-              >
-                See What We're Building
-              </Link>
-              <Link
-                href="/contact"
-                className="px-8 py-4 bg-white/5 hover:bg-white/10 text-forge-light font-medium rounded-lg border border-forge-border transition-smooth"
-              >
-                Start a Conversation
-              </Link>
+          <AnimatedSection animation="fade-up">
+            <div className="text-center max-w-3xl mx-auto">
+              
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-env-primary mb-6">
+                Ready to be part of 
+                <span className="gradient-text"> the Forge journey?</span>
+              </h2>
+              
+              <p className="text-lg text-env-secondary mb-10">
+                We welcome passionate minds who share our vision. Whether you want to join our team, partner with us, or support our mission — there's a place for you at Forge.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  href="/join"
+                  className="px-8 py-4 bg-chapter-accent hover:bg-chapter-accent-hover text-env-text-inverse font-medium rounded-lg transition-smooth glow hover-lift"
+                >
+                  Join Our Team
+                </Link>
+                <Link
+                  href="/contact"
+                  className="px-8 py-4 bg-env-surface hover:bg-env-surface-hover text-env-primary font-medium rounded-lg border border-env-border transition-smooth hover-lift"
+                >
+                  Get In Touch
+                </Link>
+              </div>
+              
             </div>
-          </div>
+          </AnimatedSection>
           
         </div>
       </section>
       
-    </div>
+    </ChapterWrapper>
   );
 }

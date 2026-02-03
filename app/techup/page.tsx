@@ -1,5 +1,8 @@
 import SectionHeader from "../../components/SectionHeader";
 import Link from "next/link";
+import { ChapterWrapper } from "../../components/ChapterWrapper";
+import { AnimatedSection, StaggeredChildren } from "../../components/AnimatedSection";
+import { Badge } from "../../components/Badge";
 
 // Metadata for SEO
 export const metadata = {
@@ -218,7 +221,7 @@ const faqs = [
 
 export default function TechUpPage() {
   return (
-    <div>
+    <ChapterWrapper chapter="ignition">
       
       {/* ==================== HERO SECTION ==================== */}
       <section className="section-padding flex items-center min-h-[70vh]">
@@ -226,105 +229,106 @@ export default function TechUpPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             
             {/* Hero Content */}
-            <div>
-              <div className="flex items-center space-x-3 mb-6">
-                <span className="text-5xl">🎓</span>
-                <span className="px-3 py-1 text-xs font-semibold uppercase tracking-wider text-yellow-400 bg-yellow-500/10 rounded-full border border-yellow-500/20">
-                  Pilot Program
-                </span>
-              </div>
-              
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-forge-light mb-6">
-                TechUp
-              </h1>
-              
-              <p className="text-xl md:text-2xl text-primary-400 font-medium mb-6">
-                Digital skills education for secondary schools
-              </p>
-              
-              <p className="text-lg text-forge-muted leading-relaxed mb-8">
-                A structured in-school digital technology initiative designed for 
-                secondary school students from JSS1 to SS3. Moving beyond basic 
-                computer awareness to equip students with practical, future-ready 
-                digital skills.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  href="/contact"
-                  className="px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-smooth glow text-center"
-                >
-                  Partner With Us
-                </Link>
-                <a
-                  href="#curriculum"
-                  className="px-8 py-4 bg-white/5 hover:bg-white/10 text-forge-light font-medium rounded-lg border border-forge-border transition-smooth text-center"
-                >
-                  View Curriculum
-                </a>
-              </div>
-            </div>
-            
-            {/* Hero Visual */}
-            <div className="relative hidden lg:block">
-              <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary-500/20 via-accent-500/10 to-primary-500/20 border border-forge-border flex items-center justify-center">
-                <div className="text-center p-8">
-                  <div className="text-8xl mb-6">🎓</div>
-                  <p className="text-forge-muted">
-                    [TechUp classroom or students image]
-                  </p>
+            <AnimatedSection animation="fade-right">
+              <div>
+                <div className="flex items-center space-x-3 mb-6">
+                  <span className="text-5xl">🎓</span>
+                  <Badge status="pilot" pulse>Pilot Program</Badge>
+                </div>
+                
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-env-primary mb-6">
+                  TechUp
+                </h1>
+                
+                <p className="text-xl md:text-2xl text-chapter-accent font-medium mb-6">
+                  Digital skills education for secondary schools
+                </p>
+                
+                <p className="text-lg text-env-secondary leading-relaxed mb-8">
+                  A structured in-school digital technology initiative designed for 
+                  secondary school students from JSS1 to SS3. Moving beyond basic 
+                  computer awareness to equip students with practical, future-ready 
+                  digital skills.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Link
+                    href="/contact"
+                    className="px-8 py-4 bg-chapter-accent hover:bg-chapter-accent-hover text-env-text-inverse font-medium rounded-lg transition-smooth glow text-center hover-lift"
+                  >
+                    Partner With Us
+                  </Link>
+                  <a
+                    href="#curriculum"
+                    className="px-8 py-4 bg-env-surface hover:bg-env-surface-hover text-env-primary font-medium rounded-lg border border-env-border transition-smooth text-center hover-lift"
+                  >
+                    View Curriculum
+                  </a>
                 </div>
               </div>
-              {/* Decorative elements */}
-              <div className="absolute -top-4 -left-4 w-20 h-20 bg-primary-500/20 rounded-xl -z-10"></div>
-              <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-accent-500/20 rounded-2xl -z-10"></div>
-            </div>
+            </AnimatedSection>
+            
+            {/* Hero Visual */}
+            <AnimatedSection animation="fade-left" delay={200}>
+              <div className="relative hidden lg:block">
+                <div className="aspect-square rounded-2xl bg-gradient-to-br from-chapter-accent-soft via-chapter-accent-softer to-chapter-accent-soft border border-env-border flex items-center justify-center animate-float">
+                  <div className="text-center p-8">
+                    <div className="text-8xl mb-6">🎓</div>
+                    <p className="text-env-tertiary">
+                      [TechUp classroom or students image]
+                    </p>
+                  </div>
+                </div>
+                {/* Decorative elements */}
+                <div className="absolute -top-4 -left-4 w-20 h-20 bg-chapter-accent-soft rounded-xl -z-10"></div>
+                <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-purple-500/10 rounded-2xl -z-10"></div>
+              </div>
+            </AnimatedSection>
             
           </div>
         </div>
       </section>
 
       {/* ==================== MISSION SECTION ==================== */}
-      <section className="section-padding bg-forge-darker">
+      <section className="section-padding bg-env-secondary">
         <div className="container-forge">
           
-          <div className="max-w-4xl mx-auto text-center">
-            <span className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold uppercase tracking-wider text-primary-400 bg-primary-500/10 rounded-full border border-primary-500/20">
-              Our Mission
-            </span>
-            
-            <h2 className="text-3xl md:text-4xl font-bold text-forge-light mb-6">
-              Skills that open doors
-            </h2>
-            
-            <p className="text-lg text-forge-muted leading-relaxed mb-8">
-              TechUp supports the government's vision of ensuring every child is 
-              technologically competent. But our core mission goes further: 
-              <strong className="text-forge-light"> to ensure students graduate with 
-              skills they can actually use</strong> — skills that open doors to 
-              employment, freelancing, entrepreneurship, and participation in the 
-              modern digital economy.
-            </p>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-primary-400 mb-2">6</div>
-                <p className="text-sm text-forge-muted">Years of Progressive Learning</p>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-primary-400 mb-2">JSS1</div>
-                <p className="text-sm text-forge-muted">Starting Grade</p>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-primary-400 mb-2">SS3</div>
-                <p className="text-sm text-forge-muted">Graduation Grade</p>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-primary-400 mb-2">∞</div>
-                <p className="text-sm text-forge-muted">Career Possibilities</p>
+          <AnimatedSection animation="fade-up">
+            <div className="max-w-4xl mx-auto text-center">
+              <span className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent-soft rounded-full border border-chapter-accent/20">
+                Our Mission
+              </span>
+              
+              <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-6">
+                Skills that open doors
+              </h2>
+              
+              <p className="text-lg text-env-secondary leading-relaxed mb-8">
+                TechUp supports the government's vision of ensuring every child is 
+                technologically competent. But our core mission goes further: 
+                <strong className="text-env-primary"> to ensure students graduate with 
+                skills they can actually use</strong> — skills that open doors to 
+                employment, freelancing, entrepreneurship, and participation in the 
+                modern digital economy.
+              </p>
+              
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
+                {[
+                  { value: "6", label: "Years of Progressive Learning" },
+                  { value: "JSS1", label: "Starting Grade" },
+                  { value: "SS3", label: "Graduation Grade" },
+                  { value: "∞", label: "Career Possibilities" },
+                ].map((stat, index) => (
+                  <AnimatedSection key={stat.label} animation="fade-up" delay={index * 100}>
+                    <div className="text-center">
+                      <div className="text-3xl md:text-4xl font-bold text-chapter-accent mb-2">{stat.value}</div>
+                      <p className="text-sm text-env-tertiary">{stat.label}</p>
+                    </div>
+                  </AnimatedSection>
+                ))}
               </div>
             </div>
-          </div>
+          </AnimatedSection>
           
         </div>
       </section>
@@ -333,26 +337,27 @@ export default function TechUpPage() {
       <section className="section-padding">
         <div className="container-forge">
           
-          <SectionHeader
-            label="Why TechUp"
-            title="Beyond Basic Computer Education"
-            description="Traditional computer studies teach students to use software. TechUp teaches them to build, create, and thrive in a digital world."
-          />
+          <AnimatedSection animation="fade-up">
+            <SectionHeader
+              label="Why TechUp"
+              title="Beyond Basic Computer Education"
+              description="Traditional computer studies teach students to use software. TechUp teaches them to build, create, and thrive in a digital world."
+            />
+          </AnimatedSection>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {differentiators.map((item) => (
-              <div 
-                key={item.title}
-                className="p-6 rounded-xl bg-white/5 border border-forge-border hover:border-primary-500/30 transition-smooth"
-              >
-                <span className="text-3xl mb-4 block">{item.icon}</span>
-                <h3 className="text-lg font-semibold text-forge-light mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-forge-muted text-sm leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
+            {differentiators.map((item, index) => (
+              <AnimatedSection key={item.title} animation="fade-up" delay={index * 75}>
+                <div className="p-6 rounded-xl bg-env-surface border border-env-border hover:border-chapter-accent/30 transition-smooth hover-lift hover-glow h-full">
+                  <span className="text-3xl mb-4 block">{item.icon}</span>
+                  <h3 className="text-lg font-semibold text-env-primary mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-env-secondary text-sm leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              </AnimatedSection>
             ))}
           </div>
           
@@ -360,31 +365,32 @@ export default function TechUpPage() {
       </section>
 
       {/* ==================== SKILL AREAS SECTION ==================== */}
-      <section className="section-padding bg-forge-darker">
+      <section className="section-padding bg-env-secondary">
         <div className="container-forge">
           
-          <SectionHeader
-            label="What Students Learn"
-            title="Core Skill Areas"
-            description="Through age-appropriate, progressive learning paths, students are introduced to essential areas of digital technology."
-          />
+          <AnimatedSection animation="fade-up">
+            <SectionHeader
+              label="What Students Learn"
+              title="Core Skill Areas"
+              description="Through age-appropriate, progressive learning paths, students are introduced to essential areas of digital technology."
+            />
+          </AnimatedSection>
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {skillAreas.map((skill) => (
-              <div 
-                key={skill.name}
-                className="p-5 rounded-xl bg-white/5 border border-forge-border text-center hover:border-primary-500/30 transition-smooth group"
-              >
-                <span className="text-4xl mb-3 block group-hover:scale-110 transition-transform">
-                  {skill.icon}
-                </span>
-                <h3 className="font-semibold text-forge-light text-sm mb-1">
-                  {skill.name}
-                </h3>
-                <p className="text-forge-muted text-xs leading-relaxed">
-                  {skill.description}
-                </p>
-              </div>
+            {skillAreas.map((skill, index) => (
+              <AnimatedSection key={skill.name} animation="scale" delay={index * 50}>
+                <div className="p-5 rounded-xl bg-env-surface border border-env-border text-center hover:border-chapter-accent/30 transition-smooth group hover-lift h-full">
+                  <span className="text-4xl mb-3 block group-hover:scale-110 transition-transform">
+                    {skill.icon}
+                  </span>
+                  <h3 className="font-semibold text-env-primary text-sm mb-1">
+                    {skill.name}
+                  </h3>
+                  <p className="text-env-tertiary text-xs leading-relaxed">
+                    {skill.description}
+                  </p>
+                </div>
+              </AnimatedSection>
             ))}
           </div>
           
@@ -395,50 +401,51 @@ export default function TechUpPage() {
       <section id="curriculum" className="section-padding scroll-mt-20">
         <div className="container-forge">
           
-          <SectionHeader
-            label="The Curriculum"
-            title="Six Years of Growth"
-            description="The curriculum is carefully structured to grow with the student, building confidence, creativity, and technical competence over time."
-          />
+          <AnimatedSection animation="fade-up">
+            <SectionHeader
+              label="The Curriculum"
+              title="Six Years of Growth"
+              description="The curriculum is carefully structured to grow with the student, building confidence, creativity, and technical competence over time."
+            />
+          </AnimatedSection>
           
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {curriculumTracks.map((track) => (
-              <div 
-                key={track.level}
-                className={`p-6 md:p-8 rounded-2xl bg-gradient-to-br ${track.color} border ${track.borderColor}`}
-              >
-                {/* Track Header */}
-                <div className="mb-6">
-                  <span className={`text-sm font-semibold uppercase tracking-wider ${track.textColor}`}>
-                    {track.grades}
-                  </span>
-                  <h3 className="text-2xl font-bold text-forge-light mt-1">
-                    {track.level}
-                  </h3>
-                  <p className={`${track.textColor} font-medium mt-1`}>
-                    {track.focus}
-                  </p>
+            {curriculumTracks.map((track, index) => (
+              <AnimatedSection key={track.level} animation="fade-up" delay={index * 150}>
+                <div className={`p-6 md:p-8 rounded-2xl bg-gradient-to-br ${track.color} border ${track.borderColor} h-full hover-lift transition-smooth`}>
+                  {/* Track Header */}
+                  <div className="mb-6">
+                    <span className={`text-sm font-semibold uppercase tracking-wider ${track.textColor}`}>
+                      {track.grades}
+                    </span>
+                    <h3 className="text-2xl font-bold text-env-primary mt-1">
+                      {track.level}
+                    </h3>
+                    <p className={`${track.textColor} font-medium mt-1`}>
+                      {track.focus}
+                    </p>
+                  </div>
+                  
+                  {/* Skills List */}
+                  <ul className="space-y-3 mb-6">
+                    {track.skills.map((skill, i) => (
+                      <li key={i} className="flex items-start text-env-secondary text-sm">
+                        <svg className={`w-5 h-5 ${track.textColor} mr-2 mt-0.5 flex-shrink-0`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        {skill}
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  {/* Outcome */}
+                  <div className="pt-4 border-t border-white/10">
+                    <p className="text-sm text-env-secondary">
+                      <span className={`font-semibold ${track.textColor}`}>Outcome:</span> {track.outcome}
+                    </p>
+                  </div>
                 </div>
-                
-                {/* Skills List */}
-                <ul className="space-y-3 mb-6">
-                  {track.skills.map((skill, i) => (
-                    <li key={i} className="flex items-start text-forge-muted text-sm">
-                      <svg className={`w-5 h-5 ${track.textColor} mr-2 mt-0.5 flex-shrink-0`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      {skill}
-                    </li>
-                  ))}
-                </ul>
-                
-                {/* Outcome */}
-                <div className="pt-4 border-t border-white/10">
-                  <p className="text-sm text-forge-muted">
-                    <span className={`font-semibold ${track.textColor}`}>Outcome:</span> {track.outcome}
-                  </p>
-                </div>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
           
@@ -446,25 +453,27 @@ export default function TechUpPage() {
       </section>
 
       {/* ==================== TRANSFORMATION SECTION ==================== */}
-      <section className="section-padding bg-forge-darker">
+      <section className="section-padding bg-env-secondary">
         <div className="container-forge">
           
-          <div className="max-w-4xl mx-auto text-center">
-            <span className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold uppercase tracking-wider text-accent-400 bg-accent-500/10 rounded-full border border-accent-500/20">
-              The Transformation
-            </span>
-            
-            <h2 className="text-3xl md:text-4xl font-bold text-forge-light mb-6">
-              Schools become talent incubators
-            </h2>
-            
-            <p className="text-lg text-forge-muted leading-relaxed">
-              TechUp transforms schools into talent incubation spaces, helping young 
-              people discover their strengths early and positioning them to thrive 
-              in a technology-driven world. Students don't just learn about 
-              technology — they learn to <strong className="text-forge-light">shape it</strong>.
-            </p>
-          </div>
+          <AnimatedSection animation="fade-up">
+            <div className="max-w-4xl mx-auto text-center">
+              <span className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold uppercase tracking-wider text-purple-400 bg-purple-500/10 rounded-full border border-purple-500/20">
+                The Transformation
+              </span>
+              
+              <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-6">
+                Schools become talent incubators
+              </h2>
+              
+              <p className="text-lg text-env-secondary leading-relaxed">
+                TechUp transforms schools into talent incubation spaces, helping young 
+                people discover their strengths early and positioning them to thrive 
+                in a technology-driven world. Students don't just learn about 
+                technology — they learn to <strong className="text-env-primary">shape it</strong>.
+              </p>
+            </div>
+          </AnimatedSection>
           
         </div>
       </section>
@@ -473,65 +482,70 @@ export default function TechUpPage() {
       <section className="section-padding">
         <div className="container-forge">
           
-          <SectionHeader
-            label="Benefits"
-            title="Value for Everyone"
-            description="TechUp creates meaningful value for students, schools, and partners alike."
-          />
+          <AnimatedSection animation="fade-up">
+            <SectionHeader
+              label="Benefits"
+              title="Value for Everyone"
+              description="TechUp creates meaningful value for students, schools, and partners alike."
+            />
+          </AnimatedSection>
           
           {/* Students Benefits */}
           <div className="mb-16">
-            <div className="flex items-center space-x-3 mb-8">
-              <span className="text-3xl">👨‍🎓</span>
-              <h3 className="text-2xl font-bold text-forge-light">For Students</h3>
-            </div>
+            <AnimatedSection animation="fade-up">
+              <div className="flex items-center space-x-3 mb-8">
+                <span className="text-3xl">👨‍🎓</span>
+                <h3 className="text-2xl font-bold text-env-primary">For Students</h3>
+              </div>
+            </AnimatedSection>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {benefits.students.map((benefit) => (
-                <div 
-                  key={benefit.title}
-                  className="p-6 rounded-xl bg-green-500/5 border border-green-500/20"
-                >
-                  <h4 className="font-semibold text-forge-light mb-2">{benefit.title}</h4>
-                  <p className="text-forge-muted text-sm leading-relaxed">{benefit.description}</p>
-                </div>
+              {benefits.students.map((benefit, index) => (
+                <AnimatedSection key={benefit.title} animation="fade-up" delay={index * 75}>
+                  <div className="p-6 rounded-xl bg-green-500/5 border border-green-500/20 h-full hover-lift transition-smooth">
+                    <h4 className="font-semibold text-env-primary mb-2">{benefit.title}</h4>
+                    <p className="text-env-secondary text-sm leading-relaxed">{benefit.description}</p>
+                  </div>
+                </AnimatedSection>
               ))}
             </div>
           </div>
           
           {/* Schools Benefits */}
           <div className="mb-16">
-            <div className="flex items-center space-x-3 mb-8">
-              <span className="text-3xl">🏫</span>
-              <h3 className="text-2xl font-bold text-forge-light">For Schools</h3>
-            </div>
+            <AnimatedSection animation="fade-up">
+              <div className="flex items-center space-x-3 mb-8">
+                <span className="text-3xl">🏫</span>
+                <h3 className="text-2xl font-bold text-env-primary">For Schools</h3>
+              </div>
+            </AnimatedSection>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {benefits.schools.map((benefit) => (
-                <div 
-                  key={benefit.title}
-                  className="p-6 rounded-xl bg-blue-500/5 border border-blue-500/20"
-                >
-                  <h4 className="font-semibold text-forge-light mb-2">{benefit.title}</h4>
-                  <p className="text-forge-muted text-sm leading-relaxed">{benefit.description}</p>
-                </div>
+              {benefits.schools.map((benefit, index) => (
+                <AnimatedSection key={benefit.title} animation="fade-up" delay={index * 75}>
+                  <div className="p-6 rounded-xl bg-blue-500/5 border border-blue-500/20 h-full hover-lift transition-smooth">
+                    <h4 className="font-semibold text-env-primary mb-2">{benefit.title}</h4>
+                    <p className="text-env-secondary text-sm leading-relaxed">{benefit.description}</p>
+                  </div>
+                </AnimatedSection>
               ))}
             </div>
           </div>
           
           {/* Partners Benefits */}
           <div>
-            <div className="flex items-center space-x-3 mb-8">
-              <span className="text-3xl">🤝</span>
-              <h3 className="text-2xl font-bold text-forge-light">For Partners</h3>
-            </div>
+            <AnimatedSection animation="fade-up">
+              <div className="flex items-center space-x-3 mb-8">
+                <span className="text-3xl">🤝</span>
+                <h3 className="text-2xl font-bold text-env-primary">For Partners</h3>
+              </div>
+            </AnimatedSection>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {benefits.partners.map((benefit) => (
-                <div 
-                  key={benefit.title}
-                  className="p-6 rounded-xl bg-purple-500/5 border border-purple-500/20"
-                >
-                  <h4 className="font-semibold text-forge-light mb-2">{benefit.title}</h4>
-                  <p className="text-forge-muted text-sm leading-relaxed">{benefit.description}</p>
-                </div>
+              {benefits.partners.map((benefit, index) => (
+                <AnimatedSection key={benefit.title} animation="fade-up" delay={index * 75}>
+                  <div className="p-6 rounded-xl bg-purple-500/5 border border-purple-500/20 h-full hover-lift transition-smooth">
+                    <h4 className="font-semibold text-env-primary mb-2">{benefit.title}</h4>
+                    <p className="text-env-secondary text-sm leading-relaxed">{benefit.description}</p>
+                  </div>
+                </AnimatedSection>
               ))}
             </div>
           </div>
@@ -540,30 +554,31 @@ export default function TechUpPage() {
       </section>
 
       {/* ==================== FAQ SECTION ==================== */}
-      <section className="section-padding bg-forge-darker">
+      <section className="section-padding bg-env-secondary">
         <div className="container-forge">
           
-          <SectionHeader
-            label="FAQ"
-            title="Common Questions"
-            description="Everything you need to know about bringing TechUp to your school."
-          />
+          <AnimatedSection animation="fade-up">
+            <SectionHeader
+              label="FAQ"
+              title="Common Questions"
+              description="Everything you need to know about bringing TechUp to your school."
+            />
+          </AnimatedSection>
           
           <div className="max-w-3xl mx-auto">
             <div className="space-y-4">
               {faqs.map((faq, index) => (
-                <div 
-                  key={index}
-                  className="p-6 rounded-xl bg-white/5 border border-forge-border"
-                >
-                  <h3 className="font-semibold text-forge-light mb-2 flex items-start">
-                    <span className="text-primary-400 mr-3">Q:</span>
-                    {faq.question}
-                  </h3>
-                  <p className="text-forge-muted leading-relaxed pl-7">
-                    {faq.answer}
-                  </p>
-                </div>
+                <AnimatedSection key={index} animation="fade-up" delay={index * 75}>
+                  <div className="p-6 rounded-xl bg-env-surface border border-env-border hover:border-chapter-accent/30 transition-smooth">
+                    <h3 className="font-semibold text-env-primary mb-2 flex items-start">
+                      <span className="text-chapter-accent mr-3">Q:</span>
+                      {faq.question}
+                    </h3>
+                    <p className="text-env-secondary leading-relaxed pl-7">
+                      {faq.answer}
+                    </p>
+                  </div>
+                </AnimatedSection>
               ))}
             </div>
           </div>
@@ -575,40 +590,42 @@ export default function TechUpPage() {
       <section className="section-padding">
         <div className="container-forge">
           
-          <div className="max-w-4xl mx-auto">
-            <div className="p-8 md:p-12 rounded-2xl bg-gradient-to-br from-primary-500/10 via-accent-500/5 to-primary-500/10 border border-primary-500/20 text-center">
-              
-              <h2 className="text-3xl md:text-4xl font-bold text-forge-light mb-4">
-                Ready to transform your school?
-              </h2>
-              
-              <p className="text-lg text-forge-muted mb-8 max-w-2xl mx-auto">
-                Whether you're a school administrator, government official, or 
-                organization looking to sponsor digital education — we'd love to 
-                discuss how TechUp can work for you.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  href="/contact"
-                  className="px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-smooth glow"
-                >
-                  Start a Conversation
-                </Link>
-                <Link
-                  href="/join#partners"
-                  className="px-8 py-4 bg-white/5 hover:bg-white/10 text-forge-light font-medium rounded-lg border border-forge-border transition-smooth"
-                >
-                  Become a Sponsor
-                </Link>
+          <AnimatedSection animation="fade-up">
+            <div className="max-w-4xl mx-auto">
+              <div className="p-8 md:p-12 rounded-2xl bg-gradient-to-br from-chapter-accent-soft via-chapter-accent-softer to-chapter-accent-soft border border-chapter-accent/20 text-center">
+                
+                <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-4">
+                  Ready to transform your school?
+                </h2>
+                
+                <p className="text-lg text-env-secondary mb-8 max-w-2xl mx-auto">
+                  Whether you're a school administrator, government official, or 
+                  organization looking to sponsor digital education — we'd love to 
+                  discuss how TechUp can work for you.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Link
+                    href="/contact"
+                    className="px-8 py-4 bg-chapter-accent hover:bg-chapter-accent-hover text-env-text-inverse font-medium rounded-lg transition-smooth glow hover-lift"
+                  >
+                    Start a Conversation
+                  </Link>
+                  <Link
+                    href="/join#partners"
+                    className="px-8 py-4 bg-env-surface hover:bg-env-surface-hover text-env-primary font-medium rounded-lg border border-env-border transition-smooth hover-lift"
+                  >
+                    Become a Sponsor
+                  </Link>
+                </div>
+                
               </div>
-              
             </div>
-          </div>
+          </AnimatedSection>
           
         </div>
       </section>
       
-    </div>
+    </ChapterWrapper>
   );
 }

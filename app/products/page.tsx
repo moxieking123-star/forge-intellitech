@@ -1,5 +1,8 @@
 import SectionHeader from "../../components/SectionHeader";
 import Link from "next/link";
+import { ChapterWrapper } from "../../components/ChapterWrapper";
+import { AnimatedSection } from "../../components/AnimatedSection";
+import { StatusBadge } from "../../components/Badge";
 
 // Metadata for SEO
 export const metadata = {
@@ -111,80 +114,53 @@ const products = [
   },
 ];
 
-// Status badge component
-function StatusBadge({ status }: { status: string }) {
-  const statusConfig = {
-    live: { 
-      color: "bg-green-500/20 text-green-400 border-green-500/30",
-      text: "Live" 
-    },
-    pilot: { 
-      color: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
-      text: "Pilot Program" 
-    },
-    scaling: { 
-      color: "bg-blue-500/20 text-blue-400 border-blue-500/30",
-      text: "Scaling" 
-    },
-    development: { 
-      color: "bg-purple-500/20 text-purple-400 border-purple-500/30",
-      text: "In Development" 
-    },
-  };
-
-  const config = statusConfig[status as keyof typeof statusConfig];
-
-  return (
-    <span className={`inline-flex px-3 py-1 text-xs font-semibold rounded-full border ${config.color}`}>
-      {config.text}
-    </span>
-  );
-}
-
 export default function ProductsPage() {
   return (
-    <div>
+    <ChapterWrapper chapter="forge">
       
       {/* ==================== HERO SECTION ==================== */}
       <section className="section-padding flex items-center min-h-[50vh]">
         <div className="container-forge">
-          <div className="max-w-4xl">
-            
-            <span className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold uppercase tracking-wider text-primary-400 bg-primary-500/10 rounded-full border border-primary-500/20">
-              Our Products
-            </span>
-            
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-forge-light mb-6">
-              Technology that 
-              <span className="gradient-text"> solves real problems.</span>
-            </h1>
-            
-            <p className="text-xl text-forge-muted leading-relaxed max-w-3xl">
-              Every product we build addresses a critical gap in African infrastructure. 
-              From education to trade, we're creating the tools our continent needs 
-              to thrive in the digital age.
-            </p>
-            
-          </div>
+          <AnimatedSection animation="fade-up">
+            <div className="max-w-4xl">
+              
+              <span className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent-soft rounded-full border border-chapter-accent/20">
+                Our Products
+              </span>
+              
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-env-primary mb-6">
+                Technology that 
+                <span className="gradient-text"> solves real problems.</span>
+              </h1>
+              
+              <p className="text-xl text-env-secondary leading-relaxed max-w-3xl">
+                Every product we build addresses a critical gap in African infrastructure. 
+                From education to trade, we're creating the tools our continent needs 
+                to thrive in the digital age.
+              </p>
+              
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* ==================== PRODUCTS OVERVIEW ==================== */}
-      <section className="section-padding bg-forge-darker">
+      <section className="section-padding bg-env-secondary">
         <div className="container-forge">
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {products.map((product) => (
-              <a
-                key={product.id}
-                href={`#${product.id}`}
-                className="p-4 md:p-6 rounded-xl bg-white/5 border border-forge-border hover:border-primary-500/50 transition-smooth text-center group"
-              >
-                <span className="text-3xl md:text-4xl block mb-3">{product.icon}</span>
-                <h3 className="font-semibold text-forge-light group-hover:text-primary-400 transition-smooth">
-                  {product.name}
-                </h3>
-              </a>
+            {products.map((product, index) => (
+              <AnimatedSection key={product.id} animation="fade-up" delay={index * 75}>
+                <a
+                  href={`#${product.id}`}
+                  className="block p-4 md:p-6 rounded-xl bg-env-surface border border-env-border hover:border-chapter-accent/50 transition-smooth text-center group hover-lift"
+                >
+                  <span className="text-3xl md:text-4xl block mb-3 group-hover:scale-110 transition-transform">{product.icon}</span>
+                  <h3 className="font-semibold text-env-primary group-hover:text-chapter-accent transition-smooth">
+                    {product.name}
+                  </h3>
+                </a>
+              </AnimatedSection>
             ))}
           </div>
           
@@ -196,171 +172,183 @@ export default function ProductsPage() {
         <section 
           key={product.id}
           id={product.id}
-          className={`section-padding ${index % 2 === 0 ? '' : 'bg-forge-darker'}`}
+          className={`section-padding scroll-mt-20 ${index % 2 === 0 ? '' : 'bg-env-secondary'}`}
         >
           <div className="container-forge">
             
             {/* Product Header */}
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-10">
-              <div className="flex items-center space-x-4 mb-4 md:mb-0">
-                <span className="text-5xl">{product.icon}</span>
-                <div>
-                  <h2 className="text-3xl md:text-4xl font-bold text-forge-light">
-                    {product.name}
-                  </h2>
-                  <p className="text-primary-400 font-medium">
-                    {product.tagline}
-                  </p>
+            <AnimatedSection animation="fade-up">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-10">
+                <div className="flex items-center space-x-4 mb-4 md:mb-0">
+                  <span className="text-5xl">{product.icon}</span>
+                  <div>
+                    <h2 className="text-3xl md:text-4xl font-bold text-env-primary">
+                      {product.name}
+                    </h2>
+                    <p className="text-chapter-accent font-medium">
+                      {product.tagline}
+                    </p>
+                  </div>
                 </div>
+                <StatusBadge status={product.status} />
               </div>
-              <StatusBadge status={product.status} />
-            </div>
+            </AnimatedSection>
 
             {/* Problem & Solution */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
               
               {/* Problem */}
-              <div className="p-6 md:p-8 rounded-xl bg-red-500/5 border border-red-500/20">
-                <div className="flex items-center space-x-2 mb-4">
-                  <span className="text-xl">⚠️</span>
-                  <h3 className="text-sm font-semibold uppercase tracking-wider text-red-400">
-                    The Problem
-                  </h3>
+              <AnimatedSection animation="fade-right" delay={100}>
+                <div className="p-6 md:p-8 rounded-xl bg-red-500/5 border border-red-500/20 h-full">
+                  <div className="flex items-center space-x-2 mb-4">
+                    <span className="text-xl">⚠️</span>
+                    <h3 className="text-sm font-semibold uppercase tracking-wider text-red-400">
+                      The Problem
+                    </h3>
+                  </div>
+                  <p className="text-env-secondary leading-relaxed">
+                    {product.problem}
+                  </p>
                 </div>
-                <p className="text-forge-muted leading-relaxed">
-                  {product.problem}
-                </p>
-              </div>
+              </AnimatedSection>
               
               {/* Solution */}
-              <div className="p-6 md:p-8 rounded-xl bg-green-500/5 border border-green-500/20">
-                <div className="flex items-center space-x-2 mb-4">
-                  <span className="text-xl">✅</span>
-                  <h3 className="text-sm font-semibold uppercase tracking-wider text-green-400">
-                    Our Solution
-                  </h3>
+              <AnimatedSection animation="fade-left" delay={100}>
+                <div className="p-6 md:p-8 rounded-xl bg-green-500/5 border border-green-500/20 h-full">
+                  <div className="flex items-center space-x-2 mb-4">
+                    <span className="text-xl">✅</span>
+                    <h3 className="text-sm font-semibold uppercase tracking-wider text-green-400">
+                      Our Solution
+                    </h3>
+                  </div>
+                  <p className="text-env-secondary leading-relaxed">
+                    {product.solution}
+                  </p>
                 </div>
-                <p className="text-forge-muted leading-relaxed">
-                  {product.solution}
-                </p>
-              </div>
+              </AnimatedSection>
               
             </div>
 
             {/* Features & Audience */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
-              
-              {/* Features */}
-              <div>
-                <h3 className="text-xl font-semibold text-forge-light mb-4 flex items-center">
-                  <span className="text-primary-400 mr-2">⚡</span>
-                  Key Features
-                </h3>
-                <ul className="space-y-3">
-                  {product.features.map((feature, i) => (
-                    <li key={i} className="flex items-start text-forge-muted">
-                      <svg className="w-5 h-5 text-primary-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+            <AnimatedSection animation="fade-up" delay={200}>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+                
+                {/* Features */}
+                <div>
+                  <h3 className="text-xl font-semibold text-env-primary mb-4 flex items-center">
+                    <span className="text-chapter-accent mr-2">⚡</span>
+                    Key Features
+                  </h3>
+                  <ul className="space-y-3">
+                    {product.features.map((feature, i) => (
+                      <li key={i} className="flex items-start text-env-secondary">
+                        <svg className="w-5 h-5 text-chapter-accent mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                {/* Audience */}
+                <div>
+                  <h3 className="text-xl font-semibold text-env-primary mb-4 flex items-center">
+                    <span className="text-chapter-accent mr-2">👥</span>
+                    Who It's For
+                  </h3>
+                  <ul className="space-y-3">
+                    {product.audience.map((item, i) => (
+                      <li key={i} className="flex items-start text-env-secondary">
+                        <svg className="w-5 h-5 text-purple-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
               </div>
-              
-              {/* Audience */}
-              <div>
-                <h3 className="text-xl font-semibold text-forge-light mb-4 flex items-center">
-                  <span className="text-primary-400 mr-2">👥</span>
-                  Who It's For
-                </h3>
-                <ul className="space-y-3">
-                  {product.audience.map((item, i) => (
-                    <li key={i} className="flex items-start text-forge-muted">
-                      <svg className="w-5 h-5 text-accent-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              
-            </div>
+            </AnimatedSection>
 
             {/* Impact Statement & CTA */}
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between p-6 rounded-xl bg-white/5 border border-forge-border">
-              <div className="mb-4 md:mb-0">
-                <p className="text-sm text-forge-muted uppercase tracking-wider mb-1">Impact</p>
-                <p className="text-xl font-semibold text-forge-light">{product.impact}</p>
+            <AnimatedSection animation="fade-up" delay={300}>
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between p-6 rounded-xl bg-env-surface border border-env-border hover-glow transition-smooth">
+                <div className="mb-4 md:mb-0">
+                  <p className="text-sm text-env-tertiary uppercase tracking-wider mb-1">Impact</p>
+                  <p className="text-xl font-semibold text-env-primary">{product.impact}</p>
+                </div>
+                {product.hasPage ? (
+                  <Link
+                    href={product.href}
+                    className="inline-flex items-center px-6 py-3 bg-chapter-accent hover:bg-chapter-accent-hover text-env-text-inverse font-medium rounded-lg transition-smooth hover-lift"
+                  >
+                    Learn more about {product.name}
+                    <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </Link>
+                ) : (
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center px-6 py-3 bg-env-surface-hover hover:bg-env-border text-env-primary font-medium rounded-lg border border-env-border transition-smooth hover-lift"
+                  >
+                    Get notified when {product.name} launches
+                    <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+                  </Link>
+                )}
               </div>
-              {product.hasPage ? (
-                <Link
-                  href={product.href}
-                  className="inline-flex items-center px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-smooth"
-                >
-                  Learn more about {product.name}
-                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
-              ) : (
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center px-6 py-3 bg-white/10 hover:bg-white/20 text-forge-light font-medium rounded-lg border border-forge-border transition-smooth"
-                >
-                  Get notified when {product.name} launches
-                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                  </svg>
-                </Link>
-              )}
-            </div>
+            </AnimatedSection>
             
           </div>
         </section>
       ))}
 
       {/* ==================== PARTNERSHIP CTA ==================== */}
-      <section className="section-padding bg-gradient-to-b from-forge-dark to-forge-darker">
+      <section className="section-padding bg-gradient-to-b from-env-bg-primary to-env-bg-secondary">
         <div className="container-forge">
           
-          <div className="text-center max-w-3xl mx-auto">
-            
-            <span className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold uppercase tracking-wider text-accent-400 bg-accent-500/10 rounded-full border border-accent-500/20">
-              Partner With Us
-            </span>
-            
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-forge-light mb-6">
-              Want to build with us?
-            </h2>
-            
-            <p className="text-lg text-forge-muted mb-10">
-              We're always looking for partners who share our vision. Whether you're an 
-              investor, a potential client, or an organization that wants to collaborate — 
-              we'd love to hear from you.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/join#partners"
-                className="px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-smooth glow"
-              >
-                Become a Partner
-              </Link>
-              <Link
-                href="/join#investors"
-                className="px-8 py-4 bg-white/5 hover:bg-white/10 text-forge-light font-medium rounded-lg border border-forge-border transition-smooth"
-              >
-                Invest in Forge
-              </Link>
+          <AnimatedSection animation="fade-up">
+            <div className="text-center max-w-3xl mx-auto">
+              
+              <span className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold uppercase tracking-wider text-purple-400 bg-purple-500/10 rounded-full border border-purple-500/20">
+                Partner With Us
+              </span>
+              
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-env-primary mb-6">
+                Want to build with us?
+              </h2>
+              
+              <p className="text-lg text-env-secondary mb-10">
+                We're always looking for partners who share our vision. Whether you're an 
+                investor, a potential client, or an organization that wants to collaborate — 
+                we'd love to hear from you.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  href="/join#partners"
+                  className="px-8 py-4 bg-chapter-accent hover:bg-chapter-accent-hover text-env-text-inverse font-medium rounded-lg transition-smooth glow hover-lift"
+                >
+                  Become a Partner
+                </Link>
+                <Link
+                  href="/join#investors"
+                  className="px-8 py-4 bg-env-surface hover:bg-env-surface-hover text-env-primary font-medium rounded-lg border border-env-border transition-smooth hover-lift"
+                >
+                  Invest in Forge
+                </Link>
+              </div>
+              
             </div>
-            
-          </div>
+          </AnimatedSection>
           
         </div>
       </section>
       
-    </div>
+    </ChapterWrapper>
   );
 }

@@ -3,69 +3,312 @@
 @tailwind utilities;
 
 /* ============================================
-   FORGE INTELLITECH - GLOBAL STYLES
+   FORGE INTELLITECH - DESIGN SYSTEM
+   ============================================
+   
+   Architecture:
+   1. Environment Layer (--env-*) → Day/Night mode
+   2. Chapter Layer (--chapter-*) → Per-page identity
+   3. Component Layer → Individual element styling
+   
+   This system allows pages to have unique emotional 
+   identities while respecting user's light/dark preference.
+   
+============================================ */
+
+/* ============================================
+   LAYER 1: CSS CUSTOM PROPERTIES
+   ============================================ */
+
+:root {
+  /* ----------------------------------------
+     Environment Variables (Day/Night)
+     ----------------------------------------
+     These control the global light/dark appearance.
+     Default is dark mode (Forge's primary aesthetic).
+  */
+  --env-bg-primary: #0a0a0a;
+  --env-bg-secondary: #050505;
+  --env-bg-tertiary: #121212;
+  --env-surface: #171717;
+  --env-surface-hover: #1f1f1f;
+  --env-border: #27272a;
+  --env-border-subtle: #1f1f1f;
+  
+  --env-text-primary: #fafafa;
+  --env-text-secondary: #a1a1aa;
+  --env-text-tertiary: #71717a;
+  --env-text-inverse: #0a0a0a;
+  
+  /* Glass effect values */
+  --env-glass-bg: rgba(255, 255, 255, 0.05);
+  --env-glass-border: rgba(255, 255, 255, 0.1);
+  --env-glass-blur: 10px;
+  
+  /* Scrollbar */
+  --env-scrollbar-track: #1a1a1a;
+  --env-scrollbar-thumb: var(--chapter-accent, #3b82f6);
+  
+  /* ----------------------------------------
+     Chapter Variables (Page Identity)
+     ----------------------------------------
+     These define the emotional color of each page.
+     Defaults to Forge blue — the "foundation" chapter.
+  */
+  --chapter-accent: #3b82f6;
+  --chapter-accent-hover: #2563eb;
+  --chapter-accent-soft: rgba(59, 130, 246, 0.1);
+  --chapter-accent-softer: rgba(59, 130, 246, 0.05);
+  --chapter-glow: rgba(59, 130, 246, 0.3);
+  --chapter-glow-intense: rgba(59, 130, 246, 0.5);
+  --chapter-gradient-start: #3b82f6;
+  --chapter-gradient-mid: #a855f7;
+  --chapter-gradient-end: #ec4899;
+  
+  /* ----------------------------------------
+     Animation Timing
+     ---------------------------------------- */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  
+  /* ----------------------------------------
+     Cursor Glow
+     ---------------------------------------- */
+  --cursor-glow-size: 400px;
+  --cursor-glow-opacity: 0.15;
+}
+
+/* ============================================
+   LIGHT MODE ENVIRONMENT
+   ============================================ */
+
+[data-mode="light"] {
+  --env-bg-primary: #fafafa;
+  --env-bg-secondary: #f4f4f5;
+  --env-bg-tertiary: #ffffff;
+  --env-surface: #ffffff;
+  --env-surface-hover: #f4f4f5;
+  --env-border: #e4e4e7;
+  --env-border-subtle: #f4f4f5;
+  
+  --env-text-primary: #09090b;
+  --env-text-secondary: #52525b;
+  --env-text-tertiary: #71717a;
+  --env-text-inverse: #fafafa;
+  
+  --env-glass-bg: rgba(255, 255, 255, 0.8);
+  --env-glass-border: rgba(0, 0, 0, 0.1);
+  
+  --env-scrollbar-track: #e4e4e7;
+  
+  /* Reduce glow intensity in light mode */
+  --chapter-glow: rgba(59, 130, 246, 0.15);
+  --chapter-glow-intense: rgba(59, 130, 246, 0.25);
+  --cursor-glow-opacity: 0.08;
+}
+
+/* ============================================
+   CHAPTER THEMES (Page Identities)
+   ============================================
+   
+   Each chapter represents a stage in the Forge journey:
+   - ignition: The spark of an idea (warm orange)
+   - forge: The making, the heat (Forge blue)
+   - rise: Growth and emergence (vibrant purple)
+   - expand: Reaching outward (teal/cyan)
+   - foundation: Solid ground (neutral warmth)
+   
+============================================ */
+
+/* IGNITION — The Spark */
+[data-chapter="ignition"] {
+  --chapter-accent: #f97316;
+  --chapter-accent-hover: #ea580c;
+  --chapter-accent-soft: rgba(249, 115, 22, 0.1);
+  --chapter-accent-softer: rgba(249, 115, 22, 0.05);
+  --chapter-glow: rgba(249, 115, 22, 0.3);
+  --chapter-glow-intense: rgba(249, 115, 22, 0.5);
+  --chapter-gradient-start: #f97316;
+  --chapter-gradient-mid: #fb923c;
+  --chapter-gradient-end: #fbbf24;
+}
+
+/* FORGE — The Making */
+[data-chapter="forge"] {
+  --chapter-accent: #3b82f6;
+  --chapter-accent-hover: #2563eb;
+  --chapter-accent-soft: rgba(59, 130, 246, 0.1);
+  --chapter-accent-softer: rgba(59, 130, 246, 0.05);
+  --chapter-glow: rgba(59, 130, 246, 0.3);
+  --chapter-glow-intense: rgba(59, 130, 246, 0.5);
+  --chapter-gradient-start: #3b82f6;
+  --chapter-gradient-mid: #6366f1;
+  --chapter-gradient-end: #8b5cf6;
+}
+
+/* RISE — Growth */
+[data-chapter="rise"] {
+  --chapter-accent: #a855f7;
+  --chapter-accent-hover: #9333ea;
+  --chapter-accent-soft: rgba(168, 85, 247, 0.1);
+  --chapter-accent-softer: rgba(168, 85, 247, 0.05);
+  --chapter-glow: rgba(168, 85, 247, 0.3);
+  --chapter-glow-intense: rgba(168, 85, 247, 0.5);
+  --chapter-gradient-start: #a855f7;
+  --chapter-gradient-mid: #c084fc;
+  --chapter-gradient-end: #e879f9;
+}
+
+/* EXPAND — Reaching Outward */
+[data-chapter="expand"] {
+  --chapter-accent: #14b8a6;
+  --chapter-accent-hover: #0d9488;
+  --chapter-accent-soft: rgba(20, 184, 166, 0.1);
+  --chapter-accent-softer: rgba(20, 184, 166, 0.05);
+  --chapter-glow: rgba(20, 184, 166, 0.3);
+  --chapter-glow-intense: rgba(20, 184, 166, 0.5);
+  --chapter-gradient-start: #14b8a6;
+  --chapter-gradient-mid: #2dd4bf;
+  --chapter-gradient-end: #5eead4;
+}
+
+/* FOUNDATION — Solid Ground */
+[data-chapter="foundation"] {
+  --chapter-accent: #78716c;
+  --chapter-accent-hover: #57534e;
+  --chapter-accent-soft: rgba(120, 113, 108, 0.1);
+  --chapter-accent-softer: rgba(120, 113, 108, 0.05);
+  --chapter-glow: rgba(120, 113, 108, 0.2);
+  --chapter-glow-intense: rgba(120, 113, 108, 0.35);
+  --chapter-gradient-start: #78716c;
+  --chapter-gradient-mid: #a8a29e;
+  --chapter-gradient-end: #d6d3d1;
+}
+
+/* Light mode chapter adjustments */
+[data-mode="light"][data-chapter="ignition"] {
+  --chapter-glow: rgba(249, 115, 22, 0.15);
+  --chapter-glow-intense: rgba(249, 115, 22, 0.25);
+}
+
+[data-mode="light"][data-chapter="rise"] {
+  --chapter-glow: rgba(168, 85, 247, 0.15);
+  --chapter-glow-intense: rgba(168, 85, 247, 0.25);
+}
+
+[data-mode="light"][data-chapter="expand"] {
+  --chapter-glow: rgba(20, 184, 166, 0.15);
+  --chapter-glow-intense: rgba(20, 184, 166, 0.25);
+}
+
+/* ============================================
+   LAYER 2: BASE STYLES
    ============================================ */
 
 html {
   scroll-behavior: smooth;
 }
 
-body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: #0a0a0a;
-  color: #fafafa;
-  line-height: 1.6;
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
-/* Custom scrollbar */
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--env-bg-primary);
+  color: var(--env-text-primary);
+  line-height: 1.6;
+  /* Prevent layout shift during theme transitions */
+  transition: background-color var(--duration-normal) var(--ease-smooth),
+              color var(--duration-normal) var(--ease-smooth);
+}
+
+/* Custom scrollbar using CSS variables */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: var(--env-scrollbar-track);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3b82f6;
+  background: var(--env-scrollbar-thumb);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #2563eb;
+  background: var(--chapter-accent-hover);
 }
 
 /* Focus states for accessibility */
 *:focus-visible {
-  outline: 2px solid #3b82f6;
+  outline: 2px solid var(--chapter-accent);
   outline-offset: 2px;
 }
 
 /* ============================================
-   CUSTOM UTILITY CLASSES
-   ============================================ */
+   LAYER 3: UTILITY CLASSES
+   ============================================
+   Updated to use CSS variables while maintaining
+   backward compatibility with existing class names.
+============================================ */
 
+/* Gradient text — now uses chapter colors */
 .gradient-text {
-  background: linear-gradient(135deg, #3b82f6 0%, #a855f7 50%, #ec4899 100%);
+  background: linear-gradient(
+    135deg, 
+    var(--chapter-gradient-start) 0%, 
+    var(--chapter-gradient-mid) 50%, 
+    var(--chapter-gradient-end) 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+/* Glass effect — now uses environment variables */
 .glass {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--env-glass-bg);
+  backdrop-filter: blur(var(--env-glass-blur));
+  -webkit-backdrop-filter: blur(var(--env-glass-blur));
+  border-bottom: 1px solid var(--env-glass-border);
 }
 
+/* Glow effect — now uses chapter accent */
 .glow {
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 0 20px var(--chapter-glow);
 }
 
+.glow-intense {
+  box-shadow: 0 0 30px var(--chapter-glow-intense);
+}
+
+/* Smooth transition — now uses design tokens */
 .transition-smooth {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--duration-normal) var(--ease-smooth);
 }
 
+.transition-fast {
+  transition: all var(--duration-fast) var(--ease-smooth);
+}
+
+/* Container — unchanged */
 .container-forge {
   width: 100%;
   max-width: 1280px;
@@ -75,6 +318,7 @@ body {
   padding-right: 1.5rem;
 }
 
+/* Section padding — unchanged */
 .section-padding {
   padding-top: 5rem;
   padding-bottom: 5rem;
@@ -86,3 +330,236 @@ body {
     padding-bottom: 7rem;
   }
 }
+
+/* ============================================
+   LAYER 4: ENVIRONMENT-AWARE UTILITIES
+   ============================================
+   New utility classes that respond to the 
+   environment (day/night) and chapter.
+============================================ */
+
+/* Backgrounds */
+.bg-env-primary { background-color: var(--env-bg-primary); }
+.bg-env-secondary { background-color: var(--env-bg-secondary); }
+.bg-env-tertiary { background-color: var(--env-bg-tertiary); }
+.bg-env-surface { background-color: var(--env-surface); }
+
+/* Text colors */
+.text-env-primary { color: var(--env-text-primary); }
+.text-env-secondary { color: var(--env-text-secondary); }
+.text-env-tertiary { color: var(--env-text-tertiary); }
+
+/* Chapter accent */
+.text-chapter-accent { color: var(--chapter-accent); }
+.bg-chapter-accent { background-color: var(--chapter-accent); }
+.bg-chapter-accent-soft { background-color: var(--chapter-accent-soft); }
+.border-chapter-accent { border-color: var(--chapter-accent); }
+
+/* Borders */
+.border-env { border-color: var(--env-border); }
+.border-env-subtle { border-color: var(--env-border-subtle); }
+
+/* ============================================
+   LAYER 5: MICRO-ANIMATIONS
+   ============================================
+   Subtle, purposeful animations that enhance
+   the perception of craft. All respect 
+   prefers-reduced-motion.
+============================================ */
+
+/* Fade in and up — for content appearing */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp var(--duration-slow) var(--ease-out-expo) forwards;
+}
+
+/* Staggered children — apply to parent */
+.stagger-children > * {
+  opacity: 0;
+  animation: fadeInUp var(--duration-slow) var(--ease-out-expo) forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 75ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 150ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 225ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 300ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 375ms; }
+
+/* Subtle pulse — for emphasis */
+@keyframes subtlePulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-subtle-pulse {
+  animation: subtlePulse 3s var(--ease-smooth) infinite;
+}
+
+/* Float — gentle hovering motion */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float {
+  animation: float 4s var(--ease-smooth) infinite;
+}
+
+/* Glow pulse — for interactive elements */
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--chapter-glow);
+  }
+  50% {
+    box-shadow: 0 0 30px var(--chapter-glow-intense);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glowPulse 3s var(--ease-smooth) infinite;
+}
+
+/* Reveal line — for headings */
+@keyframes revealLine {
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+.animate-reveal-line::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 2px;
+  background: var(--chapter-accent);
+  margin-top: 1rem;
+  animation: revealLine var(--duration-slow) var(--ease-out-expo) forwards;
+}
+
+/* ============================================
+   LAYER 6: INTERACTIVE STATES
+   ============================================ */
+
+/* Card hover lift */
+.hover-lift {
+  transition: transform var(--duration-normal) var(--ease-smooth),
+              box-shadow var(--duration-normal) var(--ease-smooth);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Subtle scale on hover */
+.hover-scale {
+  transition: transform var(--duration-fast) var(--ease-smooth);
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* Border glow on hover */
+.hover-glow {
+  transition: box-shadow var(--duration-normal) var(--ease-smooth);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 0 1px var(--chapter-accent),
+              0 0 20px var(--chapter-glow);
+}
+
+/* ============================================
+   LAYER 7: TYPOGRAPHY REFINEMENTS
+   ============================================ */
+
+/* Improved heading rhythm */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+/* Better paragraph spacing for long-form content */
+.prose-forge p {
+  margin-bottom: 1.5em;
+  line-height: 1.75;
+}
+
+.prose-forge p:last-child {
+  margin-bottom: 0;
+}
+
+/* Refined link style */
+.link-underline {
+  position: relative;
+  color: var(--chapter-accent);
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--chapter-accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--duration-normal) var(--ease-smooth);
+}
+
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ============================================
+   LEGACY COMPATIBILITY LAYER
+   ============================================
+   These rules ensure existing hardcoded classes
+   continue to work. The colors are now sourced
+   from CSS variables but fall back to original
+   values for safety.
+============================================ */
+
+/* Existing forge color classes still work */
+.text-forge-light { color: var(--env-text-primary); }
+.text-forge-muted { color: var(--env-text-secondary); }
+.bg-forge-dark { background-color: var(--env-bg-primary); }
+.bg-forge-darker { background-color: var(--env-bg-secondary); }
+.border-forge-border { border-color: var(--env-border); }
+
+/* Existing primary color classes map to chapter accent */
+.text-primary-400 { color: var(--chapter-accent); }
+.text-primary-300 { color: var(--chapter-accent); filter: brightness(1.1); }
+.bg-primary-600 { background-color: var(--chapter-accent); }
+.bg-primary-700 { background-color: var(--chapter-accent-hover); }
+.hover\:bg-primary-700:hover { background-color: var(--chapter-accent-hover); }
+.hover\:text-primary-300:hover { color: var(--chapter-accent); filter: brightness(1.1); }
+.hover\:text-primary-400:hover { color: var(--chapter-accent); }

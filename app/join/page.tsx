@@ -1,5 +1,7 @@
 import Link from "next/link";
 import SectionHeader from "../../components/SectionHeader";
+import { ChapterWrapper } from "../../components/ChapterWrapper";
+import { AnimatedSection } from "../../components/AnimatedSection";
 
 // Metadata for SEO
 export const metadata = {
@@ -100,7 +102,7 @@ const investmentHighlights = [
   },
   {
     title: "Proven Traction",
-    description: "LaunchPad 2025 succeeded with limited resources. TechUp is piloting in partner schools. We execute.",
+    description: "LaunchPad 2024 succeeded with limited resources. TechUp is piloting in partner schools. We execute.",
     icon: "✅",
   },
   {
@@ -155,198 +157,178 @@ const volunteerOpportunities = [
 
 export default function JoinPage() {
   return (
-    <div>
+    <ChapterWrapper chapter="ignition">
       
       {/* ==================== HERO SECTION ==================== */}
       <section className="section-padding flex items-center min-h-[60vh]">
         <div className="container-forge">
-          <div className="max-w-4xl mx-auto text-center">
-            
-            <span className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold uppercase tracking-wider text-primary-400 bg-primary-500/10 rounded-full border border-primary-500/20">
-              Join Us
-            </span>
-            
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-forge-light mb-6">
-              Be Part of the 
-              <span className="gradient-text"> Movement</span>
-            </h1>
-            
-            <p className="text-xl text-forge-muted leading-relaxed mb-10">
-              We're building technology that understands Africa — and we can't do it alone. 
-              Whether you're looking to join our team, partner with us, invest in our vision, 
-              or volunteer your time — there's a place for you at Forge.
-            </p>
-            
-            {/* Quick navigation */}
-            <div className="flex flex-wrap justify-center gap-4">
-              <a 
-                href="#talent" 
-                className="px-6 py-3 bg-white/5 hover:bg-white/10 text-forge-light font-medium rounded-lg border border-forge-border transition-smooth"
-              >
-                👩‍💻 Talent
-              </a>
-              <a 
-                href="#partners" 
-                className="px-6 py-3 bg-white/5 hover:bg-white/10 text-forge-light font-medium rounded-lg border border-forge-border transition-smooth"
-              >
-                🤝 Partners
-              </a>
-              <a 
-                href="#investors" 
-                className="px-6 py-3 bg-white/5 hover:bg-white/10 text-forge-light font-medium rounded-lg border border-forge-border transition-smooth"
-              >
-                💼 Investors
-              </a>
-              <a 
-                href="#volunteers" 
-                className="px-6 py-3 bg-white/5 hover:bg-white/10 text-forge-light font-medium rounded-lg border border-forge-border transition-smooth"
-              >
-                🙋 Volunteers
-              </a>
+          <AnimatedSection animation="fade-up">
+            <div className="max-w-4xl mx-auto text-center">
+              
+              <span className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent-soft rounded-full border border-chapter-accent/20">
+                Join Us
+              </span>
+              
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-env-primary mb-6">
+                Be Part of the 
+                <span className="gradient-text"> Movement</span>
+              </h1>
+              
+              <p className="text-xl text-env-secondary leading-relaxed mb-10">
+                We're building technology that understands Africa — and we can't do it alone. 
+                Whether you're looking to join our team, partner with us, invest in our vision, 
+                or volunteer your time — there's a place for you at Forge.
+              </p>
+              
+              {/* Quick navigation */}
+              <div className="flex flex-wrap justify-center gap-4">
+                {[
+                  { href: "#talent", icon: "👩‍💻", label: "Talent" },
+                  { href: "#partners", icon: "🤝", label: "Partners" },
+                  { href: "#investors", icon: "💼", label: "Investors" },
+                  { href: "#volunteers", icon: "🙋", label: "Volunteers" },
+                ].map((item) => (
+                  <a 
+                    key={item.href}
+                    href={item.href}
+                    className="px-6 py-3 bg-env-surface hover:bg-env-surface-hover text-env-primary font-medium rounded-lg border border-env-border transition-smooth hover-lift"
+                  >
+                    {item.icon} {item.label}
+                  </a>
+                ))}
+              </div>
+              
             </div>
-            
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* ==================== TALENT SECTION ==================== */}
-      <section id="talent" className="section-padding bg-forge-darker scroll-mt-20">
+      <section id="talent" className="section-padding bg-env-secondary scroll-mt-20">
         <div className="container-forge">
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             
             {/* Left: About working at Forge */}
-            <div>
-              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-green-400 bg-green-500/10 rounded-full border border-green-500/20">
-                Careers
-              </span>
-              
-              <h2 className="text-3xl md:text-4xl font-bold text-forge-light mb-6">
-                Build Your Career at Forge
-              </h2>
-              
-              <p className="text-forge-muted leading-relaxed mb-8">
-                Working at Forge means more than a job — it means being part of a mission 
-                to transform how technology serves Africa. We're a small team doing big things, 
-                and we're looking for exceptional people to join us.
-              </p>
-              
-              {/* What we look for */}
-              <h3 className="text-xl font-semibold text-forge-light mb-4">
-                What We Look For
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                {talentQualities.map((quality) => (
-                  <div 
-                    key={quality.title}
-                    className="p-4 rounded-lg bg-white/5 border border-forge-border"
-                  >
-                    <span className="text-2xl block mb-2">{quality.icon}</span>
-                    <h4 className="font-medium text-forge-light mb-1">{quality.title}</h4>
-                    <p className="text-forge-muted text-sm">{quality.description}</p>
-                  </div>
-                ))}
+            <AnimatedSection animation="fade-right">
+              <div>
+                <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-green-400 bg-green-500/10 rounded-full border border-green-500/20">
+                  Careers
+                </span>
+                
+                <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-6">
+                  Build Your Career at Forge
+                </h2>
+                
+                <p className="text-env-secondary leading-relaxed mb-8">
+                  Working at Forge means more than a job — it means being part of a mission 
+                  to transform how technology serves Africa. We're a small team doing big things, 
+                  and we're looking for exceptional people to join us.
+                </p>
+                
+                {/* What we look for */}
+                <h3 className="text-xl font-semibold text-env-primary mb-4">
+                  What We Look For
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                  {talentQualities.map((quality, index) => (
+                    <div 
+                      key={quality.title}
+                      className="p-4 rounded-lg bg-env-surface border border-env-border hover-glow transition-smooth"
+                    >
+                      <span className="text-2xl block mb-2">{quality.icon}</span>
+                      <h4 className="font-medium text-env-primary mb-1">{quality.title}</h4>
+                      <p className="text-env-secondary text-sm">{quality.description}</p>
+                    </div>
+                  ))}
+                </div>
+                
+                {/* Benefits */}
+                <h3 className="text-xl font-semibold text-env-primary mb-4">
+                  What We Offer
+                </h3>
+                <ul className="space-y-2 text-env-secondary">
+                  {[
+                    "Meaningful work with real impact",
+                    "Flexible, hybrid work environment",
+                    "Learning and growth opportunities",
+                    "Competitive compensation",
+                    "Equity options for early team members",
+                  ].map((benefit) => (
+                    <li key={benefit} className="flex items-center">
+                      <svg className="w-5 h-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      {benefit}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              
-              {/* Benefits */}
-              <h3 className="text-xl font-semibold text-forge-light mb-4">
-                What We Offer
-              </h3>
-              <ul className="space-y-2 text-forge-muted">
-                <li className="flex items-center">
-                  <svg className="w-5 h-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  Meaningful work with real impact
-                </li>
-                <li className="flex items-center">
-                  <svg className="w-5 h-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  Flexible, hybrid work environment
-                </li>
-                <li className="flex items-center">
-                  <svg className="w-5 h-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  Learning and growth opportunities
-                </li>
-                <li className="flex items-center">
-                  <svg className="w-5 h-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  Competitive compensation
-                </li>
-                <li className="flex items-center">
-                  <svg className="w-5 h-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  Equity options for early team members
-                </li>
-              </ul>
-            </div>
+            </AnimatedSection>
             
             {/* Right: Open positions */}
-            <div>
-              <h3 className="text-xl font-semibold text-forge-light mb-6">
-                Open Positions
-              </h3>
-              
-              <div className="space-y-4">
-                {openPositions.map((position, index) => (
-                  <div 
-                    key={index}
-                    className="p-6 rounded-xl bg-white/5 border border-forge-border hover:border-green-500/30 transition-smooth"
-                  >
-                    <div className="flex flex-wrap items-start justify-between gap-4 mb-3">
-                      <h4 className="font-semibold text-forge-light text-lg">
-                        {position.title}
-                      </h4>
-                      <div className="flex gap-2">
-                        <span className="px-2 py-1 text-xs font-medium text-green-400 bg-green-500/10 rounded">
-                          {position.type}
-                        </span>
-                      </div>
-                    </div>
-                    <p className="text-forge-muted text-sm mb-3">
-                      📍 {position.location}
-                    </p>
-                    <p className="text-forge-muted text-sm leading-relaxed mb-4">
-                      {position.description}
-                    </p>
-                    <Link
-                      href="/contact?category=careers"
-                      className="inline-flex items-center text-green-400 hover:text-green-300 font-medium text-sm transition-smooth"
+            <AnimatedSection animation="fade-left" delay={150}>
+              <div>
+                <h3 className="text-xl font-semibold text-env-primary mb-6">
+                  Open Positions
+                </h3>
+                
+                <div className="space-y-4">
+                  {openPositions.map((position, index) => (
+                    <div 
+                      key={index}
+                      className="p-6 rounded-xl bg-env-surface border border-env-border hover:border-green-500/30 transition-smooth hover-lift"
                     >
-                      Apply Now
-                      <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </Link>
-                  </div>
-                ))}
+                      <div className="flex flex-wrap items-start justify-between gap-4 mb-3">
+                        <h4 className="font-semibold text-env-primary text-lg">
+                          {position.title}
+                        </h4>
+                        <div className="flex gap-2">
+                          <span className="px-2 py-1 text-xs font-medium text-green-400 bg-green-500/10 rounded">
+                            {position.type}
+                          </span>
+                        </div>
+                      </div>
+                      <p className="text-env-tertiary text-sm mb-3">
+                        📍 {position.location}
+                      </p>
+                      <p className="text-env-secondary text-sm leading-relaxed mb-4">
+                        {position.description}
+                      </p>
+                      <Link
+                        href="/contact?category=careers"
+                        className="inline-flex items-center text-green-400 hover:text-green-300 font-medium text-sm transition-smooth"
+                      >
+                        Apply Now
+                        <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+                
+                {/* Don't see your role */}
+                <div className="mt-6 p-6 rounded-xl bg-green-500/10 border border-green-500/20">
+                  <h4 className="font-semibold text-env-primary mb-2">
+                    Don't see your role?
+                  </h4>
+                  <p className="text-env-secondary text-sm mb-4">
+                    We're always looking for exceptional talent. Send us your CV and tell us 
+                    how you can contribute to our mission.
+                  </p>
+                  <Link
+                    href="/contact?category=careers"
+                    className="inline-flex items-center text-green-400 hover:text-green-300 font-medium text-sm transition-smooth"
+                  >
+                    Send Open Application
+                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </Link>
+                </div>
               </div>
-              
-              {/* Don't see your role */}
-              <div className="mt-6 p-6 rounded-xl bg-green-500/10 border border-green-500/20">
-                <h4 className="font-semibold text-forge-light mb-2">
-                  Don't see your role?
-                </h4>
-                <p className="text-forge-muted text-sm mb-4">
-                  We're always looking for exceptional talent. Send us your CV and tell us 
-                  how you can contribute to our mission.
-                </p>
-                <Link
-                  href="/contact?category=careers"
-                  className="inline-flex items-center text-green-400 hover:text-green-300 font-medium text-sm transition-smooth"
-                >
-                  Send Open Application
-                  <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
-              </div>
-            </div>
+            </AnimatedSection>
             
           </div>
           
@@ -357,108 +339,109 @@ export default function JoinPage() {
       <section id="partners" className="section-padding scroll-mt-20">
         <div className="container-forge">
           
-          <SectionHeader
-            label="Partnerships"
-            title="Partner With Us"
-            description="We believe in collaboration over competition. There are many ways to work together toward our shared goal of African development."
-          />
+          <AnimatedSection animation="fade-up">
+            <SectionHeader
+              label="Partnerships"
+              title="Partner With Us"
+              description="We believe in collaboration over competition. There are many ways to work together toward our shared goal of African development."
+            />
+          </AnimatedSection>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {partnershipTypes.map((partner) => (
-              <div 
-                key={partner.title}
-                className="p-6 md:p-8 rounded-xl bg-white/5 border border-forge-border hover:border-blue-500/30 transition-smooth"
-              >
-                <span className="text-4xl block mb-4">{partner.icon}</span>
-                <h3 className="text-xl font-semibold text-forge-light mb-3">
-                  {partner.title}
-                </h3>
-                <p className="text-forge-muted leading-relaxed mb-6">
-                  {partner.description}
-                </p>
-                <Link
-                  href={partner.href}
-                  className="inline-flex items-center px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-smooth text-sm"
-                >
-                  {partner.cta}
-                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
-              </div>
+            {partnershipTypes.map((partner, index) => (
+              <AnimatedSection key={partner.title} animation="fade-up" delay={index * 100}>
+                <div className="p-6 md:p-8 rounded-xl bg-env-surface border border-env-border hover:border-blue-500/30 transition-smooth hover-lift h-full">
+                  <span className="text-4xl block mb-4">{partner.icon}</span>
+                  <h3 className="text-xl font-semibold text-env-primary mb-3">
+                    {partner.title}
+                  </h3>
+                  <p className="text-env-secondary leading-relaxed mb-6">
+                    {partner.description}
+                  </p>
+                  <Link
+                    href={partner.href}
+                    className="inline-flex items-center px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-smooth text-sm hover-lift"
+                  >
+                    {partner.cta}
+                    <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </Link>
+                </div>
+              </AnimatedSection>
             ))}
           </div>
           
           {/* Current partners */}
-          <div className="mt-16 text-center">
-            <h3 className="text-xl font-semibold text-forge-light mb-6">
-              Organizations We've Worked With
-            </h3>
-            <div className="flex flex-wrap justify-center gap-8 items-center">
-              <div className="px-6 py-4 rounded-lg bg-white/5 border border-forge-border">
-                <p className="text-forge-muted font-medium">Ikosi-Isheri LCDA</p>
-              </div>
-              <div className="px-6 py-4 rounded-lg bg-white/5 border border-forge-border">
-                <p className="text-forge-muted font-medium">NAPPS Lagos State</p>
-              </div>
-              <div className="px-6 py-4 rounded-lg bg-white/5 border border-forge-border text-forge-muted">
-                <p className="font-medium">+ More Coming</p>
+          <AnimatedSection animation="fade-up" delay={300}>
+            <div className="mt-16 text-center">
+              <h3 className="text-xl font-semibold text-env-primary mb-6">
+                Organizations We've Worked With
+              </h3>
+              <div className="flex flex-wrap justify-center gap-8 items-center">
+                {["Ikosi-Isheri LCDA", "NAPPS Lagos State", "+ More Coming"].map((partner) => (
+                  <div key={partner} className="px-6 py-4 rounded-lg bg-env-surface border border-env-border">
+                    <p className="text-env-secondary font-medium">{partner}</p>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
+          </AnimatedSection>
           
         </div>
       </section>
 
       {/* ==================== INVESTORS SECTION ==================== */}
-      <section id="investors" className="section-padding bg-forge-darker scroll-mt-20">
+      <section id="investors" className="section-padding bg-env-secondary scroll-mt-20">
         <div className="container-forge">
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             
             {/* Left: Investment thesis */}
-            <div>
-              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-accent-400 bg-accent-500/10 rounded-full border border-accent-500/20">
-                Investment
-              </span>
-              
-              <h2 className="text-3xl md:text-4xl font-bold text-forge-light mb-6">
-                Invest in Africa's Future
-              </h2>
-              
-              <p className="text-forge-muted leading-relaxed mb-8">
-                Forge Intellitech is building the digital infrastructure Africa needs. 
-                We're at an early stage with proven traction, a clear vision, and a 
-                massive market opportunity. We're looking for investors who share our 
-                long-term vision for the continent.
-              </p>
-              
-              {/* Investment highlights */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {investmentHighlights.map((highlight) => (
-                  <div 
-                    key={highlight.title}
-                    className="p-4 rounded-lg bg-accent-500/5 border border-accent-500/20"
-                  >
-                    <span className="text-2xl block mb-2">{highlight.icon}</span>
-                    <h4 className="font-medium text-forge-light mb-1">{highlight.title}</h4>
-                    <p className="text-forge-muted text-sm">{highlight.description}</p>
-                  </div>
-                ))}
+            <AnimatedSection animation="fade-right">
+              <div>
+                <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-purple-400 bg-purple-500/10 rounded-full border border-purple-500/20">
+                  Investment
+                </span>
+                
+                <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-6">
+                  Invest in Africa's Future
+                </h2>
+                
+                <p className="text-env-secondary leading-relaxed mb-8">
+                  Forge Intellitech is building the digital infrastructure Africa needs. 
+                  We're at an early stage with proven traction, a clear vision, and a 
+                  massive market opportunity. We're looking for investors who share our 
+                  long-term vision for the continent.
+                </p>
+                
+                {/* Investment highlights */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {investmentHighlights.map((highlight, index) => (
+                    <div 
+                      key={highlight.title}
+                      className="p-4 rounded-lg bg-purple-500/5 border border-purple-500/20 hover-glow transition-smooth"
+                    >
+                      <span className="text-2xl block mb-2">{highlight.icon}</span>
+                      <h4 className="font-medium text-env-primary mb-1">{highlight.title}</h4>
+                      <p className="text-env-secondary text-sm">{highlight.description}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            </AnimatedSection>
             
             {/* Right: What investors get */}
-            <div>
-              <div className="p-6 md:p-8 rounded-2xl bg-gradient-to-br from-accent-500/10 to-primary-500/10 border border-accent-500/20">
-                <h3 className="text-xl font-semibold text-forge-light mb-6">
+            <AnimatedSection animation="fade-left" delay={150}>
+              <div className="p-6 md:p-8 rounded-2xl bg-gradient-to-br from-purple-500/10 to-chapter-accent-soft border border-purple-500/20">
+                <h3 className="text-xl font-semibold text-env-primary mb-6">
                   What Early Investors Get
                 </h3>
                 
                 <ul className="space-y-4 mb-8">
                   {investorBenefits.map((benefit, index) => (
-                    <li key={index} className="flex items-start text-forge-muted">
-                      <svg className="w-5 h-5 text-accent-400 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <li key={index} className="flex items-start text-env-secondary">
+                      <svg className="w-5 h-5 text-purple-400 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                       {benefit}
@@ -466,27 +449,27 @@ export default function JoinPage() {
                   ))}
                 </ul>
                 
-                <div className="p-4 rounded-lg bg-white/5 border border-forge-border mb-6">
-                  <p className="text-forge-muted text-sm">
-                    <strong className="text-forge-light">Current Stage:</strong> Pre-seed / Seed
+                <div className="p-4 rounded-lg bg-env-surface border border-env-border mb-6">
+                  <p className="text-env-secondary text-sm">
+                    <strong className="text-env-primary">Current Stage:</strong> Pre-seed / Seed
                   </p>
-                  <p className="text-forge-muted text-sm mt-1">
-                    <strong className="text-forge-light">Looking For:</strong> Strategic investors aligned with our mission
+                  <p className="text-env-secondary text-sm mt-1">
+                    <strong className="text-env-primary">Looking For:</strong> Strategic investors aligned with our mission
                   </p>
                 </div>
                 
                 <Link
                   href="/contact?category=investment"
-                  className="block w-full text-center px-6 py-4 bg-accent-600 hover:bg-accent-700 text-white font-medium rounded-lg transition-smooth"
+                  className="block w-full text-center px-6 py-4 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-smooth hover-lift"
                 >
                   Request Investment Details
                 </Link>
                 
-                <p className="text-forge-muted text-xs text-center mt-4">
+                <p className="text-env-tertiary text-xs text-center mt-4">
                   We'll send you our pitch deck and arrange a call.
                 </p>
               </div>
-            </div>
+            </AnimatedSection>
             
           </div>
           
@@ -497,86 +480,91 @@ export default function JoinPage() {
       <section id="volunteers" className="section-padding scroll-mt-20">
         <div className="container-forge">
           
-          <SectionHeader
-            label="Volunteer"
-            title="Give Your Time, Change Lives"
-            description="Not everyone can work full-time or invest capital. But if you have skills and time to share, you can still make a difference."
-          />
+          <AnimatedSection animation="fade-up">
+            <SectionHeader
+              label="Volunteer"
+              title="Give Your Time, Change Lives"
+              description="Not everyone can work full-time or invest capital. But if you have skills and time to share, you can still make a difference."
+            />
+          </AnimatedSection>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {volunteerOpportunities.map((opportunity) => (
-              <div 
-                key={opportunity.title}
-                className="p-6 rounded-xl bg-white/5 border border-forge-border hover:border-yellow-500/30 transition-smooth"
-              >
-                <span className="text-4xl block mb-4">{opportunity.icon}</span>
-                <h3 className="text-lg font-semibold text-forge-light mb-2">
-                  {opportunity.title}
-                </h3>
-                <p className="text-forge-muted text-sm leading-relaxed mb-4">
-                  {opportunity.description}
-                </p>
-                <p className="text-yellow-400 text-sm font-medium">
-                  ⏱️ {opportunity.commitment}
-                </p>
-              </div>
+            {volunteerOpportunities.map((opportunity, index) => (
+              <AnimatedSection key={opportunity.title} animation="fade-up" delay={index * 75}>
+                <div className="p-6 rounded-xl bg-env-surface border border-env-border hover:border-chapter-accent/30 transition-smooth hover-lift h-full">
+                  <span className="text-4xl block mb-4">{opportunity.icon}</span>
+                  <h3 className="text-lg font-semibold text-env-primary mb-2">
+                    {opportunity.title}
+                  </h3>
+                  <p className="text-env-secondary text-sm leading-relaxed mb-4">
+                    {opportunity.description}
+                  </p>
+                  <p className="text-chapter-accent text-sm font-medium">
+                    ⏱️ {opportunity.commitment}
+                  </p>
+                </div>
+              </AnimatedSection>
             ))}
           </div>
           
-          <div className="text-center mt-12">
-            <p className="text-forge-muted mb-6">
-              Ready to volunteer? Tell us about your skills and availability.
-            </p>
-            <Link
-              href="/contact?category=general"
-              className="inline-flex items-center px-8 py-4 bg-yellow-600 hover:bg-yellow-700 text-white font-medium rounded-lg transition-smooth"
-            >
-              Become a Volunteer
-              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-          </div>
+          <AnimatedSection animation="fade-up" delay={300}>
+            <div className="text-center mt-12">
+              <p className="text-env-secondary mb-6">
+                Ready to volunteer? Tell us about your skills and availability.
+              </p>
+              <Link
+                href="/contact?category=general"
+                className="inline-flex items-center px-8 py-4 bg-chapter-accent hover:bg-chapter-accent-hover text-env-text-inverse font-medium rounded-lg transition-smooth hover-lift glow"
+              >
+                Become a Volunteer
+                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </div>
+          </AnimatedSection>
           
         </div>
       </section>
 
       {/* ==================== FINAL CTA SECTION ==================== */}
-      <section className="section-padding bg-gradient-to-b from-forge-darker to-forge-dark">
+      <section className="section-padding bg-gradient-to-b from-env-secondary to-env-bg-primary">
         <div className="container-forge">
           
-          <div className="max-w-3xl mx-auto text-center">
-            
-            <h2 className="text-3xl md:text-4xl font-bold text-forge-light mb-6">
-              Ready to join the 
-              <span className="gradient-text"> movement?</span>
-            </h2>
-            
-            <p className="text-lg text-forge-muted mb-10">
-              Whatever way you choose to participate, you'll be part of something bigger — 
-              the transformation of African technology from the ground up.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/contact"
-                className="px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-smooth glow"
-              >
-                Get In Touch
-              </Link>
-              <Link
-                href="/about"
-                className="px-8 py-4 bg-white/5 hover:bg-white/10 text-forge-light font-medium rounded-lg border border-forge-border transition-smooth"
-              >
-                Learn More About Us
-              </Link>
+          <AnimatedSection animation="fade-up">
+            <div className="max-w-3xl mx-auto text-center">
+              
+              <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-6">
+                Ready to join the 
+                <span className="gradient-text"> movement?</span>
+              </h2>
+              
+              <p className="text-lg text-env-secondary mb-10">
+                Whatever way you choose to participate, you'll be part of something bigger — 
+                the transformation of African technology from the ground up.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  href="/contact"
+                  className="px-8 py-4 bg-chapter-accent hover:bg-chapter-accent-hover text-env-text-inverse font-medium rounded-lg transition-smooth glow hover-lift"
+                >
+                  Get In Touch
+                </Link>
+                <Link
+                  href="/about"
+                  className="px-8 py-4 bg-env-surface hover:bg-env-surface-hover text-env-primary font-medium rounded-lg border border-env-border transition-smooth hover-lift"
+                >
+                  Learn More About Us
+                </Link>
+              </div>
+              
             </div>
-            
-          </div>
+          </AnimatedSection>
           
         </div>
       </section>
       
-    </div>
+    </ChapterWrapper>
   );
 }
