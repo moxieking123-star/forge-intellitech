@@ -27,9 +27,9 @@ interface LogoProps {
 
 // Size mappings in pixels
 const sizeMap = {
-  sm: { height: 24, width: 80 },
-  md: { height: 32, width: 107 },
-  lg: { height: 48, width: 160 },
+  sm: { height: 30, width: 80 },
+  md: { height: 50, width: 107 },
+  lg: { height: 65, width: 160 },
 };
 
 export function Logo({ 

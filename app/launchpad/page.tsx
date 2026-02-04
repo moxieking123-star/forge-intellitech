@@ -1,3 +1,4 @@
+import Image from "next/image";  // ← ADD THIS IMPORT
 import Link from "next/link";
 import { ChapterWrapper } from "../../components/ChapterWrapper";
 import { AnimatedSection } from "../../components/AnimatedSection";
@@ -39,9 +40,24 @@ export default function LaunchPadPage() {
       />
       
       {/* ==================== HERO SECTION ==================== */}
-      <section className="section-padding flex items-center min-h-[85vh] relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-chapter-accent/20 via-env-bg-primary to-purple-900/10 pointer-events-none" />
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-chapter-accent/10 rounded-full blur-3xl animate-subtle-pulse pointer-events-none" />
+      {/* UPDATED: Added hero background image */}
+      <section className="relative section-padding flex items-center min-h-[85vh] overflow-hidden">
+        {/* Hero Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/launchpad/hero-launchpad.jpg"
+            alt=""
+            fill
+            className="object-cover opacity-30"
+            priority
+            quality={85}
+          />
+          {/* Gradient overlays */}
+          <div className="absolute inset-0 bg-gradient-to-br from-chapter-accent/20 via-env-bg-primary/90 to-purple-900/20" />
+        </div>
+
+        {/* Animated glow */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-chapter-accent/10 rounded-full blur-3xl animate-subtle-pulse pointer-events-none z-0" />
         
         <div className="container-forge relative z-10">
           <AnimatedSection animation="fade-up">
@@ -118,6 +134,7 @@ export default function LaunchPadPage() {
       </section>
 
       {/* ==================== ABOUT SECTION ==================== */}
+      {/* UPDATED: Replaced placeholder with real image */}
       <section className="section-padding bg-env-secondary">
         <div className="container-forge">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -152,11 +169,15 @@ export default function LaunchPadPage() {
             
             <AnimatedSection animation="fade-left" delay={200}>
               <div className="relative">
-                <div className="aspect-video rounded-2xl bg-gradient-to-br from-chapter-accent-soft via-chapter-accent-softer to-chapter-accent-soft border border-env-border flex items-center justify-center animate-float">
-                  <div className="text-center p-8">
-                    <div className="text-7xl mb-4">🚀</div>
-                    <p className="text-env-tertiary">[LaunchPad event photo]</p>
-                  </div>
+                {/* UPDATED: Real image instead of placeholder */}
+                <div className="aspect-video rounded-2xl overflow-hidden border border-env-border relative">
+                  <Image
+                    src="/images/launchpad/event-2024.jpg"
+                    alt="LaunchPad 2024 event - Students presenting their business ideas"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
                 </div>
                 <div className="absolute -inset-4 bg-chapter-accent/10 rounded-3xl blur-2xl -z-10" />
               </div>

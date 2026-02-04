@@ -38,8 +38,8 @@ export default function Navbar() {
             <Image
               src="/images/logo.png"
               alt="Forge Intellitech"
-              width={140}
-              height={45}
+              width={200}
+              height={100}
               className="h-10 md:h-12 w-auto object-contain"
               priority
             />

@@ -1,4 +1,3 @@
-// ADD THIS IMPORT AT THE TOP (after line 1)
 import Image from "next/image";
 import SectionHeader from "../../components/SectionHeader";
 import Link from "next/link";
@@ -76,25 +75,19 @@ const team = [
     name: "Adeniyi Moxie",
     role: "Founder & CEO",
     bio: "A visionary builder turning ideas into real systems. Adeniyi bridges African ingenuity with scalable solutions that prepare youth for tomorrow's opportunities.",
-    image: "/images/team/founder.jpg", // CHANGED: lowercase .jpg for consistency
+    image: "/images/team/founder.jpg",
   },
   {
     name: "Adeola Oyewoler",
     role: "Chairman",
     bio: "A strategic thinker nurturing African-led institutions. Adeola ensures Forge's initiatives empower youth to create lasting, meaningful systems.",
-    image: "/images/team/chairman.jpg", // CHANGED: lowercase .jpg for consistency
+    image: "/images/team/chairman.jpg",
   },
 ];
 
 // ============================================
-// UPDATED: Team Member Card Component
+// Team Member Card Component
 // ============================================
-// Changes made:
-// - Increased image container from w-24 h-24 to w-40 h-40 (mobile)
-// - Added responsive sizing: md:w-48 md:h-48 (desktop)
-// - Added ring/border effect for polish
-// - Improved hover state
-
 interface TeamMemberCardProps {
   member: {
     name: string;
@@ -107,13 +100,6 @@ interface TeamMemberCardProps {
 function TeamMemberCard({ member }: TeamMemberCardProps) {
   return (
     <div className="p-8 rounded-2xl bg-env-surface border border-env-border hover:border-chapter-accent/30 transition-smooth hover-lift">
-      {/* 
-        UPDATED: Team member photo container
-        - Increased from w-24 h-24 to w-40 h-40 (160px)
-        - Desktop size: w-48 h-48 (192px)
-        - Added ring effect for visual polish
-        - Centered on all screen sizes
-      */}
       <div className="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden bg-gradient-to-br from-chapter-accent-soft to-chapter-accent-softer border-4 border-env-border ring-4 ring-chapter-accent/10 mb-8 mx-auto relative group">
         <Image
           src={member.image}
@@ -121,11 +107,10 @@ function TeamMemberCard({ member }: TeamMemberCardProps) {
           fill
           sizes="(max-width: 768px) 160px, 192px"
           className="object-cover transition-transform duration-500 group-hover:scale-110"
-          priority // Load these images immediately since they're above the fold
+          priority
         />
       </div>
       
-      {/* Center-aligned text for better visual balance with larger image */}
       <div className="text-center">
         <h3 className="text-2xl font-semibold text-env-primary mb-2">
           {member.name}
@@ -146,31 +131,60 @@ export default function AboutPage() {
     <ChapterWrapper chapter="foundation">
       
       {/* ==================== HERO SECTION ==================== */}
-      <section className="section-padding flex items-center min-h-[60vh]">
-        <div className="container-forge">
-          <AnimatedSection animation="fade-up">
-            <div className="max-w-4xl">
-              
-              <span className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent-soft rounded-full border border-chapter-accent/20">
-                About Forge
-              </span>
-              
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-env-primary mb-6">
-                We do more than build technology.
-                <br />
-                <span className="gradient-text">We forge systems that endure.</span>
-              </h1>
-              
-              <p className="text-xl text-env-secondary leading-relaxed max-w-3xl">
-                Forge Intellitech empowers African youth and institutions through digital education programs and scalable software solutions — designed in Africa, for Africa, and for a future that belongs to us.
-              </p>
-              
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
+<section className="relative section-padding flex items-center min-h-[60vh] overflow-hidden">
+  
+  {/* 
+    FIX: Hero Background Image
+    
+    Previous issue: Nested structure with w-full h-full inside absolute inset-0
+    caused dimension calculation issues.
+    
+    Solution: Place Image directly as child of section (which has relative).
+    The Image with fill becomes position:absolute and fills the section directly.
+  */}
+  <Image
+    src="/images/about/hero-about.jpg"
+    alt=""
+    fill
+    sizes="100vw"
+    className="object-cover"
+    style={{ zIndex: 0 }}
+    priority
+    quality={85}
+  />
+  
+  {/* Gradient overlay - must be above image (z-[1]) but below content (z-10) */}
+  <div 
+    className="absolute inset-0 bg-gradient-to-r from-env-bg-primary via-env-bg-primary/90 to-env-bg-primary/70"
+    style={{ zIndex: 1 }}
+  />
+
+  {/* Content - highest z-index */}
+  <div className="container-forge relative" style={{ zIndex: 10 }}>
+    <AnimatedSection animation="fade-up">
+      <div className="max-w-4xl">
+        
+        <span className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent-soft rounded-full border border-chapter-accent/20">
+          About Forge
+        </span>
+        
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-env-primary mb-6">
+          We do more than build technology.
+          <br />
+          <span className="gradient-text">We forge systems that endure.</span>
+        </h1>
+        
+        <p className="text-xl text-env-secondary leading-relaxed max-w-3xl">
+          Forge Intellitech empowers African youth and institutions through digital education programs and scalable software solutions — designed in Africa, for Africa, and for a future that belongs to us.
+        </p>
+        
+      </div>
+    </AnimatedSection>
+  </div>
+</section>
 
       {/* ==================== OUR STORY SECTION ==================== */}
+      {/* UPDATED: Replaced placeholder with actual image */}
       <section className="section-padding bg-env-secondary">
         <div className="container-forge">
           
@@ -205,11 +219,15 @@ export default function AboutPage() {
             
             <AnimatedSection animation="fade-left" delay={200}>
               <div className="relative">
-                <div className="aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-chapter-accent-soft via-chapter-accent-softer to-chapter-accent-soft border border-env-border flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <span className="text-6xl block mb-4">🌍</span>
-                    <p className="text-env-tertiary text-sm">[Team or office image]</p>
-                  </div>
+                {/* UPDATED: Real image instead of placeholder */}
+                <div className="aspect-square rounded-2xl overflow-hidden border border-env-border relative">
+                  <Image
+                    src="/images/about/team-story.jpg"
+                    alt="Forge Intellitech team collaborating"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
                 </div>
                 <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-chapter-accent-soft rounded-2xl -z-10"></div>
               </div>
@@ -311,7 +329,6 @@ export default function AboutPage() {
           
           <div className="max-w-3xl mx-auto">
             <div className="relative">
-              {/* Timeline line */}
               <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-env-border md:-translate-x-px"></div>
               
               {journey.map((milestone, index) => (
@@ -323,10 +340,8 @@ export default function AboutPage() {
                   <div className={`relative flex items-start mb-12 last:mb-0 ${
                     index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                   }`}>
-                    {/* Timeline dot */}
                     <div className="absolute left-4 md:left-1/2 w-3 h-3 rounded-full bg-chapter-accent md:-translate-x-1.5 mt-2 ring-4 ring-env-bg-primary"></div>
                     
-                    {/* Content */}
                     <div className={`ml-12 md:ml-0 md:w-1/2 ${
                       index % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12'
                     }`}>
@@ -350,7 +365,6 @@ export default function AboutPage() {
       </section>
 
       {/* ==================== TEAM SECTION ==================== */}
-      {/* UPDATED: Now uses TeamMemberCard component with actual images */}
       <section className="section-padding bg-env-secondary">
         <div className="container-forge">
           
@@ -369,7 +383,6 @@ export default function AboutPage() {
                 animation="fade-up" 
                 delay={index * 150}
               >
-                {/* CHANGED: Using TeamMemberCard component instead of inline JSX */}
                 <TeamMemberCard member={member} />
               </AnimatedSection>
             ))}

@@ -1,3 +1,4 @@
+import Image from "next/image";  // ← ADD THIS IMPORT
 import SectionHeader from "../../components/SectionHeader";
 import Link from "next/link";
 import { ChapterWrapper } from "../../components/ChapterWrapper";
@@ -119,8 +120,28 @@ export default function ProductsPage() {
     <ChapterWrapper chapter="forge">
       
       {/* ==================== HERO SECTION ==================== */}
-      <section className="section-padding flex items-center min-h-[50vh]">
-        <div className="container-forge">
+      {/* UPDATED: Added hero background image */}
+      <section className="relative section-padding flex items-center min-h-[50vh] overflow-hidden">
+        {/* Hero Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/products/hero-products.jpg"
+            alt=""
+            fill
+            className="object-cover opacity-20"
+            priority
+            quality={85}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-env-bg-primary via-env-bg-primary/95 to-env-bg-primary/80" />
+        </div>
+
+        {/* Decorative elements */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-chapter-accent/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
+        </div>
+
+        <div className="container-forge relative z-10">
           <AnimatedSection animation="fade-up">
             <div className="max-w-4xl">
               

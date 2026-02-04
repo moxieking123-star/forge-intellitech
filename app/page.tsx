@@ -5,7 +5,8 @@ import SectionHeader from "../components/SectionHeader";
 import Link from "next/link";
 import Image from "next/image";
 import { ChapterWrapper } from "../components/ChapterWrapper";
-import HeroSlider from "../components/HeroSlider";
+// REMOVED: HeroSlider import - no longer needed
+// import HeroSlider from "../components/HeroSlider";
 
 // Products data
 const products = [
@@ -72,15 +73,15 @@ export default function HomePage() {
     <ChapterWrapper chapter="forge">
       
       {/* ==================== HERO SECTION ==================== */}
-      {/* UPDATED: Added background image layer */}
-      <section className="relative section-padding flex flex-col items-center justify-center min-h-[85vh] overflow-hidden">
+      {/* 
+        UPDATED:
+        1. Reduced height from min-h-[85vh] to min-h-[60vh]
+        2. Removed HeroSlider component
+        3. Changed description text color for better visibility
+      */}
+      <section className="relative section-padding flex flex-col items-center justify-center min-h-[60vh] overflow-hidden">
         
-        {/* 
-          NEW: Hero Background Image
-          - Absolute positioned behind content
-          - Dark overlay for text readability
-          - Responsive and optimized with Next.js Image
-        */}
+        {/* Hero Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/hero-background.jpg"
@@ -88,10 +89,13 @@ export default function HomePage() {
             fill
             className="object-cover"
             priority
-            quality={85}
+            quality={75}
           />
-          {/* Gradient overlay for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-env-bg-primary/90 via-env-bg-primary/70 to-env-bg-primary" />
+          {/* 
+            Gradient overlay - adjusted for better text contrast
+            Made slightly darker to improve readability
+          */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-env-bg-primary" />
         </div>
 
         {/* Decorative glow elements */}
@@ -103,17 +107,19 @@ export default function HomePage() {
         <div className="container-forge text-center relative z-10">
           
           <div className="stagger-children">
-            {/* 
-              FIXED: Typo correction
-              Changed "Amos if technology" to "What if technology"
-            */}
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
-              <span className="text-env-primary">What if technology</span>
+              <span className="text-white drop-shadow-lg">What if technology</span>
               <br />
               <span className="gradient-text">truly understood Africa?</span>
             </h1>
             
-            <p className="text-lg md:text-xl text-env-secondary max-w-2xl mx-auto mb-10">
+            {/* 
+              UPDATED: Description text
+              - Changed from text-env-secondary to text-white for better visibility
+              - Added drop-shadow for extra contrast against background
+              - Made text slightly larger on mobile for readability
+            */}
+            <p className="text-lg md:text-xl text-white max-w-2xl mx-auto mb-10 drop-shadow-md leading-relaxed">
               We build solutions rooted in African realities, designed for global impact. 
               Tools that speak your language, solve your problems, and grow with your ambitions.
             </p>
@@ -127,15 +133,15 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/join"
-                className="px-8 py-4 bg-env-surface hover:bg-env-surface-hover text-env-primary font-medium rounded-lg border border-env-border transition-smooth hover-lift"
+                className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-medium rounded-lg border border-white/30 backdrop-blur-sm transition-smooth hover-lift"
               >
                 Join Our Movement
               </Link>
             </div>
           </div>
 
-          {/* Hero Image Slider */}
-          <HeroSlider />
+          {/* REMOVED: HeroSlider component */}
+          {/* <HeroSlider /> */}
           
         </div>
       </section>
@@ -209,7 +215,6 @@ export default function HomePage() {
       </section>
 
       {/* ==================== STATS SECTION ==================== */}
-      {/* NOTE: This section already has an image - keeping as is */}
       <section className="section-padding bg-gradient-to-b from-env-secondary to-env-primary">
         <div className="container-forge">
 
@@ -253,7 +258,6 @@ export default function HomePage() {
       </section>
 
       {/* ==================== CTA SECTION ==================== */}
-      {/* NOTE: This section already has an image - keeping as is */}
       <section className="section-padding">
         <div className="container-forge">
           
