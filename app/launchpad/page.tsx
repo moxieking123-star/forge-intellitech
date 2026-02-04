@@ -172,11 +172,11 @@ export default function LaunchPadPage() {
                 {/* UPDATED: Real image instead of placeholder */}
                 <div className="aspect-video rounded-2xl overflow-hidden border border-env-border relative">
                   <Image
-                    src="/images/launchpad/event-2024.jpg"
-                    alt="LaunchPad 2024 event - Students presenting their business ideas"
+                    src="/images/launchpad/event-2025.jpg"
+                    alt="LaunchPad 2025 event - Students presenting their business ideas"
                     fill
                     className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    sizes="(max-width: 1094px) 100vw, 50vw"
                   />
                 </div>
                 <div className="absolute -inset-4 bg-chapter-accent/10 rounded-3xl blur-2xl -z-10" />
