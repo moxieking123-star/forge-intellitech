@@ -1,116 +1,116 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+
+interface TimeLeft {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
+
+function getTimeLeft(targetDate: string): TimeLeft | null {
+  const difference = new Date(targetDate).getTime() - Date.now();
+  
+  if (difference <= 0) {
+    return null;
+  }
+  
+  return {
+    days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+    minutes: Math.floor((difference / 1000 / 60) % 60),
+    seconds: Math.floor((difference / 1000) % 60),
+  };
+}
+
+// ============================================
+// COUNTDOWN COMPONENT
+// ============================================
 
 interface CountdownProps {
   targetDate: string;
   eventName?: string;
+  className?: string;
 }
 
-export function Countdown({ targetDate, eventName = "the event" }: CountdownProps) {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
-  const [isComplete, setIsComplete] = useState(false);
+export function Countdown({ targetDate, eventName, className = "" }: CountdownProps) {
   const [mounted, setMounted] = useState(false);
+  const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(() => getTimeLeft(targetDate));
 
+  // Handle mounting
   useEffect(() => {
     setMounted(true);
-    
-    const calculateTimeLeft = () => {
-      const target = new Date(targetDate).getTime();
-      const now = Date.now();
-      const difference = target - now;
+  }, []);
 
-      if (difference <= 0) {
-        setIsComplete(true);
-        return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-      }
-
-      return {
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / (1000 * 60)) % 60),
-        seconds: Math.floor((difference / 1000) % 60),
-      };
-    };
-
-    setTimeLeft(calculateTimeLeft());
-
+  // Update countdown every second
+  useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
+      setTimeLeft(getTimeLeft(targetDate));
     }, 1000);
 
     return () => clearInterval(timer);
   }, [targetDate]);
 
-  // Don't render until mounted (prevents hydration mismatch)
+  // Placeholder during SSR
   if (!mounted) {
     return (
-      <div className="text-center">
-        <p className="text-gray-400 text-sm mb-4">Loading countdown...</p>
+      <div className={`flex justify-center gap-3 md:gap-4 ${className}`} aria-hidden="true">
+        {["Days", "Hours", "Minutes", "Seconds"].map((label) => (
+          <div key={label} className="text-center">
+            <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl bg-env-surface border border-env-border flex items-center justify-center mb-2">
+              <span className="text-2xl md:text-3xl font-bold text-env-tertiary">--</span>
+            </div>
+            <span className="text-xs text-env-tertiary uppercase tracking-wider">{label}</span>
+          </div>
+        ))}
       </div>
     );
   }
 
-  if (isComplete) {
+  // Event has started or passed
+  if (!timeLeft) {
     return (
-      <div className="text-center">
-        <div className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl bg-purple-500/10 border border-purple-500/20">
-          <span className="text-2xl">🎉</span>
-          <span className="text-xl font-semibold text-purple-400">
-            {eventName} is here!
-          </span>
-          <span className="text-2xl">🎉</span>
+      <div className={`text-center ${className}`}>
+        <div className="inline-flex items-center gap-2 px-6 py-3 bg-chapter-accent-soft rounded-full border border-chapter-accent/30">
+          <span className="text-xl">🎉</span>
+          <p className="text-lg font-semibold text-chapter-accent">
+            {eventName ? `${eventName} is happening now!` : "Event is happening now!"}
+          </p>
         </div>
       </div>
     );
   }
 
   const timeUnits = [
-    { value: timeLeft.days, label: 'Days' },
-    { value: timeLeft.hours, label: 'Hours' },
-    { value: timeLeft.minutes, label: 'Minutes' },
-    { value: timeLeft.seconds, label: 'Seconds' },
+    { label: "Days", value: timeLeft.days },
+    { label: "Hours", value: timeLeft.hours },
+    { label: "Minutes", value: timeLeft.minutes },
+    { label: "Seconds", value: timeLeft.seconds },
   ];
 
   return (
-    <div>
-      <p className="text-center text-gray-400 mb-6 text-sm uppercase tracking-wider font-medium">
-        Counting down to {eventName}
-      </p>
-      
-      <div className="grid grid-cols-4 gap-3 md:gap-4 max-w-lg mx-auto">
-        {timeUnits.map(({ value, label }) => (
-          <div key={label} className="text-center">
-            <div className="relative w-full aspect-square max-w-[100px] mx-auto flex items-center justify-center rounded-2xl bg-white/5 border border-white/10">
-              <span className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
-                {value.toString().padStart(2, '0')}
-              </span>
-            </div>
-            <span className="mt-2 block text-xs md:text-sm font-medium text-gray-400 uppercase tracking-wider">
-              {label}
+    <div className={`flex justify-center gap-3 md:gap-4 ${className}`}>
+      {timeUnits.map((unit) => (
+        <div key={unit.label} className="text-center">
+          <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl bg-env-surface border border-env-border flex items-center justify-center mb-2 shadow-lg hover-glow transition-smooth">
+            <span className="text-2xl md:text-3xl font-bold text-chapter-accent tabular-nums">
+              {unit.value.toString().padStart(2, "0")}
             </span>
           </div>
-        ))}
-      </div>
-      
-      <p className="text-center text-gray-500 mt-6 text-sm">
-        {new Date(targetDate).toLocaleDateString('en-US', {
-          weekday: 'long',
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        })}
-      </p>
+          <span className="text-xs text-env-tertiary uppercase tracking-wider">
+            {unit.label}
+          </span>
+        </div>
+      ))}
     </div>
   );
 }
 
-// Simple banner version
+// ============================================
+// COUNTDOWN BANNER COMPONENT
+// ============================================
+
 interface CountdownBannerProps {
   targetDate: string;
   eventName: string;
@@ -119,45 +119,101 @@ interface CountdownBannerProps {
   className?: string;
 }
 
-export function CountdownBanner({ 
-  targetDate, 
+export function CountdownBanner({
+  targetDate,
   eventName,
-  ctaText,
-  ctaHref,
-  className = '',
+  ctaText = "Learn More",
+  ctaHref = "#",
+  className = "",
 }: CountdownBannerProps) {
-  const [days, setDays] = useState(0);
   const [mounted, setMounted] = useState(false);
+  const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(() => getTimeLeft(targetDate));
 
   useEffect(() => {
     setMounted(true);
-    const target = new Date(targetDate).getTime();
-    const now = Date.now();
-    const difference = target - now;
-    setDays(Math.max(0, Math.floor(difference / (1000 * 60 * 60 * 24))));
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(getTimeLeft(targetDate));
+    }, 1000);
+
+    return () => clearInterval(timer);
   }, [targetDate]);
 
-  if (!mounted) return null;
+  // Don't render until mounted
+  if (!mounted) {
+    return null;
+  }
+
+  // Don't render if event has passed
+  if (!timeLeft) {
+    return null;
+  }
 
   return (
-    <div className={`py-3 px-4 bg-purple-500/10 border-b border-purple-500/20 ${className}`}>
-      <div className="container-forge flex flex-col sm:flex-row items-center justify-between gap-3">
-        <div className="flex items-center gap-3">
-          <span className="text-lg">🚀</span>
-          <div>
-            <p className="text-sm font-semibold text-white">{eventName}</p>
-            <p className="text-xs text-gray-400">{days} days remaining</p>
+    <div
+      className={`bg-gradient-to-r from-chapter-accent/10 via-chapter-accent/5 to-purple-500/10 border-b border-env-border ${className}`}
+    >
+      <div className="container-forge py-3">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <span className="text-xl animate-bounce">🚀</span>
+            <div className="text-sm">
+              <span className="text-env-secondary">{eventName} in </span>
+              <span className="font-semibold text-chapter-accent tabular-nums">
+                {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
+              </span>
+            </div>
           </div>
-        </div>
-        {ctaText && ctaHref && (
-          <a 
+          <a
             href={ctaHref}
-            className="px-4 py-2 text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 rounded-lg transition-colors"
+            className="text-sm font-medium text-chapter-accent hover:text-chapter-accent-hover transition-colors flex items-center gap-1 group"
           >
             {ctaText}
+            <svg 
+              className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
           </a>
-        )}
+        </div>
       </div>
     </div>
   );
 }
+
+// ============================================
+// SIMPLE INLINE COUNTDOWN (for debugging)
+// ============================================
+
+export function SimpleCountdown({ targetDate }: { targetDate: string }) {
+  const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
+
+  useEffect(() => {
+    // Initial calculation
+    setTimeLeft(getTimeLeft(targetDate));
+
+    // Update every second
+    const interval = setInterval(() => {
+      setTimeLeft(getTimeLeft(targetDate));
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [targetDate]);
+
+  if (!timeLeft) {
+    return <span>Event started!</span>;
+  }
+
+  return (
+    <span className="font-mono">
+      {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
+    </span>
+  );
+}
+
+export default Countdown;

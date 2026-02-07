@@ -1,43 +1,77 @@
+import { AnimatedSection } from "./AnimatedSection";
+
 interface SectionHeaderProps {
-  /** Small label above title */
+  /** Small label above title (e.g., "Our Approach") */
   label?: string;
   /** Main section title */
   title: string;
-  /** Description text below title */
+  /** Optional highlighted portion of title (renders with gradient) */
+  titleHighlight?: string;
+  /** Supporting description */
   description?: string;
-  /** Center the header (default: true) */
-  centered?: boolean;
-  /** Add reveal line animation to title */
-  animated?: boolean;
+  /** Alignment */
+  align?: "left" | "center";
+  /** Additional classes */
+  className?: string;
 }
 
-export default function SectionHeader({ 
-  label, 
-  title, 
-  description, 
-  centered = true,
-  animated = false,
+/**
+ * SectionHeader
+ * 
+ * Consistent header pattern for page sections.
+ * Provides visual rhythm and hierarchy.
+ * 
+ * @example
+ * <SectionHeader
+ *   label="What We're Building"
+ *   title="Products with"
+ *   titleHighlight="Purpose"
+ *   description="Every product addresses a critical gap in Africa."
+ * />
+ */
+export function SectionHeader({
+  label,
+  title,
+  titleHighlight,
+  description,
+  align = "center",
+  className = "",
 }: SectionHeaderProps) {
+  const alignmentClasses = {
+    left: "text-left",
+    center: "text-center mx-auto",
+  };
+
   return (
-    <div className={`mb-12 md:mb-16 ${centered ? 'text-center' : ''}`}>
-      {label && (
-        <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent-soft rounded-full border border-chapter-accent/20">
-          {label}
-        </span>
-      )}
-      <h2 
-        className={`
-          text-3xl md:text-4xl lg:text-5xl font-bold text-env-primary mb-4
-          ${animated ? 'animate-reveal-line' : ''}
-        `}
-      >
-        {title}
-      </h2>
-      {description && (
-        <p className={`text-lg text-env-secondary leading-relaxed ${centered ? 'max-w-2xl mx-auto' : 'max-w-2xl'}`}>
-          {description}
-        </p>
-      )}
-    </div>
+    <AnimatedSection animation="fade-up" className={`mb-12 md:mb-16 ${className}`}>
+      <div className={`max-w-3xl ${alignmentClasses[align]}`}>
+        {/* Label */}
+        {label && (
+          <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium bg-chapter-accent-soft text-chapter-accent rounded-full border border-chapter-accent/20">
+            {label}
+          </span>
+        )}
+
+        {/* Title */}
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-env-primary mb-4 leading-tight">
+          {title}
+          {titleHighlight && (
+            <>
+              {" "}
+              <span className="gradient-text">{titleHighlight}</span>
+            </>
+          )}
+        </h2>
+
+        {/* Description */}
+        {description && (
+          <p className="text-lg text-env-secondary leading-relaxed max-w-2xl mx-auto">
+            {description}
+          </p>
+        )}
+      </div>
+    </AnimatedSection>
   );
 }
+
+export default SectionHeader;

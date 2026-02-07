@@ -708,7 +708,7 @@ export function SponsorApplicationForm() {
         disabled={status === 'loading'}
         className="w-full px-8 py-4 bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white font-semibold rounded-lg transition-colors"
       >
-        {status === 'loading' ? 'Submitting...' : '🤝 Submit Inquiry'}
+        {status === 'loading' ? 'Submitting...' : '🤝 Submit Sponsorship Inquiry'}
       </button>
     </form>
   );

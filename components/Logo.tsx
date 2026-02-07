@@ -15,7 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface LogoProps {
-  /** Size preset: sm (24px), md (32px), lg (48px) */
+  /** Size preset: sm (50px), md (75px), lg (96px) */
   size?: "sm" | "md" | "lg";
   /** Additional CSS classes */
   className?: string;
@@ -27,9 +27,9 @@ interface LogoProps {
 
 // Size mappings in pixels
 const sizeMap = {
-  sm: { height: 30, width: 80 },
-  md: { height: 50, width: 107 },
-  lg: { height: 65, width: 160 },
+  sm: { height: 100, width: 300 },
+  md: { height: 200, width: 428 },
+  lg: { height: 260, width: 640 },
 };
 
 export function Logo({ 

@@ -1,41 +1,93 @@
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
-// Get environment variables
+// ============================================
+// FORGE INTELLITECH - SUPABASE CLIENT
+// ============================================
+
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-// ============================================
-// SUPABASE CLIENT
-// ============================================
-// 
-// We use a placeholder during build if env vars are missing.
-// This prevents build failures while still working at runtime.
-// 
-// IMPORTANT: Make sure to add these environment variables in Vercel:
-// - NEXT_PUBLIC_SUPABASE_URL
-// - NEXT_PUBLIC_SUPABASE_ANON_KEY
+/**
+ * Validates that environment variables are properly configured.
+ * Supabase anon keys are JWTs and always start with 'eyJ'.
+ */
+const isValidSupabaseConfig = (): boolean => {
+  return Boolean(
+    supabaseUrl?.startsWith("https://") &&
+    supabaseUrl?.includes(".supabase.co") &&
+    supabaseAnonKey?.startsWith("eyJ")
+  );
+};
 
+/**
+ * Check if Supabase is properly configured.
+ * Use this before making database calls to provide better UX.
+ * 
+ * @example
+ * if (!isSupabaseReady()) {
+ *   return { error: 'Database not available' };
+ * }
+ */
+export const isSupabaseReady = (): boolean => isValidSupabaseConfig();
+
+/**
+ * The main Supabase client instance.
+ */
 let supabase: SupabaseClient;
 
-if (supabaseUrl && supabaseAnonKey) {
-  // Normal case: environment variables are available
-  supabase = createClient(supabaseUrl, supabaseAnonKey);
+if (isValidSupabaseConfig()) {
+  supabase = createClient(supabaseUrl!, supabaseAnonKey!, {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: true,
+    },
+  });
 } else {
-  // Build time or missing env vars: create a placeholder client
-  // This will fail gracefully at runtime if actually used
-  console.warn(
-    "⚠️ Supabase environment variables not found. Database features will not work."
-  );
-  
-  // Create a dummy client that won't crash the build
-  // It uses placeholder values that will fail at runtime (which is fine)
+  // Log warning only on client-side to avoid build log noise
+  if (typeof window !== "undefined") {
+    console.warn(
+      "⚠️ Forge: Supabase not configured. Database features disabled.\n" +
+      "   Ensure NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY are set."
+    );
+  }
+
+  // Create placeholder client with dummy JWT structure
   supabase = createClient(
     "https://placeholder.supabase.co",
-    "placeholder-anon-key"
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwbGFjZWhvbGRlciJ9.placeholder"
   );
 }
 
 export { supabase };
+
+/**
+ * Safe wrapper for Supabase queries.
+ * Returns null instead of throwing if Supabase isn't configured.
+ */
+export async function safeQuery<T>(
+  query: PromiseLike<{ data: T | null; error: Error | null }>
+): Promise<{ data: T | null; error: string | null }> {
+  if (!isSupabaseReady()) {
+    return {
+      data: null,
+      error: "Database connection not available. Please try again later.",
+    };
+  }
+
+  try {
+    const { data, error } = await query;
+    return {
+      data,
+      error: error?.message || null,
+    };
+  } catch (err) {
+    return {
+      data: null,
+      error: err instanceof Error ? err.message : "An unexpected error occurred",
+    };
+  }
+}
 
 // ============================================
 // TYPE DEFINITIONS
@@ -105,3 +157,14 @@ export interface SponsorInquiry {
   submittedAt: string;
   created_at?: string;
 }
+
+// ============================================
+// DATABASE TABLE TYPES
+// ============================================
+
+export type Tables = {
+  contact_messages: ContactMessage;
+  blog_posts: BlogPost;
+  launchpad_applications: LaunchPadApplication;
+  sponsor_inquiries: SponsorInquiry;
+};

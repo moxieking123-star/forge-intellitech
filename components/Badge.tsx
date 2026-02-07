@@ -1,77 +1,81 @@
-/* ============================================
-   BADGE COMPONENT
-   ============================================
-   
-   Status badges with predefined styles.
-   
-   Usage:
-   <Badge status="pilot">Pilot</Badge>
-   <Badge status="live">Live</Badge>
-   <Badge variant="accent">New</Badge>
-   
-============================================ */
+import { ReactNode } from "react";
 
-type BadgeStatus = 'pilot' | 'development' | 'live' | 'coming-soon' | 'beta';
-type BadgeVariant = 'default' | 'accent' | 'success' | 'warning' | 'error';
+type BadgeVariant = "default" | "success" | "warning" | "error" | "info";
+type ProductStatus = "live" | "pilot" | "development" | "coming-soon" | "active";
 
 interface BadgeProps {
-  children: React.ReactNode;
-  status?: BadgeStatus;
+  children: ReactNode;
   variant?: BadgeVariant;
-  size?: 'sm' | 'md';
-  className?: string;
-  /** Animated pulse effect */
+  status?: ProductStatus;
   pulse?: boolean;
+  className?: string;
 }
 
+const variantStyles: Record<BadgeVariant, string> = {
+  default: "bg-env-surface text-env-secondary border-env-border",
+  success: "bg-baobab-500/20 text-baobab-400 border-baobab-500/30",
+  warning: "bg-kente-500/20 text-kente-400 border-kente-500/30",
+  error: "bg-red-500/20 text-red-400 border-red-500/30",
+  info: "bg-indigo-500/20 text-indigo-400 border-indigo-500/30",
+};
+
+const statusStyles: Record<ProductStatus, { label: string; classes: string }> = {
+  live: {
+    label: "Live",
+    classes: "bg-baobab-500/20 text-baobab-400 border-baobab-500/30",
+  },
+  pilot: {
+    label: "Pilot",
+    classes: "bg-kente-500/20 text-kente-400 border-kente-500/30",
+  },
+  development: {
+    label: "In Development",
+    classes: "bg-indigo-500/20 text-indigo-400 border-indigo-500/30",
+  },
+  "coming-soon": {
+    label: "Coming Soon",
+    classes: "bg-clay-500/20 text-clay-400 border-clay-500/30",
+  },
+  active: {
+    label: "Active",
+    classes: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
+  },
+};
+
+/**
+ * Badge
+ * 
+ * A small label component for status indicators, tags, etc.
+ */
 export function Badge({
   children,
+  variant = "default",
   status,
-  variant = 'default',
-  size = 'sm',
-  className = '',
   pulse = false,
+  className = "",
 }: BadgeProps) {
+  const baseClasses = "inline-flex items-center px-3 py-1 text-xs font-medium rounded-full border";
   
-  // Status-based styling
-  const statusStyles: Record<BadgeStatus, string> = {
-    pilot: 'bg-amber-500/10 text-amber-500 border-amber-500/20',
-    development: 'bg-blue-500/10 text-blue-500 border-blue-500/20',
-    live: 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20',
-    'coming-soon': 'bg-purple-500/10 text-purple-500 border-purple-500/20',
-    beta: 'bg-orange-500/10 text-orange-500 border-orange-500/20',
-  };
-  
-  // Variant-based styling (when not using status)
-  const variantStyles: Record<BadgeVariant, string> = {
-    default: 'bg-env-surface text-env-secondary border-env-border',
-    accent: 'bg-chapter-accent-soft text-chapter-accent border-chapter-accent/20',
-    success: 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20',
-    warning: 'bg-amber-500/10 text-amber-500 border-amber-500/20',
-    error: 'bg-red-500/10 text-red-500 border-red-500/20',
-  };
-  
-  // Size classes
-  const sizeClasses = {
-    sm: 'px-2 py-0.5 text-xs',
-    md: 'px-3 py-1 text-sm',
-  };
-
-  const styles = status ? statusStyles[status] : variantStyles[variant];
+  // If status is provided, use status styles
+  if (status) {
+    const statusInfo = statusStyles[status];
+    return (
+      <span className={`${baseClasses} ${statusInfo.classes} ${className}`}>
+        {pulse && (
+          <span className="relative flex h-2 w-2 mr-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-current opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-current" />
+          </span>
+        )}
+        {children || statusInfo.label}
+      </span>
+    );
+  }
 
   return (
-    <span
-      className={`
-        inline-flex items-center gap-1.5
-        font-medium rounded-full
-        border
-        ${sizeClasses[size]}
-        ${styles}
-        ${className}
-      `}
-    >
+    <span className={`${baseClasses} ${variantStyles[variant]} ${className}`}>
       {pulse && (
-        <span className="relative flex h-2 w-2">
+        <span className="relative flex h-2 w-2 mr-2">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-current opacity-75" />
           <span className="relative inline-flex rounded-full h-2 w-2 bg-current" />
         </span>
@@ -81,33 +85,32 @@ export function Badge({
   );
 }
 
-/* ============================================
-   STATUS BADGE
-   ============================================
-   Pre-configured badges for common statuses
-============================================ */
-
+/**
+ * StatusBadge
+ * 
+ * Specialized badge for product/feature status
+ */
 interface StatusBadgeProps {
-  status: BadgeStatus;
+  status: ProductStatus;
   className?: string;
 }
 
-export function StatusBadge({ status, className }: StatusBadgeProps) {
-  const labels: Record<BadgeStatus, string> = {
-    pilot: 'Pilot',
-    development: 'In Development',
-    live: 'Live',
-    'coming-soon': 'Coming Soon',
-    beta: 'Beta',
-  };
-
+export function StatusBadge({ status, className = "" }: StatusBadgeProps) {
+  const statusInfo = statusStyles[status];
+  
   return (
-    <Badge 
-      status={status} 
-      className={className}
-      pulse={status === 'live'}
+    <span
+      className={`inline-flex items-center px-3 py-1.5 text-xs font-semibold rounded-full border ${statusInfo.classes} ${className}`}
     >
-      {labels[status]}
-    </Badge>
+      {(status === "live" || status === "active") && (
+        <span className="relative flex h-2 w-2 mr-2">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-current opacity-75" />
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-current" />
+        </span>
+      )}
+      {statusInfo.label}
+    </span>
   );
 }
+
+export default Badge;

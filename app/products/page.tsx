@@ -1,17 +1,18 @@
-import Image from "next/image";  // ← ADD THIS IMPORT
-import SectionHeader from "../../components/SectionHeader";
+import Image from "next/image";
 import Link from "next/link";
+import SectionHeader from "../../components/SectionHeader";
 import { ChapterWrapper } from "../../components/ChapterWrapper";
 import { AnimatedSection } from "../../components/AnimatedSection";
 import { StatusBadge } from "../../components/Badge";
+import { CTASection } from "../../components/CTASection";
 
 // Metadata for SEO
 export const metadata = {
-  title: "Our Products",
-  description: "Explore Forge Intellitech's products - TechUp, LaunchPad, BiteBank, and Trego. Technology solutions built for Africa.",
+  title: "Our Products - Forge Intellitech",
+  description: "Explore Forge Intellitech's products - TechUp, LaunchPad, BiteBank, and Trego. Systems built to strengthen African institutions, communities and infrastructure.",
 };
 
-// Detailed product information
+// Product data
 const products = [
   {
     id: "techup",
@@ -21,22 +22,24 @@ const products = [
     icon: "🎓",
     href: "/techup",
     hasPage: true,
-    problem: "Africa has millions of talented young people, but traditional education often fails to prepare them for the digital economy. Skills gaps widen while opportunities pass by.",
-    solution: "TechUp is a practical skills development program that teaches real-world digital skills. From coding to digital marketing, we prepare African youth to compete globally — and build locally.",
+    problem: "African schools are under increasing pressure to prepare learners for a digital economy — yet most classrooms lack the curriculum structure, tools and industry pathways required to do so. The result is a widening gap between education and employability, especially for students in public and low-resource schools. Government digital literacy goals remain unmet while young people graduate without the practical skills their economies need.",
+    solution: "TechUp is a structured in-school and community-based digital skills programme designed to operate inside existing education systems. It equips junior and senior secondary students with practical digital competencies while supporting schools, facilitators and administrators with tools, curriculum and delivery frameworks that can scale sustainably. TechUp aligns with national education priorities and creates pathways from classroom learning to real innovation and employment.",
     features: [
-      "Industry-relevant curriculum designed with employers",
-      "Hands-on projects with real-world applications",
-      "Mentorship from working professionals",
-      "Job placement support and career guidance",
-      "Flexible learning paths for different skill levels",
+      "Structured curriculum aligned with national education frameworks",
+      "Junior Secondary foundation across design, web, data and digital literacy",
+      "Senior Secondary specialisation into Builders, Strategists and Storytellers",
+      "Digital ethics and Nigerian Cybercrimes Act (2015) integration",
+      "Teacher enablement and facilitator support systems",
+      "Project-based learning with real community challenges",
     ],
     audience: [
-      "Young people seeking digital skills (16-35)",
-      "Schools looking to enhance their curriculum",
-      "Organizations wanting to upskill their workforce",
-      "Parents investing in their children's future",
+      "Junior and Senior Secondary School students",
+      "Public and private schools seeking structured digital education",
+      "Education authorities and ministries",
+      "Community learning centres and youth programmes",
     ],
-    impact: "Preparing the next generation of African tech talent",
+    operatesIn: "Public and private secondary schools, community learning centres and youth programmes — in partnership with school leadership, facilitators and local institutions.",
+    impact: "Building long-term digital capacity inside African schools and youth communities.",
   },
   {
     id: "launchpad",
@@ -46,22 +49,24 @@ const products = [
     icon: "🚀",
     href: "/launchpad",
     hasPage: true,
-    problem: "Young African entrepreneurs have brilliant ideas but lack funding, mentorship, and support to bring them to life. Traditional investors often overlook early-stage African ventures.",
-    solution: "LaunchPad is a grant-based innovation program that provides funding, training, and mentorship to young entrepreneurs. No equity taken — we invest in people, not just profits.",
+    problem: "Young African entrepreneurs with promising ideas face systemic barriers to starting and growing ventures. Access to early-stage funding is limited, mentorship networks are fragmented, and most support programmes prioritise equity extraction over founder development. The pipeline from idea to sustainable enterprise remains broken for the majority of young innovators.",
+    solution: "LaunchPad is a grant-based innovation programme that provides non-equity funding, structured training, and mentorship to young entrepreneurs. It connects outstanding students from TechUp and other pipelines to real venture-building support — creating a continuous pathway from skill acquisition to enterprise development. LaunchPad strengthens the ecosystem by preparing founders who understand markets, operations and community relevance.",
     features: [
-      "Grant funding (no equity, no debt)",
-      "12-week intensive incubation program",
-      "One-on-one mentorship from successful founders",
-      "Access to Forge's network of partners and investors",
-      "Demo day with potential investors and partners",
+      "Grant funding with no equity or debt requirements",
+      "Intensive incubation with structured business development",
+      "One-on-one mentorship from experienced founders",
+      "Connection to Forge's institutional and industry networks",
+      "Demo opportunities with potential partners and supporters",
+      "Post-programme support and alumni community",
     ],
     audience: [
-      "Young entrepreneurs (18-30) with viable ideas",
-      "Early-stage startups needing support",
-      "Innovators solving African problems",
-      "Teams with passion and commitment",
+      "Young entrepreneurs (18-30) with validated ideas",
+      "Outstanding TechUp graduates ready for enterprise",
+      "Early-stage founders solving African problems",
+      "Teams committed to building sustainable ventures",
     ],
-    impact: "Launching the next generation of African businesses",
+    operatesIn: "Innovation hubs, tertiary institutions, community founder networks and early-stage startup communities.",
+    impact: "Launching the next generation of African founders and enterprise builders.",
   },
   {
     id: "bitebank",
@@ -71,58 +76,61 @@ const products = [
     icon: "🍽️",
     href: "#bitebank",
     hasPage: false,
-    problem: "Food waste is massive while hunger persists. Street vendors struggle to reach customers. Consumers lack access to affordable, quality meals. The food ecosystem is broken.",
-    solution: "BiteBank connects food vendors, consumers, and logistics providers on one platform. Reduce waste, improve access, and create economic opportunities across the food value chain.",
+    problem: "African food systems are fragmented and inefficient. Vendors struggle to reach customers consistently, consumers lack access to affordable and healthy meal options, and food waste remains high across the value chain. Informal food economies lack the infrastructure for planning, logistics and quality assurance — leaving both sellers and buyers underserved.",
+    solution: "BiteBank connects food vendors, consumers and logistics providers on a single platform designed for African food realities. It helps households plan meals using AI-supported tools, connects them to trusted local vendors, and reduces waste through better demand visibility. BiteBank strengthens local food economies by giving vendors access to customers, data and delivery infrastructure they could not build alone.",
     features: [
+      "AI-supported meal planning for households",
       "Vendor marketplace for local food sellers",
-      "Real-time inventory to reduce waste",
+      "Real-time inventory to reduce food waste",
+      "Integrated delivery and logistics network",
       "Affordable meal discovery for consumers",
-      "Integrated delivery and logistics",
-      "Data insights for better food planning",
+      "Data insights for vendors and food system planners",
     ],
     audience: [
-      "Food vendors seeking more customers",
-      "Consumers looking for affordable meals",
-      "Restaurants wanting to reduce waste",
-      "Logistics providers in the food space",
+      "Households seeking affordable, healthy meal options",
+      "Food vendors wanting consistent customer access",
+      "Restaurants and kitchens looking to reduce waste",
+      "Logistics providers serving the food sector",
     ],
-    impact: "Making food accessible while reducing waste",
+    operatesIn: "Local food vendors, informal markets, logistics operators and neighbourhood delivery networks.",
+    impact: "Strengthening local food systems while improving access and reducing waste.",
   },
   {
     id: "trego",
     name: "Trego",
-    tagline: "Trade without borders",
+    tagline: "Mobility for every journey",
     status: "development" as const,
-    icon: "📦",
+    icon: "🚌",
     href: "#trego",
     hasPage: false,
-    problem: "Cross-border trade in Africa is complicated, expensive, and risky. Small merchants face impossible barriers. Goods move slowly. Opportunities are lost.",
-    solution: "Trego simplifies cross-border commerce with integrated logistics, payments, and documentation. We make it as easy to sell across Africa as it is to sell across the street.",
+    problem: "Urban mobility in African cities is unreliable, unsafe and unregulated. Traditional public transport systems lack accountability, route transparency and safety standards. Commuters — especially women, students and low-income workers — face daily uncertainty. Small businesses struggle with last-mile logistics in fragmented transport ecosystems.",
+    solution: "Trego is a shared public transport and logistics platform designed to replace informal, unregulated services with safe, affordable and technology-enabled mobility. It introduces regulated electric vehicles, real-time tracking, and accessible booking via USSD and app. Trego is designed for African urban corridors — serving commuters and small business logistics with infrastructure that can scale across cities.",
     features: [
-      "Simplified customs and documentation",
-      "Integrated cross-border payments",
-      "Reliable logistics network",
-      "Trade financing options",
-      "Market access across African countries",
+      "Safe, regulated public transport with trained operators",
+      "Electric vehicle fleet designed for African cities",
+      "USSD and app-based booking for accessibility",
+      "Real-time tracking and route visibility",
+      "Affordable pricing for daily commuters",
+      "Last-mile logistics support for small businesses",
     ],
     audience: [
-      "Small and medium merchants",
-      "Manufacturers seeking new markets",
-      "Importers and exporters",
-      "Logistics companies",
+      "Daily commuters seeking safe, reliable transport",
+      "Students and workers on fixed budgets",
+      "Small business owners needing delivery logistics",
+      "Urban communities underserved by formal transport",
     ],
-    impact: "Unlocking intra-African trade potential",
+    operatesIn: "Urban corridors, commuter routes, small business logistics lanes and community transport clusters.",
+    impact: "Making urban mobility safe, accessible and sustainable for African cities.",
   },
 ];
 
 export default function ProductsPage() {
   return (
-    <ChapterWrapper chapter="forge">
+    <ChapterWrapper chapter="ignition">
       
       {/* ==================== HERO SECTION ==================== */}
-      {/* UPDATED: Added hero background image */}
       <section className="relative section-padding flex items-center min-h-[50vh] overflow-hidden">
-        {/* Hero Background Image */}
+        {/* Background */}
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/products/hero-products.jpg"
@@ -154,10 +162,21 @@ export default function ProductsPage() {
                 <span className="gradient-text"> solves real problems.</span>
               </h1>
               
-              <p className="text-xl text-env-secondary leading-relaxed max-w-3xl">
-                Every product we build addresses a critical gap in African infrastructure. 
-                From education to trade, we're creating the tools our continent needs 
-                to thrive in the digital age.
+              <div className="space-y-4 text-xl text-env-secondary leading-relaxed max-w-3xl">
+                <p>
+                  We do not build products in isolation.
+                </p>
+                <p>
+                  Each platform you see here is a response to a broken or missing system across education, enterprise, food access and urban mobility in Africa.
+                </p>
+                <p className="text-env-primary font-medium">
+                  These are not features.<br />
+                  They are foundations — designed to strengthen institutions, communities and young people who must carry the future forward.
+                </p>
+              </div>
+              
+              <p className="mt-6 text-env-tertiary italic">
+                Every product is designed to work in real African environments — limited bandwidth, shared devices, public institutions and informal economies included.
               </p>
               
             </div>
@@ -169,6 +188,17 @@ export default function ProductsPage() {
       <section className="section-padding bg-env-secondary">
         <div className="container-forge">
           
+          <AnimatedSection animation="fade-up">
+            <div className="text-center mb-10">
+              <h2 className="text-2xl md:text-3xl font-bold text-env-primary mb-4">
+                One ecosystem. Multiple entry points.
+              </h2>
+              <p className="text-env-secondary max-w-2xl mx-auto">
+                Forge products are designed to interlock — learning feeds enterprise, enterprise feeds livelihoods, and livelihoods strengthen communities.
+              </p>
+            </div>
+          </AnimatedSection>
+          
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {products.map((product, index) => (
               <AnimatedSection key={product.id} animation="fade-up" delay={index * 75}>
@@ -176,7 +206,9 @@ export default function ProductsPage() {
                   href={`#${product.id}`}
                   className="block p-4 md:p-6 rounded-xl bg-env-surface border border-env-border hover:border-chapter-accent/50 transition-smooth text-center group hover-lift"
                 >
-                  <span className="text-3xl md:text-4xl block mb-3 group-hover:scale-110 transition-transform">{product.icon}</span>
+                  <span className="text-3xl md:text-4xl block mb-3 group-hover:scale-110 transition-transform">
+                    {product.icon}
+                  </span>
                   <h3 className="font-semibold text-env-primary group-hover:text-chapter-accent transition-smooth">
                     {product.name}
                   </h3>
@@ -188,12 +220,50 @@ export default function ProductsPage() {
         </div>
       </section>
 
+      {/* ==================== HOW WE DESIGN PRODUCTS ==================== */}
+      <section className="section-padding">
+        <div className="container-forge">
+          
+          <AnimatedSection animation="fade-up">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-8">
+                <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent-soft rounded-full border border-chapter-accent/20">
+                  Our Approach
+                </span>
+                <h2 className="text-3xl md:text-4xl font-bold text-env-primary">
+                  How our products are designed
+                </h2>
+              </div>
+              
+              <div className="space-y-6 text-lg text-env-secondary leading-relaxed">
+                <p>
+                  At Forge, products do not begin with technology.
+                </p>
+                <p>
+                  They begin with field work — classrooms, markets, transport routes, community sessions and policy conversations.
+                </p>
+                <p>
+                  We design backwards from lived realities — and forward into scalable digital infrastructure.
+                </p>
+              </div>
+              
+              <div className="mt-8 p-6 rounded-xl bg-chapter-accent/10 border border-chapter-accent/20">
+                <p className="text-env-primary font-medium text-center">
+                  Every platform is built to survive low trust environments, limited resources and fragmented systems — while still meeting global technical standards.
+                </p>
+              </div>
+            </div>
+          </AnimatedSection>
+          
+        </div>
+      </section>
+
       {/* ==================== DETAILED PRODUCTS ==================== */}
       {products.map((product, index) => (
         <section 
           key={product.id}
           id={product.id}
-          className={`section-padding scroll-mt-20 ${index % 2 === 0 ? '' : 'bg-env-secondary'}`}
+          className={`section-padding scroll-mt-20 ${index % 2 === 0 ? 'bg-env-secondary' : ''}`}
         >
           <div className="container-forge">
             
@@ -218,7 +288,6 @@ export default function ProductsPage() {
             {/* Problem & Solution */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
               
-              {/* Problem */}
               <AnimatedSection animation="fade-right" delay={100}>
                 <div className="p-6 md:p-8 rounded-xl bg-red-500/5 border border-red-500/20 h-full">
                   <div className="flex items-center space-x-2 mb-4">
@@ -233,7 +302,6 @@ export default function ProductsPage() {
                 </div>
               </AnimatedSection>
               
-              {/* Solution */}
               <AnimatedSection animation="fade-left" delay={100}>
                 <div className="p-6 md:p-8 rounded-xl bg-green-500/5 border border-green-500/20 h-full">
                   <div className="flex items-center space-x-2 mb-4">
@@ -254,7 +322,6 @@ export default function ProductsPage() {
             <AnimatedSection animation="fade-up" delay={200}>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
                 
-                {/* Features */}
                 <div>
                   <h3 className="text-xl font-semibold text-env-primary mb-4 flex items-center">
                     <span className="text-chapter-accent mr-2">⚡</span>
@@ -272,7 +339,6 @@ export default function ProductsPage() {
                   </ul>
                 </div>
                 
-                {/* Audience */}
                 <div>
                   <h3 className="text-xl font-semibold text-env-primary mb-4 flex items-center">
                     <span className="text-chapter-accent mr-2">👥</span>
@@ -293,7 +359,20 @@ export default function ProductsPage() {
               </div>
             </AnimatedSection>
 
-            {/* Impact Statement & CTA */}
+            {/* Where It Operates */}
+            <AnimatedSection animation="fade-up" delay={250}>
+              <div className="mb-10 p-6 rounded-xl bg-env-surface border border-env-border">
+                <h3 className="text-lg font-semibold text-env-primary mb-3 flex items-center">
+                  <span className="text-chapter-accent mr-2">📍</span>
+                  Where this product operates
+                </h3>
+                <p className="text-env-secondary leading-relaxed">
+                  {product.operatesIn}
+                </p>
+              </div>
+            </AnimatedSection>
+
+            {/* Impact & CTA */}
             <AnimatedSection animation="fade-up" delay={300}>
               <div className="flex flex-col md:flex-row md:items-center md:justify-between p-6 rounded-xl bg-env-surface border border-env-border hover-glow transition-smooth">
                 <div className="mb-4 md:mb-0">
@@ -303,7 +382,7 @@ export default function ProductsPage() {
                 {product.hasPage ? (
                   <Link
                     href={product.href}
-                    className="inline-flex items-center px-6 py-3 bg-chapter-accent hover:bg-chapter-accent-hover text-env-text-inverse font-medium rounded-lg transition-smooth hover-lift"
+                    className="inline-flex items-center px-6 py-3 bg-chapter-accent hover:bg-chapter-accent-hover text-white font-medium rounded-lg transition-smooth hover-lift"
                   >
                     Learn more about {product.name}
                     <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -313,7 +392,7 @@ export default function ProductsPage() {
                 ) : (
                   <Link
                     href="/contact"
-                    className="inline-flex items-center px-6 py-3 bg-env-surface-hover hover:bg-env-border text-env-primary font-medium rounded-lg border border-env-border transition-smooth hover-lift"
+                    className="inline-flex items-center px-6 py-3 bg-env-surface-hover text-env-primary font-medium rounded-lg border border-env-border transition-smooth hover-lift"
                   >
                     Get notified when {product.name} launches
                     <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -328,47 +407,81 @@ export default function ProductsPage() {
         </section>
       ))}
 
-      {/* ==================== PARTNERSHIP CTA ==================== */}
-      <section className="section-padding bg-gradient-to-b from-env-bg-primary to-env-bg-secondary">
+      {/* ==================== WHY WE BUILD THIS WAY ==================== */}
+      <section className="section-padding bg-env-secondary">
         <div className="container-forge">
           
           <AnimatedSection animation="fade-up">
-            <div className="text-center max-w-3xl mx-auto">
-              
-              <span className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold uppercase tracking-wider text-purple-400 bg-purple-500/10 rounded-full border border-purple-500/20">
-                Partner With Us
-              </span>
-              
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-env-primary mb-6">
-                Want to build with us?
-              </h2>
-              
-              <p className="text-lg text-env-secondary mb-10">
-                We're always looking for partners who share our vision. Whether you're an 
-                investor, a potential client, or an organization that wants to collaborate — 
-                we'd love to hear from you.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  href="/join#partners"
-                  className="px-8 py-4 bg-chapter-accent hover:bg-chapter-accent-hover text-env-text-inverse font-medium rounded-lg transition-smooth glow hover-lift"
-                >
-                  Become a Partner
-                </Link>
-                <Link
-                  href="/join#investors"
-                  className="px-8 py-4 bg-env-surface hover:bg-env-surface-hover text-env-primary font-medium rounded-lg border border-env-border transition-smooth hover-lift"
-                >
-                  Invest in Forge
-                </Link>
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-8">
+                <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent-soft rounded-full border border-chapter-accent/20">
+                  Our Philosophy
+                </span>
+                <h2 className="text-3xl md:text-4xl font-bold text-env-primary">
+                  Why Forge builds products this way
+                </h2>
               </div>
               
+              <div className="space-y-6 text-lg text-env-secondary leading-relaxed">
+                <p>
+                  Africa does not suffer from a lack of ideas.
+                </p>
+                <p>
+                  It suffers from fragile systems.
+                </p>
+                <p className="text-env-primary font-medium">
+                  Forge products are deliberately slow to design and fast to institutionalise.
+                </p>
+              </div>
+              
+              <div className="mt-8 p-6 rounded-xl bg-env-surface border border-env-border">
+                <h3 className="text-lg font-semibold text-env-primary mb-4">We prioritise:</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {[
+                    "Policy alignment",
+                    "Public sector readiness",
+                    "Facilitator capacity",
+                    "Infrastructure realities",
+                    "Long-term adoption over short-term usage",
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center p-3 rounded-lg bg-chapter-accent/10 border border-chapter-accent/20">
+                      <svg className="w-5 h-5 text-chapter-accent mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="text-env-primary">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="mt-8 p-6 rounded-xl bg-chapter-accent/10 border border-chapter-accent/20 text-center">
+                <p className="text-xl text-env-primary font-medium">
+                  This is how technology becomes development infrastructure — <span className="text-chapter-accent">not just digital convenience.</span>
+                </p>
+              </div>
             </div>
           </AnimatedSection>
           
         </div>
       </section>
+
+      {/* ==================== CTA SECTION ==================== */}
+      <CTASection
+        badge="Partner With Us"
+        headline="Want to build"
+        highlightedText="with us?"
+        description="We work with governments, schools, development organisations, private institutions and infrastructure partners who understand that sustainable progress requires more than software. If you are building programmes, systems or markets that serve African communities — we are ready to build alongside you."
+        primaryAction={{
+          label: "Become a Partner",
+          href: "/join#partners",
+        }}
+        secondaryAction={{
+          label: "Start a Conversation",
+          href: "/contact",
+        }}
+        backgroundImage="/images/cta/products-cta.jpg"
+        overlayOpacity={80}
+      />
       
     </ChapterWrapper>
   );

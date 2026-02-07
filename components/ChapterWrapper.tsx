@@ -1,103 +1,55 @@
-'use client';
+"use client";
 
-import { useEffect, type ReactNode } from 'react';
-import { useTheme } from './ThemeProvider';
-import { Chapter } from '@/lib/themes';
-
-/* ============================================
-   CHAPTER WRAPPER
-   ============================================
-   
-   Wraps page content and sets the chapter theme.
-   This component:
-   - Sets the chapter in ThemeContext
-   - Optionally adds animation classes
-   - Provides a clean page container
-   
-   Usage:
-   <ChapterWrapper chapter="ignition">
-     <YourPageContent />
-   </ChapterWrapper>
-   
-============================================ */
+import { useEffect, type ReactNode } from "react";
+import { useTheme } from "./ThemeProvider";
+import { Chapter } from "@/lib/themes";
 
 interface ChapterWrapperProps {
-  /** The chapter theme for this page */
+  /** The chapter identity for this page */
   chapter: Chapter;
   /** Page content */
   children: ReactNode;
-  /** Additional CSS classes */
+  /** Optional additional classes */
   className?: string;
-  /** Enable page entrance animation */
-  animate?: boolean;
 }
 
+/**
+ * ChapterWrapper
+ * 
+ * Wraps page content and sets the chapter theme.
+ * Each page should use this to establish its color identity.
+ * 
+ * @example
+ * <ChapterWrapper chapter="rise">
+ *   <YourPageContent />
+ * </ChapterWrapper>
+ */
 export function ChapterWrapper({ 
   chapter, 
   children, 
-  className = '',
-  animate = true,
+  className = "" 
 }: ChapterWrapperProps) {
   const { setChapter } = useTheme();
 
-  // Set chapter on mount and when it changes
+  // Set chapter on mount and when chapter prop changes
   useEffect(() => {
     setChapter(chapter);
+    
+    // Cleanup: reset to default when unmounting
+    // (optional - remove if you want chapter to persist)
+    return () => {
+      // setChapter('forge');
+    };
   }, [chapter, setChapter]);
 
   return (
     <div 
-      className={`
-        chapter-wrapper
-        ${animate ? 'animate-fade-in' : ''}
-        ${className}
-      `}
-      data-chapter={chapter}
+      className={`min-h-screen ${className}`}
+      data-page-chapter={chapter}
     >
       {children}
     </div>
   );
 }
 
-/* ============================================
-   CHAPTER SECTION
-   ============================================
-   
-   A section within a page that can have its
-   own chapter theme. Useful for multi-chapter
-   pages like the homepage.
-   
-============================================ */
-
-interface ChapterSectionProps {
-  /** The chapter theme for this section */
-  chapter: Chapter;
-  /** Section content */
-  children: ReactNode;
-  /** Additional CSS classes */
-  className?: string;
-  /** Section ID for navigation */
-  id?: string;
-}
-
-export function ChapterSection({ 
-  chapter, 
-  children, 
-  className = '',
-  id,
-}: ChapterSectionProps) {
-  return (
-    <section 
-      id={id}
-      className={className}
-      data-chapter={chapter}
-      style={{
-        // Section-level chapter variables
-        // These override the page-level chapter
-        '--chapter-accent': `var(--section-${chapter}-accent, var(--chapter-accent))`,
-      } as React.CSSProperties}
-    >
-      {children}
-    </section>
-  );
-}
+export default ChapterWrapper;

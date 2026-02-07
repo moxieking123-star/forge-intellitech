@@ -4,83 +4,87 @@ interface ProductCardProps {
   name: string;
   tagline: string;
   description: string;
-  status: "live" | "pilot" | "scaling" | "development";
+  status: "live" | "pilot" | "development" | "coming-soon";
   href: string;
-  icon: string;
+  icon?: string;
 }
 
-export default function ProductCard({ 
-  name, 
-  tagline, 
-  description, 
-  status, 
-  href, 
-  icon 
-}: ProductCardProps) {
-  
-  /* 
-   * Status badge colors remain hardcoded as they are semantic:
-   * - Green = live/active
-   * - Yellow = pilot/testing
-   * - Blue = scaling
-   * - Purple = development
-   * 
-   * These should NOT change with chapter themes as they 
-   * communicate specific meaning to users.
-   */
-  const statusColors = {
-    live: "bg-green-500/20 text-green-400 border-green-500/30",
-    pilot: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
-    scaling: "bg-blue-500/20 text-blue-400 border-blue-500/30",
-    development: "bg-purple-500/20 text-purple-400 border-purple-500/30",
-  };
+const statusStyles = {
+  live: {
+    label: "Live",
+    classes: "bg-baobab-500/20 text-baobab-400 border-baobab-500/30",
+  },
+  pilot: {
+    label: "Pilot",
+    classes: "bg-kente-500/20 text-kente-400 border-kente-500/30",
+  },
+  development: {
+    label: "In Development",
+    classes: "bg-indigo-500/20 text-indigo-400 border-indigo-500/30",
+  },
+  "coming-soon": {
+    label: "Coming Soon",
+    classes: "bg-clay-500/20 text-clay-400 border-clay-500/30",
+  },
+};
 
-  // Status display text
-  const statusText = {
-    live: "Live",
-    pilot: "Pilot",
-    scaling: "Scaling",
-    development: "In Development",
-  };
+/**
+ * ProductCard
+ * 
+ * Displays a product/initiative in a card format.
+ * Used on homepage and products page.
+ */
+export function ProductCard({
+  name,
+  tagline,
+  description,
+  status,
+  href,
+  icon,
+}: ProductCardProps) {
+  const statusInfo = statusStyles[status];
 
   return (
-    <Link href={href} className="block group">
-      <div className="h-full p-6 md:p-8 rounded-2xl bg-env-surface border border-env-border hover:border-chapter-accent/50 transition-smooth hover:bg-env-surface-hover hover-lift hover-glow">
-        
-        {/* Icon and Status */}
+    <Link href={href} className="group block h-full">
+      <article className="h-full p-6 md:p-8 rounded-2xl bg-env-surface border border-env-border hover:border-chapter-accent/30 transition-all duration-300 hover-lift hover-glow">
+        {/* Header */}
         <div className="flex items-start justify-between mb-4">
-          <span className="text-4xl group-hover:scale-110 transition-transform">{icon}</span>
-          <span className={`px-3 py-1 text-xs font-medium rounded-full border ${statusColors[status]}`}>
-            {statusText[status]}
+          <div className="flex items-center gap-3">
+            {icon && <span className="text-2xl">{icon}</span>}
+            <div>
+              <h3 className="text-xl font-semibold text-env-primary group-hover:text-chapter-accent transition-colors">
+                {name}
+              </h3>
+              <p className="text-sm text-chapter-accent">{tagline}</p>
+            </div>
+          </div>
+          
+          {/* Status badge */}
+          <span className={`px-3 py-1 text-xs font-medium rounded-full border ${statusInfo.classes}`}>
+            {statusInfo.label}
           </span>
         </div>
-        
-        {/* Name and Tagline */}
-        <h3 className="text-xl font-bold text-env-primary mb-2 group-hover:text-chapter-accent transition-smooth">
-          {name}
-        </h3>
-        <p className="text-chapter-accent text-sm font-medium mb-3">
-          {tagline}
-        </p>
-        
+
         {/* Description */}
-        <p className="text-env-secondary text-sm leading-relaxed">
+        <p className="text-env-secondary leading-relaxed line-clamp-3 mb-4">
           {description}
         </p>
-        
-        {/* Learn More Link */}
-        <div className="mt-4 flex items-center text-sm text-chapter-accent font-medium transition-smooth">
+
+        {/* Learn more link */}
+        <div className="flex items-center text-sm font-medium text-chapter-accent group-hover:gap-2 transition-all">
           <span>Learn more</span>
           <svg 
-            className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" 
+            className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" 
             fill="none" 
             stroke="currentColor" 
             viewBox="0 0 24 24"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
         </div>
-      </div>
+      </article>
     </Link>
   );
 }
+
+export default ProductCard;

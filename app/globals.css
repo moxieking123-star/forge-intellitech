@@ -112,97 +112,123 @@
 }
 
 /* ============================================
-   CHAPTER THEMES (Page Identities)
+   CHAPTER THEMES (African-Inspired Identities)
    ============================================
    
-   Each chapter represents a stage in the Forge journey:
-   - ignition: The spark of an idea (warm orange)
-   - forge: The making, the heat (Forge blue)
-   - rise: Growth and emergence (vibrant purple)
-   - expand: Reaching outward (teal/cyan)
-   - foundation: Solid ground (neutral warmth)
+   Each chapter represents an emotional/functional area:
+   
+   - FORGE (Indigo): West African adire/indigo dye tradition
+     Trust, depth, wisdom, the foundation
+   
+   - IGNITION (Sahel Amber): Savanna warmth, innovation fire
+     Energy, creativity, the spark of ideas
+   
+   - RISE (Vibrant Purple): African violet, Ankara patterns
+     Youth, ambition, education, growth potential
+   
+   - EXPAND (Teal): Ocean meets land, connectivity
+     Mobility, infrastructure, reaching outward
+   
+   - FOUNDATION (Clay Earth): African soil, pottery
+     Stability, authenticity, groundedness
    
 ============================================ */
 
-/* IGNITION — The Spark */
-[data-chapter="ignition"] {
-  --chapter-accent: #f97316;
-  --chapter-accent-hover: #ea580c;
-  --chapter-accent-soft: rgba(249, 115, 22, 0.1);
-  --chapter-accent-softer: rgba(249, 115, 22, 0.05);
-  --chapter-glow: rgba(249, 115, 22, 0.3);
-  --chapter-glow-intense: rgba(249, 115, 22, 0.5);
-  --chapter-gradient-start: #f97316;
-  --chapter-gradient-mid: #fb923c;
-  --chapter-gradient-end: #fbbf24;
-}
-
-/* FORGE — The Making */
+/* FORGE — The Core (West African Indigo) */
 [data-chapter="forge"] {
-  --chapter-accent: #3b82f6;
-  --chapter-accent-hover: #2563eb;
-  --chapter-accent-soft: rgba(59, 130, 246, 0.1);
-  --chapter-accent-softer: rgba(59, 130, 246, 0.05);
-  --chapter-glow: rgba(59, 130, 246, 0.3);
-  --chapter-glow-intense: rgba(59, 130, 246, 0.5);
-  --chapter-gradient-start: #3b82f6;
-  --chapter-gradient-mid: #6366f1;
-  --chapter-gradient-end: #8b5cf6;
+  --chapter-accent: #3D5A80;
+  --chapter-accent-hover: #2C4A6E;
+  --chapter-accent-soft: rgba(61, 90, 128, 0.12);
+  --chapter-accent-softer: rgba(61, 90, 128, 0.06);
+  --chapter-glow: rgba(61, 90, 128, 0.35);
+  --chapter-glow-intense: rgba(61, 90, 128, 0.5);
+  --chapter-gradient-start: #3D5A80;
+  --chapter-gradient-mid: #5C7A9E;
+  --chapter-gradient-end: #98C1D9;
 }
 
-/* RISE — Growth */
+/* IGNITION — The Spark (Sahel Amber/Orange) */
+[data-chapter="ignition"] {
+  --chapter-accent: #E07B39;
+  --chapter-accent-hover: #C96A2D;
+  --chapter-accent-soft: rgba(224, 123, 57, 0.12);
+  --chapter-accent-softer: rgba(224, 123, 57, 0.06);
+  --chapter-glow: rgba(224, 123, 57, 0.35);
+  --chapter-glow-intense: rgba(224, 123, 57, 0.5);
+  --chapter-gradient-start: #E07B39;
+  --chapter-gradient-mid: #F4A261;
+  --chapter-gradient-end: #E9C46A;
+}
+
+/* RISE — Youth & Education (Vibrant Purple) */
+/* Inspired by African violets and vibrant Ankara fabrics */
 [data-chapter="rise"] {
-  --chapter-accent: #a855f7;
-  --chapter-accent-hover: #9333ea;
-  --chapter-accent-soft: rgba(168, 85, 247, 0.1);
-  --chapter-accent-softer: rgba(168, 85, 247, 0.05);
-  --chapter-glow: rgba(168, 85, 247, 0.3);
-  --chapter-glow-intense: rgba(168, 85, 247, 0.5);
-  --chapter-gradient-start: #a855f7;
-  --chapter-gradient-mid: #c084fc;
-  --chapter-gradient-end: #e879f9;
+  --chapter-accent: #8B5CF6;
+  --chapter-accent-hover: #7C3AED;
+  --chapter-accent-soft: rgba(139, 92, 246, 0.12);
+  --chapter-accent-softer: rgba(139, 92, 246, 0.06);
+  --chapter-glow: rgba(139, 92, 246, 0.35);
+  --chapter-glow-intense: rgba(139, 92, 246, 0.5);
+  --chapter-gradient-start: #8B5CF6;
+  --chapter-gradient-mid: #A78BFA;
+  --chapter-gradient-end: #C4B5FD;
 }
 
-/* EXPAND — Reaching Outward */
+/* EXPAND — Mobility & Reach (Teal/Cyan) */
+/* Ocean meeting land, connectivity across the continent */
 [data-chapter="expand"] {
-  --chapter-accent: #14b8a6;
-  --chapter-accent-hover: #0d9488;
-  --chapter-accent-soft: rgba(20, 184, 166, 0.1);
-  --chapter-accent-softer: rgba(20, 184, 166, 0.05);
-  --chapter-glow: rgba(20, 184, 166, 0.3);
+  --chapter-accent: #14B8A6;
+  --chapter-accent-hover: #0D9488;
+  --chapter-accent-soft: rgba(20, 184, 166, 0.12);
+  --chapter-accent-softer: rgba(20, 184, 166, 0.06);
+  --chapter-glow: rgba(20, 184, 166, 0.35);
   --chapter-glow-intense: rgba(20, 184, 166, 0.5);
-  --chapter-gradient-start: #14b8a6;
-  --chapter-gradient-mid: #2dd4bf;
-  --chapter-gradient-end: #5eead4;
+  --chapter-gradient-start: #14B8A6;
+  --chapter-gradient-mid: #2DD4BF;
+  --chapter-gradient-end: #5EEAD4;
 }
 
-/* FOUNDATION — Solid Ground */
+/* FOUNDATION — Stability (Clay Earth) */
+/* African soil, pottery, roots and authenticity */
 [data-chapter="foundation"] {
-  --chapter-accent: #78716c;
-  --chapter-accent-hover: #57534e;
-  --chapter-accent-soft: rgba(120, 113, 108, 0.1);
-  --chapter-accent-softer: rgba(120, 113, 108, 0.05);
-  --chapter-glow: rgba(120, 113, 108, 0.2);
-  --chapter-glow-intense: rgba(120, 113, 108, 0.35);
-  --chapter-gradient-start: #78716c;
-  --chapter-gradient-mid: #a8a29e;
-  --chapter-gradient-end: #d6d3d1;
+  --chapter-accent: #B45309;
+  --chapter-accent-hover: #92400E;
+  --chapter-accent-soft: rgba(180, 83, 9, 0.12);
+  --chapter-accent-softer: rgba(180, 83, 9, 0.06);
+  --chapter-glow: rgba(180, 83, 9, 0.25);
+  --chapter-glow-intense: rgba(180, 83, 9, 0.4);
+  --chapter-gradient-start: #B45309;
+  --chapter-gradient-mid: #D97706;
+  --chapter-gradient-end: #F59E0B;
 }
 
-/* Light mode chapter adjustments */
+/* ----------------------------------------
+   Light mode chapter adjustments
+   Reduce glow intensity for better visibility
+---------------------------------------- */
+[data-mode="light"][data-chapter="forge"] {
+  --chapter-glow: rgba(61, 90, 128, 0.2);
+  --chapter-glow-intense: rgba(61, 90, 128, 0.3);
+}
+
 [data-mode="light"][data-chapter="ignition"] {
-  --chapter-glow: rgba(249, 115, 22, 0.15);
-  --chapter-glow-intense: rgba(249, 115, 22, 0.25);
+  --chapter-glow: rgba(224, 123, 57, 0.2);
+  --chapter-glow-intense: rgba(224, 123, 57, 0.3);
 }
 
 [data-mode="light"][data-chapter="rise"] {
-  --chapter-glow: rgba(168, 85, 247, 0.15);
-  --chapter-glow-intense: rgba(168, 85, 247, 0.25);
+  --chapter-glow: rgba(139, 92, 246, 0.2);
+  --chapter-glow-intense: rgba(139, 92, 246, 0.3);
 }
 
 [data-mode="light"][data-chapter="expand"] {
-  --chapter-glow: rgba(20, 184, 166, 0.15);
-  --chapter-glow-intense: rgba(20, 184, 166, 0.25);
+  --chapter-glow: rgba(20, 184, 166, 0.2);
+  --chapter-glow-intense: rgba(20, 184, 166, 0.3);
+}
+
+[data-mode="light"][data-chapter="foundation"] {
+  --chapter-glow: rgba(180, 83, 9, 0.15);
+  --chapter-glow-intense: rgba(180, 83, 9, 0.25);
 }
 
 /* ============================================
