@@ -6,12 +6,9 @@ import { AnimatedSection } from './AnimatedSection';
 import { LAUNCHPAD_CONFIG } from '@/lib/launchpadData';
 
 export function LaunchPadCTASection() {
-  const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
-  const [isSponsorModalOpen, setIsSponsorModalOpen] = useState(false);
-
   return (
     <>
-      {/* Inline Apply Section */}
+      {/* Apply Section */}
       <section id="apply" className="section-padding scroll-mt-20">
         <div className="container-forge">
           <AnimatedSection animation="fade-up">
@@ -25,15 +22,16 @@ export function LaunchPadCTASection() {
                 </h2>
                 <p className="text-env-secondary max-w-2xl mx-auto">
                   Ready to transform your ideas into reality? Complete the application below.
-                  Applications are open until {new Date(LAUNCHPAD_CONFIG.applicationDeadline).toLocaleDateString('en-NG', { 
-                    day: 'numeric', 
-                    month: 'long', 
-                    year: 'numeric' 
-                  })}.
+                  Applications are open until{' '}
+                  {new Date(LAUNCHPAD_CONFIG.applicationDeadline).toLocaleDateString('en-NG', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric',
+                  })}
+                  .
                 </p>
               </div>
-              
-              {/* Embedded Application Form */}
+
               <div className="p-6 md:p-8 rounded-2xl bg-env-surface border border-env-border">
                 <StudentApplicationForm />
               </div>
@@ -42,7 +40,7 @@ export function LaunchPadCTASection() {
         </div>
       </section>
 
-      {/* Inline Sponsor Section */}
+      {/* Sponsor Section */}
       <section id="sponsor" className="section-padding bg-env-secondary scroll-mt-20">
         <div className="container-forge">
           <AnimatedSection animation="fade-up">
@@ -52,15 +50,14 @@ export function LaunchPadCTASection() {
                   Become a Sponsor
                 </span>
                 <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-4">
-                  Invest in Nigeria's Future
+                  Invest in Nigeria&apos;s Future
                 </h2>
                 <p className="text-env-secondary max-w-2xl mx-auto">
-                  Partner with us to empower the next generation of Nigerian entrepreneurs.
-                  Select a tier and submit your sponsorship inquiry below.
+                  Partner with us to empower the next generation of Nigerian entrepreneurs. Select a
+                  tier and submit your sponsorship inquiry below.
                 </p>
               </div>
-              
-              {/* Embedded Sponsor Form */}
+
               <div className="p-6 md:p-8 rounded-2xl bg-env-surface border border-env-border">
                 <SponsorApplicationForm />
               </div>
@@ -69,7 +66,7 @@ export function LaunchPadCTASection() {
         </div>
       </section>
 
-      {/* Quick Action Buttons (Fixed on mobile) */}
+      {/* Mobile Fixed Buttons */}
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-env-bg-primary/95 backdrop-blur-sm border-t border-env-border md:hidden z-40">
         <div className="flex gap-3">
           <a
@@ -90,30 +87,30 @@ export function LaunchPadCTASection() {
   );
 }
 
-/* Alternative: Modal-based forms */
+/* Modal-based alternative */
 export function LaunchPadModals() {
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [isSponsorModalOpen, setIsSponsorModalOpen] = useState(false);
 
   return (
     <>
-      {/* Trigger Buttons */}
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
         <button
           onClick={() => setIsApplyModalOpen(true)}
+          type="button"
           className="px-8 py-4 bg-chapter-accent hover:bg-chapter-accent-hover text-env-text-inverse font-semibold rounded-lg transition-smooth glow hover-lift"
         >
           🚀 Apply for LaunchPad {LAUNCHPAD_CONFIG.currentYear}
         </button>
         <button
           onClick={() => setIsSponsorModalOpen(true)}
+          type="button"
           className="px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-smooth hover-lift"
         >
           🤝 Become a Sponsor
         </button>
       </div>
 
-      {/* Application Modal */}
       <FormModal
         isOpen={isApplyModalOpen}
         onClose={() => setIsApplyModalOpen(false)}
@@ -122,7 +119,6 @@ export function LaunchPadModals() {
         <StudentApplicationForm />
       </FormModal>
 
-      {/* Sponsor Modal */}
       <FormModal
         isOpen={isSponsorModalOpen}
         onClose={() => setIsSponsorModalOpen(false)}

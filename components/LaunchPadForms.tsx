@@ -1,20 +1,60 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type ReactNode, type ChangeEvent, type FormEvent } from 'react';
 
-/* ============================================
-   FORM MODAL COMPONENT
-   ============================================ */
+// ==========================================
+// TYPES
+// ==========================================
 
 interface FormModalProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
+interface StudentFormData {
+  fullName: string;
+  email: string;
+  phone: string;
+  gender: string;
+  schoolName: string;
+  schoolLevel: string;
+  parentName: string;
+  parentPhone: string;
+  businessCategory: string;
+  businessTitle: string;
+  problemStatement: string;
+  solution: string;
+  aiIntegration: string;
+  whyJoin: string;
+  parentConsent: boolean;
+  termsAccepted: boolean;
+}
+
+interface SponsorFormData {
+  organizationName: string;
+  organizationType: string;
+  contactName: string;
+  contactEmail: string;
+  contactPhone: string;
+  sponsorshipGoals: string;
+  termsAccepted: boolean;
+}
+
+type FormStatus = 'idle' | 'loading' | 'success' | 'error';
+
+interface SponsorTier {
+  name: string;
+  amount: string;
+  popular: boolean;
+}
+
+// ==========================================
+// FORM MODAL COMPONENT
+// ==========================================
+
 export function FormModal({ isOpen, onClose, title, children }: FormModalProps) {
-  // Prevent body scroll when modal is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -26,7 +66,6 @@ export function FormModal({ isOpen, onClose, title, children }: FormModalProps) 
     };
   }, [isOpen]);
 
-  // Handle escape key to close modal
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -42,28 +81,26 @@ export function FormModal({ isOpen, onClose, title, children }: FormModalProps) 
   if (!isOpen) return null;
 
   return (
-    <div 
+    <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
     >
-      {/* Backdrop */}
-      <div 
+      <div
         className="absolute inset-0 bg-black/80 backdrop-blur-sm"
         onClick={onClose}
         aria-hidden="true"
       />
-      
-      {/* Modal Content */}
+
       <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-env-surface border border-env-border rounded-2xl shadow-2xl">
-        {/* Header */}
         <div className="sticky top-0 z-10 flex items-center justify-between p-6 border-b border-env-border bg-env-surface rounded-t-2xl">
           <h2 id="modal-title" className="text-xl font-bold text-env-primary">
             {title}
           </h2>
           <button
             onClick={onClose}
+            type="button"
             className="p-2 text-env-tertiary hover:text-env-primary hover:bg-env-surface-hover rounded-lg transition-colors"
             aria-label="Close modal"
           >
@@ -72,8 +109,7 @@ export function FormModal({ isOpen, onClose, title, children }: FormModalProps) 
             </svg>
           </button>
         </div>
-        
-        {/* Body */}
+
         <div className="p-6">
           {children}
         </div>
@@ -82,16 +118,16 @@ export function FormModal({ isOpen, onClose, title, children }: FormModalProps) 
   );
 }
 
-/* ============================================
-   STUDENT APPLICATION FORM
-   ============================================ */
+// ==========================================
+// STUDENT APPLICATION FORM
+// ==========================================
 
 export function StudentApplicationForm() {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [error, setError] = useState('');
-  
-  const [formData, setFormData] = useState({
+  const [currentStep, setCurrentStep] = useState<number>(1);
+  const [status, setStatus] = useState<FormStatus>('idle');
+  const [error, setError] = useState<string>('');
+
+  const initialFormData: StudentFormData = {
     fullName: '',
     email: '',
     phone: '',
@@ -108,9 +144,11 @@ export function StudentApplicationForm() {
     whyJoin: '',
     parentConsent: false,
     termsAccepted: false,
-  });
+  };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const [formData, setFormData] = useState<StudentFormData>(initialFormData);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
     const checked = (e.target as HTMLInputElement).checked;
     setFormData(prev => ({
@@ -121,11 +159,16 @@ export function StudentApplicationForm() {
 
   const validateStep = (step: number): boolean => {
     switch (step) {
-      case 1: return !!(formData.fullName && formData.email && formData.phone && formData.gender);
-      case 2: return !!(formData.schoolName && formData.schoolLevel && formData.parentName && formData.parentPhone);
-      case 3: return !!(formData.businessCategory && formData.businessTitle && formData.problemStatement && formData.solution && formData.aiIntegration);
-      case 4: return formData.parentConsent && formData.termsAccepted;
-      default: return true;
+      case 1:
+        return Boolean(formData.fullName && formData.email && formData.phone && formData.gender);
+      case 2:
+        return Boolean(formData.schoolName && formData.schoolLevel && formData.parentName && formData.parentPhone);
+      case 3:
+        return Boolean(formData.businessCategory && formData.businessTitle && formData.problemStatement && formData.solution && formData.aiIntegration);
+      case 4:
+        return formData.parentConsent && formData.termsAccepted;
+      default:
+        return true;
     }
   };
 
@@ -142,7 +185,13 @@ export function StudentApplicationForm() {
     if (currentStep > 1) setCurrentStep(prev => prev - 1);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const resetForm = () => {
+    setStatus('idle');
+    setCurrentStep(1);
+    setFormData(initialFormData);
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validateStep(4)) {
       setError('Please accept all terms');
@@ -161,13 +210,12 @@ export function StudentApplicationForm() {
 
       if (!response.ok) throw new Error('Submission failed');
       setStatus('success');
-    } catch (err) {
+    } catch {
       setStatus('error');
       setError('Failed to submit. Please try again.');
     }
   };
 
-  // Success screen
   if (status === 'success') {
     return (
       <div className="text-center py-12">
@@ -178,18 +226,10 @@ export function StudentApplicationForm() {
         </div>
         <h3 className="text-2xl font-bold text-white mb-3">Application Submitted! 🎉</h3>
         <p className="text-gray-400 mb-2">Thank you for applying to LaunchPad 2025!</p>
-        <p className="text-gray-500 text-sm mb-8">We'll contact you at {formData.email} within 5 business days.</p>
+        <p className="text-gray-500 text-sm mb-8">We&apos;ll contact you at {formData.email} within 5 business days.</p>
         <button
-          onClick={() => {
-            setStatus('idle');
-            setCurrentStep(1);
-            setFormData({
-              fullName: '', email: '', phone: '', gender: '',
-              schoolName: '', schoolLevel: '', parentName: '', parentPhone: '',
-              businessCategory: '', businessTitle: '', problemStatement: '', solution: '', aiIntegration: '',
-              whyJoin: '', parentConsent: false, termsAccepted: false,
-            });
-          }}
+          onClick={resetForm}
+          type="button"
           className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors"
         >
           Submit Another Application
@@ -198,7 +238,7 @@ export function StudentApplicationForm() {
     );
   }
 
-  const steps = ['Personal Info', 'School & Parent', 'Business Idea', 'Review'];
+  const steps: string[] = ['Personal Info', 'School & Parent', 'Business Idea', 'Review'];
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -206,9 +246,11 @@ export function StudentApplicationForm() {
       <div className="flex items-center justify-between mb-8">
         {[1, 2, 3, 4].map((step) => (
           <div key={step} className="flex items-center">
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm ${
-              currentStep >= step ? 'bg-purple-600 text-white' : 'bg-white/10 text-gray-500'
-            }`}>
+            <div
+              className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm ${
+                currentStep >= step ? 'bg-purple-600 text-white' : 'bg-white/10 text-gray-500'
+              }`}
+            >
               {currentStep > step ? '✓' : step}
             </div>
             {step < 4 && (
@@ -274,11 +316,25 @@ export function StudentApplicationForm() {
               <label className="block text-sm font-medium text-white mb-2">Gender *</label>
               <div className="flex gap-6 pt-3">
                 <label className="flex items-center cursor-pointer">
-                  <input type="radio" name="gender" value="male" checked={formData.gender === 'male'} onChange={handleChange} className="mr-2" />
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="male"
+                    checked={formData.gender === 'male'}
+                    onChange={handleChange}
+                    className="mr-2"
+                  />
                   <span className="text-gray-300">Male</span>
                 </label>
                 <label className="flex items-center cursor-pointer">
-                  <input type="radio" name="gender" value="female" checked={formData.gender === 'female'} onChange={handleChange} className="mr-2" />
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="female"
+                    checked={formData.gender === 'female'}
+                    onChange={handleChange}
+                    className="mr-2"
+                  />
                   <span className="text-gray-300">Female</span>
                 </label>
               </div>
@@ -435,10 +491,22 @@ export function StudentApplicationForm() {
           <div className="p-6 rounded-xl bg-white/5 border border-white/10">
             <h4 className="font-semibold text-white mb-4">📋 Review Your Application</h4>
             <div className="grid grid-cols-2 gap-4 text-sm">
-              <div><span className="text-gray-400">Name:</span> <span className="text-white ml-2">{formData.fullName}</span></div>
-              <div><span className="text-gray-400">Email:</span> <span className="text-white ml-2">{formData.email}</span></div>
-              <div><span className="text-gray-400">School:</span> <span className="text-white ml-2">{formData.schoolName}</span></div>
-              <div><span className="text-gray-400">Idea:</span> <span className="text-white ml-2">{formData.businessTitle}</span></div>
+              <div>
+                <span className="text-gray-400">Name:</span>
+                <span className="text-white ml-2">{formData.fullName}</span>
+              </div>
+              <div>
+                <span className="text-gray-400">Email:</span>
+                <span className="text-white ml-2">{formData.email}</span>
+              </div>
+              <div>
+                <span className="text-gray-400">School:</span>
+                <span className="text-white ml-2">{formData.schoolName}</span>
+              </div>
+              <div>
+                <span className="text-gray-400">Idea:</span>
+                <span className="text-white ml-2">{formData.businessTitle}</span>
+              </div>
             </div>
           </div>
           <div>
@@ -454,11 +522,25 @@ export function StudentApplicationForm() {
           </div>
           <div className="space-y-3 p-6 rounded-xl bg-white/5 border border-white/10">
             <label className="flex items-start cursor-pointer">
-              <input type="checkbox" name="parentConsent" checked={formData.parentConsent} onChange={handleChange} className="mt-1 mr-3" required />
+              <input
+                type="checkbox"
+                name="parentConsent"
+                checked={formData.parentConsent}
+                onChange={handleChange}
+                className="mt-1 mr-3"
+                required
+              />
               <span className="text-gray-300 text-sm">My parent/guardian consents to my participation. *</span>
             </label>
             <label className="flex items-start cursor-pointer">
-              <input type="checkbox" name="termsAccepted" checked={formData.termsAccepted} onChange={handleChange} className="mt-1 mr-3" required />
+              <input
+                type="checkbox"
+                name="termsAccepted"
+                checked={formData.termsAccepted}
+                onChange={handleChange}
+                className="mt-1 mr-3"
+                required
+              />
               <span className="text-gray-300 text-sm">I confirm all information is accurate. *</span>
             </label>
           </div>
@@ -468,18 +550,28 @@ export function StudentApplicationForm() {
       {/* Navigation */}
       <div className="flex justify-between pt-6 border-t border-white/10">
         {currentStep > 1 ? (
-          <button type="button" onClick={prevStep} className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors">
+          <button
+            type="button"
+            onClick={prevStep}
+            className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors"
+          >
             ← Back
           </button>
-        ) : <div />}
-        
+        ) : (
+          <div />
+        )}
+
         {currentStep < 4 ? (
-          <button type="button" onClick={nextStep} className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors">
+          <button
+            type="button"
+            onClick={nextStep}
+            className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors"
+          >
             Next →
           </button>
         ) : (
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             disabled={status === 'loading'}
             className="px-8 py-3 bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white font-semibold rounded-lg transition-colors"
           >
@@ -491,16 +583,16 @@ export function StudentApplicationForm() {
   );
 }
 
-/* ============================================
-   SPONSOR APPLICATION FORM
-   ============================================ */
+// ==========================================
+// SPONSOR APPLICATION FORM
+// ==========================================
 
 export function SponsorApplicationForm() {
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [error, setError] = useState('');
-  const [selectedTier, setSelectedTier] = useState('');
-  
-  const [formData, setFormData] = useState({
+  const [status, setStatus] = useState<FormStatus>('idle');
+  const [error, setError] = useState<string>('');
+  const [selectedTier, setSelectedTier] = useState<string>('');
+
+  const initialFormData: SponsorFormData = {
     organizationName: '',
     organizationType: '',
     contactName: '',
@@ -508,28 +600,36 @@ export function SponsorApplicationForm() {
     contactPhone: '',
     sponsorshipGoals: '',
     termsAccepted: false,
-  });
+  };
 
-  const tiers = [
+  const [formData, setFormData] = useState<SponsorFormData>(initialFormData);
+
+  const tiers: SponsorTier[] = [
     { name: 'Bronze', amount: '₦100K - ₦249K', popular: false },
     { name: 'Silver', amount: '₦250K - ₦499K', popular: false },
     { name: 'Gold', amount: '₦500K - ₦999K', popular: true },
     { name: 'Platinum', amount: '₦1M+', popular: false },
   ];
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
     const checked = (e.target as HTMLInputElement).checked;
     setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const resetForm = () => {
+    setStatus('idle');
+    setSelectedTier('');
+    setFormData(initialFormData);
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!formData.termsAccepted) {
       setError('Please accept the terms');
       return;
     }
-    
+
     setStatus('loading');
     setError('');
 
@@ -558,11 +658,8 @@ export function SponsorApplicationForm() {
         <h3 className="text-2xl font-bold text-white mb-3">Inquiry Received! 🤝</h3>
         <p className="text-gray-400 mb-8">Our team will contact you within 2 business days.</p>
         <button
-          onClick={() => {
-            setStatus('idle');
-            setSelectedTier('');
-            setFormData({ organizationName: '', organizationType: '', contactName: '', contactEmail: '', contactPhone: '', sponsorshipGoals: '', termsAccepted: false });
-          }}
+          onClick={resetForm}
+          type="button"
           className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg"
         >
           Submit Another
@@ -583,14 +680,18 @@ export function SponsorApplicationForm() {
               type="button"
               onClick={() => setSelectedTier(tier.name)}
               className={`p-4 rounded-xl text-left transition-all ${
-                selectedTier === tier.name 
-                  ? 'bg-purple-600 border-2 border-purple-400' 
+                selectedTier === tier.name
+                  ? 'bg-purple-600 border-2 border-purple-400'
                   : 'bg-white/5 border border-white/10 hover:border-purple-500/50'
               }`}
             >
               <div className="flex justify-between items-start mb-1">
                 <span className="font-semibold text-white">{tier.name}</span>
-                {tier.popular && <span className="text-[10px] px-1.5 py-0.5 bg-yellow-500/20 text-yellow-400 rounded">Popular</span>}
+                {tier.popular && (
+                  <span className="text-[10px] px-1.5 py-0.5 bg-yellow-500/20 text-yellow-400 rounded">
+                    Popular
+                  </span>
+                )}
               </div>
               <span className="text-purple-400 text-sm font-medium">{tier.amount}</span>
             </button>
@@ -698,8 +799,17 @@ export function SponsorApplicationForm() {
       {/* Terms */}
       <div className="p-6 rounded-xl bg-white/5 border border-white/10">
         <label className="flex items-start cursor-pointer">
-          <input type="checkbox" name="termsAccepted" checked={formData.termsAccepted} onChange={handleChange} className="mt-1 mr-3" required />
-          <span className="text-gray-300 text-sm">I am authorized to discuss sponsorship on behalf of my organization. *</span>
+          <input
+            type="checkbox"
+            name="termsAccepted"
+            checked={formData.termsAccepted}
+            onChange={handleChange}
+            className="mt-1 mr-3"
+            required
+          />
+          <span className="text-gray-300 text-sm">
+            I am authorized to discuss sponsorship on behalf of my organization. *
+          </span>
         </label>
       </div>
 
