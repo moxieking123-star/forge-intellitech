@@ -1,46 +1,40 @@
-import type { MetadataRoute } from 'next'
-
-const BASE_URL = 'https://forgeintellitech.com'
+import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date()
-
+  // ⚠️ CHANGE THIS to your actual domain
+  const baseUrl = 'https://yourdomain.com'
+  
   return [
     {
-      url: `${BASE_URL}`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 1
-    },
-    {
-      url: `${BASE_URL}/about`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8
-    },
-    {
-      url: `${BASE_URL}/programs`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8
-    },
-    {
-      url: `${BASE_URL}/techup`,
-      lastModified: now,
+      url: baseUrl,
+      lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 0.7
+      priority: 1,
     },
     {
-      url: `${BASE_URL}/launchpad`,
-      lastModified: now,
+      url: `${baseUrl}/about`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/services`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/properties`,
+      lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 0.7
+      priority: 0.9,
     },
     {
-      url: `${BASE_URL}/contact`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.4
-    }
+      url: `${baseUrl}/contact`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    // Add more pages as needed
   ]
 }

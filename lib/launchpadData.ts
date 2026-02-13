@@ -197,7 +197,7 @@ export const partners = [
     year: 2025,
   },
   {
-    name: "PAD A Girl Movement",
+    name: "The Motunrayo Girls Foundation",
     role: "Community Partner",
     contribution: "Student outreach and mentorship",
     year: 2025,

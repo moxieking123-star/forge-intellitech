@@ -482,7 +482,7 @@ export default function LaunchPadPage() {
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 {partners2025.map((partner, index) => (
-  <div key={`partner-${index}`} className="p-6 rounded-xl bg-env-surface border border-env-border text-center hover-lift transition-smooth">                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-chapter-accent-soft flex items-center justify-center">
+  <div key={`partner-${index}`} className="p-6 rounded-xl bg-env-surface border border-env-border text-center hover-lift transition-smooth">                   <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-chapter-accent-soft flex items-center justify-center">
                       <span className="text-2xl">🤝</span>
                     </div>
                     <h4 className="font-semibold text-env-primary mb-1">{partner.name}</h4>
