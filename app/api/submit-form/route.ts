@@ -99,14 +99,14 @@ export async function POST(request: NextRequest) {
     // Send confirmation to the user
     try {
       await resend.emails.send({
-        from: 'Your Company <contact@yourdomain.com>',  // CHANGE yourdomain.com
+        from: 'Your Company <info@forgeintellitech.com>',  // CHANGE yourdomain.com
         to: [cleanData.email],
-        subject: 'Thank you for contacting us!',
+        subject: 'Thank you for contacting Forge!',
         html: `
           <h2>Thank You!</h2>
           <p>Dear ${cleanData.name},</p>
           <p>We received your message and will get back to you within 24-48 hours.</p>
-          <p>Best regards,<br>Your Company Team</p>
+          <p>Best regards,<br>Forge Team</p>
         `,
       })
     } catch (emailError) {
