@@ -1,824 +1,662 @@
-'use client';
+"use client";
 
-import { useState, useEffect, type ReactNode, type ChangeEvent, type FormEvent } from 'react';
+import { useState } from "react";
+import { supabase, isSupabaseReady } from "@/lib/supabase";
+import { LAUNCHPAD_CONFIG, sponsorshipTiers } from "@/lib/launchpadData";
 
-// ==========================================
-// TYPES
-// ==========================================
-
-interface FormModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  title: string;
-  children: ReactNode;
-}
-
-interface StudentFormData {
-  fullName: string;
-  email: string;
-  phone: string;
-  gender: string;
-  schoolName: string;
-  schoolLevel: string;
-  parentName: string;
-  parentPhone: string;
-  businessCategory: string;
-  businessTitle: string;
-  problemStatement: string;
-  solution: string;
-  aiIntegration: string;
-  whyJoin: string;
-  parentConsent: boolean;
-  termsAccepted: boolean;
-}
-
-interface SponsorFormData {
-  organizationName: string;
-  organizationType: string;
-  contactName: string;
-  contactEmail: string;
-  contactPhone: string;
-  sponsorshipGoals: string;
-  termsAccepted: boolean;
-}
-
-type FormStatus = 'idle' | 'loading' | 'success' | 'error';
-
-interface SponsorTier {
-  name: string;
-  amount: string;
-  popular: boolean;
-}
-
-// ==========================================
-// FORM MODAL COMPONENT
-// ==========================================
-
-export function FormModal({ isOpen, onClose, title, children }: FormModalProps) {
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isOpen]);
-
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
-    }
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-    };
-  }, [isOpen, onClose]);
-
-  if (!isOpen) return null;
-
-  return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="modal-title"
-    >
-      <div
-        className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-        onClick={onClose}
-        aria-hidden="true"
-      />
-
-      <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-env-surface border border-env-border rounded-2xl shadow-2xl">
-        <div className="sticky top-0 z-10 flex items-center justify-between p-6 border-b border-env-border bg-env-surface rounded-t-2xl">
-          <h2 id="modal-title" className="text-xl font-bold text-env-primary">
-            {title}
-          </h2>
-          <button
-            onClick={onClose}
-            type="button"
-            className="p-2 text-env-tertiary hover:text-env-primary hover:bg-env-surface-hover rounded-lg transition-colors"
-            aria-label="Close modal"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-
-        <div className="p-6">
-          {children}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ==========================================
+// ============================================
 // STUDENT APPLICATION FORM
-// ==========================================
+// ============================================
 
 export function StudentApplicationForm() {
-  const [currentStep, setCurrentStep] = useState<number>(1);
-  const [status, setStatus] = useState<FormStatus>('idle');
-  const [error, setError] = useState<string>('');
-
-  const initialFormData: StudentFormData = {
-    fullName: '',
-    email: '',
-    phone: '',
-    gender: '',
-    schoolName: '',
-    schoolLevel: '',
-    parentName: '',
-    parentPhone: '',
-    businessCategory: '',
-    businessTitle: '',
-    problemStatement: '',
-    solution: '',
-    aiIntegration: '',
-    whyJoin: '',
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    gender: "",
+    schoolName: "",
+    schoolLevel: "",
+    parentName: "",
+    parentPhone: "",
+    businessCategory: "",
+    businessTitle: "",
+    problemStatement: "",
+    solution: "",
+    aiIntegration: "",
+    whyJoin: "",
     parentConsent: false,
     termsAccepted: false,
-  };
+  });
+  
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const [formData, setFormData] = useState<StudentFormData>(initialFormData);
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value, type } = e.target;
     const checked = (e.target as HTMLInputElement).checked;
-    setFormData(prev => ({
+    
+    setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
-  const validateStep = (step: number): boolean => {
-    switch (step) {
-      case 1:
-        return Boolean(formData.fullName && formData.email && formData.phone && formData.gender);
-      case 2:
-        return Boolean(formData.schoolName && formData.schoolLevel && formData.parentName && formData.parentPhone);
-      case 3:
-        return Boolean(formData.businessCategory && formData.businessTitle && formData.problemStatement && formData.solution && formData.aiIntegration);
-      case 4:
-        return formData.parentConsent && formData.termsAccepted;
-      default:
-        return true;
-    }
-  };
-
-  const nextStep = () => {
-    if (validateStep(currentStep) && currentStep < 4) {
-      setCurrentStep(prev => prev + 1);
-    } else if (!validateStep(currentStep)) {
-      setError('Please fill in all required fields');
-      setTimeout(() => setError(''), 3000);
-    }
-  };
-
-  const prevStep = () => {
-    if (currentStep > 1) setCurrentStep(prev => prev - 1);
-  };
-
-  const resetForm = () => {
-    setStatus('idle');
-    setCurrentStep(1);
-    setFormData(initialFormData);
-  };
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateStep(4)) {
-      setError('Please accept all terms');
+    setStatus("loading");
+    setErrorMessage("");
+
+    if (!isSupabaseReady()) {
+      setStatus("error");
+      setErrorMessage("Application system is temporarily unavailable. Please try again later.");
       return;
     }
 
-    setStatus('loading');
-    setError('');
-
     try {
-      const response = await fetch('/api/launchpad/apply', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, submittedAt: new Date().toISOString() }),
-      });
+      const { error } = await supabase
+        .from("launchpad_applications")
+        .insert([
+          {
+            ...formData,
+            submittedAt: new Date().toISOString(),
+          },
+        ]);
 
-      if (!response.ok) throw new Error('Submission failed');
-      setStatus('success');
-    } catch {
-      setStatus('error');
-      setError('Failed to submit. Please try again.');
+      if (error) {
+        console.error("Supabase error:", error);
+        throw error;
+      }
+
+      setStatus("success");
+      setFormData({
+        fullName: "",
+        email: "",
+        phone: "",
+        gender: "",
+        schoolName: "",
+        schoolLevel: "",
+        parentName: "",
+        parentPhone: "",
+        businessCategory: "",
+        businessTitle: "",
+        problemStatement: "",
+        solution: "",
+        aiIntegration: "",
+        whyJoin: "",
+        parentConsent: false,
+        termsAccepted: false,
+      });
+    } catch (err) {
+      setStatus("error");
+      setErrorMessage(
+        err instanceof Error ? err.message : "Something went wrong. Please try again."
+      );
     }
   };
 
-  if (status === 'success') {
+  if (status === "success") {
     return (
       <div className="text-center py-12">
-        <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-6">
-          <svg className="w-10 h-10 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-baobab-500/20 flex items-center justify-center">
+          <svg className="w-8 h-8 text-baobab-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-2xl font-bold text-white mb-3">Application Submitted! 🎉</h3>
-        <p className="text-gray-400 mb-2">Thank you for applying to LaunchPad 2025!</p>
-        <p className="text-gray-500 text-sm mb-8">We&apos;ll contact you at {formData.email} within 5 business days.</p>
-        <button
-          onClick={resetForm}
-          type="button"
-          className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors"
-        >
-          Submit Another Application
-        </button>
-      </div>
-    );
-  }
-
-  const steps: string[] = ['Personal Info', 'School & Parent', 'Business Idea', 'Review'];
-
-  return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Progress Steps */}
-      <div className="flex items-center justify-between mb-8">
-        {[1, 2, 3, 4].map((step) => (
-          <div key={step} className="flex items-center">
-            <div
-              className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm ${
-                currentStep >= step ? 'bg-purple-600 text-white' : 'bg-white/10 text-gray-500'
-              }`}
-            >
-              {currentStep > step ? '✓' : step}
-            </div>
-            {step < 4 && (
-              <div className={`hidden sm:block w-16 h-1 mx-2 ${currentStep > step ? 'bg-purple-600' : 'bg-white/10'}`} />
-            )}
-          </div>
-        ))}
-      </div>
-
-      <h3 className="text-lg font-semibold text-white text-center mb-6">
-        Step {currentStep}: {steps[currentStep - 1]}
-      </h3>
-
-      {error && (
-        <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-          ⚠️ {error}
-        </div>
-      )}
-
-      {/* Step 1: Personal Info */}
-      {currentStep === 1 && (
-        <div className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-white mb-2">Full Name *</label>
-              <input
-                type="text"
-                name="fullName"
-                value={formData.fullName}
-                onChange={handleChange}
-                placeholder="Your full name"
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-white mb-2">Email *</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="your@email.com"
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500"
-                required
-              />
-            </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-white mb-2">Phone *</label>
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                placeholder="08012345678"
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-white mb-2">Gender *</label>
-              <div className="flex gap-6 pt-3">
-                <label className="flex items-center cursor-pointer">
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="male"
-                    checked={formData.gender === 'male'}
-                    onChange={handleChange}
-                    className="mr-2"
-                  />
-                  <span className="text-gray-300">Male</span>
-                </label>
-                <label className="flex items-center cursor-pointer">
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="female"
-                    checked={formData.gender === 'female'}
-                    onChange={handleChange}
-                    className="mr-2"
-                  />
-                  <span className="text-gray-300">Female</span>
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Step 2: School & Parent */}
-      {currentStep === 2 && (
-        <div className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-white mb-2">School Name *</label>
-              <input
-                type="text"
-                name="schoolName"
-                value={formData.schoolName}
-                onChange={handleChange}
-                placeholder="Your school name"
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-white mb-2">Class *</label>
-              <select
-                name="schoolLevel"
-                value={formData.schoolLevel}
-                onChange={handleChange}
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-purple-500"
-                required
-              >
-                <option value="" className="bg-gray-900">Select class</option>
-                <option value="ss3" className="bg-gray-900">SS3 (Final Year)</option>
-                <option value="ss2" className="bg-gray-900">SS2</option>
-                <option value="ss1" className="bg-gray-900">SS1</option>
-                <option value="jss3" className="bg-gray-900">JSS3</option>
-              </select>
-            </div>
-          </div>
-          <div className="border-t border-white/10 pt-4 mt-4">
-            <p className="text-purple-400 text-sm font-medium mb-4">👨‍👩‍👧 Parent/Guardian Info</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-white mb-2">Parent Name *</label>
-              <input
-                type="text"
-                name="parentName"
-                value={formData.parentName}
-                onChange={handleChange}
-                placeholder="Parent/guardian name"
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-white mb-2">Parent Phone *</label>
-              <input
-                type="tel"
-                name="parentPhone"
-                value={formData.parentPhone}
-                onChange={handleChange}
-                placeholder="08012345678"
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500"
-                required
-              />
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Step 3: Business Idea */}
-      {currentStep === 3 && (
-        <div className="space-y-4">
-          <div className="p-4 rounded-lg bg-purple-500/10 border border-purple-500/20">
-            <p className="text-sm text-gray-300">💡 This is the most important part! Tell us about your business idea.</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-white mb-2">Category *</label>
-              <select
-                name="businessCategory"
-                value={formData.businessCategory}
-                onChange={handleChange}
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-purple-500"
-                required
-              >
-                <option value="" className="bg-gray-900">Select category</option>
-                <option value="tech" className="bg-gray-900">Technology</option>
-                <option value="education" className="bg-gray-900">Education</option>
-                <option value="health" className="bg-gray-900">Health</option>
-                <option value="agriculture" className="bg-gray-900">Agriculture</option>
-                <option value="finance" className="bg-gray-900">Finance</option>
-                <option value="other" className="bg-gray-900">Other</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-white mb-2">Business Name *</label>
-              <input
-                type="text"
-                name="businessTitle"
-                value={formData.businessTitle}
-                onChange={handleChange}
-                placeholder="Name your idea"
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500"
-                required
-              />
-            </div>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-white mb-2">What problem does it solve? *</label>
-            <textarea
-              name="problemStatement"
-              value={formData.problemStatement}
-              onChange={handleChange}
-              rows={3}
-              placeholder="Describe the problem..."
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500 resize-none"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-white mb-2">Your solution *</label>
-            <textarea
-              name="solution"
-              value={formData.solution}
-              onChange={handleChange}
-              rows={3}
-              placeholder="How does your idea solve it?"
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500 resize-none"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-white mb-2">How does AI help? *</label>
-            <textarea
-              name="aiIntegration"
-              value={formData.aiIntegration}
-              onChange={handleChange}
-              rows={3}
-              placeholder="How will you use AI?"
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500 resize-none"
-              required
-            />
-          </div>
-        </div>
-      )}
-
-      {/* Step 4: Review */}
-      {currentStep === 4 && (
-        <div className="space-y-6">
-          <div className="p-6 rounded-xl bg-white/5 border border-white/10">
-            <h4 className="font-semibold text-white mb-4">📋 Review Your Application</h4>
-            <div className="grid grid-cols-2 gap-4 text-sm">
-              <div>
-                <span className="text-gray-400">Name:</span>
-                <span className="text-white ml-2">{formData.fullName}</span>
-              </div>
-              <div>
-                <span className="text-gray-400">Email:</span>
-                <span className="text-white ml-2">{formData.email}</span>
-              </div>
-              <div>
-                <span className="text-gray-400">School:</span>
-                <span className="text-white ml-2">{formData.schoolName}</span>
-              </div>
-              <div>
-                <span className="text-gray-400">Idea:</span>
-                <span className="text-white ml-2">{formData.businessTitle}</span>
-              </div>
-            </div>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-white mb-2">Why LaunchPad?</label>
-            <textarea
-              name="whyJoin"
-              value={formData.whyJoin}
-              onChange={handleChange}
-              rows={2}
-              placeholder="What excites you about LaunchPad?"
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500 resize-none"
-            />
-          </div>
-          <div className="space-y-3 p-6 rounded-xl bg-white/5 border border-white/10">
-            <label className="flex items-start cursor-pointer">
-              <input
-                type="checkbox"
-                name="parentConsent"
-                checked={formData.parentConsent}
-                onChange={handleChange}
-                className="mt-1 mr-3"
-                required
-              />
-              <span className="text-gray-300 text-sm">My parent/guardian consents to my participation. *</span>
-            </label>
-            <label className="flex items-start cursor-pointer">
-              <input
-                type="checkbox"
-                name="termsAccepted"
-                checked={formData.termsAccepted}
-                onChange={handleChange}
-                className="mt-1 mr-3"
-                required
-              />
-              <span className="text-gray-300 text-sm">I confirm all information is accurate. *</span>
-            </label>
-          </div>
-        </div>
-      )}
-
-      {/* Navigation */}
-      <div className="flex justify-between pt-6 border-t border-white/10">
-        {currentStep > 1 ? (
-          <button
-            type="button"
-            onClick={prevStep}
-            className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors"
-          >
-            ← Back
-          </button>
-        ) : (
-          <div />
-        )}
-
-        {currentStep < 4 ? (
-          <button
-            type="button"
-            onClick={nextStep}
-            className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors"
-          >
-            Next →
-          </button>
-        ) : (
-          <button
-            type="submit"
-            disabled={status === 'loading'}
-            className="px-8 py-3 bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white font-semibold rounded-lg transition-colors"
-          >
-            {status === 'loading' ? 'Submitting...' : '🚀 Submit Application'}
-          </button>
-        )}
-      </div>
-    </form>
-  );
-}
-
-// ==========================================
-// SPONSOR APPLICATION FORM
-// ==========================================
-
-export function SponsorApplicationForm() {
-  const [status, setStatus] = useState<FormStatus>('idle');
-  const [error, setError] = useState<string>('');
-  const [selectedTier, setSelectedTier] = useState<string>('');
-
-  const initialFormData: SponsorFormData = {
-    organizationName: '',
-    organizationType: '',
-    contactName: '',
-    contactEmail: '',
-    contactPhone: '',
-    sponsorshipGoals: '',
-    termsAccepted: false,
-  };
-
-  const [formData, setFormData] = useState<SponsorFormData>(initialFormData);
-
-  const tiers: SponsorTier[] = [
-    { name: 'Bronze', amount: '₦100K - ₦249K', popular: false },
-    { name: 'Silver', amount: '₦250K - ₦499K', popular: false },
-    { name: 'Gold', amount: '₦500K - ₦999K', popular: true },
-    { name: 'Platinum', amount: '₦1M+', popular: false },
-  ];
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target;
-    const checked = (e.target as HTMLInputElement).checked;
-    setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
-  };
-
-  const resetForm = () => {
-    setStatus('idle');
-    setSelectedTier('');
-    setFormData(initialFormData);
-  };
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!formData.termsAccepted) {
-      setError('Please accept the terms');
-      return;
-    }
-
-    setStatus('loading');
-    setError('');
-
-    try {
-      const response = await fetch('/api/launchpad/sponsor', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, tier: selectedTier, submittedAt: new Date().toISOString() }),
-      });
-      if (!response.ok) throw new Error('Failed');
-      setStatus('success');
-    } catch {
-      setStatus('error');
-      setError('Submission failed. Please try again.');
-    }
-  };
-
-  if (status === 'success') {
-    return (
-      <div className="text-center py-12">
-        <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-6">
-          <svg className="w-10 h-10 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <h3 className="text-2xl font-bold text-white mb-3">Inquiry Received! 🤝</h3>
-        <p className="text-gray-400 mb-8">Our team will contact you within 2 business days.</p>
-        <button
-          onClick={resetForm}
-          type="button"
-          className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg"
-        >
-          Submit Another
-        </button>
+        <h3 className="text-2xl font-bold text-env-primary mb-2">Application Submitted!</h3>
+        <p className="text-env-secondary max-w-md mx-auto">
+          Thank you for applying to LaunchPad {LAUNCHPAD_CONFIG.currentYear}. 
+          We'll review your application and contact you soon.
+        </p>
       </div>
     );
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
-      {/* Tier Selection */}
+      {/* Personal Information */}
       <div>
-        <h4 className="text-lg font-semibold text-white mb-4">Select Tier</h4>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {tiers.map((tier) => (
-            <button
-              key={tier.name}
-              type="button"
-              onClick={() => setSelectedTier(tier.name)}
-              className={`p-4 rounded-xl text-left transition-all ${
-                selectedTier === tier.name
-                  ? 'bg-purple-600 border-2 border-purple-400'
-                  : 'bg-white/5 border border-white/10 hover:border-purple-500/50'
-              }`}
-            >
-              <div className="flex justify-between items-start mb-1">
-                <span className="font-semibold text-white">{tier.name}</span>
-                {tier.popular && (
-                  <span className="text-[10px] px-1.5 py-0.5 bg-yellow-500/20 text-yellow-400 rounded">
-                    Popular
-                  </span>
-                )}
-              </div>
-              <span className="text-purple-400 text-sm font-medium">{tier.amount}</span>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {error && (
-        <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-          ⚠️ {error}
-        </div>
-      )}
-
-      {/* Organization */}
-      <div className="space-y-4">
-        <h4 className="text-lg font-semibold text-white">Organization</h4>
+        <h3 className="text-lg font-semibold text-env-primary mb-4 flex items-center">
+          <span className="text-chapter-accent mr-2">👤</span>
+          Personal Information
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-white mb-2">Organization Name *</label>
+            <label htmlFor="student-fullName" className="block text-sm font-medium text-env-secondary mb-2">
+              Full Name *
+            </label>
             <input
               type="text"
-              name="organizationName"
-              value={formData.organizationName}
+              id="student-fullName"
+              name="fullName"
+              value={formData.fullName}
               onChange={handleChange}
-              placeholder="Company name"
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500"
               required
+              className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth"
+              placeholder="Enter your full name"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-white mb-2">Type *</label>
-            <select
-              name="organizationType"
-              value={formData.organizationType}
+            <label htmlFor="student-email" className="block text-sm font-medium text-env-secondary mb-2">
+              Email Address *
+            </label>
+            <input
+              type="email"
+              id="student-email"
+              name="email"
+              value={formData.email}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-purple-500"
               required
+              className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth"
+              placeholder="your.email@example.com"
+            />
+          </div>
+          <div>
+            <label htmlFor="student-phone" className="block text-sm font-medium text-env-secondary mb-2">
+              Phone Number *
+            </label>
+            <input
+              type="tel"
+              id="student-phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth"
+              placeholder="+234..."
+            />
+          </div>
+          <div>
+            <label htmlFor="student-gender" className="block text-sm font-medium text-env-secondary mb-2">
+              Gender *
+            </label>
+            <select
+              id="student-gender"
+              name="gender"
+              value={formData.gender}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth"
             >
-              <option value="" className="bg-gray-900">Select type</option>
-              <option value="corporate" className="bg-gray-900">Corporate</option>
-              <option value="government" className="bg-gray-900">Government</option>
-              <option value="ngo" className="bg-gray-900">NGO/Foundation</option>
-              <option value="individual" className="bg-gray-900">Individual</option>
+              <option value="">Select gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
             </select>
           </div>
         </div>
       </div>
 
-      {/* Contact */}
-      <div className="space-y-4">
-        <h4 className="text-lg font-semibold text-white">Contact Person</h4>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {/* School Information */}
+      <div>
+        <h3 className="text-lg font-semibold text-env-primary mb-4 flex items-center">
+          <span className="text-chapter-accent mr-2">🏫</span>
+          School Information
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-white mb-2">Name *</label>
+            <label htmlFor="student-schoolName" className="block text-sm font-medium text-env-secondary mb-2">
+              School Name *
+            </label>
             <input
               type="text"
-              name="contactName"
-              value={formData.contactName}
+              id="student-schoolName"
+              name="schoolName"
+              value={formData.schoolName}
               onChange={handleChange}
-              placeholder="Contact name"
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500"
               required
+              className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth"
+              placeholder="Enter your school name"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-white mb-2">Email *</label>
+            <label htmlFor="student-schoolLevel" className="block text-sm font-medium text-env-secondary mb-2">
+              Current Level *
+            </label>
+            <select
+              id="student-schoolLevel"
+              name="schoolLevel"
+              value={formData.schoolLevel}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth"
+            >
+              <option value="">Select level</option>
+              <option value="SS1">SS1</option>
+              <option value="SS2">SS2</option>
+              <option value="SS3">SS3</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      {/* Parent/Guardian Information */}
+      <div>
+        <h3 className="text-lg font-semibold text-env-primary mb-4 flex items-center">
+          <span className="text-chapter-accent mr-2">👨‍👩‍👧</span>
+          Parent/Guardian Information
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label htmlFor="student-parentName" className="block text-sm font-medium text-env-secondary mb-2">
+              Parent/Guardian Name *
+            </label>
             <input
-              type="email"
-              name="contactEmail"
-              value={formData.contactEmail}
+              type="text"
+              id="student-parentName"
+              name="parentName"
+              value={formData.parentName}
               onChange={handleChange}
-              placeholder="email@company.com"
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500"
               required
+              className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth"
+              placeholder="Enter parent/guardian name"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-white mb-2">Phone *</label>
+            <label htmlFor="student-parentPhone" className="block text-sm font-medium text-env-secondary mb-2">
+              Parent/Guardian Phone *
+            </label>
             <input
               type="tel"
-              name="contactPhone"
-              value={formData.contactPhone}
+              id="student-parentPhone"
+              name="parentPhone"
+              value={formData.parentPhone}
               onChange={handleChange}
-              placeholder="08012345678"
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500"
               required
+              className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth"
+              placeholder="+234..."
             />
           </div>
         </div>
       </div>
 
+      {/* Business Idea */}
+      <div>
+        <h3 className="text-lg font-semibold text-env-primary mb-4 flex items-center">
+          <span className="text-chapter-accent mr-2">💡</span>
+          Your Business Idea
+        </h3>
+        <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="student-businessCategory" className="block text-sm font-medium text-env-secondary mb-2">
+                Business Category *
+              </label>
+              <select
+                id="student-businessCategory"
+                name="businessCategory"
+                value={formData.businessCategory}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth"
+              >
+                <option value="">Select category</option>
+                <option value="technology">Technology</option>
+                <option value="education">Education</option>
+                <option value="health">Health</option>
+                <option value="agriculture">Agriculture</option>
+                <option value="finance">Finance</option>
+                <option value="environment">Environment</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor="student-businessTitle" className="block text-sm font-medium text-env-secondary mb-2">
+                Business Title *
+              </label>
+              <input
+                type="text"
+                id="student-businessTitle"
+                name="businessTitle"
+                value={formData.businessTitle}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth"
+                placeholder="Give your idea a name"
+              />
+            </div>
+          </div>
+          <div>
+            <label htmlFor="student-problemStatement" className="block text-sm font-medium text-env-secondary mb-2">
+              What problem are you solving? *
+            </label>
+            <textarea
+              id="student-problemStatement"
+              name="problemStatement"
+              value={formData.problemStatement}
+              onChange={handleChange}
+              required
+              rows={3}
+              className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth resize-none"
+              placeholder="Describe the problem you want to solve..."
+            />
+          </div>
+          <div>
+            <label htmlFor="student-solution" className="block text-sm font-medium text-env-secondary mb-2">
+              Your proposed solution *
+            </label>
+            <textarea
+              id="student-solution"
+              name="solution"
+              value={formData.solution}
+              onChange={handleChange}
+              required
+              rows={3}
+              className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth resize-none"
+              placeholder="How will your idea solve this problem?"
+            />
+          </div>
+          <div>
+            <label htmlFor="student-aiIntegration" className="block text-sm font-medium text-env-secondary mb-2">
+              How will you use AI in your solution?
+            </label>
+            <textarea
+              id="student-aiIntegration"
+              name="aiIntegration"
+              value={formData.aiIntegration}
+              onChange={handleChange}
+              rows={2}
+              className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth resize-none"
+              placeholder="Optional: Describe how AI could enhance your solution..."
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Consents */}
+      <div className="space-y-4">
+        <div className="flex items-start gap-3">
+          <input
+            type="checkbox"
+            id="student-parentConsent"
+            name="parentConsent"
+            checked={formData.parentConsent}
+            onChange={handleChange}
+            required
+            className="w-5 h-5 mt-0.5 rounded border-env-border text-chapter-accent focus:ring-chapter-accent"
+          />
+          <label htmlFor="student-parentConsent" className="text-sm text-env-secondary cursor-pointer">
+            I confirm that my parent/guardian has given permission for me to participate in LaunchPad {LAUNCHPAD_CONFIG.currentYear}. *
+          </label>
+        </div>
+        <div className="flex items-start gap-3">
+          <input
+            type="checkbox"
+            id="student-termsAccepted"
+            name="termsAccepted"
+            checked={formData.termsAccepted}
+            onChange={handleChange}
+            required
+            className="w-5 h-5 mt-0.5 rounded border-env-border text-chapter-accent focus:ring-chapter-accent"
+          />
+          <label htmlFor="student-termsAccepted" className="text-sm text-env-secondary cursor-pointer">
+            I agree to the terms and conditions of the LaunchPad program. *
+          </label>
+        </div>
+      </div>
+
+      {/* Error Message */}
+      {status === "error" && (
+        <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400">
+          {errorMessage}
+        </div>
+      )}
+
+      {/* Submit Button */}
+      <button
+        type="submit"
+        disabled={status === "loading"}
+        className="w-full py-4 bg-chapter-accent hover:bg-chapter-accent-hover text-white font-semibold rounded-lg transition-smooth glow disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {status === "loading" ? "Submitting..." : "Submit Application"}
+      </button>
+    </form>
+  );
+}
+
+// ============================================
+// SPONSOR APPLICATION FORM
+// ============================================
+
+export function SponsorApplicationForm() {
+  const [formData, setFormData] = useState({
+    organizationName: "",
+    organizationType: "",
+    contactName: "",
+    contactEmail: "",
+    contactPhone: "",
+    tier: "",
+    sponsorshipGoals: "",
+    termsAccepted: false,
+  });
+  
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value, type } = e.target;
+    const checked = (e.target as HTMLInputElement).checked;
+    
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+    setErrorMessage("");
+
+    if (!isSupabaseReady()) {
+      setStatus("error");
+      setErrorMessage("System is temporarily unavailable. Please try again later.");
+      return;
+    }
+
+    try {
+      const { error } = await supabase
+        .from("sponsor_inquiries")
+        .insert([
+          {
+            ...formData,
+            submittedAt: new Date().toISOString(),
+          },
+        ]);
+
+      if (error) {
+        console.error("Supabase error:", error);
+        throw error;
+      }
+
+      setStatus("success");
+    } catch (err) {
+      setStatus("error");
+      setErrorMessage(
+        err instanceof Error ? err.message : "Something went wrong. Please try again."
+      );
+    }
+  };
+
+  if (status === "success") {
+    return (
+      <div className="text-center py-12">
+        <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-purple-500/20 flex items-center justify-center">
+          <svg className="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h3 className="text-2xl font-bold text-env-primary mb-2">Inquiry Received!</h3>
+        <p className="text-env-secondary max-w-md mx-auto">
+          Thank you for your interest in sponsoring LaunchPad. 
+          Our partnerships team will contact you within 48 hours.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Organization Info */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label htmlFor="sponsor-organizationName" className="block text-sm font-medium text-env-secondary mb-2">
+            Organization Name *
+          </label>
+          <input
+            type="text"
+            id="sponsor-organizationName"
+            name="organizationName"
+            value={formData.organizationName}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-smooth"
+            placeholder="Enter organization name"
+          />
+        </div>
+        <div>
+          <label htmlFor="sponsor-organizationType" className="block text-sm font-medium text-env-secondary mb-2">
+            Organization Type *
+          </label>
+          <select
+            id="sponsor-organizationType"
+            name="organizationType"
+            value={formData.organizationType}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-smooth"
+          >
+            <option value="">Select type</option>
+            <option value="corporate">Corporate</option>
+            <option value="foundation">Foundation/NGO</option>
+            <option value="government">Government Agency</option>
+            <option value="individual">Individual Donor</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Contact Info */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <label htmlFor="sponsor-contactName" className="block text-sm font-medium text-env-secondary mb-2">
+            Contact Name *
+          </label>
+          <input
+            type="text"
+            id="sponsor-contactName"
+            name="contactName"
+            value={formData.contactName}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-smooth"
+            placeholder="Your name"
+          />
+        </div>
+        <div>
+          <label htmlFor="sponsor-contactEmail" className="block text-sm font-medium text-env-secondary mb-2">
+            Email *
+          </label>
+          <input
+            type="email"
+            id="sponsor-contactEmail"
+            name="contactEmail"
+            value={formData.contactEmail}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-smooth"
+            placeholder="email@organization.com"
+          />
+        </div>
+        <div>
+          <label htmlFor="sponsor-contactPhone" className="block text-sm font-medium text-env-secondary mb-2">
+            Phone *
+          </label>
+          <input
+            type="tel"
+            id="sponsor-contactPhone"
+            name="contactPhone"
+            value={formData.contactPhone}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-smooth"
+            placeholder="+234..."
+          />
+        </div>
+      </div>
+
+      {/* Sponsorship Tier */}
+      <div>
+        <label htmlFor="sponsor-tier" className="block text-sm font-medium text-env-secondary mb-2">
+          Interested Sponsorship Tier *
+        </label>
+        <select
+          id="sponsor-tier"
+          name="tier"
+          value={formData.tier}
+          onChange={handleChange}
+          required
+          className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-smooth"
+        >
+          <option value="">Select a tier</option>
+          {sponsorshipTiers.map((tier) => (
+            <option key={tier.name} value={tier.name}>
+              {tier.name} ({tier.amount})
+            </option>
+          ))}
+          <option value="custom">Custom Amount</option>
+        </select>
+      </div>
+
       {/* Goals */}
       <div>
-        <label className="block text-sm font-medium text-white mb-2">Sponsorship Goals</label>
+        <label htmlFor="sponsor-sponsorshipGoals" className="block text-sm font-medium text-env-secondary mb-2">
+          What are your sponsorship goals?
+        </label>
         <textarea
+          id="sponsor-sponsorshipGoals"
           name="sponsorshipGoals"
           value={formData.sponsorshipGoals}
           onChange={handleChange}
           rows={3}
-          placeholder="What do you hope to achieve?"
-          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500 resize-none"
+          className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-smooth resize-none"
+          placeholder="Tell us what you hope to achieve through this partnership..."
         />
       </div>
 
-      {/* Terms */}
-      <div className="p-6 rounded-xl bg-white/5 border border-white/10">
-        <label className="flex items-start cursor-pointer">
-          <input
-            type="checkbox"
-            name="termsAccepted"
-            checked={formData.termsAccepted}
-            onChange={handleChange}
-            className="mt-1 mr-3"
-            required
-          />
-          <span className="text-gray-300 text-sm">
-            I am authorized to discuss sponsorship on behalf of my organization. *
-          </span>
+      {/* Consent */}
+      <div className="flex items-start gap-3">
+        <input
+          type="checkbox"
+          id="sponsor-termsAccepted"
+          name="termsAccepted"
+          checked={formData.termsAccepted}
+          onChange={handleChange}
+          required
+          className="w-5 h-5 mt-0.5 rounded border-env-border text-purple-500 focus:ring-purple-500"
+        />
+        <label htmlFor="sponsor-termsAccepted" className="text-sm text-env-secondary cursor-pointer">
+          I agree to be contacted regarding sponsorship opportunities. *
         </label>
       </div>
 
+      {/* Error */}
+      {status === "error" && (
+        <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400">
+          {errorMessage}
+        </div>
+      )}
+
+      {/* Submit */}
       <button
         type="submit"
-        disabled={status === 'loading'}
-        className="w-full px-8 py-4 bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white font-semibold rounded-lg transition-colors"
+        disabled={status === "loading"}
+        className="w-full py-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-smooth disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {status === 'loading' ? 'Submitting...' : '🤝 Submit Sponsorship Inquiry'}
+        {status === "loading" ? "Submitting..." : "Submit Sponsorship Inquiry"}
       </button>
     </form>
   );
