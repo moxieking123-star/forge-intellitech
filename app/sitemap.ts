@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // ⚠️ CHANGE THIS to your actual domain
-  const baseUrl = 'https://yourdomain.com'
+  const baseUrl = 'https://forgeintellitech.com'
   
   return [
     {

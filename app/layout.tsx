@@ -13,6 +13,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://forgeintellitech.com'),
   title: {
     default: "Forge Intellitech | Technology Built for Africa",
     template: "%s | Forge Intellitech",
@@ -26,21 +27,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html 
-      lang="en" 
-      /* 
-       * suppressHydrationWarning is needed because we set
-       * data-mode on the client to avoid flash. This is a
-       * standard pattern for theme implementations.
-       */
-      suppressHydrationWarning
-    >
+    <html lang="en" suppressHydrationWarning>
       <head>
-        {/*
-          Inline script to set initial theme before paint.
-          This prevents the "flash" of wrong theme on load.
-          We check localStorage first, then system preference.
-        */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -53,7 +41,6 @@ export default function RootLayout({
                     var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
                     document.documentElement.setAttribute('data-mode', isDark ? 'dark' : 'light');
                   }
-                  // Default chapter
                   document.documentElement.setAttribute('data-chapter', 'forge');
                 } catch (e) {}
               })();
@@ -63,17 +50,15 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} min-h-screen flex flex-col`}>
         <ThemeProvider defaultMode="dark" defaultChapter="forge">
-          {/* Glow cursor - positioned fixed, doesn't affect layout */}
           <GlowCursor />
-          
           <Navbar />
           <main className="flex-grow pt-16 md:pt-20">
             {children}
           </main>
           <Footer />
         </ThemeProvider>
+        <GoogleAnalytics gaId="G-KE1R66TB7V" />
       </body>
-      <GoogleAnalytics gaId="G-XXXXXXXXXX" /> {/* YOUR ID HERE */}
     </html>
   );
 }
