@@ -83,7 +83,7 @@ export default function HomePage() {
     <ChapterWrapper chapter="forge">
       
       {/* ==================== HERO SECTION ==================== */}
-      <section className="relative section-padding flex flex-col items-center justify-center min-h-[70vh] overflow-hidden">
+      <section className="relative flex flex-col items-center justify-center min-h-[90vh] overflow-hidden">
         
         {/* Hero Background Image */}
         <div className="absolute inset-0 z-0">
@@ -93,54 +93,136 @@ export default function HomePage() {
             fill
             className="object-cover"
             priority
-            quality={75}
+            quality={85}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-env-bg-primary" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-env-bg-primary" />
         </div>
 
         {/* Decorative glow elements */}
         <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-chapter-accent/20 rounded-full blur-3xl animate-subtle-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl" />
+          <div className="absolute top-1/3 left-1/3 w-[500px] h-[500px] bg-chapter-accent/15 rounded-full blur-3xl animate-subtle-pulse" />
+          <div className="absolute bottom-1/3 right-1/3 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-3xl" />
         </div>
 
-        <div className="container-forge text-center relative z-10">
+        <div className="container-forge text-center relative z-10 px-6">
           
           <AnimatedSection animation="fade-up">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
-              <span className="text-white drop-shadow-lg">What if technology</span>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-8 leading-tight">
+              <span className="text-white drop-shadow-lg">We stopped waiting</span>
               <br />
-              <span className="gradient-text">truly understood Africa?</span>
+              <span className="text-white drop-shadow-lg">for the future.</span>
+              <br />
+              <span className="gradient-text">We started building it.</span>
             </h1>
             
-            <div className="text-lg md:text-xl text-white max-w-3xl mx-auto mb-10 drop-shadow-md leading-relaxed space-y-4">
-              <p>
-                Forge Intellitech is building the hidden infrastructure of Africa's future — not just software, but human capability.
-              </p>
-              <p>
-                From public classrooms to community halls, from young designers to first-time founders, we train minds, deploy systems and cultivate builders who understand their world before trying to change it.
-              </p>
-              <p className="text-white/90 italic">
-                We are not importing progress.<br />
-                We are engineering it — patiently, locally and at scale.
-              </p>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/products"
-                className="px-8 py-4 bg-chapter-accent hover:bg-chapter-accent-hover text-white font-medium rounded-lg transition-smooth glow hover-lift"
-              >
-                Explore Our Products
-              </Link>
-              <Link
-                href="/join"
-                className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-medium rounded-lg border border-white/30 backdrop-blur-sm transition-smooth hover-lift"
-              >
-                Join Our Movement
-              </Link>
+            <p className="text-xl md:text-2xl text-white/80 max-w-2xl mx-auto drop-shadow-md">
+              Technology and education, forged from African soil.
+            </p>
+          </AnimatedSection>
+          
+        </div>
+        
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+          <AnimatedSection animation="fade-up" delay={500}>
+            <div className="flex flex-col items-center text-white/50">
+              <span className="text-xs uppercase tracking-widest mb-2">Discover</span>
+              <svg className="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
             </div>
           </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ==================== MISSION SECTION (New) ==================== */}
+      <section className="section-padding bg-env-bg-primary">
+        <div className="container-forge">
+          
+          <div className="max-w-5xl mx-auto">
+            
+            <AnimatedSection animation="fade-up">
+              <div className="text-center mb-12">
+                <span className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent-soft rounded-full border border-chapter-accent/20">
+                  Our Purpose
+                </span>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-env-primary mb-6">
+                  Building the hidden infrastructure of Africa's future
+                </h2>
+                <p className="text-xl text-env-secondary max-w-3xl mx-auto leading-relaxed">
+                  Not just software — but human capability.
+                </p>
+              </div>
+            </AnimatedSection>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+              <AnimatedSection animation="fade-up" delay={100}>
+                <div className="text-center p-6">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-chapter-accent/10 flex items-center justify-center">
+                    <span className="text-3xl">🏫</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-env-primary mb-2">From Classrooms</h3>
+                  <p className="text-env-secondary text-sm">
+                    Training young minds in public schools and community halls
+                  </p>
+                </div>
+              </AnimatedSection>
+              
+              <AnimatedSection animation="fade-up" delay={200}>
+                <div className="text-center p-6">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-chapter-accent/10 flex items-center justify-center">
+                    <span className="text-3xl">💡</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-env-primary mb-2">To Creators</h3>
+                  <p className="text-env-secondary text-sm">
+                    Cultivating designers, builders and first-time founders
+                  </p>
+                </div>
+              </AnimatedSection>
+              
+              <AnimatedSection animation="fade-up" delay={300}>
+                <div className="text-center p-6">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-chapter-accent/10 flex items-center justify-center">
+                    <span className="text-3xl">🌍</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-env-primary mb-2">For Africa</h3>
+                  <p className="text-env-secondary text-sm">
+                    Deploying systems that understand our world
+                  </p>
+                </div>
+              </AnimatedSection>
+            </div>
+            
+            <AnimatedSection animation="fade-up" delay={400}>
+              <div className="p-8 rounded-2xl bg-env-surface border border-env-border text-center">
+                <p className="text-lg md:text-xl text-env-secondary leading-relaxed mb-6">
+                  We train minds, deploy systems and cultivate builders who understand their world before trying to change it.
+                </p>
+                <p className="text-xl md:text-2xl text-env-primary font-medium italic">
+                  We are not importing progress.<br />
+                  <span className="text-chapter-accent">We are engineering it — patiently, locally and at scale.</span>
+                </p>
+              </div>
+            </AnimatedSection>
+            
+            <AnimatedSection animation="fade-up" delay={500}>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
+                <Link
+                  href="/about"
+                  className="px-8 py-4 bg-chapter-accent hover:bg-chapter-accent-hover text-white font-medium rounded-lg transition-smooth glow hover-lift"
+                >
+                  Learn Our Story
+                </Link>
+                <Link
+                  href="/products"
+                  className="px-8 py-4 bg-env-surface hover:bg-env-surface-hover text-env-primary font-medium rounded-lg border border-env-border transition-smooth hover-lift"
+                >
+                  Explore Our Products
+                </Link>
+              </div>
+            </AnimatedSection>
+            
+          </div>
           
         </div>
       </section>
