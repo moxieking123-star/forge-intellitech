@@ -1,16 +1,9 @@
-export const dynamic = 'force-dynamic';
 import { createClient } from '@supabase/supabase-js'
 import { Resend } from 'resend'
 import { NextRequest, NextResponse } from 'next/server'
 
-// Initialize Resend
-const resend = new Resend(process.env.RESEND_API_KEY)
-
-// Initialize Supabase
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+// ✅ Force dynamic - prevents static generation issues
+export const dynamic = 'force-dynamic'
 
 // Sanitize input to prevent security issues
 function sanitize(str: string): string {
@@ -23,6 +16,14 @@ function sanitize(str: string): string {
 
 export async function POST(request: NextRequest) {
   try {
+    // ✅ Initialize clients INSIDE the function
+    const resend = new Resend(process.env.RESEND_API_KEY)
+    
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    )
+
     const body = await request.json()
     
     // Honeypot check - catches bots
@@ -75,11 +76,10 @@ export async function POST(request: NextRequest) {
     }
     
     // Send notification email to YOU
-    // ⚠️ CHANGE THE EMAIL BELOW TO YOUR EMAIL
     try {
       await resend.emails.send({
-        from: 'Website <notifications@forgeintellitech.com>',  // CHANGE yourdomain.com
-        to: ['info@forgeintellitech.com'],  // CHANGE to your email
+        from: 'Website <notifications@forgeintellitech.com>',
+        to: ['info@forgeintellitech.com'],
         subject: `New Form: ${cleanData.name}`,
         html: `
           <h2>New Form Submission</h2>
@@ -100,7 +100,7 @@ export async function POST(request: NextRequest) {
     // Send confirmation to the user
     try {
       await resend.emails.send({
-        from: 'Your Company <info@forgeintellitech.com>',  // CHANGE yourdomain.com
+        from: 'Your Company <info@forgeintellitech.com>',
         to: [cleanData.email],
         subject: 'Thank you for contacting Forge!',
         html: `
