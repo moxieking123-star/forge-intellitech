@@ -14,8 +14,8 @@ const contactMethods = [
     icon: "📧",
     title: "Email",
     description: "Send us a message anytime",
-    value: "hello@forgeintellitech.com",
-    href: "mailto:hello@forgeintellitech.com",
+    value: "admin@forgeintellitech.com",
+    href: "mailto:admin@forgeintellitech.com",
   },
   {
     icon: "📍",
@@ -30,6 +30,13 @@ const contactMethods = [
     description: "Follow us for updates",
     value: "@forgeintelli",
     href: "https://twitter.com/forgeintelli",
+  },
+  {
+    icon: "",
+    title: "Call/Whatsapp Number",
+    description: "Calls Forge on",
+    value: "09015175807",
+    href: "https://wa.link/fcu0jk",
   },
 ];
 
