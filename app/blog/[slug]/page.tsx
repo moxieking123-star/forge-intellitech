@@ -1,187 +1,385 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ChapterWrapper } from "../../../components/ChapterWrapper";
+import { AnimatedSection } from "../../../components/AnimatedSection";
 
-// Sample blog posts data (same as listing page - will be centralized later)
+// Complete blog posts data with full content
 const blogPosts = [
   {
-    slug: "launching-forge-intellitech",
-    title: "Launching Forge Intellitech: Building Technology That Understands Africa",
-    excerpt: "Today, we officially introduce Forge Intellitech to the world. This is not just a company launch — it's the beginning of a movement to reshape how technology serves Africa.",
+    slug: "launchpad-2026-announcement",
+    title: "LaunchPad 2026 is Coming: ₦10 Million Up for Grabs — And We Need You",
+    excerpt: "Mark your calendars! August 28th, 2026. Twenty young visionaries. Ten million naira in grants and gifts. This is bigger than anything we've done before — and we're calling on Nigeria to join us.",
     content: `
-      <p>Today marks a significant milestone in our journey. We are officially launching Forge Intellitech — not just as a technology company, but as a movement to transform how technology serves Africa.</p>
-      
-      <h2>The Question That Started It All</h2>
-      <p>What if technology truly understood Africa? Not adapted solutions from elsewhere. Not localized versions of foreign products. But technology built from the ground up by those who understand the unique challenges, opportunities, and realities of our continent.</p>
-      <p>This question has driven us from day one, and it continues to guide every decision we make.</p>
-      
-      <h2>Why We're Building Forge</h2>
-      <p>For too long, Africa has been on the receiving end of technology. Solutions designed in distant boardrooms by people who've never experienced our realities. Products that work perfectly in stable power grids and high-speed internet environments, but struggle in our markets.</p>
-      <p>We believe Africa deserves better. We believe the best solutions for African problems will come from African minds. And we're building the company to prove it.</p>
-      
-      <h2>What We're Building</h2>
-      <p>Forge Intellitech is building a suite of products that address critical gaps in African infrastructure:</p>
+      <p>Omo, I still get goosebumps when I think about what we're planning.</p>
+
+      <p>If you followed what we did with LaunchPad 2025, you know we don't play. But what's coming in 2026? E go shock you.</p>
+
+      <h2>Save This Date: August 28th, 2026</h2>
+
+      <p>We're bringing together <strong>20 of the most innovative secondary school students from across Lagos State</strong> — not just one or two schools, but young minds from every corner of this city. From Epe to Ikeja, from Badagry to Ikorodu. The brightest, most daring young thinkers Lagos has to offer.</p>
+
+      <p>And we're not coming to play small.</p>
+
+      <h2>₦10,000,000 in Grants and Gifts</h2>
+
+      <p>You read that right. Ten million naira.</p>
+
+      <p>We're talking business grants, startup equipment, mentorship packages, tech resources — everything a young founder needs to turn an idea from "what if" to "watch me."</p>
+
+      <p>Last year, we gave ₦100,000 each to two brilliant young women and watched them start building their dreams. This year? We're scaling up because Nigeria's young people deserve more than crumbs. They deserve real investment.</p>
+
+      <h2>But We Can't Do This Alone</h2>
+
+      <p>Here's where you come in.</p>
+
+      <p>Whether you're a corporate organization looking for meaningful CSR impact, a government agency committed to youth development, an NGO focused on education, or an individual who believes in Nigeria's next generation — <strong>we need you</strong>.</p>
+
+      <h2>To Corporate Nigeria</h2>
+
+      <p>Your logo on a billboard is nice. But your logo on a young entrepreneur's first business card? That's legacy. That's impact you can actually see grow.</p>
+
+      <p>When you sponsor LaunchPad, you're not just writing a cheque. You're becoming part of a story. You're the reason a 15-year-old finally gets the chance to prove that their "crazy idea" wasn't crazy at all.</p>
+
+      <h2>To Government Partners</h2>
+
+      <p>We saw what happened when Ikosi-Isheri LCDA believed in us. The Chairman, Princess Samiat Bada, didn't just give us a venue — she gave us legitimacy. She showed other leaders what's possible when government backs youth innovation.</p>
+
+      <p>We're looking for more partners like that. Local governments, state ministries, education boards — if you're serious about youth empowerment, let's talk. We'll bring the students, the structure, and the passion. You bring the support and watch transformation happen.</p>
+
+      <h2>To Everyone Who Believes</h2>
+
+      <p>Maybe you can't sponsor millions. That's okay. Share this post. Tell a teacher. Nominate a student you know who has that fire in their eyes. Help us spread the word that opportunity is coming.</p>
+
+      <p>Because here's what I've learned: Nigerian young people don't lack ideas. They don't lack talent. They don't lack ambition.</p>
+
+      <p>They lack opportunity. And that's exactly what LaunchPad exists to provide.</p>
+
+      <h2>The Details</h2>
+
       <ul>
-        <li><strong>TechUp</strong> — Digital skills education for secondary schools</li>
-        <li><strong>LaunchPad</strong> — Youth entrepreneurship and innovation program</li>
-        <li><strong>BiteBank</strong> — Food security and vendor connectivity platform</li>
-        <li><strong>Trego</strong> — Cross-border trade simplification</li>
+        <li><strong>Date:</strong> August 28th, 2026</li>
+        <li><strong>Participants:</strong> 20 students from secondary schools across Lagos State</li>
+        <li><strong>Total Prize Pool:</strong> ₦10,000,000 in grants, gifts, and support</li>
+        <li><strong>Location:</strong> To be announced (we're going bigger this time)</li>
       </ul>
-      <p>Each product is designed with African realities at its core — not as an afterthought.</p>
-      
-      <h2>Join the Movement</h2>
-      <p>We're just getting started, and we want you to be part of this journey. Whether you're a potential partner, investor, or simply someone who believes in Africa's potential — we'd love to connect.</p>
-      <p>The future of African technology is being written now. Let's write it together.</p>
+
+      <h2>Ready to Be Part of History?</h2>
+
+      <p>Contact us today. Whether you want to sponsor, partner, volunteer, or just learn more — we want to hear from you.</p>
+
+      <p>Because August 28th, 2026 isn't just an event date. It's the day 20 young Nigerians start their journey from student to founder. From dreamer to builder.</p>
+
+      <p>And you could be the reason they get that chance.</p>
+
+      <p><em>Let's build the future together. Na we get am.</em></p>
     `,
     author: "Forge Team",
-    date: "January 15, 2025",
-    category: "Company News",
-    readTime: "5 min read",
-    featured: true,
-    image: null,
-  },
-  {
-    slug: "why-africa-needs-homegrown-tech",
-    title: "Why Africa Needs Homegrown Technology Solutions",
-    excerpt: "For too long, African markets have relied on solutions designed elsewhere. Here's why building from within is not just preferable — it's essential.",
-    content: `
-      <p>Every day, millions of Africans interact with technology that wasn't designed for them. Apps that assume stable internet. Payment systems that don't understand informal economies. Educational tools that ignore local languages and contexts.</p>
-      
-      <h2>The Adaptation Problem</h2>
-      <p>When foreign solutions are "adapted" for African markets, they often carry assumptions that don't translate. The result? Products that work, but never quite fit. Features that solve problems we don't have, while ignoring problems we do.</p>
-      
-      <h2>Understanding Context</h2>
-      <p>Building for Africa requires understanding Africa. Not from reports and market research, but from lived experience. Understanding why mobile money works better than banking apps. Why offline-first isn't a nice-to-have but a necessity. Why community trust matters more than brand recognition.</p>
-      
-      <h2>The Opportunity</h2>
-      <p>The opportunity isn't just about fixing problems — it's about leapfrogging. Africa has done it before with mobile phones, skipping landlines entirely. We can do it again with technology built specifically for our realities.</p>
-      
-      <h2>Our Commitment</h2>
-      <p>At Forge Intellitech, we're committed to building technology that doesn't just work in Africa — but works <em>for</em> Africa. Technology that understands our context, respects our cultures, and serves our communities.</p>
-      <p>The future is being built. Let's build it ourselves.</p>
-    `,
-    author: "Forge Team",
-    date: "January 20, 2025",
-    category: "Technology",
-    readTime: "7 min read",
-    featured: false,
-    image: null,
-  },
-  {
-    slug: "introducing-techup-program",
-    title: "Introducing TechUp: Digital Skills Education for Nigerian Schools",
-    excerpt: "We're excited to announce TechUp, our flagship education program designed to equip secondary school students with practical, future-ready digital skills.",
-    content: `
-      <p>Today, we're excited to officially introduce TechUp — our flagship education program designed to transform how Nigerian secondary school students learn digital skills.</p>
-      
-      <h2>The Problem We're Solving</h2>
-      <p>Traditional computer education in Nigerian schools often stops at basic computer awareness. Students learn to use Microsoft Word and Excel, but rarely develop skills that translate to real economic opportunity.</p>
-      <p>Meanwhile, the digital economy is creating opportunities that require practical skills — web development, digital design, AI literacy, and more.</p>
-      
-      <h2>What TechUp Offers</h2>
-      <p>TechUp is a structured, six-year program for students from JSS1 to SS3. Unlike traditional computer studies, TechUp focuses on practical, industry-relevant skills:</p>
-      <ul>
-        <li>Web development fundamentals</li>
-        <li>Digital design and creativity</li>
-        <li>AI-assisted productivity</li>
-        <li>Digital entrepreneurship</li>
-        <li>Portfolio development</li>
-      </ul>
-      
-      <h2>For Schools</h2>
-      <p>We partner with schools to deliver the program through their existing infrastructure, with teacher training and ongoing support. Schools become talent incubation spaces, producing graduates ready for the digital economy.</p>
-      
-      <h2>Get Involved</h2>
-      <p>We're currently piloting TechUp with select partner schools. If you're a school administrator, government official, or potential sponsor interested in bringing TechUp to your community, we'd love to hear from you.</p>
-    `,
-    author: "Forge Team",
-    date: "February 1, 2025",
-    category: "Education",
+    authorImage: "/images/team/forge-team.jpg",
+    date: "March 1, 2026",
+    category: "Events",
     readTime: "6 min read",
-    featured: false,
-    image: null,
+    featured: true,
+    image: "/images/blog/launchpad-2026.jpg",
   },
   {
-    slug: "launchpad-2025-success-story",
-    title: "LaunchPad 2025: How 11 Students Proved the Power of Youth Innovation",
-    excerpt: "Our inaugural LaunchPad program brought together 11 brilliant students from two schools. Here's what happened when we gave them the tools to dream big.",
+    slug: "launchpad-2025-winners-story",
+    title: "When Young Nigerians Dream Out Loud: The Story of LaunchPad 2025",
+    excerpt: "On July 4th, 2025, something beautiful happened at Ikosi-Isheri. Two young women walked away with ₦100,000 each to chase their dreams. Here's the story of that unforgettable day.",
     content: `
-      <p>When we launched the first LaunchPad program in 2025, we had high hopes but uncertain expectations. What we witnessed exceeded everything we imagined.</p>
-      
-      <h2>The Setup</h2>
-      <p>With support from Ikosi-Isheri LCDA and sponsorship from Chief Alaka (Lagos State President, NAPPS), we brought together 11 students from two partner schools. The venue was provided by Chairman Princess Samiat Bada — remarkably, during an election period.</p>
-      
-      <h2>What Students Learned</h2>
-      <p>Over the program, students learned to identify real problems in their communities, develop business solutions, use AI tools for research and ideation, and pitch their ideas with confidence.</p>
-      
-      <h2>The Pitches</h2>
-      <p>The final pitching event was electric. Students presented ideas ranging from agricultural technology to educational services to community solutions. The quality of thinking was remarkable — these were ideas that could genuinely work.</p>
-      
-      <h2>The Winners</h2>
-      <p>First place took home ₦300,000, with second place receiving ₦200,000. But honestly, every student who participated was a winner — they left with skills, confidence, and a new understanding of their potential.</p>
-      
-      <h2>What's Next</h2>
-      <p>LaunchPad 2026 is already in planning. We're expanding to 26 students and seeking partnerships at the Lagos State Government level. The movement is growing.</p>
+      <p>I'm going to tell you a story. Not a corporate success story with fancy metrics and investor jargon. A real story about real young people who dared to believe they had something to offer.</p>
+
+      <h2>July 4th, 2025 — The Day Dreams Got Funding</h2>
+
+      <p>The venue was the Council Hall at Ikosi-Isheri LCDA. The Chairman herself had made it possible — even in the middle of election season, she understood that some things can't wait. Youth development can't wait.</p>
+
+      <p>Students filed in that morning with nervous energy. Some had never pitched anything in their lives. Some had never even thought of themselves as "entrepreneurs." But they all had one thing in common: an idea they believed in.</p>
+
+      <h2>The Ideas That Blew Us Away</h2>
+
+      <p>Wallahi, I wasn't prepared for what these young people brought.</p>
+
+      <p>Apps for mental health support. Solutions for food waste. Agricultural innovations. Educational tools. Business models that made the judges look at each other like, "Wait, a secondary school student thought of this?"</p>
+
+      <p>But two ideas stood out. Not because the others weren't brilliant — they were. But because these two had that special combination of passion, practicality, and pure determination.</p>
+
+      <h2>Winner: Obasi Ugonna — Organic Food Revolution</h2>
+
+      <p>Ugonna came with a simple but powerful vision: making organic food accessible to everyday Nigerians.</p>
+
+      <p>See, organic food in Nigeria has become "oyinbo people thing." Something only the wealthy can afford. But Ugonna asked a different question: What if we could grow it locally, distribute it smartly, and price it fairly?</p>
+
+      <p>Her pitch wasn't just about selling vegetables. It was about health, about sustainability, about proving that young Nigerians can build businesses that actually make society better.</p>
+
+      <p>When we handed her that ₦100,000 cheque, the look on her face — I'll never forget it. That wasn't just money. That was validation. That was "your dream matters."</p>
+
+      <h2>Winner: Rotimi Oreoluwapo — MyBuddy App</h2>
+
+      <p>Oreoluwapo's MyBuddy app tackled something every Nigerian student understands: the loneliness of academic struggle.</p>
+
+      <p>Her app connects students for peer learning, study groups, and academic support. Think of it as your study partner in your pocket — but built by someone who actually understands what Nigerian students go through.</p>
+
+      <p>What got the judges wasn't just the app concept. It was how clearly she understood her users. She wasn't building from imagination — she was building from experience. From pain she'd felt herself.</p>
+
+      <p>Another ₦100,000. Another young woman whose belief in herself just got tangible proof.</p>
+
+      <h2>The Support That Made It Possible</h2>
+
+      <p>I have to pause and give credit where it's due.</p>
+
+      <p>The LCDA Chairman, Princess Samiat Bada, didn't just give us space. She showed up. She listened to these young people pitch. She saw what we see every day — that Nigerian youth are not the problem. They're the solution we've been sleeping on.</p>
+
+      <p>This is what happens when government partners with purpose-driven organizations. Not bureaucracy. Not red tape. Just genuine collaboration for youth empowerment.</p>
+
+      <h2>What I Learned That Day</h2>
+
+      <p>Standing there, watching these students present their ideas with shaking voices but steady conviction, something hit me:</p>
+
+      <p><strong>We've been telling young Nigerians to wait their turn. To pay their dues. To let the "adults" handle things.</strong></p>
+
+      <p>But look at what happens when we just give them a platform and believe in them. Look at the innovation. The courage. The pure, unfiltered ambition.</p>
+
+      <p>We don't have a youth problem in Nigeria. We have an opportunity problem. And events like LaunchPad exist to close that gap, one young dreamer at a time.</p>
+
+      <h2>Where Are They Now?</h2>
+
+      <p>Both winners are currently developing their ideas. The seed money was just the beginning — they now have access to mentorship, resources, and a community that believes in them.</p>
+
+      <p>Ugonna is working on her supply chain. Oreoluwapo is building her user base. Both are proving that the ₦100,000 wasn't charity — it was an investment that's already paying dividends.</p>
+
+      <h2>And This Is Just The Beginning</h2>
+
+      <p>LaunchPad 2025 was our first. It won't be our last.</p>
+
+      <p>If this story moved you — if you looked at Ugonna and Oreoluwapo and thought, "I know young people like that" — then help us reach more of them.</p>
+
+      <p>Because for every student who pitched that day, there are thousands more across Nigeria with ideas just as brilliant, waiting for someone to believe in them.</p>
+
+      <p><em>That could be you. That could be your organization. That could be your legacy.</em></p>
+
+      <p>The door is open. Come through.</p>
     `,
     author: "Forge Team",
-    date: "February 10, 2025",
+    authorImage: "/images/team/forge-team.jpg",
+    date: "July 10, 2025",
     category: "Impact Stories",
     readTime: "8 min read",
     featured: false,
-    image: null,
+    image: "/images/blog/launchpad-2025.jpg",
   },
   {
-    slug: "ai-in-african-education",
-    title: "The Role of AI in African Education: Opportunity or Threat?",
-    excerpt: "Artificial intelligence is transforming education globally. How can African schools harness its power while avoiding its pitfalls?",
+    slug: "ict-to-digital-technology-opportunity",
+    title: "From ICT to Digital Technology: The Curriculum Change Nigeria Has Been Waiting For",
+    excerpt: "The Federal Government didn't just rename a subject — they opened a door. For EdTech companies, schools, and young Nigerians, this is the moment we've been preparing for.",
     content: `
-      <p>Artificial intelligence is reshaping education around the world. For African schools, this presents both tremendous opportunity and significant risk. Getting it right matters.</p>
-      
-      <h2>The Opportunity</h2>
-      <p>AI can democratize access to quality education. It can provide personalized learning at scale, assist teachers with administrative burdens, and help students learn at their own pace. For resource-constrained African schools, these benefits are particularly compelling.</p>
-      
-      <h2>The Risks</h2>
-      <p>But there are real risks. Over-reliance on AI could undermine critical thinking. Students might learn to use AI without understanding underlying concepts. And AI systems trained on non-African data might perpetuate biases or miss context.</p>
-      
-      <h2>Our Approach at TechUp</h2>
-      <p>In the TechUp program, we teach AI literacy — not just how to use AI tools, but how to understand their limitations and use them responsibly. Students learn that AI is a tool, not a replacement for thinking.</p>
-      
-      <h2>The Path Forward</h2>
-      <p>African education can harness AI's power while maintaining what makes human learning valuable. The key is intentionality — using AI deliberately, not defaulting to it. Teaching with AI, not just teaching AI.</p>
-      <p>The future will belong to those who can work with AI while thinking beyond it. Let's prepare our students for that future.</p>
+      <p>Let me tell you what just happened in Nigerian education, because I'm not sure everyone has grasped it yet.</p>
+
+      <p>The Federal Government, through the Nigerian Educational Research and Development Council (NERDC), has officially transitioned the secondary school curriculum from "ICT" to "Digital Technology."</p>
+
+      <p>On the surface? A name change. In reality? <strong>This is everything.</strong></p>
+
+      <h2>What "ICT" Actually Meant</h2>
+
+      <p>Be honest with yourself. When you hear "ICT class" in a Nigerian secondary school, what comes to mind?</p>
+
+      <p>Microsoft Word. Microsoft Excel. Maybe PowerPoint if the school is "advanced." Typing practice. Basic computer parts. A curriculum that was written when Yahoo was still the biggest thing on the internet.</p>
+
+      <p>Students graduate knowing how to format a document but having no idea how websites are built, how apps work, how data is analyzed, or how to use technology to actually solve problems.</p>
+
+      <p>That was ICT. A subject frozen in time while the world raced ahead.</p>
+
+      <h2>What "Digital Technology" Should Mean</h2>
+
+      <p>The new curriculum isn't just a rebrand. It's a philosophical shift.</p>
+
+      <p>Digital Technology, as envisioned, includes:</p>
+
+      <ul>
+        <li>Computational thinking and problem-solving</li>
+        <li>Introduction to programming and coding concepts</li>
+        <li>Digital design and creativity</li>
+        <li>Data literacy and basic analytics</li>
+        <li>Cybersecurity awareness and digital citizenship</li>
+        <li>AI awareness and ethical technology use</li>
+        <li>Digital entrepreneurship fundamentals</li>
+      </ul>
+
+      <p>See the difference? This isn't about using technology. It's about <em>understanding</em> technology. About being creators, not just consumers.</p>
+
+      <h2>The Opportunity Nobody Is Talking About</h2>
+
+      <p>Here's what excites me most — and what I wish more EdTech founders, investors, and education stakeholders would understand:</p>
+
+      <p><strong>The government just created a mandate for digital skills education in every secondary school in Nigeria.</strong></p>
+
+      <p>Think about what that means. Schools now <em>need</em> curriculum. They need teaching resources. They need teacher training. They need practical delivery support.</p>
+
+      <p>The demand just became official. National. Unavoidable.</p>
+
+      <p>And most schools are not equipped to deliver this new curriculum on their own. They need partners. They need organizations that have been thinking about this — building for this — long before the policy arrived.</p>
+
+      <h2>Why This Is EdTech's Moment</h2>
+
+      <p>For years, Nigerian EdTech has been fighting for legitimacy. Fighting to be seen as more than a "nice-to-have." Fighting for a seat at the table of national education planning.</p>
+
+      <p>That fight just got easier.</p>
+
+      <p>The government has essentially said: "We recognize that digital skills are essential. We're changing our curriculum to reflect this. Now help us deliver it."</p>
+
+      <p>EdTech companies that can provide:</p>
+
+      <ul>
+        <li>Structured curriculum aligned with the new standards</li>
+        <li>Teacher enablement and training</li>
+        <li>Practical, hands-on delivery methodologies</li>
+        <li>Progress tracking and assessment tools</li>
+        <li>Scalable models that work in public and private schools</li>
+      </ul>
+
+      <p>...are now positioned not as disruptions to the system, but as <em>solutions</em> the system is actively looking for.</p>
+
+      <h2>This Is Why We Built TechUp</h2>
+
+      <p>I won't pretend this timing is coincidence. Forge Intellitech designed TechUp specifically for this moment — even before we knew the policy was coming.</p>
+
+      <p>We saw where education was heading. We saw the gap between what schools teach and what the economy needs. And we built a solution that doesn't just fill that gap — it creates a pathway from student to skilled professional to entrepreneur.</p>
+
+      <p>Now, with official government backing for digital technology education, we're not pitching a vision. We're offering implementation for a vision the government itself has endorsed.</p>
+
+      <h2>A Call to Action: Let's Build This Together</h2>
+
+      <p>This isn't just an opportunity for Forge. It's an opportunity for Nigeria.</p>
+
+      <p>To other EdTech founders: Let's not compete ourselves into irrelevance. Let's collaborate. Let's build an ecosystem that actually delivers on this curriculum promise.</p>
+
+      <p>To school administrators: Start planning now. Don't wait until the deadline arrives and scramble. Partner with organizations that can support your transition.</p>
+
+      <p>To government officials: Keep this momentum going. Create pathways for private sector participation. Don't let this curriculum change become another policy that dies in implementation.</p>
+
+      <p>To parents: Demand more for your children. Ask schools what their Digital Technology plan looks like. Hold them accountable to actually teaching these skills.</p>
+
+      <p>The door is open. The mandate is clear. The moment is now.</p>
+
+      <p><em>Nigeria has a chance to raise a generation of digital builders, not just digital consumers. Let's not waste it.</em></p>
     `,
     author: "Forge Team",
-    date: "February 15, 2025",
-    category: "Technology",
+    authorImage: "/images/team/forge-team.jpg",
+    date: "August 29, 2025",
+    category: "Education Policy",
     readTime: "10 min read",
     featured: false,
-    image: null,
+    image: "/images/blog/curriculum-change.jpg",
   },
   {
-    slug: "partnership-with-ikosi-isheri",
-    title: "Partnering with Ikosi-Isheri LCDA: A Model for Government Collaboration",
-    excerpt: "Our partnership with Ikosi-Isheri LCDA shows what's possible when government and private sector align on youth development.",
+    slug: "edtech-revolution-nigeria",
+    title: "The EdTech Revolution Nigeria Needs: Why Now Is the Time to Act",
+    excerpt: "Something is shifting in Nigerian education. Between policy changes, youth unemployment, and digital transformation — the conditions are perfect for EdTech to truly matter. But will we rise to the occasion?",
     content: `
-      <p>When we approached Ikosi-Isheri LCDA about partnering on LaunchPad 2025, we weren't sure what to expect. Government partnerships can be complex. What we found was a local government genuinely committed to youth development.</p>
-      
-      <h2>Finding the Right Partner</h2>
-      <p>Chairman Princess Samiat Bada understood immediately what we were trying to achieve. She didn't just approve the partnership — she actively supported it, providing the council hall as venue even during the busy election period.</p>
-      
-      <h2>Why This Model Works</h2>
-      <p>Government-private sector partnerships work when both parties share genuine commitment to outcomes. Ikosi-Isheri LCDA wasn't looking for photo opportunities — they wanted real impact for their young constituents.</p>
-      
-      <h2>Scaling the Model</h2>
-      <p>This partnership shows what's possible at the local government level. Our goal is to replicate this model across Lagos State, eventually partnering at the state government level to reach more students.</p>
-      
-      <h2>A Call to Other LGAs</h2>
-      <p>To other local governments across Lagos and Nigeria: this is possible in your community too. If you're committed to youth development and innovation, we'd love to explore partnership opportunities.</p>
-      <p>The success of Ikosi-Isheri shows the way forward.</p>
+      <p>I've been in education technology for a minute now, and I've learned to be skeptical of "revolutionary" claims. Every year, someone announces the next big thing that will "transform Nigerian education forever."</p>
+
+      <p>Most of them disappear within 18 months.</p>
+
+      <p>But right now? Something different is happening. And I want to talk about it honestly — without the hype, without the investment pitch, without the buzzwords.</p>
+
+      <h2>The Conditions Are Aligning</h2>
+
+      <p>Multiple forces are converging in a way I haven't seen before:</p>
+
+      <p><strong>Policy is moving.</strong> The ICT to Digital Technology curriculum shift isn't just semantics. It's a signal that government recognizes the skills gap and is trying to address it.</p>
+
+      <p><strong>Youth unemployment is impossible to ignore.</strong> With millions of graduates entering a job market that can't absorb them, the conversation is shifting from "get a degree" to "get skills that actually matter."</p>
+
+      <p><strong>The digital economy is real.</strong> Remote work, freelancing, digital entrepreneurship — these aren't trends anymore. They're established pathways that Nigerians are already using to build livelihoods.</p>
+
+      <p><strong>Infrastructure is improving.</strong> Not perfect, but better. More Nigerians have smartphones. Data is more affordable. The basics for digital learning are increasingly in place.</p>
+
+      <h2>What EdTech Has Been Getting Wrong</h2>
+
+      <p>Before we get excited, let's be honest about our failures.</p>
+
+      <p>Nigerian EdTech has often prioritized:</p>
+
+      <ul>
+        <li>Urban, private school markets over public school access</li>
+        <li>Exam preparation over genuine skill-building</li>
+        <li>Flashy apps over sustainable delivery models</li>
+        <li>Investor presentations over actual student outcomes</li>
+        <li>Individual consumers over institutional partnerships</li>
+      </ul>
+
+      <p>We've built products that work great for the 5% who already have advantages, and wondered why we can't scale.</p>
+
+      <p>The opportunity in front of us requires a different approach.</p>
+
+      <h2>What Actually Needs to Happen</h2>
+
+      <p>For EdTech to truly matter in Nigeria — not as a niche industry, but as a force for national development — we need to rethink almost everything:</p>
+
+      <h3>1. School Integration, Not Replacement</h3>
+
+      <p>The fantasy of "disrupting" traditional education is exactly that — a fantasy. Schools aren't going away. Instead of fighting them, EdTech should strengthen them. Partner with schools. Empower teachers. Enhance existing systems.</p>
+
+      <h3>2. Public Sector Focus</h3>
+
+      <p>Real scale in Nigeria means government schools. That's where the majority of students are. If your model only works in expensive private schools, you're not solving the problem — you're creating a new elite.</p>
+
+      <h3>3. Teacher-Centric Design</h3>
+
+      <p>Stop building products that bypass teachers and wonder why schools don't adopt them. Teachers are the distribution network for education. Enable them, train them, make them look good — and watch your adoption soar.</p>
+
+      <h3>4. Offline-First Thinking</h3>
+
+      <p>Internet connectivity in Nigerian schools is inconsistent at best. Products that require constant connectivity are products that don't work. Design for the reality, not the dream.</p>
+
+      <h3>5. Outcomes Over Engagement</h3>
+
+      <p>Nobody cares how many hours students spent on your app if they can't do anything useful afterward. Measure what matters: Can they build something? Can they get hired? Can they start something?</p>
+
+      <h2>The EdTech Industry We Need to Build</h2>
+
+      <p>Imagine an EdTech ecosystem where:</p>
+
+      <ul>
+        <li>Public school students have access to the same quality digital education as private school students</li>
+        <li>Teachers are equipped to deliver modern curricula, not replaced by apps</li>
+        <li>Graduates enter the workforce with portfolios, not just certificates</li>
+        <li>Young entrepreneurs have pathways from classroom idea to funded startup</li>
+        <li>Government, private sector, and EdTech work together instead of in silos</li>
+      </ul>
+
+      <p>This isn't utopia. This is achievable — if we're willing to do the hard, unsexy work of building for scale, not just for demo day.</p>
+
+      <h2>Why Forge Is Betting Everything On This Moment</h2>
+
+      <p>At Forge Intellitech, we're not building for the next funding round. We're building for the next generation.</p>
+
+      <p>TechUp exists because we believe every secondary school student in Nigeria deserves practical digital skills — not just the ones whose parents can afford coding bootcamps.</p>
+
+      <p>LaunchPad exists because we believe the next great Nigerian founder might be sitting in a classroom right now, waiting for someone to believe in their idea.</p>
+
+      <p>We're not the only ones who can do this work. We're not even claiming to be the best. But we are claiming to be serious. Committed. In it for the long haul.</p>
+
+      <h2>The Invitation</h2>
+
+      <p>If you're in EdTech, I want to challenge you: Are you building for impact, or are you building for acquisition?</p>
+
+      <p>If you're in government, I want to ask: Are you ready to partner with organizations that can help you deliver on your digital education promises?</p>
+
+      <p>If you're a school administrator, I want to know: What's your plan for the new Digital Technology curriculum?</p>
+
+      <p>If you're a parent, I want to push you: Are you demanding more than the bare minimum for your children's digital education?</p>
+
+      <p>The revolution isn't coming. The conditions are here. The question is whether we'll meet the moment or waste it.</p>
+
+      <p><em>I know which side Forge is on. What about you?</em></p>
     `,
     author: "Forge Team",
-    date: "February 20, 2025",
-    category: "Company News",
-    readTime: "5 min read",
+    authorImage: "/images/team/forge-team.jpg",
+    date: "September 11, 2025",
+    category: "EdTech",
+    readTime: "9 min read",
     featured: false,
-    image: null,
+    image: "/images/blog/edtech-revolution.jpg",
   },
 ];
 
@@ -197,7 +395,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
   
   return {
-    title: post.title,
+    title: `${post.title} - Forge Intellitech`,
     description: post.excerpt,
   };
 }
@@ -224,169 +422,330 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     .slice(0, 2);
 
   return (
-    <div>
+    <ChapterWrapper chapter="forge">
       
-      {/* ==================== ARTICLE HEADER ==================== */}
-      <section className="section-padding pb-8">
-        <div className="container-forge">
-          <div className="max-w-3xl mx-auto">
-            
-            {/* Back link */}
+      {/* ==================== HERO IMAGE ==================== */}
+      <section className="relative h-[50vh] md:h-[60vh] overflow-hidden">
+        <Image
+          src={post.image}
+          alt={post.title}
+          fill
+          className="object-cover"
+          priority
+          quality={90}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-env-bg-primary via-env-bg-primary/50 to-transparent" />
+        
+        {/* Back Button */}
+        <div className="absolute top-8 left-0 right-0 z-10">
+          <div className="container-forge">
             <Link 
               href="/blog"
-              className="inline-flex items-center text-forge-muted hover:text-primary-400 transition-smooth mb-8"
+              className="inline-flex items-center px-4 py-2 bg-black/30 backdrop-blur-sm text-white rounded-full hover:bg-black/50 transition-all"
             >
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
               Back to Blog
             </Link>
-            
-            {/* Category and read time */}
-            <div className="flex items-center space-x-3 mb-4">
-              <span className="px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary-400 bg-primary-500/10 rounded-full border border-primary-500/20">
-                {post.category}
-              </span>
-              <span className="text-forge-muted text-sm">{post.readTime}</span>
-            </div>
-            
-            {/* Title */}
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-forge-light mb-6 leading-tight">
-              {post.title}
-            </h1>
-            
-            {/* Excerpt */}
-            <p className="text-xl text-forge-muted leading-relaxed mb-8">
-              {post.excerpt}
-            </p>
-            
-            {/* Author and date */}
-            <div className="flex items-center space-x-4 pb-8 border-b border-forge-border">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary-500/30 to-accent-500/30 flex items-center justify-center">
-                <span className="text-lg">✍️</span>
-              </div>
-              <div>
-                <p className="font-medium text-forge-light">{post.author}</p>
-                <p className="text-sm text-forge-muted">{post.date}</p>
-              </div>
-            </div>
-            
           </div>
         </div>
       </section>
 
-      {/* ==================== FEATURED IMAGE ==================== */}
-      <section className="pb-12">
+      {/* ==================== ARTICLE HEADER ==================== */}
+      <section className="relative -mt-32 z-10 pb-12">
         <div className="container-forge">
           <div className="max-w-4xl mx-auto">
-            <div className="aspect-video rounded-2xl bg-white/5 border border-forge-border flex items-center justify-center">
-              <div className="text-center p-8">
-                <span className="text-6xl block mb-4">📰</span>
-                <p className="text-forge-muted">[Article featured image]</p>
+            
+            <AnimatedSection animation="fade-up">
+              <div className="bg-env-surface rounded-3xl border border-env-border p-8 md:p-12 shadow-2xl">
+                
+                {/* Category and Read Time */}
+                <div className="flex flex-wrap items-center gap-3 mb-6">
+                  <span className="px-4 py-1.5 text-sm font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent/10 rounded-full border border-chapter-accent/20">
+                    {post.category}
+                  </span>
+                  <span className="text-env-tertiary">·</span>
+                  <span className="text-env-tertiary text-sm">{post.readTime}</span>
+                </div>
+                
+                {/* Title */}
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-env-primary mb-6 leading-tight">
+                  {post.title}
+                </h1>
+                
+                {/* Excerpt */}
+                <p className="text-xl text-env-secondary leading-relaxed mb-8">
+                  {post.excerpt}
+                </p>
+                
+                {/* Author Info */}
+                <div className="flex items-center justify-between pt-8 border-t border-env-border">
+                  <div className="flex items-center gap-4">
+                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-chapter-accent/30 to-purple-500/30 flex items-center justify-center overflow-hidden">
+                      <span className="text-2xl">✍️</span>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-env-primary text-lg">{post.author}</p>
+                      <p className="text-env-tertiary">{post.date}</p>
+                    </div>
+                  </div>
+                  
+                  {/* Share Buttons */}
+                  <div className="hidden sm:flex items-center gap-3">
+                    <span className="text-env-tertiary text-sm mr-2">Share:</span>
+                    <a 
+                      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(`https://forgeintelli.com/blog/${post.slug}`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-full bg-env-bg-primary flex items-center justify-center text-env-secondary hover:text-chapter-accent hover:bg-chapter-accent/10 transition-all"
+                      aria-label="Share on Twitter"
+                    >
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                      </svg>
+                    </a>
+                    <a 
+                      href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://forgeintelli.com/blog/${post.slug}`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-full bg-env-bg-primary flex items-center justify-center text-env-secondary hover:text-chapter-accent hover:bg-chapter-accent/10 transition-all"
+                      aria-label="Share on LinkedIn"
+                    >
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                      </svg>
+                    </a>
+                    <a 
+                      href={`https://wa.me/?text=${encodeURIComponent(post.title + ' ' + `https://forgeintelli.com/blog/${post.slug}`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-full bg-env-bg-primary flex items-center justify-center text-env-secondary hover:text-chapter-accent hover:bg-chapter-accent/10 transition-all"
+                      aria-label="Share on WhatsApp"
+                    >
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+                
               </div>
-            </div>
+            </AnimatedSection>
+            
           </div>
         </div>
       </section>
 
       {/* ==================== ARTICLE CONTENT ==================== */}
-      <section className="pb-16">
+      <section className="py-12 md:py-16">
         <div className="container-forge">
           <div className="max-w-3xl mx-auto">
             
-            {/* Article content with prose styling */}
-            <article 
-              className="prose prose-invert prose-lg max-w-none
-                prose-headings:text-forge-light prose-headings:font-bold
-                prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
-                prose-p:text-forge-muted prose-p:leading-relaxed prose-p:mb-6
-                prose-a:text-primary-400 prose-a:no-underline hover:prose-a:underline
-                prose-strong:text-forge-light prose-strong:font-semibold
-                prose-em:text-forge-light prose-em:italic
-                prose-ul:text-forge-muted prose-ul:my-6
-                prose-li:my-2 prose-li:leading-relaxed
-                prose-blockquote:border-l-primary-500 prose-blockquote:bg-white/5 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-lg"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
+            <AnimatedSection animation="fade-up" delay={100}>
+              <article 
+                className="
+                  prose prose-lg max-w-none
+                  
+                  prose-headings:text-env-primary 
+                  prose-headings:font-bold
+                  prose-headings:leading-tight
+                  
+                  prose-h2:text-2xl 
+                  prose-h2:md:text-3xl 
+                  prose-h2:mt-12 
+                  prose-h2:mb-6
+                  prose-h2:pb-4
+                  prose-h2:border-b
+                  prose-h2:border-env-border
+                  
+                  prose-h3:text-xl 
+                  prose-h3:md:text-2xl 
+                  prose-h3:mt-10 
+                  prose-h3:mb-4
+                  
+                  prose-p:text-env-secondary 
+                  prose-p:text-lg
+                  prose-p:leading-relaxed 
+                  prose-p:mb-6
+                  
+                  prose-a:text-chapter-accent 
+                  prose-a:no-underline 
+                  prose-a:font-medium
+                  hover:prose-a:underline
+                  
+                  prose-strong:text-env-primary 
+                  prose-strong:font-semibold
+                  
+                  prose-em:text-env-primary 
+                  prose-em:italic
+                  
+                  prose-ul:text-env-secondary 
+                  prose-ul:my-8
+                  prose-ul:pl-0
+                  prose-ul:list-none
+                  
+                  prose-li:my-3
+                  prose-li:pl-8
+                  prose-li:relative
+                  prose-li:text-lg
+                  prose-li:leading-relaxed
+                  prose-li:before:content-['→']
+                  prose-li:before:absolute
+                  prose-li:before:left-0
+                  prose-li:before:text-chapter-accent
+                  prose-li:before:font-bold
+                  
+                  prose-blockquote:border-l-4
+                  prose-blockquote:border-l-chapter-accent 
+                  prose-blockquote:bg-chapter-accent/5
+                  prose-blockquote:py-6 
+                  prose-blockquote:px-8 
+                  prose-blockquote:rounded-r-xl
+                  prose-blockquote:my-8
+                  prose-blockquote:italic
+                  prose-blockquote:text-env-primary
+                "
+                dangerouslySetInnerHTML={{ __html: post.content }}
+              />
+            </AnimatedSection>
             
           </div>
         </div>
       </section>
 
-      {/* ==================== SHARE & TAGS ==================== */}
-      <section className="pb-16">
+      {/* ==================== TAGS & SHARE (MOBILE) ==================== */}
+      <section className="py-8 border-t border-env-border">
         <div className="container-forge">
           <div className="max-w-3xl mx-auto">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 p-6 rounded-xl bg-white/5 border border-forge-border">
+            
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
               
               {/* Tags */}
-              <div className="flex items-center space-x-2">
-                <span className="text-forge-muted text-sm">Tags:</span>
-                <span className="px-3 py-1 text-xs font-medium text-forge-muted bg-white/5 rounded-full">
+              <div className="flex items-center gap-3">
+                <span className="text-env-tertiary text-sm">Tagged:</span>
+                <span className="px-4 py-2 text-sm font-medium text-env-primary bg-env-surface rounded-full border border-env-border">
                   {post.category}
                 </span>
               </div>
               
-              {/* Share buttons */}
-              <div className="flex items-center space-x-4">
-                <span className="text-forge-muted text-sm">Share:</span>
+              {/* Share - Mobile */}
+              <div className="flex sm:hidden items-center gap-3">
+                <span className="text-env-tertiary text-sm">Share:</span>
                 <a 
                   href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(`https://forgeintelli.com/blog/${post.slug}`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-forge-muted hover:text-primary-400 transition-smooth"
-                  aria-label="Share on Twitter"
+                  className="w-10 h-10 rounded-full bg-env-surface flex items-center justify-center text-env-secondary hover:text-chapter-accent transition-all"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                   </svg>
                 </a>
                 <a 
-                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://forgeintelli.com/blog/${post.slug}`)}`}
+                  href={`https://wa.me/?text=${encodeURIComponent(post.title + ' ' + `https://forgeintelli.com/blog/${post.slug}`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-forge-muted hover:text-primary-400 transition-smooth"
-                  aria-label="Share on LinkedIn"
+                  className="w-10 h-10 rounded-full bg-env-surface flex items-center justify-center text-env-secondary hover:text-chapter-accent transition-all"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                   </svg>
                 </a>
               </div>
               
             </div>
+            
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== CTA BOX ==================== */}
+      <section className="py-12">
+        <div className="container-forge">
+          <div className="max-w-3xl mx-auto">
+            
+            <AnimatedSection animation="fade-up">
+              <div className="p-8 md:p-12 rounded-3xl bg-gradient-to-br from-chapter-accent/10 via-purple-500/5 to-chapter-accent/10 border border-chapter-accent/20 text-center">
+                
+                <span className="text-4xl mb-4 block">🤝</span>
+                
+                <h3 className="text-2xl md:text-3xl font-bold text-env-primary mb-4">
+                  Want to be part of the movement?
+                </h3>
+                
+                <p className="text-lg text-env-secondary mb-8 max-w-lg mx-auto">
+                  Whether you're a school, sponsor, or supporter — we'd love to hear from you and explore how we can work together.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Link
+                    href="/contact"
+                    className="px-8 py-4 bg-chapter-accent hover:bg-chapter-accent-hover text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-chapter-accent/25"
+                  >
+                    Get In Touch
+                  </Link>
+                  <Link
+                    href="/join"
+                    className="px-8 py-4 bg-env-surface hover:bg-env-surface-hover text-env-primary font-semibold rounded-xl border border-env-border transition-all duration-300"
+                  >
+                    Partner With Us
+                  </Link>
+                </div>
+                
+              </div>
+            </AnimatedSection>
+            
           </div>
         </div>
       </section>
 
       {/* ==================== RELATED POSTS ==================== */}
       {relatedPosts.length > 0 && (
-        <section className="section-padding bg-forge-darker">
+        <section className="py-16 bg-env-secondary">
           <div className="container-forge">
             
-            <h2 className="text-2xl font-bold text-forge-light mb-8 text-center">
-              Related Articles
-            </h2>
+            <AnimatedSection animation="fade-up">
+              <h2 className="text-2xl md:text-3xl font-bold text-env-primary mb-8 text-center">
+                Related Articles
+              </h2>
+            </AnimatedSection>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-              {relatedPosts.map((relatedPost) => (
-                <Link 
-                  key={relatedPost.slug}
-                  href={`/blog/${relatedPost.slug}`}
-                  className="block group"
-                >
-                  <article className="h-full p-6 rounded-xl bg-white/5 border border-forge-border hover:border-primary-500/30 transition-smooth">
-                    <span className="px-2 py-1 text-xs font-medium text-primary-400 bg-primary-500/10 rounded mb-3 inline-block">
-                      {relatedPost.category}
-                    </span>
-                    <h3 className="text-lg font-semibold text-forge-light mb-2 group-hover:text-primary-400 transition-smooth">
-                      {relatedPost.title}
-                    </h3>
-                    <p className="text-forge-muted text-sm line-clamp-2">
-                      {relatedPost.excerpt}
-                    </p>
-                  </article>
-                </Link>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {relatedPosts.map((relatedPost, index) => (
+                <AnimatedSection key={relatedPost.slug} animation="fade-up" delay={index * 100}>
+                  <Link 
+                    href={`/blog/${relatedPost.slug}`}
+                    className="block group"
+                  >
+                    <article className="h-full rounded-2xl bg-env-surface border border-env-border hover:border-chapter-accent/30 overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-1">
+                      
+                      {/* Image */}
+                      <div className="relative aspect-[16/9] overflow-hidden">
+                        <Image
+                          src={relatedPost.image}
+                          alt={relatedPost.title}
+                          fill
+                          className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                      </div>
+                      
+                      {/* Content */}
+                      <div className="p-6">
+                        <span className="inline-block px-3 py-1 text-xs font-medium text-chapter-accent bg-chapter-accent/10 rounded-full mb-3">
+                          {relatedPost.category}
+                        </span>
+                        <h3 className="text-lg font-bold text-env-primary mb-2 group-hover:text-chapter-accent transition-colors line-clamp-2">
+                          {relatedPost.title}
+                        </h3>
+                        <p className="text-env-secondary text-sm line-clamp-2">
+                          {relatedPost.excerpt}
+                        </p>
+                      </div>
+                      
+                    </article>
+                  </Link>
+                </AnimatedSection>
               ))}
             </div>
             
@@ -394,36 +753,23 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </section>
       )}
 
-      {/* ==================== CTA SECTION ==================== */}
-      <section className="section-padding">
+      {/* ==================== BACK TO BLOG ==================== */}
+      <section className="py-12 bg-env-bg-primary">
         <div className="container-forge">
-          
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-forge-light mb-4">
-              Want to stay updated?
-            </h2>
-            <p className="text-forge-muted mb-8">
-              Subscribe to our newsletter for the latest articles, program updates, and Forge news.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/blog"
-                className="px-6 py-3 bg-white/5 hover:bg-white/10 text-forge-light font-medium rounded-lg border border-forge-border transition-smooth"
-              >
-                Read More Articles
-              </Link>
-              <Link
-                href="/contact"
-                className="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-smooth"
-              >
-                Get In Touch
-              </Link>
-            </div>
+          <div className="text-center">
+            <Link
+              href="/blog"
+              className="inline-flex items-center px-6 py-3 text-chapter-accent hover:text-chapter-accent-hover font-semibold transition-all group"
+            >
+              <svg className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+              Back to All Articles
+            </Link>
           </div>
-          
         </div>
       </section>
       
-    </div>
+    </ChapterWrapper>
   );
 }

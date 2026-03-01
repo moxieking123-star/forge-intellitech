@@ -27,7 +27,7 @@ const footerSections = [
     ],
   },
   {
-    title: "Join Us",
+    title: "Get Involved",
     links: [
       { name: "Careers", href: "/join#talent" },
       { name: "Partner With Us", href: "/join#partners" },
@@ -79,33 +79,88 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-env-secondary border-t border-env-border">
-      <div className="container-forge section-padding">
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12">
-          {/* Brand Column */}
-          <div className="col-span-2 md:col-span-1">
+    <footer className="relative bg-env-bg-primary border-t border-env-border overflow-hidden">
+      
+      {/* Background Decoration */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-chapter-accent/5 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl" />
+      </div>
+      
+      {/* Newsletter Section */}
+      <div className="relative border-b border-env-border">
+        <div className="container-forge py-12 md:py-16">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-8 p-8 rounded-2xl bg-gradient-to-r from-chapter-accent/10 via-purple-500/5 to-chapter-accent/10 border border-chapter-accent/20">
+              
+              <div className="text-center md:text-left">
+                <h3 className="text-xl md:text-2xl font-bold text-env-primary mb-2">
+                  Stay in the loop
+                </h3>
+                <p className="text-env-secondary">
+                  Get updates on our programs, products, and impact stories.
+                </p>
+              </div>
+              
+              <form className="flex w-full md:w-auto gap-3">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="
+                    flex-1 md:w-64 px-4 py-3 rounded-xl
+                    bg-env-surface border border-env-border
+                    text-env-primary placeholder:text-env-tertiary
+                    focus:outline-none focus:border-chapter-accent/50 focus:ring-2 focus:ring-chapter-accent/20
+                    transition-all duration-200
+                  "
+                />
+                <button
+                  type="submit"
+                  className="
+                    px-6 py-3 rounded-xl
+                    bg-chapter-accent hover:bg-chapter-accent-hover
+                    text-white font-medium
+                    transition-all duration-200
+                    hover:shadow-lg hover:shadow-chapter-accent/25
+                    whitespace-nowrap
+                  "
+                >
+                  Subscribe
+                </button>
+              </form>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Footer Content */}
+      <div className="relative container-forge py-12 md:py-16">
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-8 md:gap-6">
+          
+          {/* Brand Column - Takes 2 columns on md+ */}
+          <div className="col-span-2">
             <Link
               href="/"
-              className="inline-block mb-6 transition-all duration-normal hover:opacity-80"
+              className="inline-block mb-6 transition-transform duration-200 hover:scale-105"
               aria-label="Forge Intellitech - Home"
             >
               <Image
                 src="/images/logo.png"
                 alt="Forge Intellitech"
-                width={180}
-                height={60}
-                className="h-14 w-auto object-contain"
+                width={200}
+                height={80}
+                className="h-12 md:h-14 w-auto object-contain"
               />
             </Link>
             
-            <p className="text-body-lg text-env-secondary leading-relaxed mb-8">
+            <p className="text-env-secondary leading-relaxed mb-6 max-w-xs">
               Building technology that understands Africa. Solutions rooted in
-              local realities, designed for global impact.
+              local realities, designed for lasting impact.
             </p>
 
             {/* Social Links */}
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center gap-2">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
@@ -113,13 +168,13 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="
-                    w-11 h-11 rounded-xl
+                    w-10 h-10 rounded-xl
                     bg-env-surface hover:bg-chapter-accent
                     border border-env-border hover:border-chapter-accent
                     flex items-center justify-center
                     text-env-secondary hover:text-white
-                    transition-all duration-normal ease-smooth
-                    hover:scale-105 hover:shadow-glow
+                    transition-all duration-200
+                    hover:scale-110 hover:shadow-lg hover:shadow-chapter-accent/25
                   "
                   aria-label={`Follow us on ${social.name}`}
                 >
@@ -132,7 +187,7 @@ export default function Footer() {
           {/* Link Columns */}
           {footerSections.map((section) => (
             <div key={section.title}>
-              <h3 className="text-overline font-semibold text-env-primary uppercase tracking-wider mb-5">
+              <h3 className="text-sm font-semibold text-env-primary uppercase tracking-wider mb-4">
                 {section.title}
               </h3>
               <ul className="space-y-3">
@@ -141,12 +196,15 @@ export default function Footer() {
                     <Link
                       href={link.href}
                       className="
-                        text-caption text-env-secondary
+                        text-sm text-env-secondary
                         hover:text-chapter-accent
-                        transition-colors duration-normal
+                        transition-colors duration-200
+                        inline-flex items-center group
                       "
                     >
-                      {link.name}
+                      <span className="group-hover:translate-x-1 transition-transform duration-200">
+                        {link.name}
+                      </span>
                     </Link>
                   </li>
                 ))}
@@ -154,22 +212,39 @@ export default function Footer() {
             </div>
           ))}
         </div>
+      </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-env-border">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-caption text-env-tertiary">
-              © {currentYear} Forge Intellitech Services. All rights reserved.
+      {/* Bottom Bar */}
+      <div className="relative border-t border-env-border">
+        <div className="container-forge py-6">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            
+            {/* Copyright */}
+            <p className="text-sm text-env-tertiary">
+              © {currentYear} Forge Intellitech Services Ltd.
             </p>
-            <p className="text-caption text-env-tertiary flex items-center gap-2">
-              <span>Built with purpose in Africa</span>
-              <span className="text-lg" role="img" aria-label="Africa">
-                🌍
-              </span>
-            </p>
+            
+            {/* Center Element */}
+            <div className="flex items-center gap-2 text-sm text-env-tertiary">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Building from Lagos, Nigeria</span>
+              <span className="text-base">🇳🇬</span>
+            </div>
+            
+            {/* Legal Links */}
+            <div className="flex items-center gap-4 text-sm">
+              <Link href="/privacy" className="text-env-tertiary hover:text-env-secondary transition-colors">
+                Privacy
+              </Link>
+              <Link href="/terms" className="text-env-tertiary hover:text-env-secondary transition-colors">
+                Terms
+              </Link>
+            </div>
+            
           </div>
         </div>
       </div>
+      
     </footer>
   );
 }

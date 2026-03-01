@@ -70,12 +70,12 @@ const whyForgePoints = [
 
 // Impact stats
 const impactStats = [
-  { value: "X+", label: "Schools running TechUp classes", evidence: "Classrooms, labs, facilitators" },
-  { value: "X+", label: "Community outreach programmes", evidence: "Community halls, public demos" },
-  { value: "X+", label: "Basic school tech classes (JSS)", evidence: "Design & coding sessions" },
-  { value: "X+", label: "Faith-based & civic tech sessions", evidence: "Churches, mosques, civic halls" },
-  { value: "X+", label: "Free public workshops delivered", evidence: "Facilitators, learners, showcases" },
-  { value: "X+", label: "Students trained in digital skills", evidence: "Design, web, data, tools" },
+  { value: "10+", label: "Schools running TechUp classes", evidence: "Classrooms, labs, facilitators" },
+  { value: "4+", label: "Community outreach programmes", evidence: "Community halls, public demos" },
+  { value: "2+", label: "Primary school TechUp pilot classes", evidence: "Design & coding sessions" },
+  { value: "3+", label: "Faith-based & civic tech sessions", evidence: "Churches, mosques, civic halls" },
+  { value: "30+", label: "Free public workshops delivered", evidence: "Facilitators, learners, showcases" },
+  { value: "2500+", label: "Students trained in digital skills", evidence: "Design, web, data, tools" },
 ];
 
 export default function HomePage() {

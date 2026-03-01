@@ -48,11 +48,11 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.className} min-h-screen flex flex-col`}>
+      <body className={`${inter.className} min-h-screen flex flex-col bg-env-bg-primary`}>
         <ThemeProvider defaultMode="dark" defaultChapter="forge">
           <GlowCursor />
           <Navbar />
-          <main className="flex-grow pt-16 md:pt-20">
+          <main className="flex-grow pt-20 md:pt-24">
             {children}
           </main>
           <Footer />
