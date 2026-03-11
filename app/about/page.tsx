@@ -14,39 +14,39 @@ export const metadata = {
 // Company values
 const values = [
   {
-    title: "Original",
+    title: "Ubuntu",
     meaning: "I am because we are",
-    description: "Community impact defines success.",
+    description: "We succeed when our communities succeed.",
     icon: "🤝",
   },
   {
     title: "Excellence",
     meaning: "World-class, homegrown",
-    description: "Global standards, African context.",
+    description: "Global quality, African soul.",
     icon: "⭐",
   },
   {
     title: "Integrity",
     meaning: "Trust as foundation",
-    description: "Transparency and accountability at every level.",
+    description: "We do what we say, every time.",
     icon: "🛡️",
   },
   {
     title: "Innovation",
     meaning: "Solutions from within",
-    description: "Designed from lived African realities.",
+    description: "Built from our reality, not borrowed ideas.",
     icon: "💡",
   },
   {
-    title: "Persistence",
+    title: "Patience",
     meaning: "Building for generations",
-    description: "We build infrastructure, not headlines.",
+    description: "We're not chasing headlines. We're building legacy.",
     icon: "🔥",
   },
   {
     title: "Accessibility",
     meaning: "Technology for everyone",
-    description: "Reach and inclusion drive design decisions.",
+    description: "If it doesn't reach everyone, it's not done yet.",
     icon: "🌍",
   },
 ];
@@ -56,18 +56,18 @@ const team = [
   {
     name: "Adeniyi Moxie",
     role: "Founder & CEO",
-    bio: "A systems builder focused on turning African potential into scalable digital infrastructure and institutional capability.",
+    bio: "A builder who believes Africa's future belongs to those who understand both technology and community.",
     image: "/images/team/founder.jpg",
   },
   {
     name: "Adeola Oyewoler",
     role: "Chairman",
-    bio: "A strategic leader committed to strengthening African-led institutions and long-term youth empowerment.",
+    bio: "A leader committed to strengthening African institutions and empowering the next generation.",
     image: "/images/team/chairman.jpg",
   },
 ];
 
-// Partners - UPDATED
+// Partners
 const partners = [
   {
     name: "Ikosi-Isheri Local Government",
@@ -85,34 +85,34 @@ const partners = [
 
 // Our edge focus areas
 const edgeFocusAreas = [
-  "Learning pathways",
-  "Institutional partnerships",
-  "Civic responsibility",
-  "Industry relevance",
+  "Clear learning paths that grow with students",
+  "Real partnerships with schools and communities",
+  "Teaching responsibility alongside skills",
+  "Training for jobs that actually exist",
 ];
 
 // What makes Forge different
 const forgeDifferentiators = [
   {
-    wrong: "We are not an NGO programme.",
-    right: "We are a long-term institutional partner.",
+    wrong: "We're not running one-off workshops",
+    right: "We're building lasting school partnerships",
   },
   {
-    wrong: "We do not run isolated workshops.",
-    right: "We embed inside school systems.",
+    wrong: "We're not teaching tools alone",
+    right: "We're developing complete skillsets",
   },
   {
-    wrong: "We do not train for tools.",
-    right: "We train for national capability.",
+    wrong: "We're not chasing numbers",
+    right: "We're building real capability",
   },
 ];
 
 // Institutional alignment areas
 const institutionalAlignment = [
-  "Public education systems",
-  "Local government initiatives",
-  "National youth development frameworks",
-  "Digital economy and innovation policies",
+  "Public school systems",
+  "Local government programs",
+  "Youth development initiatives",
+  "Digital economy plans",
 ];
 
 // Team Member Card Component
@@ -184,17 +184,19 @@ export default function AboutPage() {
             <div className="max-w-4xl">
               
               <span className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent-soft rounded-full border border-chapter-accent/20">
-                About Forge Intellitech Services Ltd
+                About Forge
               </span>
               
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-env-primary mb-6 leading-tight">
-                Africa will not become great by importing systems.
+                Africa won't become great
                 <br />
-                <span className="text-chapter-accent">Africa will become great by engineering its own future — starting with its youth.</span>
+                by copying other people's playbook.
+                <br />
+                <span className="text-chapter-accent">We'll get there by writing our own — starting with our young people.</span>
               </h1>
               
               <p className="text-xl text-env-secondary leading-relaxed max-w-3xl">
-                Forge Intellitech is an African technology and education company built around a single, deliberate conviction.
+                That's why Forge exists.
               </p>
               
             </div>
@@ -208,14 +210,14 @@ export default function AboutPage() {
           <AnimatedSection animation="fade-up">
             <div className="max-w-4xl mx-auto text-center">
               <p className="text-xl md:text-2xl text-env-secondary leading-relaxed mb-6">
-                We do not run short-term digital trainings.
+                We're not here to run quick tech trainings and call it a day.
               </p>
               <p className="text-xl md:text-2xl text-env-primary font-medium leading-relaxed">
-                We build <span className="text-chapter-accent">long-term capability pipelines</span> that prepare young Africans to design, build and govern the digital infrastructure of their own societies.
+                We're here to <span className="text-chapter-accent">build pipelines</span> — pathways that take young Africans from curiosity to capability, from learning to leading.
               </p>
               <div className="mt-8 p-6 rounded-xl bg-chapter-accent/10 border border-chapter-accent/20">
                 <p className="text-lg text-env-primary font-medium">
-                  Our work begins with young people — but it is designed for <span className="text-chapter-accent">national scale</span>.
+                  We start with students. <span className="text-chapter-accent">But we're building for the whole country.</span>
                 </p>
               </div>
             </div>
@@ -236,18 +238,18 @@ export default function AboutPage() {
                 </span>
                 
                 <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-6">
-                  The quiet advantage behind real African transformation
+                  What makes us different
                 </h2>
                 
                 <div className="space-y-4 text-env-secondary leading-relaxed">
                   <p>
-                    Most innovation programmes in Africa focus on: <span className="text-env-primary font-medium">tools, hackathons and isolated success stories.</span>
+                    Most tech programs focus on: <span className="text-env-primary font-medium">apps, hackathons, and quick wins.</span>
                   </p>
                   <p>
-                    Forge focuses on something far more strategic:
+                    We focus on something deeper:
                   </p>
                   <p className="text-xl text-chapter-accent font-bold">
-                    How a nation builds human infrastructure.
+                    Training people who will shape the future.
                   </p>
                 </div>
               </div>
@@ -256,20 +258,20 @@ export default function AboutPage() {
             <AnimatedSection animation="fade-left" delay={200}>
               <div className="p-6 md:p-8 rounded-2xl bg-env-surface border border-env-border">
                 <h3 className="text-lg font-semibold text-env-primary mb-4">
-                  We intentionally design:
+                  We intentionally build:
                 </h3>
                 <div className="space-y-3">
                   {edgeFocusAreas.map((area, i) => (
-                    <div key={i} className="flex items-center p-3 rounded-lg bg-chapter-accent/10 border border-chapter-accent/20">
-                      <svg className="w-5 h-5 text-chapter-accent mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div key={i} className="flex items-start p-3 rounded-lg bg-chapter-accent/10 border border-chapter-accent/20">
+                      <svg className="w-5 h-5 text-chapter-accent mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                      <span className="text-env-primary font-medium">{area}</span>
+                      <span className="text-env-primary font-medium text-sm">{area}</span>
                     </div>
                   ))}
                 </div>
                 <p className="text-env-secondary mt-4 text-sm">
-                  ...into one connected system.
+                  ...all working together as one system.
                 </p>
               </div>
             </AnimatedSection>
@@ -285,8 +287,8 @@ export default function AboutPage() {
           
           <SectionHeader
             label="What We Build"
-            title="Two Tightly Integrated Pillars"
-            description="Forge operates across education and infrastructure — and they reinforce each other."
+            title="Two Sides of the Same Coin"
+            description="Education and technology — working together, making each other stronger."
           />
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -297,17 +299,17 @@ export default function AboutPage() {
                   <span className="text-2xl">🎓</span>
                 </div>
                 <h3 className="text-xl font-bold text-env-primary mb-4">
-                  1. Education & National Talent Pipelines
+                  1. Education Programs
                 </h3>
                 <p className="text-env-secondary leading-relaxed mb-4">
-                  Through <strong className="text-env-primary">TechUp</strong> and <strong className="text-env-primary">LaunchPad</strong>, we design structured, in-school digital capability programmes that move students from foundational literacy to real innovation, enterprise and employability.
+                  Through <strong className="text-env-primary">TechUp</strong> and <strong className="text-env-primary">LaunchPad</strong>, we teach students real digital skills in their own schools — taking them from basic tech literacy all the way to building their own ideas.
                 </p>
                 <div className="flex gap-3">
                   <Link href="/techup" className="text-emerald-400 hover:underline text-sm font-medium">
-                    TechUp →
+                    Explore TechUp →
                   </Link>
                   <Link href="/launchpad" className="text-emerald-400 hover:underline text-sm font-medium">
-                    LaunchPad →
+                    Explore LaunchPad →
                   </Link>
                 </div>
               </div>
@@ -319,17 +321,17 @@ export default function AboutPage() {
                   <span className="text-2xl">🏗️</span>
                 </div>
                 <h3 className="text-xl font-bold text-env-primary mb-4">
-                  2. Applied Digital Infrastructure Platforms
+                  2. Technology Products
                 </h3>
                 <p className="text-env-secondary leading-relaxed mb-4">
-                  Through products such as <strong className="text-env-primary">Bitebank</strong> and <strong className="text-env-primary">Trego</strong>, we build real-world systems in food, mobility and community services that reflect African behaviour, infrastructure and constraints.
+                  Through products like <strong className="text-env-primary">BiteBank</strong> and <strong className="text-env-primary">Trego</strong>, we build real solutions for food, transport, and community needs — designed for how Africans actually live and move.
                 </p>
                 <div className="flex gap-3">
                   <Link href="/bitebank" className="text-blue-400 hover:underline text-sm font-medium">
-                    Bitebank →
+                    See BiteBank →
                   </Link>
                   <Link href="/trego" className="text-blue-400 hover:underline text-sm font-medium">
-                    Trego →
+                    See Trego →
                   </Link>
                 </div>
               </div>
@@ -340,7 +342,7 @@ export default function AboutPage() {
           <AnimatedSection animation="fade-up" delay={300}>
             <div className="mt-8 p-6 rounded-xl bg-chapter-accent/10 border border-chapter-accent/20 text-center max-w-3xl mx-auto">
               <p className="text-chapter-accent font-medium text-lg">
-                Education and infrastructure reinforce each other. That is the architecture.
+                We teach the builders. Then we build the systems. That's how it works.
               </p>
             </div>
           </AnimatedSection>
@@ -348,7 +350,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ==================== TECHUP SUMMARY (SHORTENED) ==================== */}
+      {/* ==================== TECHUP SUMMARY ==================== */}
       <section className="section-padding">
         <div className="container-forge">
           
@@ -357,15 +359,15 @@ export default function AboutPage() {
             <AnimatedSection animation="fade-right">
               <div>
                 <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent-soft rounded-full border border-chapter-accent/20">
-                  Flagship Programme
+                  Flagship Program
                 </span>
                 
                 <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-6">
-                  TechUp — Our Core Delivery Engine
+                  TechUp — Where It All Begins
                 </h2>
                 
                 <p className="text-env-secondary leading-relaxed mb-6">
-                  TechUp is a structured, school-embedded digital education programme for Junior and Senior Secondary students. It transforms classrooms into innovation hubs where students learn real, hands-on digital skills.
+                  TechUp brings real tech education directly into secondary schools. Students don't just learn to use apps — they learn to design, build, and create their own.
                 </p>
                 
                 <div className="grid grid-cols-3 gap-4 mb-6">
@@ -384,7 +386,7 @@ export default function AboutPage() {
                 </div>
                 
                 <p className="text-env-secondary text-sm mb-6">
-                  Students graduate as builders, strategists or storytellers — prepared not just for employment, but for enterprise and digital leadership.
+                  By the time they finish, students choose their path — whether they want to build tech, solve problems with data, or tell powerful stories through design.
                 </p>
                 
                 <Link
@@ -419,14 +421,14 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ==================== LAUNCHPAD SUMMARY (SHORTENED) ==================== */}
+      {/* ==================== LAUNCHPAD SUMMARY ==================== */}
       <section className="section-padding bg-env-secondary">
         <div className="container-forge">
           
           <AnimatedSection animation="fade-up">
             <div className="max-w-4xl mx-auto text-center">
               <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent-soft rounded-full border border-chapter-accent/20">
-                From Skills to Enterprise
+                From Skills to Business
               </span>
               
               <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-6">
@@ -434,12 +436,12 @@ export default function AboutPage() {
               </h2>
               
               <p className="text-lg text-env-secondary leading-relaxed mb-8">
-                LaunchPad identifies outstanding TechUp graduates and supports them to refine ideas, build early products and receive non-equity funding — creating a direct pathway from school to enterprise.
+                LaunchPad finds the best TechUp graduates and helps them turn their ideas into real businesses — with funding, mentorship, and support, without taking any part of what they build.
               </p>
               
               <div className="p-6 rounded-xl bg-chapter-accent/10 border border-chapter-accent/20">
                 <p className="text-xl text-chapter-accent font-bold">
-                  School → Skills → Innovation → Enterprise
+                  Learn → Build → Launch → Grow
                 </p>
               </div>
               
@@ -463,9 +465,9 @@ export default function AboutPage() {
         <div className="container-forge">
           
           <SectionHeader
-            label="Our Difference"
-            title="What Makes Forge Different"
-            description="We are not like typical digital skills initiatives."
+            label="Our Approach"
+            title="We Do Things Differently"
+            description="Here's what sets us apart from typical tech programs."
           />
           
           <div className="max-w-3xl mx-auto space-y-4">
@@ -495,15 +497,15 @@ export default function AboutPage() {
           <AnimatedSection animation="fade-up">
             <div className="max-w-4xl mx-auto text-center">
               <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent-soft rounded-full border border-chapter-accent/20">
-                Government Alignment
+                Built to Scale
               </span>
               
               <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-6">
-                Designed for Institutional Trust
+                Designed to Work With Government
               </h2>
               
               <p className="text-env-secondary leading-relaxed mb-8">
-                Forge designs all programmes to integrate with public systems and national priorities.
+                Everything we build is designed to fit into existing systems — so it can grow beyond one school, one community, one state.
               </p>
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -516,7 +518,7 @@ export default function AboutPage() {
               
               <div className="mt-8 p-6 rounded-xl bg-chapter-accent/10 border border-chapter-accent/20">
                 <p className="text-env-primary font-medium">
-                  Our model is designed for replication across: <span className="text-chapter-accent">local government areas, states and national programmes.</span>
+                  What works in one school today can work in <span className="text-chapter-accent">every school tomorrow.</span>
                 </p>
               </div>
             </div>
@@ -531,8 +533,8 @@ export default function AboutPage() {
           
           <SectionHeader
             label="Our Partners"
-            title="Organisations We Have Partnered With"
-            description="We work closely with public institutions and community-driven organisations to deliver sustainable impact."
+            title="Who We Work With"
+            description="We work with government, community organizations, and schools to make real impact."
           />
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
@@ -563,8 +565,8 @@ export default function AboutPage() {
           
           <SectionHeader
             label="Leadership"
-            title="The People Behind Forge"
-            description="Forge is led by practitioners who combine technology delivery, youth development and institutional strategy."
+            title="Who's Behind Forge"
+            description="Meet the people leading this mission."
           />
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -588,8 +590,8 @@ export default function AboutPage() {
           
           <SectionHeader
             label="Our Values"
-            title="Six Operating Principles"
-            description="We are guided by these core principles in everything we do."
+            title="What We Stand For"
+            description="Six principles that guide everything we do."
           />
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -629,21 +631,21 @@ export default function AboutPage() {
               </span>
               
               <p className="text-xl text-env-secondary leading-relaxed mb-8">
-                Forge Intellitech exists to ensure that the next generation of Africans do not only consume digital systems.
+                Forge exists so the next generation of Africans don't just use technology —
               </p>
               
               <div className="space-y-4 mb-8">
-                <p className="text-2xl text-env-primary font-bold">They design them.</p>
-                <p className="text-2xl text-env-primary font-bold">They build them.</p>
-                <p className="text-2xl text-env-primary font-bold">They govern them.</p>
+                <p className="text-2xl text-env-primary font-bold">They design it.</p>
+                <p className="text-2xl text-env-primary font-bold">They build it.</p>
+                <p className="text-2xl text-env-primary font-bold">They own it.</p>
               </div>
               
               <div className="p-6 md:p-8 rounded-2xl bg-gradient-to-r from-chapter-accent/10 to-purple-500/10 border border-chapter-accent/20">
                 <p className="text-xl text-env-secondary mb-4">
-                  Africa's future will not be imported.
+                  Africa's future won't be imported.
                 </p>
                 <p className="text-3xl md:text-4xl text-chapter-accent font-bold">
-                  It will be forged.
+                  It will be forged — right here, by us.
                 </p>
               </div>
             </div>
@@ -655,9 +657,9 @@ export default function AboutPage() {
       {/* ==================== CTA SECTION ==================== */}
       <CTASection
         badge="Partner With Us"
-        headline="Ready to build"
-        highlightedText="Africa's digital future?"
-        description="We welcome institutions, governments and organisations who share our vision. Whether you want to bring TechUp to your schools, sponsor our initiatives, or collaborate on national digital capacity — there's a place for you."
+        headline="Let's Build"
+        highlightedText="Something That Lasts"
+        description="We're looking for schools, governments, and organizations who are ready to invest in real, long-term change. Whether you want to bring TechUp to your community, support our students, or collaborate on something bigger — let's talk."
         primaryAction={{
           label: "Start a Conversation",
           href: "/contact",
