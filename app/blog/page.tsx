@@ -18,10 +18,22 @@ const categories = [
   { name: "Education Policy", slug: "policy", active: false },
   { name: "Impact Stories", slug: "impact", active: false },
   { name: "Events", slug: "events", active: false },
+  { name: "African Leadership", slug: "leadership", active: false },
 ];
 
 // Blog posts data
 const blogPosts = [
+  {
+    slug: "iran-self-reliance-lessons-for-africa",
+    title: "What Africa Can Learn From Iran's Self-Reliance: Building From Within, Not From Handouts",
+    excerpt: "We're not picking sides in global politics. But there's a lesson in watching a nation build advanced technology under crushing sanctions — while Africa, with all its freedom and resources, still waits for help from abroad. The lesson isn't about missiles. It's about will.",
+    author: "Forge Team",
+    date: "March 15, 2026",
+    category: "African Leadership",
+    readTime: "12 min read",
+    featured: true,
+    image: "/images/blog/africa-self-reliance.jpg",
+  },
   {
     slug: "launchpad-2026-announcement",
     title: "LaunchPad 2026 is Coming: ₦10 Million Up for Grabs — And We Need You",
@@ -30,7 +42,7 @@ const blogPosts = [
     date: "March 1, 2026",
     category: "Events",
     readTime: "6 min read",
-    featured: true,
+    featured: false,
     image: "/images/blog/launchpad-2026.jpg",
   },
   {
@@ -76,7 +88,7 @@ export default function BlogPage() {
   return (
     <ChapterWrapper chapter="forge">
       
-      {/* ==================== HERO SECTION WITH IMAGE ==================== */}
+      {/* ==================== HERO SECTION ==================== */}
       <section className="relative min-h-[60vh] flex items-center overflow-hidden">
         
         {/* Background Image */}
@@ -111,9 +123,9 @@ export default function BlogPage() {
               </h1>
               
               <p className="text-xl text-env-secondary leading-relaxed">
-                Real stories about building the future of African education. 
-                No corporate speak — just honest reflections on what we're learning, 
-                who we're meeting, and why this work matters.
+                Real stories about building Africa's future. 
+                No corporate speak — just honest thoughts on education, leadership, 
+                and what it takes to build from within.
               </p>
               
             </div>
@@ -229,7 +241,7 @@ export default function BlogPage() {
           
           <AnimatedSection animation="fade-up">
             <div className="flex items-center justify-between mb-12">
-              <h2 className="text-3xl font-bold text-env-primary">Latest Articles</h2>
+              <h2 className="text-3xl font-bold text-env-primary">More Articles</h2>
               <div className="hidden sm:block h-px flex-1 mx-8 bg-env-border" />
               <span className="text-sm text-env-tertiary">{regularPosts.length} articles</span>
             </div>
@@ -293,15 +305,6 @@ export default function BlogPage() {
             ))}
           </div>
           
-          {/* Load More Button */}
-          <AnimatedSection animation="fade-up" delay={400}>
-            <div className="text-center mt-16">
-              <button className="px-8 py-4 bg-env-surface hover:bg-env-surface-hover text-env-primary font-semibold rounded-xl border border-env-border hover:border-chapter-accent/30 transition-all duration-300 hover:shadow-lg">
-                Load More Articles
-              </button>
-            </div>
-          </AnimatedSection>
-          
         </div>
       </section>
 
@@ -316,12 +319,12 @@ export default function BlogPage() {
               </span>
               
               <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-4">
-                Get insights delivered to your inbox
+                Get insights in your inbox
               </h2>
               
               <p className="text-lg text-env-secondary mb-8">
-                Subscribe to our newsletter for the latest insights, program updates, 
-                and stories from the Forge community. No spam, ever.
+                Subscribe for the latest insights, program updates, and stories from the field. 
+                No spam, ever.
               </p>
               
               <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
@@ -345,10 +348,10 @@ export default function BlogPage() {
 
       {/* ==================== CTA SECTION ==================== */}
       <CTASection
-        badge="Join the Movement"
-        headline="Ready to build the future"
+        badge="Join Us"
+        headline="Ready to build Africa's future"
         highlightedText="together?"
-        description="Whether you're a school, sponsor, or supporter — we'd love to connect with you and explore how we can work together."
+        description="Whether you're a school, sponsor, or supporter — let's connect and explore how we can work together."
         primaryAction={{
           label: "Get In Touch",
           href: "/contact",
