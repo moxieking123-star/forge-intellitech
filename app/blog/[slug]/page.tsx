@@ -7,7 +7,6 @@ import { AnimatedSection } from "../../../components/AnimatedSection";
 // Complete blog posts data with full content
 const blogPosts = [
   {
-    {
   slug: "iran-self-reliance-lessons-for-africa",
   title: "What Africa Can Learn From Iran's Self-Reliance: Building From Within, Not From Handouts",
   excerpt: "We're not picking sides in global politics. But there's a lesson in watching a nation build advanced technology under crushing sanctions — while Africa, with all its freedom and resources, still waits for help from abroad. The lesson isn't about missiles. It's about will.",
