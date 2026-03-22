@@ -1,102 +1,38 @@
+// components/AnimatedSection.tsx
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
-
-type AnimationType = 
-  | "fade-up" 
-  | "fade-in" 
-  | "fade-left" 
-  | "fade-right" 
-  | "scale"
-  | "none";
+import { useEffect, useRef, useState, ReactNode } from 'react';
 
 interface AnimatedSectionProps {
   children: ReactNode;
-  animation?: AnimationType;
+  animation?: 'fade-up' | 'fade-down' | 'fade-left' | 'fade-right' | 'fade-in' | 'scale-in';
   delay?: number;
-  duration?: number;
-  once?: boolean;
-  threshold?: number;
   className?: string;
+  threshold?: number;
 }
 
-const animationClasses: Record<AnimationType, { initial: string; animate: string }> = {
-  "fade-up": {
-    initial: "opacity-0 translate-y-8",
-    animate: "opacity-100 translate-y-0",
-  },
-  "fade-in": {
-    initial: "opacity-0",
-    animate: "opacity-100",
-  },
-  "fade-left": {
-    initial: "opacity-0 translate-x-8",
-    animate: "opacity-100 translate-x-0",
-  },
-  "fade-right": {
-    initial: "opacity-0 -translate-x-8",
-    animate: "opacity-100 translate-x-0",
-  },
-  "scale": {
-    initial: "opacity-0 scale-95",
-    animate: "opacity-100 scale-100",
-  },
-  "none": {
-    initial: "",
-    animate: "",
-  },
-};
-
-/**
- * AnimatedSection
- * 
- * Wraps content with scroll-triggered animations.
- * Uses Intersection Observer for performance.
- * Respects prefers-reduced-motion.
- */
 export function AnimatedSection({
   children,
-  animation = "fade-up",
+  animation = 'fade-up',
   delay = 0,
-  duration = 500,
-  once = true,
+  className = '',
   threshold = 0.1,
-  className = "",
 }: AnimatedSectionProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setPrefersReducedMotion(mediaQuery.matches);
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setPrefersReducedMotion(e.matches);
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
-
-  useEffect(() => {
-    if (prefersReducedMotion) {
-      setIsVisible(true);
-      return;
-    }
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          if (once) {
-            observer.disconnect();
-          }
-        } else if (!once) {
-          setIsVisible(false);
+          observer.unobserve(entry.target);
         }
       },
-      { threshold, rootMargin: "0px 0px -50px 0px" }
+      {
+        threshold,
+        rootMargin: '0px 0px -50px 0px',
+      }
     );
 
     const currentRef = ref.current;
@@ -109,116 +45,42 @@ export function AnimatedSection({
         observer.unobserve(currentRef);
       }
     };
-  }, [once, threshold, prefersReducedMotion]);
+  }, [threshold]);
 
-  if (prefersReducedMotion || animation === "none") {
-    return <div className={className}>{children}</div>;
-  }
+  const getAnimationStyles = (): React.CSSProperties => {
+    const baseStyles: React.CSSProperties = {
+      transition: `opacity 0.6s ease-out, transform 0.6s ease-out`,
+      transitionDelay: `${delay}ms`,
+    };
 
-  const { initial, animate } = animationClasses[animation];
+    if (!isVisible) {
+      switch (animation) {
+        case 'fade-up':
+          return { ...baseStyles, opacity: 0, transform: 'translateY(30px)' };
+        case 'fade-down':
+          return { ...baseStyles, opacity: 0, transform: 'translateY(-30px)' };
+        case 'fade-left':
+          return { ...baseStyles, opacity: 0, transform: 'translateX(30px)' };
+        case 'fade-right':
+          return { ...baseStyles, opacity: 0, transform: 'translateX(-30px)' };
+        case 'fade-in':
+          return { ...baseStyles, opacity: 0, transform: 'none' };
+        case 'scale-in':
+          return { ...baseStyles, opacity: 0, transform: 'scale(0.95)' };
+        default:
+          return { ...baseStyles, opacity: 0, transform: 'translateY(30px)' };
+      }
+    }
+
+    return { ...baseStyles, opacity: 1, transform: 'none' };
+  };
 
   return (
-    <div
-      ref={ref}
-      className={`transition-all ease-out ${isVisible ? animate : initial} ${className}`}
-      style={{
-        transitionDuration: `${duration}ms`,
-        transitionDelay: `${delay}ms`,
-      }}
-    >
+    <div ref={ref} style={getAnimationStyles()} className={className}>
       {children}
     </div>
   );
 }
 
-/**
- * StaggeredChildren
- * 
- * Wraps multiple children with staggered animation delays.
- * Each child animates in sequence.
- */
-interface StaggeredChildrenProps {
-  children: ReactNode;
-  staggerDelay?: number;
-  animation?: AnimationType;
-  className?: string;
-}
-
-export function StaggeredChildren({
-  children,
-  staggerDelay = 100,
-  animation = "fade-up",
-  className = "",
-}: StaggeredChildrenProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setPrefersReducedMotion(mediaQuery.matches);
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setPrefersReducedMotion(e.matches);
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
-
-  useEffect(() => {
-    if (prefersReducedMotion) {
-      setIsVisible(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
-    );
-
-    const currentRef = ref.current;
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-    };
-  }, [prefersReducedMotion]);
-
-  const { initial, animate } = animationClasses[animation];
-
-  return (
-    <div ref={ref} className={className}>
-      {Array.isArray(children) ? (
-        children.map((child, index) => (
-          <div
-            key={index}
-            className={`transition-all ease-out duration-500 ${
-              isVisible && !prefersReducedMotion ? animate : initial
-            }`}
-            style={{
-              transitionDelay: prefersReducedMotion ? "0ms" : `${index * staggerDelay}ms`,
-            }}
-          >
-            {child}
-          </div>
-        ))
-      ) : (
-        <div className={`transition-all ease-out duration-500 ${isVisible ? animate : initial}`}>
-          {children}
-        </div>
-      )}
-    </div>
-  );
-}
-
+// Also export as default for flexibility
 export default AnimatedSection;

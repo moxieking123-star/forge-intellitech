@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { supabase, isSupabaseReady } from "@/lib/supabase";
 import { LAUNCHPAD_CONFIG, sponsorshipTiers } from "@/lib/launchpadData";
 
 // ============================================
@@ -108,27 +107,17 @@ export function StudentApplicationForm() {
     setStatus("loading");
     setErrorMessage("");
 
-    if (!isSupabaseReady()) {
-      setStatus("error");
-      setErrorMessage("Application system is temporarily unavailable. Please try again later.");
-      return;
-    }
-
     try {
-      const { error } = await supabase
-        .from("launchpad_applications")
-        .insert([
-          {
-            ...formData,
-            submittedAt: new Date().toISOString(),
-          },
-        ]);
+      // 🔧 TEMPORARY: Log form data (backend not connected yet)
+      console.log("📧 LaunchPad Application:", {
+        ...formData,
+        submittedAt: new Date().toISOString(),
+      });
 
-      if (error) {
-        console.error("Supabase error:", error);
-        throw error;
-      }
+      // Simulate network delay
+      await new Promise(resolve => setTimeout(resolve, 1500));
 
+      // Simulate success
       setStatus("success");
       setFormData({
         fullName: "",
@@ -167,8 +156,9 @@ export function StudentApplicationForm() {
         <h3 className="text-2xl font-bold text-env-primary mb-2">Application Submitted!</h3>
         <p className="text-env-secondary max-w-md mx-auto">
           Thank you for applying to LaunchPad {LAUNCHPAD_CONFIG.currentYear}. 
-          We'll review your application and contact you soon.
+          We&apos;ll review your application and contact you soon.
         </p>
+        <p className="text-xs text-env-tertiary mt-4">(Demo Mode - Database not connected)</p>
       </div>
     );
   }
@@ -511,27 +501,17 @@ export function SponsorApplicationForm() {
     setStatus("loading");
     setErrorMessage("");
 
-    if (!isSupabaseReady()) {
-      setStatus("error");
-      setErrorMessage("System is temporarily unavailable. Please try again later.");
-      return;
-    }
-
     try {
-      const { error } = await supabase
-        .from("sponsor_inquiries")
-        .insert([
-          {
-            ...formData,
-            submittedAt: new Date().toISOString(),
-          },
-        ]);
+      // 🔧 TEMPORARY: Log form data (backend not connected yet)
+      console.log("📧 Sponsor Inquiry:", {
+        ...formData,
+        submittedAt: new Date().toISOString(),
+      });
 
-      if (error) {
-        console.error("Supabase error:", error);
-        throw error;
-      }
+      // Simulate network delay
+      await new Promise(resolve => setTimeout(resolve, 1500));
 
+      // Simulate success
       setStatus("success");
     } catch (err) {
       setStatus("error");
@@ -554,6 +534,7 @@ export function SponsorApplicationForm() {
           Thank you for your interest in sponsoring LaunchPad. 
           Our partnerships team will contact you within 48 hours.
         </p>
+        <p className="text-xs text-env-tertiary mt-4">(Demo Mode - Database not connected)</p>
       </div>
     );
   }

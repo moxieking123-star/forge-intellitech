@@ -1,106 +1,74 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { supabase, isSupabaseReady } from "@/lib/supabase";
+import { useState } from 'react';
+import { useFormSubmit } from '@/hooks/useFormSubmit';
 
-const categories = [
-  { value: "", label: "Select a category" },
-  { value: "partnership", label: "Partnership Inquiry" },
-  { value: "school", label: "School Program (TechUp)" },
-  { value: "launchpad", label: "LaunchPad Interest" },
-  { value: "careers", label: "Career Opportunities" },
-  { value: "press", label: "Press & Media" },
-  { value: "general", label: "General Inquiry" },
+const inquiryTypes = [
+  { value: 'general', label: 'General Inquiry' },
+  { value: 'partnership', label: 'Partnership' },
+  { value: 'schools', label: 'Schools / Education' },
+  { value: 'careers', label: 'Careers' },
+  { value: 'press', label: 'Press / Media' },
+  { value: 'support', label: 'Support' },
 ];
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    organization: "",
-    category: "",
-    message: "",
+    name: '',
+    email: '',
+    inquiryType: 'general',
+    subject: '',
+    message: '',
   });
-  
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [errorMessage, setErrorMessage] = useState("");
+
+  const { submitForm, isLoading, error, success, reset } = useFormSubmit({
+  endpoint: '/api/contact',
+  onSuccess: () => {
+      setFormData({
+        name: '',
+        email: '',
+        inquiryType: 'general',
+        subject: '',
+        message: '',
+      });
+    },
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await submitForm(formData);
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
+    
+    // Clear error when user starts typing
+    if (error) reset();
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("loading");
-    setErrorMessage("");
-
-    // Validation
-    if (!formData.name || !formData.email || !formData.category || !formData.message) {
-      setStatus("error");
-      setErrorMessage("Please fill in all required fields.");
-      return;
-    }
-
-    if (!isSupabaseReady()) {
-      setStatus("error");
-      setErrorMessage("Contact form is temporarily unavailable. Please email us directly at hello@forgeintellitech.com");
-      return;
-    }
-
-    try {
-      const { error } = await supabase
-        .from("contact_messages")
-        .insert([
-          {
-            name: formData.name,
-            email: formData.email,
-            organization: formData.organization || null,
-            category: formData.category,
-            message: formData.message,
-          },
-        ]);
-
-      if (error) {
-        console.error("Supabase error:", error);
-        throw error;
-      }
-
-      setStatus("success");
-      setFormData({
-        name: "",
-        email: "",
-        organization: "",
-        category: "",
-        message: "",
-      });
-    } catch (err) {
-      setStatus("error");
-      setErrorMessage(
-        err instanceof Error ? err.message : "Something went wrong. Please try again."
-      );
-    }
-  };
-
-  if (status === "success") {
+  // Success state
+  if (success) {
     return (
       <div className="text-center py-12">
-        <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-chapter-accent-soft flex items-center justify-center">
-          <svg className="w-8 h-8 text-chapter-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-green-500/10 flex items-center justify-center">
+          <svg className="w-10 h-10 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-2xl font-bold text-env-primary mb-2">Message Sent!</h3>
-        <p className="text-env-secondary max-w-md mx-auto">
-          Thank you for reaching out. We'll get back to you as soon as possible.
+        <h3 className="text-2xl font-bold text-[var(--env-text-primary)] mb-3">
+          Message Sent!
+        </h3>
+        <p className="text-[var(--env-text-secondary)] mb-6">
+          Thank you for reaching out. We'll get back to you within 24-48 hours.
         </p>
         <button
-          onClick={() => setStatus("idle")}
-          className="mt-6 text-chapter-accent hover:underline font-medium"
+          onClick={() => reset()}
+          className="px-6 py-3 rounded-xl bg-[var(--chapter-accent)] hover:bg-[var(--chapter-accent-hover)] text-white font-semibold transition-all"
         >
-          Send another message
+          Send Another Message
         </button>
       </div>
     );
@@ -108,121 +76,178 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      
-      {/* Name & Email */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* Error Display */}
+      {error && (
+        <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500">
+          <div className="flex items-center gap-3">
+            <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>{error}</span>
+          </div>
+        </div>
+      )}
+
+      {/* Name & Email Row */}
+      <div className="grid md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="contact-name" className="block text-sm font-medium text-env-secondary mb-2">
-            Your Name *
+          <label htmlFor="name" className="block text-sm font-medium text-[var(--env-text-primary)] mb-2">
+            Your Name <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
-            id="contact-name"
+            id="name"
             name="name"
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary placeholder-env-tertiary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth"
             placeholder="John Doe"
+            className="
+              w-full px-4 py-3.5 rounded-xl
+              bg-[var(--env-bg-primary)] border border-[var(--env-border)]
+              text-[var(--env-text-primary)] placeholder:text-[var(--env-text-tertiary)]
+              focus:outline-none focus:border-[var(--chapter-accent)] focus:ring-2 focus:ring-[var(--chapter-accent)]/20
+              transition-all duration-300
+            "
           />
         </div>
+
         <div>
-          <label htmlFor="contact-email" className="block text-sm font-medium text-env-secondary mb-2">
-            Email Address *
+          <label htmlFor="email" className="block text-sm font-medium text-[var(--env-text-primary)] mb-2">
+            Email Address <span className="text-red-500">*</span>
           </label>
           <input
             type="email"
-            id="contact-email"
+            id="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary placeholder-env-tertiary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth"
             placeholder="john@example.com"
+            className="
+              w-full px-4 py-3.5 rounded-xl
+              bg-[var(--env-bg-primary)] border border-[var(--env-border)]
+              text-[var(--env-text-primary)] placeholder:text-[var(--env-text-tertiary)]
+              focus:outline-none focus:border-[var(--chapter-accent)] focus:ring-2 focus:ring-[var(--chapter-accent)]/20
+              transition-all duration-300
+            "
           />
         </div>
       </div>
 
-      {/* Organization & Category */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label htmlFor="contact-organization" className="block text-sm font-medium text-env-secondary mb-2">
-            Organization
-          </label>
-          <input
-            type="text"
-            id="contact-organization"
-            name="organization"
-            value={formData.organization}
-            onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary placeholder-env-tertiary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth"
-            placeholder="Your company or school"
-          />
-        </div>
-        <div>
-          <label htmlFor="contact-category" className="block text-sm font-medium text-env-secondary mb-2">
-            Category *
-          </label>
-          <select
-            id="contact-category"
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth"
-          >
-            {categories.map((cat) => (
-              <option key={cat.value} value={cat.value}>
-                {cat.label}
-              </option>
-            ))}
-          </select>
-        </div>
+      {/* Inquiry Type */}
+      <div>
+        <label htmlFor="inquiryType" className="block text-sm font-medium text-[var(--env-text-primary)] mb-2">
+          What's this about?
+        </label>
+        <select
+          id="inquiryType"
+          name="inquiryType"
+          value={formData.inquiryType}
+          onChange={handleChange}
+          className="
+            w-full px-4 py-3.5 rounded-xl
+            bg-[var(--env-bg-primary)] border border-[var(--env-border)]
+            text-[var(--env-text-primary)]
+            focus:outline-none focus:border-[var(--chapter-accent)] focus:ring-2 focus:ring-[var(--chapter-accent)]/20
+            transition-all duration-300
+            cursor-pointer
+          "
+        >
+          {inquiryTypes.map(type => (
+            <option key={type.value} value={type.value}>
+              {type.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Subject */}
+      <div>
+        <label htmlFor="subject" className="block text-sm font-medium text-[var(--env-text-primary)] mb-2">
+          Subject
+        </label>
+        <input
+          type="text"
+          id="subject"
+          name="subject"
+          value={formData.subject}
+          onChange={handleChange}
+          placeholder="Brief subject of your message"
+          className="
+            w-full px-4 py-3.5 rounded-xl
+            bg-[var(--env-bg-primary)] border border-[var(--env-border)]
+            text-[var(--env-text-primary)] placeholder:text-[var(--env-text-tertiary)]
+            focus:outline-none focus:border-[var(--chapter-accent)] focus:ring-2 focus:ring-[var(--chapter-accent)]/20
+            transition-all duration-300
+          "
+        />
       </div>
 
       {/* Message */}
       <div>
-        <label htmlFor="contact-message" className="block text-sm font-medium text-env-secondary mb-2">
-          Message *
+        <label htmlFor="message" className="block text-sm font-medium text-[var(--env-text-primary)] mb-2">
+          Your Message <span className="text-red-500">*</span>
         </label>
         <textarea
-          id="contact-message"
+          id="message"
           name="message"
           value={formData.message}
           onChange={handleChange}
           required
-          rows={5}
-          className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary placeholder-env-tertiary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth resize-none"
-          placeholder="Tell us how we can help..."
+          rows={6}
+          placeholder="Tell us how we can help you..."
+          className="
+            w-full px-4 py-3.5 rounded-xl
+            bg-[var(--env-bg-primary)] border border-[var(--env-border)]
+            text-[var(--env-text-primary)] placeholder:text-[var(--env-text-tertiary)]
+            focus:outline-none focus:border-[var(--chapter-accent)] focus:ring-2 focus:ring-[var(--chapter-accent)]/20
+            transition-all duration-300
+            resize-none
+          "
         />
       </div>
-
-      {/* Error Message */}
-      {status === "error" && (
-        <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400">
-          {errorMessage}
-        </div>
-      )}
 
       {/* Submit Button */}
       <button
         type="submit"
-        disabled={status === "loading"}
-        className="w-full py-4 bg-chapter-accent hover:bg-chapter-accent-hover text-white font-semibold rounded-lg transition-smooth shadow-glow disabled:opacity-50 disabled:cursor-not-allowed hover-lift"
+        disabled={isLoading}
+        className="
+          w-full py-4 rounded-xl
+          bg-[var(--chapter-accent)] hover:bg-[var(--chapter-accent-hover)]
+          text-white font-semibold text-lg
+          transition-all duration-300
+          hover:shadow-lg hover:shadow-[var(--chapter-accent)]/25
+          disabled:opacity-50 disabled:cursor-not-allowed
+          flex items-center justify-center gap-3
+        "
       >
-        {status === "loading" ? (
-          <span className="flex items-center justify-center gap-2">
+        {isLoading ? (
+          <>
             <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
             </svg>
-            Sending...
-          </span>
+            <span>Sending...</span>
+          </>
         ) : (
-          "Send Message"
+          <>
+            <span>Send Message</span>
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </>
         )}
       </button>
-      
+
+      {/* Privacy Note */}
+      <p className="text-center text-sm text-[var(--env-text-tertiary)]">
+        By submitting this form, you agree to our{' '}
+        <a href="/privacy" className="text-[var(--chapter-accent)] hover:underline">
+          Privacy Policy
+        </a>
+        .
+      </p>
     </form>
   );
 }

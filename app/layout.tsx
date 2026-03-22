@@ -1,14 +1,26 @@
-import { GoogleAnalytics } from '@next/third-parties/google'
+import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins, Open_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { ThemeProvider } from "../components/ThemeProvider";
 import { GlowCursor } from "../components/GlowCursor";
+import CookieConsent from "../components/CookieConsent";
 
-const inter = Inter({ 
+// Heading font - Poppins
+const poppins = Poppins({ 
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-poppins",
+  display: "swap",
+});
+
+// Body font - Open Sans
+const openSans = Open_Sans({ 
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-opensans",
   display: "swap",
 });
 
@@ -19,6 +31,11 @@ export const metadata: Metadata = {
     template: "%s | Forge Intellitech",
   },
   description: "We build technology solutions rooted in African realities. From education to fintech, we create products that understand and serve our continent.",
+  alternates: {
+    types: {
+      'application/rss+xml': 'https://forgeintellitech.com/rss.xml',
+    },
+  },
 };
 
 export default function RootLayout({
@@ -27,8 +44,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={`${poppins.variable} ${openSans.variable}`}>
       <head>
+        {/* RSS Feed Link */}
+        <link 
+          rel="alternate" 
+          type="application/rss+xml" 
+          title="Forge Intellitech Blog" 
+          href="/rss.xml" 
+        />
+        
+        {/* Theme initialization script */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -47,15 +73,47 @@ export default function RootLayout({
             `,
           }}
         />
+        
+        {/* Google Analytics Consent Mode (before GA loads) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              
+              // Default consent state (before user choice)
+              gtag('consent', 'default', {
+                'analytics_storage': 'denied',
+                'ad_storage': 'denied',
+                'wait_for_update': 500
+              });
+              
+              // Check for saved consent
+              try {
+                var consent = localStorage.getItem('forge-cookie-consent');
+                if (consent) {
+                  var prefs = JSON.parse(consent);
+                  gtag('consent', 'update', {
+                    'analytics_storage': prefs.analytics ? 'granted' : 'denied',
+                    'ad_storage': prefs.marketing ? 'granted' : 'denied'
+                  });
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
       </head>
-      <body className={`${inter.className} min-h-screen flex flex-col bg-env-bg-primary`}>
+      <body className={`${openSans.className} min-h-screen flex flex-col bg-env-bg-primary`}>
         <ThemeProvider defaultMode="dark" defaultChapter="forge">
           <GlowCursor />
           <Navbar />
-          <main className="flex-grow pt-20 md:pt-24">
+          <main className="flex-grow">
             {children}
           </main>
           <Footer />
+          
+          {/* Cookie Consent Banner */}
+          <CookieConsent />
         </ThemeProvider>
         <GoogleAnalytics gaId="G-KE1R66TB7V" />
       </body>

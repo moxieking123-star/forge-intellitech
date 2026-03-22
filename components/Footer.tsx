@@ -1,5 +1,9 @@
+"use client";
+
+import { useState } from 'react';
 import Link from "next/link";
 import Image from "next/image";
+import { useFormSubmit } from '@/hooks/useFormSubmit';
 
 const footerSections = [
   {
@@ -27,7 +31,7 @@ const footerSections = [
     ],
   },
   {
-    title: "Get Involved",
+    title: "Join Us",
     links: [
       { name: "Careers", href: "/join#talent" },
       { name: "Partner With Us", href: "/join#partners" },
@@ -73,90 +77,151 @@ const socialLinks = [
       </svg>
     ),
   },
+  {
+    name: "RSS",
+    href: "/rss.xml",
+    icon: (
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+      </svg>
+    ),
+  },
 ];
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const [email, setEmail] = useState('');
+  
+  const { submitForm, isLoading, success, error, reset } = useFormSubmit({
+  endpoint: '/api/newsletter',
+  onSuccess: () => {
+      setEmail('');
+    },
+  });
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    await submitForm({ email });
+  };
 
   return (
-    <footer className="relative bg-env-bg-primary border-t border-env-border overflow-hidden">
+    <footer className="relative bg-[var(--env-bg-secondary)] overflow-hidden">
       
-      {/* Background Decoration */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-chapter-accent/5 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl" />
+      {/* Decorative top border */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--env-border)] to-transparent" />
+      
+      {/* Background decorations */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-[var(--chapter-accent)]/5 rounded-full blur-[100px]" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-[var(--color-apricot-current)]/5 rounded-full blur-[100px]" />
       </div>
       
       {/* Newsletter Section */}
-      <div className="relative border-b border-env-border">
-        <div className="container-forge py-12 md:py-16">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8 p-8 rounded-2xl bg-gradient-to-r from-chapter-accent/10 via-purple-500/5 to-chapter-accent/10 border border-chapter-accent/20">
-              
-              <div className="text-center md:text-left">
-                <h3 className="text-xl md:text-2xl font-bold text-env-primary mb-2">
+      <div className="relative border-b border-[var(--env-border)]">
+        <div className="px-6 sm:px-10 md:px-16 lg:px-24 py-16 md:py-20">
+          <div className="max-w-6xl mx-auto">
+            <div className="
+              flex flex-col lg:flex-row items-center justify-between gap-8
+              p-8 md:p-12 rounded-3xl
+              bg-gradient-to-br from-[var(--chapter-accent)]/10 via-transparent to-[var(--color-apricot-current)]/10
+              border border-[var(--env-border)]
+            ">
+              <div className="text-center lg:text-left">
+                <h3 className="font-heading text-2xl md:text-3xl font-bold text-[var(--env-text-primary)] mb-2">
                   Stay in the loop
                 </h3>
-                <p className="text-env-secondary">
+                <p className="text-[var(--env-text-secondary)] text-lg">
                   Get updates on our programs, products, and impact stories.
                 </p>
               </div>
               
-              <form className="flex w-full md:w-auto gap-3">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="
-                    flex-1 md:w-64 px-4 py-3 rounded-xl
-                    bg-env-surface border border-env-border
-                    text-env-primary placeholder:text-env-tertiary
-                    focus:outline-none focus:border-chapter-accent/50 focus:ring-2 focus:ring-chapter-accent/20
-                    transition-all duration-200
-                  "
-                />
-                <button
-                  type="submit"
-                  className="
-                    px-6 py-3 rounded-xl
-                    bg-chapter-accent hover:bg-chapter-accent-hover
-                    text-white font-medium
-                    transition-all duration-200
-                    hover:shadow-lg hover:shadow-chapter-accent/25
-                    whitespace-nowrap
-                  "
-                >
-                  Subscribe
-                </button>
-              </form>
-              
+              {success ? (
+                <div className="flex items-center gap-3 px-6 py-4 bg-green-500/10 border border-green-500/20 rounded-xl">
+                  <svg className="w-6 h-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-green-500 font-medium">You're subscribed!</span>
+                  <button 
+                    onClick={reset}
+                    className="text-green-500/70 hover:text-green-500 ml-2"
+                  >
+                    ✕
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row w-full lg:w-auto gap-3">
+                  <div className="relative flex-1 lg:w-80">
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Enter your email"
+                      required
+                      className="
+                        w-full px-6 py-4 rounded-xl
+                        bg-[var(--env-surface)] border border-[var(--env-border)]
+                        text-[var(--env-text-primary)] placeholder:text-[var(--env-text-tertiary)]
+                        focus:outline-none focus:border-[var(--chapter-accent)] focus:ring-2 focus:ring-[var(--chapter-accent)]/20
+                        transition-all duration-300
+                        text-base
+                      "
+                    />
+                    {error && (
+                      <p className="absolute -bottom-6 left-0 text-sm text-red-500">{error}</p>
+                    )}
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="
+                      px-8 py-4 rounded-xl
+                      bg-[var(--chapter-accent)] hover:bg-[var(--chapter-accent-hover)]
+                      text-white font-semibold
+                      transition-all duration-300
+                      hover:shadow-lg hover:shadow-[var(--chapter-accent)]/25
+                      whitespace-nowrap
+                      disabled:opacity-50 disabled:cursor-not-allowed
+                      flex items-center justify-center gap-2
+                    "
+                  >
+                    {isLoading ? (
+                      <>
+                        <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                        </svg>
+                        <span>Subscribing...</span>
+                      </>
+                    ) : (
+                      'Subscribe'
+                    )}
+                  </button>
+                </form>
+              )}
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Footer Content */}
-      <div className="relative container-forge py-12 md:py-16">
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-8 md:gap-6">
+      <div className="relative px-6 sm:px-10 md:px-16 lg:px-24 py-16 md:py-20">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10 lg:gap-8">
           
-          {/* Brand Column - Takes 2 columns on md+ */}
+          {/* Brand Column */}
           <div className="col-span-2">
-            <Link
-              href="/"
-              className="inline-block mb-6 transition-transform duration-200 hover:scale-105"
-              aria-label="Forge Intellitech - Home"
-            >
+            <Link href="/" className="inline-block mb-6 group">
               <Image
                 src="/images/logo.png"
                 alt="Forge Intellitech"
-                width={200}
-                height={80}
-                className="h-12 md:h-14 w-auto object-contain"
+                width={180}
+                height={60}
+                className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               />
             </Link>
             
-            <p className="text-env-secondary leading-relaxed mb-6 max-w-xs">
-              Building technology that understands Africa. Solutions rooted in
-              local realities, designed for lasting impact.
+            <p className="text-[var(--env-text-secondary)] leading-relaxed mb-8 max-w-xs">
+              Building technology that understands Africa. Solutions rooted in local realities, designed for lasting impact.
             </p>
 
             {/* Social Links */}
@@ -165,16 +230,15 @@ export default function Footer() {
                 <a
                   key={social.name}
                   href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={social.href.startsWith('http') ? '_blank' : undefined}
+                  rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                   className="
-                    w-10 h-10 rounded-xl
-                    bg-env-surface hover:bg-chapter-accent
-                    border border-env-border hover:border-chapter-accent
+                    w-12 h-12 rounded-xl
+                    bg-[var(--env-surface)] border border-[var(--env-border)]
                     flex items-center justify-center
-                    text-env-secondary hover:text-white
-                    transition-all duration-200
-                    hover:scale-110 hover:shadow-lg hover:shadow-chapter-accent/25
+                    text-[var(--env-text-secondary)]
+                    hover:text-white hover:bg-[var(--chapter-accent)] hover:border-[var(--chapter-accent)]
+                    transition-all duration-300
                   "
                   aria-label={`Follow us on ${social.name}`}
                 >
@@ -187,7 +251,7 @@ export default function Footer() {
           {/* Link Columns */}
           {footerSections.map((section) => (
             <div key={section.title}>
-              <h3 className="text-sm font-semibold text-env-primary uppercase tracking-wider mb-4">
+              <h3 className="font-heading text-sm font-bold text-[var(--env-text-primary)] uppercase tracking-wider mb-5">
                 {section.title}
               </h3>
               <ul className="space-y-3">
@@ -196,15 +260,13 @@ export default function Footer() {
                     <Link
                       href={link.href}
                       className="
-                        text-sm text-env-secondary
-                        hover:text-chapter-accent
-                        transition-colors duration-200
-                        inline-flex items-center group
+                        text-[var(--env-text-secondary)]
+                        hover:text-[var(--chapter-accent)]
+                        transition-colors duration-300
+                        text-sm
                       "
                     >
-                      <span className="group-hover:translate-x-1 transition-transform duration-200">
-                        {link.name}
-                      </span>
+                      {link.name}
                     </Link>
                   </li>
                 ))}
@@ -215,30 +277,46 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="relative border-t border-env-border">
-        <div className="container-forge py-6">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="relative border-t border-[var(--env-border)]">
+        <div className="px-6 sm:px-10 md:px-16 lg:px-24 py-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             
             {/* Copyright */}
-            <p className="text-sm text-env-tertiary">
-              © {currentYear} Forge Intellitech Services Ltd.
+            <p className="text-sm text-[var(--env-text-tertiary)] order-2 md:order-1">
+              © {currentYear} Forge Intellitech Services Ltd. All rights reserved.
             </p>
             
-            {/* Center Element */}
-            <div className="flex items-center gap-2 text-sm text-env-tertiary">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Building from Lagos, Nigeria</span>
-              <span className="text-base">🇳🇬</span>
+            {/* Nigerian Identity - Center */}
+            <div className="flex items-center gap-3 order-1 md:order-2">
+              <span className="flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--env-surface)] border border-[var(--env-border)]">
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                <span className="text-sm text-[var(--env-text-secondary)]">Built in Lagos</span>
+                <span className="text-lg">🇳🇬</span>
+              </span>
             </div>
             
             {/* Legal Links */}
-            <div className="flex items-center gap-4 text-sm">
-              <Link href="/privacy" className="text-env-tertiary hover:text-env-secondary transition-colors">
+            <div className="flex items-center gap-6 order-3">
+              <Link 
+                href="/privacy" 
+                className="text-sm text-[var(--env-text-tertiary)] hover:text-[var(--env-text-secondary)] transition-colors"
+              >
                 Privacy
               </Link>
-              <Link href="/terms" className="text-env-tertiary hover:text-env-secondary transition-colors">
+              <Link 
+                href="/terms" 
+                className="text-sm text-[var(--env-text-tertiary)] hover:text-[var(--env-text-secondary)] transition-colors"
+              >
                 Terms
               </Link>
+              <a 
+                href="/rss.xml" 
+                className="text-sm text-[var(--env-text-tertiary)] hover:text-[var(--env-text-secondary)] transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                RSS
+              </a>
             </div>
             
           </div>

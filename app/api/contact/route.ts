@@ -1,126 +1,88 @@
-import { NextRequest, NextResponse } from "next/server";
-import { supabase, ContactMessage } from "../../../lib/supabase";
+import { NextRequest, NextResponse } from 'next/server';
+import { supabase } from '@/lib/supabase';
+import { resend, FROM_EMAIL, ADMIN_EMAIL } from '@/lib/resend';
+import { contactNotificationEmail } from '@/lib/email-templates';
 
-// POST - Create new contact message
 export async function POST(request: NextRequest) {
   try {
-    // Get form data from request
     const body = await request.json();
-    const { name, email, organization, category, message } = body;
+    const { name, email, subject, message, inquiryType } = body;
 
-    // Validate required fields
+    // Validation
     if (!name || !email || !message) {
       return NextResponse.json(
-        { error: "Name, email, and message are required" },
+        { error: 'Name, email, and message are required' },
         { status: 400 }
       );
     }
 
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!supabase) {
+      console.error('Supabase client not initialized');
       return NextResponse.json(
-        { error: "Please provide a valid email address" },
-        { status: 400 }
+        { error: 'Database connection error' },
+        { status: 500 }
       );
     }
 
-    // Create contact message object
-    const newMessage: ContactMessage = {
-      name: name.trim(),
-      email: email.trim().toLowerCase(),
-      organization: organization?.trim() || null,
-      category: category || "general",
-      message: message.trim(),
-      status: "new",
-    };
-
-    // Insert into Supabase
+    // Insert into Supabase - using YOUR exact column names
     const { data, error } = await supabase
-      .from("contact_messages")
-      .insert([newMessage])
+      .from('contact_submissions')
+      .insert([
+        {
+          name,
+          email,
+          subject: subject || null,
+          message,
+          inquiry_type: inquiryType || null,
+          status: 'new'
+        }
+      ])
       .select()
       .single();
 
     if (error) {
-      console.error("Supabase error:", error);
+      console.error('Supabase error:', error);
       return NextResponse.json(
-        { error: "Failed to save message. Please try again." },
+        { error: 'Failed to save contact submission', details: error.message },
         { status: 500 }
       );
     }
 
-    console.log("=== New Contact Message Saved ===");
-    console.log("ID:", data.id);
-    console.log("Name:", name);
-    console.log("Email:", email);
-    console.log("Category:", category);
-    console.log("================================");
+    console.log('✅ Contact saved successfully:', data);
 
-    // Return success response
+    // Send email notification
+    if (resend) {
+      try {
+        const emailContent = contactNotificationEmail({ 
+          name, 
+          email, 
+          subject,
+          message,
+          inquiryType 
+        });
+        
+        await resend.emails.send({
+          from: FROM_EMAIL,
+          to: ADMIN_EMAIL,
+          subject: emailContent.subject,
+          html: emailContent.html,
+        });
+        
+        console.log('✅ Notification email sent');
+      } catch (emailError) {
+        console.error('Failed to send email:', emailError);
+      }
+    }
+
     return NextResponse.json(
-      {
-        success: true,
-        message: "Thank you for your message. We'll be in touch soon!",
-        id: data.id,
-      },
+      { success: true, message: 'Message sent successfully!', id: data.id },
       { status: 201 }
     );
 
   } catch (error) {
-    console.error("Contact form error:", error);
+    console.error('Contact API error:', error);
     return NextResponse.json(
-      { error: "Failed to submit form. Please try again later." },
-      { status: 500 }
-    );
-  }
-}
-
-// GET - Retrieve contact messages (for admin use later)
-export async function GET(request: NextRequest) {
-  try {
-    // Get query parameters
-    const { searchParams } = new URL(request.url);
-    const status = searchParams.get("status");
-    const category = searchParams.get("category");
-    const limit = parseInt(searchParams.get("limit") || "50");
-
-    // Build query
-    let query = supabase
-      .from("contact_messages")
-      .select("*")
-      .order("created_at", { ascending: false })
-      .limit(limit);
-
-    // Add filters if provided
-    if (status) {
-      query = query.eq("status", status);
-    }
-    if (category) {
-      query = query.eq("category", category);
-    }
-
-    // Execute query
-    const { data, error } = await query;
-
-    if (error) {
-      console.error("Supabase error:", error);
-      return NextResponse.json(
-        { error: "Failed to fetch messages" },
-        { status: 500 }
-      );
-    }
-
-    return NextResponse.json({
-      success: true,
-      count: data.length,
-      data: data,
-    });
-
-  } catch (error) {
-    console.error("Error fetching messages:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch messages" },
+      { error: 'Internal server error' },
       { status: 500 }
     );
   }

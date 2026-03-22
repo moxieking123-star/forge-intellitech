@@ -1,10 +1,25 @@
+// app/launchpad/page.tsx
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ChapterWrapper } from "../../components/ChapterWrapper";
-import { AnimatedSection } from "../../components/AnimatedSection";
+import AnimatedSection from "../../components/AnimatedSection";
 import { Countdown, CountdownBanner } from "../../components/Countdown";
 import { Badge } from "../../components/Badge";
 import { StudentApplicationForm, SponsorApplicationForm } from "../../components/LaunchPadForms";
+import LaunchPadHero from "../../components/LaunchPadHero";
+import {
+  IconLearn,
+  IconLaunch,
+  IconGrowth,
+  IconCommunity,
+  IconMentor,
+  IconIdea,
+  IconCheck,
+  IconQuestion,
+  IconArrowRight,
+} from "../../components/icons/ForgeIcons";
 import {
   LAUNCHPAD_CONFIG,
   previousYearPrizes,
@@ -18,55 +33,49 @@ import {
   sponsorCategories,
 } from "../../lib/launchpadData";
 
-// Metadata for SEO
-export const metadata = {
-  title: "LaunchPad 2026 - Youth Entrepreneurship Competition | ₦10M+ in Prizes",
-  description: `Forge LaunchPad ${LAUNCHPAD_CONFIG.currentYear} empowers Nigerian secondary school students with real business skills, mentorship, and over ₦10 Million in prizes. Free entry for all Lagos SSS3 students!`,
-};
+// Registration config
+const REGISTRATION_OPENS = "May 1, 2026";
+const REGISTRATION_OPENS_DATE = new Date("2026-05-01");
 
-// Updated prize structure for 2026
+// Prize structure for 2026
 const prizes2026 = [
   {
     position: "1st Place",
     amount: "₦2,000,000",
     bonus: "+ Brand New Laptop",
     icon: "🥇",
-    color: "from-yellow-500/20 to-yellow-500/5",
-    borderColor: "border-yellow-500/50",
+    gradient: "from-yellow-500/30 to-yellow-500/5",
+    border: "border-yellow-500/60",
+    glow: "#FFD54F",
   },
   {
     position: "2nd Place",
     amount: "₦1,500,000",
     bonus: "+ Brand New Laptop",
     icon: "🥈",
-    color: "from-gray-400/20 to-gray-400/5",
-    borderColor: "border-gray-400/50",
+    gradient: "from-gray-400/30 to-gray-400/5",
+    border: "border-gray-400/60",
+    glow: "#94A3B8",
   },
   {
     position: "3rd Place",
     amount: "₦1,000,000",
     bonus: "+ Brand New Laptop",
     icon: "🥉",
-    color: "from-orange-500/20 to-orange-500/5",
-    borderColor: "border-orange-500/50",
+    gradient: "from-orange-500/30 to-orange-500/5",
+    border: "border-orange-500/60",
+    glow: "#FF8C42",
   },
 ];
 
-const additionalPrizes2026 = {
-  otherContestants: {
-    count: "All Other Finalists",
-    laptop: "Brand New Laptop",
-    grant: "₦200,000 Business Grant",
-  },
-  audienceGiveaway: {
-    count: "20",
-    prize: "Gift Pack Worth ₦50,000",
-  },
-};
-
-// Registration date
-const REGISTRATION_OPENS = "May 1, 2026";
-const REGISTRATION_OPENS_DATE = new Date("2026-05-01");
+// What you learn
+const learningOutcomes = [
+  { icon: IconIdea, label: "Turning problems into opportunities", color: "#FF8C42" },
+  { icon: IconLaunch, label: "Pitching ideas like a pro", color: "#14B8B8" },
+  { icon: IconGrowth, label: "Planning and strategy", color: "#52B788" },
+  { icon: IconCommunity, label: "Working in teams", color: "#FFD54F" },
+  { icon: IconMentor, label: "Confidence and guts", color: "#A855F7" },
+];
 
 export default function LaunchPadPage() {
   const partners2025 = partners.filter(p => p.year === 2025);
@@ -84,240 +93,147 @@ export default function LaunchPadPage() {
         className="mt-16 md:mt-20"
       />
       
-      {/* ==================== HERO SECTION ==================== */}
-      <section className="relative section-padding flex items-center min-h-[90vh] overflow-hidden">
-        {/* Hero Background Image */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/launchpad/hero-launchpad.jpg"
-            alt=""
-            fill
-            className="object-cover opacity-30"
-            priority
-            quality={85}
-          />
-          {/* Gradient overlays */}
-          <div className="absolute inset-0 bg-gradient-to-br from-chapter-accent/20 via-env-bg-primary/90 to-purple-900/20" />
-        </div>
-
-        {/* Animated glow */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-chapter-accent/10 rounded-full blur-3xl animate-subtle-pulse pointer-events-none z-0" />
-        
-        <div className="container-forge relative z-10">
-          <AnimatedSection animation="fade-up">
-            <div className="max-w-4xl mx-auto text-center">
-              
-              <div className="flex items-center justify-center space-x-3 mb-6">
-                <span className="text-6xl animate-float">🚀</span>
-                {registrationOpen ? (
-                  <Badge status="live" pulse>Applications Open!</Badge>
-                ) : (
-                  <Badge status="development">Opens May 1</Badge>
-                )}
-              </div>
-              
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-env-primary mb-4 leading-tight">
-                Forge LaunchPad <span className="text-chapter-accent">{LAUNCHPAD_CONFIG.currentYear}</span>
-              </h1>
-              
-              <p className="text-2xl md:text-3xl text-chapter-accent font-bold mb-6">
-                🎯 ₦10,000,000+ in Prizes! 🎯
-              </p>
-              
-              <p className="text-xl md:text-2xl text-env-secondary leading-relaxed mb-6 max-w-3xl mx-auto">
-                Nigeria's biggest youth entrepreneurship competition is back — bigger, better, and ready to change your life.
-              </p>
-              
-              {/* Registration Notice */}
-              {!registrationOpen && (
-                <div className="mb-8 p-6 rounded-2xl bg-gradient-to-r from-chapter-accent/20 to-purple-500/20 border-2 border-chapter-accent/50 max-w-2xl mx-auto">
-                  <p className="text-lg font-bold text-env-primary mb-2">
-                    📅 Registration Opens: <span className="text-chapter-accent">{REGISTRATION_OPENS}</span>
-                  </p>
-                  <p className="text-env-secondary">
-                    Get ready! Applications open soon. Prepare your ideas now!
-                  </p>
-                </div>
-              )}
-              
-              <p className="text-lg text-env-tertiary mb-8 max-w-2xl mx-auto">
-                💡 Learn real business skills • 🎤 Pitch your ideas • 💰 Win big • 💻 Everyone gets prizes!
-              </p>
-              
-              {/* Countdown */}
-              <div className="mb-10">
-                <Countdown 
-                  targetDate={LAUNCHPAD_CONFIG.eventDate}
-                  eventName={LAUNCHPAD_CONFIG.eventName}
-                />
-              </div>
-              
-              {/* CTAs */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                {registrationOpen ? (
-                  <a
-                    href="#apply"
-                    className="px-10 py-5 bg-chapter-accent hover:bg-chapter-accent-hover text-white font-bold rounded-xl transition-smooth glow text-xl hover-lift"
-                  >
-                    Apply Now — It's FREE!
-                  </a>
-                ) : (
-                  <div className="px-10 py-5 bg-env-surface text-env-primary font-bold rounded-xl border-2 border-chapter-accent/30 text-xl">
-                    Applications Open May 1
-                  </div>
-                )}
-                <a
-                  href="#sponsor"
-                  className="px-10 py-5 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl border border-purple-400/30 transition-smooth text-xl hover-lift"
-                >
-                  Become a Sponsor
-                </a>
-              </div>
-              
-              <p className="mt-6 text-env-tertiary text-sm">
-                Open to ALL Lagos SSS3 students — Public & Private Schools! 🎓
-              </p>
-              
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* ==================== KEY INFO ==================== */}
-      <section className="py-8 -mt-16 relative z-20">
-        <div className="container-forge">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { icon: "📅", label: "Event Date", value: "28th August 2026" },
-              { icon: "🏆", label: "Total Prizes", value: "₦10,000,000+" },
-              { icon: "🎓", label: "Who Can Apply", value: "All SSS3 Students" },
-              { icon: "🆓", label: "Entry Fee", value: "100% FREE" },
-            ].map((item, index) => (
-              <AnimatedSection key={item.label} animation="fade-up" delay={index * 100}>
-                <div className="px-6 py-5 bg-env-surface rounded-xl border border-env-border text-center hover-lift transition-smooth hover:border-chapter-accent/50">
-                  <span className="text-3xl block mb-2">{item.icon}</span>
-                  <span className="text-env-tertiary text-xs block uppercase tracking-wider">{item.label}</span>
-                  <span className="text-env-primary font-bold text-lg">{item.value}</span>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ==================== ANIMATED HERO ==================== */}
+      <LaunchPadHero />
 
       {/* ==================== GROWTH STORY ==================== */}
-      <section className="section-padding bg-gradient-to-b from-env-bg-primary to-env-secondary">
+      <section className="section-padding bg-env-bg-primary">
         <div className="container-forge">
           
           <AnimatedSection animation="fade-up">
             <div className="text-center mb-12">
-              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent-soft rounded-full border border-chapter-accent/20">
-                How We're Growing
+              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-[#FF8C42] bg-[#FF8C42]/10 rounded-full border border-[#FF8C42]/20">
+                Our Journey
               </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-6">
-                From Small Beginnings to <span className="text-chapter-accent">Massive Dreams</span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-env-primary mb-4">
+                From Small Beginnings to{' '}
+                <span className="text-[#FF8C42]">Massive Dreams</span>
               </h2>
+              <p className="text-lg text-env-secondary max-w-2xl mx-auto">
+                Last year we started with 2 schools and 11 students. 
+                This year? We're going for something much bigger.
+              </p>
             </div>
           </AnimatedSection>
           
           {/* Growth Comparison */}
-          <AnimatedSection animation="fade-up" delay={100}>
-            <div className="max-w-4xl mx-auto mb-12">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                {/* 2025 */}
-                <div className="p-6 rounded-2xl bg-env-surface border border-env-border text-center">
-                  <span className="text-4xl mb-4 block">🌱</span>
-                  <h3 className="text-xl font-bold text-env-primary mb-4">LaunchPad 2025</h3>
-                  <div className="space-y-2 text-env-secondary">
-                    <p><span className="text-chapter-accent font-bold">2</span> Schools</p>
-                    <p><span className="text-chapter-accent font-bold">11</span> Students</p>
-                    <p><span className="text-chapter-accent font-bold">₦200,000</span> Total Prizes</p>
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
+            
+            {/* 2025 Card */}
+            <AnimatedSection animation="fade-up" delay={100}>
+              <div className="p-8 rounded-2xl bg-env-surface border border-env-border text-center h-full">
+                <span className="text-5xl mb-4 block">🌱</span>
+                <h3 className="text-2xl font-bold text-env-primary mb-6">LaunchPad 2025</h3>
+                <div className="space-y-4">
+                  <div className="p-4 rounded-xl bg-env-bg-primary">
+                    <p className="text-3xl font-bold text-[#14B8B8]">2</p>
+                    <p className="text-env-secondary text-sm">Schools</p>
                   </div>
-                  <p className="mt-4 text-env-tertiary text-sm italic">Where we started...</p>
+                  <div className="p-4 rounded-xl bg-env-bg-primary">
+                    <p className="text-3xl font-bold text-[#FF8C42]">11</p>
+                    <p className="text-env-secondary text-sm">Students</p>
+                  </div>
+                  <div className="p-4 rounded-xl bg-env-bg-primary">
+                    <p className="text-3xl font-bold text-[#52B788]">₦200,000</p>
+                    <p className="text-env-secondary text-sm">Total Prizes</p>
+                  </div>
                 </div>
-                
-                {/* 2026 */}
-                <div className="p-6 rounded-2xl bg-gradient-to-br from-chapter-accent/20 to-purple-500/20 border-2 border-chapter-accent/50 text-center relative overflow-hidden">
-                  <div className="absolute top-2 right-2">
-                    <Badge status="live" pulse>This Year!</Badge>
-                  </div>
-                  <span className="text-4xl mb-4 block">🚀</span>
-                  <h3 className="text-xl font-bold text-env-primary mb-4">LaunchPad 2026</h3>
-                  <div className="space-y-2 text-env-secondary">
-                    <p><span className="text-chapter-accent font-bold">100+</span> Schools Invited</p>
-                    <p><span className="text-chapter-accent font-bold">Thousands</span> of Students</p>
-                    <p><span className="text-chapter-accent font-bold text-2xl">₦10,000,000+</span> in Prizes!</p>
-                  </div>
-                  <p className="mt-4 text-chapter-accent font-medium">50x MORE prizes! 🔥</p>
-                </div>
-                
+                <p className="mt-6 text-env-tertiary italic">Where we started...</p>
               </div>
-            </div>
-          </AnimatedSection>
-          
+            </AnimatedSection>
+            
+            {/* 2026 Card */}
+            <AnimatedSection animation="fade-up" delay={200}>
+              <div 
+                className="p-8 rounded-2xl text-center h-full relative overflow-hidden"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(255, 140, 66, 0.15), rgba(168, 85, 247, 0.15))',
+                  border: '2px solid rgba(255, 140, 66, 0.5)'
+                }}
+              >
+                <div className="absolute top-3 right-3">
+                  <Badge status="live" pulse>This Year!</Badge>
+                </div>
+                <span className="text-5xl mb-4 block">🚀</span>
+                <h3 className="text-2xl font-bold text-env-primary mb-6">LaunchPad 2026</h3>
+                <div className="space-y-4">
+                  <div className="p-4 rounded-xl bg-env-surface/50">
+                    <p className="text-3xl font-bold text-[#14B8B8]">100+</p>
+                    <p className="text-env-secondary text-sm">Schools Invited</p>
+                  </div>
+                  <div className="p-4 rounded-xl bg-env-surface/50">
+                    <p className="text-3xl font-bold text-[#FF8C42]">Thousands</p>
+                    <p className="text-env-secondary text-sm">of Students</p>
+                  </div>
+                  <div className="p-4 rounded-xl bg-env-surface/50">
+                    <p className="text-4xl font-bold text-[#FFD54F]">₦10,000,000+</p>
+                    <p className="text-env-secondary text-sm">in Prizes!</p>
+                  </div>
+                </div>
+                <p className="mt-6 text-[#FF8C42] font-bold text-lg">50x MORE prizes! 🔥</p>
+              </div>
+            </AnimatedSection>
+            
+          </div>
+
           {/* Aspirational Message */}
-          <AnimatedSection animation="fade-up" delay={200}>
+          <AnimatedSection animation="fade-up" delay={300}>
             <div className="text-center mb-12">
               <p className="text-2xl md:text-3xl font-bold text-env-primary mb-4">
                 "Why shouldn't you get your share of the ₦10 million?"
               </p>
               <p className="text-lg text-env-secondary max-w-2xl mx-auto">
-                Whether you're from a public school or private school, if you've got ideas and drive — 
-                <span className="text-chapter-accent font-semibold"> LaunchPad is YOUR stage</span>. 
-                Apply when registration opens and show us what you've got!
+                Public school, private school — it doesn't matter. If you've got ideas and drive,{' '}
+                <span className="text-[#FF8C42] font-semibold">LaunchPad is YOUR stage</span>.
               </p>
             </div>
           </AnimatedSection>
           
-          {/* 4 Image Frames */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          {/* Image Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
             {[
-              { src: "/images/launchpad/students-learning.jpg", alt: "Students learning business skills", label: "Learn 📚" },
-              { src: "/images/launchpad/mentors-guiding.jpg", alt: "Mentors guiding young entrepreneurs", label: "Get Mentored 🧑‍🏫" },
-              { src: "/images/launchpad/students-pitching.jpg", alt: "Students pitching ideas", label: "Pitch 🎤" },
-              { src: "/images/launchpad/celebration-winners.jpg", alt: "Winners celebrating", label: "Win! 🏆" },
+              { src: "/images/launchpad/students-learning.jpg", label: "Learn 📚" },
+              { src: "/images/launchpad/mentors-guiding.jpg", label: "Get Mentored 🧑‍🏫" },
+              { src: "/images/launchpad/students-pitching.jpg", label: "Pitch 🎤" },
+              { src: "/images/launchpad/celebration-winners.jpg", label: "Win! 🏆" },
             ].map((image, index) => (
-              <AnimatedSection key={image.label} animation="scale" delay={index * 100}>
-                <div className="relative group">
+              <AnimatedSection key={image.label} animation="scale-in" delay={index * 100}>
+                <div className="relative group cursor-pointer">
                   <div className="aspect-square rounded-2xl overflow-hidden border border-env-border">
                     <Image
                       src={image.src}
-                      alt={image.alt}
+                      alt={image.label}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
-                      sizes="(max-width: 768px) 50vw, 25vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
                   </div>
-                  <div className="absolute bottom-3 left-0 right-0 text-center">
+                  <div className="absolute bottom-4 left-0 right-0 text-center">
                     <span className="text-white font-bold text-lg drop-shadow-lg">{image.label}</span>
                   </div>
                 </div>
               </AnimatedSection>
             ))}
           </div>
-          
+
           {/* Call to Schools */}
           <AnimatedSection animation="fade-up" delay={400}>
-            <div className="mt-12 p-6 md:p-8 rounded-2xl bg-env-surface border border-env-border text-center max-w-3xl mx-auto">
-              <span className="text-4xl mb-4 block">🏫</span>
-              <h3 className="text-xl font-bold text-env-primary mb-4">
+            <div className="p-8 rounded-2xl bg-env-surface border border-env-border text-center max-w-3xl mx-auto">
+              <span className="text-5xl mb-4 block">🏫</span>
+              <h3 className="text-2xl font-bold text-env-primary mb-4">
                 Calling ALL Lagos Secondary Schools!
               </h3>
-              <p className="text-env-secondary mb-6">
+              <p className="text-env-secondary text-lg mb-6">
                 Public schools, private schools, everywhere in between — we want YOUR students! 
                 Help your SSS3 class discover their entrepreneurial spirit.
               </p>
               {registrationOpen && (
                 <a
                   href="#apply"
-                  className="inline-flex items-center px-6 py-3 bg-chapter-accent hover:bg-chapter-accent-hover text-white font-semibold rounded-lg transition-smooth hover-lift"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-[#FF8C42] hover:bg-[#E85D04] text-[#1A1A1A] font-bold rounded-xl transition-all duration-300 hover:scale-[1.02]"
                 >
                   Tell Your Students to Apply
-                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
+                  <IconArrowRight size={18} color="#1A1A1A" />
                 </a>
               )}
             </div>
@@ -326,20 +242,21 @@ export default function LaunchPadPage() {
         </div>
       </section>
 
-      {/* ==================== 2026 PRIZES ==================== */}
+      {/* ==================== PRIZES 2026 ==================== */}
       <section className="section-padding bg-env-secondary">
         <div className="container-forge">
           
           <AnimatedSection animation="fade-up">
             <div className="text-center mb-12">
-              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent-soft rounded-full border border-chapter-accent/20">
+              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-[#FFD54F] bg-[#FFD54F]/10 rounded-full border border-[#FFD54F]/20">
                 What You Can Win
               </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-4">
-                Over <span className="text-chapter-accent">₦10,000,000</span> Up For Grabs! 🎉
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-env-primary mb-4">
+                Over <span className="text-[#FFD54F]">₦10,000,000</span> Up For Grabs! 🎉
               </h2>
-              <p className="text-env-secondary max-w-2xl mx-auto text-lg">
-                The biggest prize pool in LaunchPad history! And <strong className="text-env-primary">everyone</strong> who makes it to the finals wins something.
+              <p className="text-lg text-env-secondary max-w-2xl mx-auto">
+                The biggest prize pool in LaunchPad history! And here's the thing — 
+                <strong className="text-env-primary"> everyone who makes it to the finals wins something</strong>.
               </p>
             </div>
           </AnimatedSection>
@@ -347,16 +264,19 @@ export default function LaunchPadPage() {
           {/* Main Prizes */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-10">
             {prizes2026.map((prize, index) => (
-              <AnimatedSection key={prize.position} animation="scale" delay={index * 150}>
-                <div className={`p-8 rounded-2xl bg-gradient-to-br ${prize.color} border-2 ${prize.borderColor} text-center hover-lift transition-smooth relative overflow-hidden`}>
+              <AnimatedSection key={prize.position} animation="scale-in" delay={index * 150}>
+                <div 
+                  className={`relative p-8 rounded-2xl bg-gradient-to-br ${prize.gradient} border-2 ${prize.border} text-center transition-all duration-300 hover:scale-[1.03]`}
+                  style={{ boxShadow: `0 20px 40px ${prize.glow}15` }}
+                >
                   {index === 0 && (
-                    <div className="absolute top-0 left-0 right-0 bg-yellow-500 text-black text-xs font-bold py-1 text-center">
+                    <div className="absolute top-0 left-0 right-0 bg-[#FFD54F] text-[#1A1A1A] text-xs font-bold py-1.5 rounded-t-xl text-center">
                       👑 GRAND PRIZE 👑
                     </div>
                   )}
                   <span className="text-6xl block mb-4 mt-4">{prize.icon}</span>
                   <h4 className="text-xl font-bold text-env-primary mb-2">{prize.position}</h4>
-                  <p className="text-3xl font-black text-chapter-accent mb-2">{prize.amount}</p>
+                  <p className="text-4xl font-black text-[#FF8C42] mb-2">{prize.amount}</p>
                   <p className="text-lg text-env-secondary font-semibold">{prize.bonus}</p>
                 </div>
               </AnimatedSection>
@@ -364,68 +284,113 @@ export default function LaunchPadPage() {
           </div>
 
           {/* Additional Prizes */}
-          <AnimatedSection animation="fade-up" delay={300}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-8">
-              {/* Other Finalists */}
-              <div className="p-6 rounded-xl bg-gradient-to-br from-blue-500/10 to-blue-500/5 border border-blue-500/30 text-center hover-lift transition-smooth">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-10">
+            
+            {/* Other Finalists */}
+            <AnimatedSection animation="fade-up" delay={300}>
+              <div 
+                className="p-6 rounded-2xl text-center transition-all duration-300 hover:scale-[1.02]"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(20, 184, 184, 0.15), rgba(20, 184, 184, 0.05))',
+                  border: '1px solid rgba(20, 184, 184, 0.3)'
+                }}
+              >
                 <span className="text-5xl block mb-3">🎁</span>
-                <h4 className="text-xl font-bold text-env-primary mb-2">{additionalPrizes2026.otherContestants.count}</h4>
-                <p className="text-env-secondary text-lg mb-1">
-                  {additionalPrizes2026.otherContestants.laptop}
-                </p>
+                <h4 className="text-xl font-bold text-env-primary mb-3">All Other Finalists</h4>
+                <p className="text-env-secondary text-lg mb-2">Brand New Laptop</p>
                 <p className="text-env-secondary text-lg">
-                  + <span className="text-blue-400 font-bold">{additionalPrizes2026.otherContestants.grant}</span> Business Grant
+                  + <span className="text-[#14B8B8] font-bold">₦200,000</span> Business Grant
                 </p>
-                <p className="text-blue-400 font-medium mt-2 text-sm">(Not cash — to help you build your business!)</p>
+                <p className="text-[#14B8B8] text-sm mt-3 font-medium">
+                  (Not cash — to help you build your business!)
+                </p>
               </div>
-              
-              {/* Audience Giveaway */}
-              <div className="p-6 rounded-xl bg-gradient-to-br from-pink-500/10 to-purple-500/5 border border-pink-500/30 text-center hover-lift transition-smooth">
+            </AnimatedSection>
+            
+            {/* Audience Giveaway */}
+            <AnimatedSection animation="fade-up" delay={400}>
+              <div 
+                className="p-6 rounded-2xl text-center transition-all duration-300 hover:scale-[1.02]"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(168, 85, 247, 0.05))',
+                  border: '1px solid rgba(168, 85, 247, 0.3)'
+                }}
+              >
                 <span className="text-5xl block mb-3">🎉</span>
-                <h4 className="text-xl font-bold text-env-primary mb-2">Audience Giveaway!</h4>
+                <h4 className="text-xl font-bold text-env-primary mb-3">Audience Giveaway!</h4>
                 <p className="text-env-secondary text-lg">
-                  <span className="text-pink-400 font-bold">{additionalPrizes2026.audienceGiveaway.count} lucky students</span> in the audience will win:
+                  <span className="text-[#A855F7] font-bold">20 lucky students</span> in the audience will win:
                 </p>
-                <p className="text-env-secondary text-lg font-bold mt-2">
-                  {additionalPrizes2026.audienceGiveaway.prize}
+                <p className="text-env-primary text-lg font-bold mt-2">Gift Pack Worth ₦50,000</p>
+                <p className="text-[#A855F7] text-sm mt-3 font-medium">
+                  Come watch, you might win! 🎊
                 </p>
-                <p className="text-pink-400 font-medium mt-2">Come watch, you might win! 🎊</p>
               </div>
-            </div>
-          </AnimatedSection>
+            </AnimatedSection>
+            
+          </div>
 
-          {/* Total Value */}
-          <AnimatedSection animation="fade-up" delay={400}>
-            <div className="p-8 rounded-2xl bg-gradient-to-r from-chapter-accent/20 to-purple-500/20 border-2 border-chapter-accent/50 max-w-3xl mx-auto text-center">
-              <h4 className="text-2xl font-bold text-env-primary mb-4">
-                Total Prize Pool Value: <span className="text-chapter-accent text-3xl">₦10,000,000+</span>
+          {/* Total Value Highlight */}
+          <AnimatedSection animation="fade-up" delay={500}>
+            <div 
+              className="p-8 rounded-2xl max-w-3xl mx-auto text-center"
+              style={{
+                background: 'linear-gradient(135deg, rgba(255, 140, 66, 0.2), rgba(168, 85, 247, 0.2))',
+                border: '2px solid rgba(255, 140, 66, 0.5)'
+              }}
+            >
+              <h4 className="text-2xl font-bold text-env-primary mb-2">
+                Total Prize Pool Value:
               </h4>
+              <p className="text-5xl font-black text-[#FFD54F] mb-4">₦10,000,000+</p>
               <p className="text-env-secondary text-lg mb-4">
                 That's laptops, cash prizes, business grants, and gift packs combined!
               </p>
-              <p className="text-env-primary font-medium">
-                <span className="text-chapter-accent">Everyone wins something.</span> No one goes home empty-handed.
+              <p className="text-env-primary font-semibold text-lg">
+                <span className="text-[#FF8C42]">Everyone wins something.</span> No one goes home empty-handed.
               </p>
             </div>
           </AnimatedSection>
 
           {/* Eligibility */}
-          <AnimatedSection animation="fade-up" delay={500}>
+          <AnimatedSection animation="fade-up" delay={600}>
             <div className="mt-10 p-6 rounded-2xl bg-env-surface border border-env-border max-w-3xl mx-auto text-center">
-              <h4 className="text-xl font-bold text-env-primary mb-4">Who Can Enter? 🤔</h4>
-              <div className="flex flex-wrap justify-center gap-3 text-env-secondary mb-4">
-                <span className="px-4 py-2 bg-chapter-accent/10 rounded-full text-sm font-medium">✅ All SSS3 Students</span>
-                <span className="px-4 py-2 bg-chapter-accent/10 rounded-full text-sm font-medium">📍 Lagos State</span>
-                <span className="px-4 py-2 bg-chapter-accent/10 rounded-full text-sm font-medium">🏫 Public & Private Schools</span>
-                <span className="px-4 py-2 bg-chapter-accent/10 rounded-full text-sm font-medium">🆓 FREE Entry</span>
+              <h4 className="text-xl font-bold text-env-primary mb-6">Who Can Enter? 🤔</h4>
+              <div className="flex flex-wrap justify-center gap-3 mb-6">
+                {[
+                  { icon: "✅", label: "All SSS3 Students" },
+                  { icon: "📍", label: "Lagos State" },
+                  { icon: "🏫", label: "Public & Private Schools" },
+                  { icon: "🆓", label: "FREE Entry" },
+                ].map((item) => (
+                  <span 
+                    key={item.label}
+                    className="px-4 py-2 rounded-full text-sm font-medium"
+                    style={{ 
+                      backgroundColor: 'rgba(255, 140, 66, 0.1)',
+                      color: 'var(--env-text-primary)'
+                    }}
+                  >
+                    {item.icon} {item.label}
+                  </span>
+                ))}
               </div>
               {!registrationOpen && (
-                <div className="p-4 rounded-xl bg-chapter-accent/10 border border-chapter-accent/20 mb-4">
-                  <p className="text-chapter-accent font-bold">📅 Registration Opens: {REGISTRATION_OPENS}</p>
+                <div 
+                  className="p-4 rounded-xl mb-4"
+                  style={{ 
+                    backgroundColor: 'rgba(255, 140, 66, 0.1)',
+                    border: '1px solid rgba(255, 140, 66, 0.2)'
+                  }}
+                >
+                  <p className="text-[#FF8C42] font-bold">
+                    📅 Registration Opens: {REGISTRATION_OPENS}
+                  </p>
                 </div>
               )}
-              <p className="text-env-primary font-medium">
-                Have an idea and the drive to make it real? <span className="text-chapter-accent">You're already qualified.</span>
+              <p className="text-env-primary font-medium text-lg">
+                Have an idea and the drive to make it real?{' '}
+                <span className="text-[#FF8C42]">You're already qualified.</span>
               </p>
             </div>
           </AnimatedSection>
@@ -433,81 +398,96 @@ export default function LaunchPadPage() {
         </div>
       </section>
 
-      {/* ==================== ABOUT SECTION ==================== */}
-      <section className="section-padding">
+      {/* ==================== WHAT IS LAUNCHPAD ==================== */}
+      <section className="section-padding bg-env-bg-primary">
         <div className="container-forge">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             
-            <AnimatedSection animation="fade-right">
+            {/* Content */}
+            <AnimatedSection animation="fade-up">
               <div>
-                <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent-soft rounded-full border border-chapter-accent/20">
+                <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-[#FF8C42] bg-[#FF8C42]/10 rounded-full border border-[#FF8C42]/20">
                   What Is LaunchPad?
                 </span>
                 
-                <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-6">
+                <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-6 leading-tight">
                   More Than a Competition —
                   <br />
-                  <span className="text-chapter-accent">It's Your Launchpad</span>
+                  <span className="text-[#FF8C42]">It's Your Launchpad</span>
                 </h2>
                 
-                <div className="space-y-4 text-env-secondary leading-relaxed">
-                  <p className="text-lg">
-                    Sure, the prizes are amazing. But LaunchPad is really about <strong className="text-env-primary">discovering what you're capable of</strong>.
+                <div className="space-y-4 text-env-secondary text-lg leading-relaxed mb-8">
+                  <p>
+                    Sure, the prizes are amazing. But LaunchPad is really about{' '}
+                    <strong className="text-env-primary">discovering what you're capable of</strong>.
                   </p>
                   <p>
                     We teach you the same skills that startup founders and CEOs use:
                   </p>
-                  <ul className="space-y-2 ml-4">
-                    <li className="flex items-center">
-                      <span className="text-chapter-accent mr-2">💡</span>
-                      Turning problems into opportunities
-                    </li>
-                    <li className="flex items-center">
-                      <span className="text-chapter-accent mr-2">🎤</span>
-                      Pitching ideas like a pro
-                    </li>
-                    <li className="flex items-center">
-                      <span className="text-chapter-accent mr-2">📊</span>
-                      Planning and strategy
-                    </li>
-                    <li className="flex items-center">
-                      <span className="text-chapter-accent mr-2">🤝</span>
-                      Working in teams
-                    </li>
-                    <li className="flex items-center">
-                      <span className="text-chapter-accent mr-2">🔥</span>
-                      Confidence and guts
-                    </li>
-                  </ul>
-                  <p className="text-lg font-medium text-env-primary">
-                    By the end, you won't just be a student anymore. <span className="text-chapter-accent">You'll be a builder.</span>
-                  </p>
                 </div>
+
+                {/* Skills List */}
+                <div className="space-y-3 mb-8">
+                  {learningOutcomes.map((item, index) => {
+                    const Icon = item.icon;
+                    return (
+                      <div key={index} className="flex items-center gap-3">
+                        <div 
+                          className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                          style={{ backgroundColor: item.color + '20' }}
+                        >
+                          <Icon size={22} color={item.color} />
+                        </div>
+                        <span className="text-env-primary font-medium">{item.label}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <p className="text-xl font-medium text-env-primary">
+                  By the end, you won't just be a student anymore.{' '}
+                  <span className="text-[#FF8C42]">You'll be a builder.</span>
+                </p>
               </div>
             </AnimatedSection>
             
-            <AnimatedSection animation="fade-left" delay={200}>
+            {/* Image */}
+            <AnimatedSection animation="fade-up" delay={200}>
               <div className="relative">
-                <div className="aspect-video rounded-2xl overflow-hidden border-2 border-env-border relative">
+                <div className="aspect-video rounded-2xl overflow-hidden border-2 border-env-border">
                   <Image
                     src="/images/launchpad/event-2025.jpg"
                     alt="Students at LaunchPad 2025"
                     fill
                     className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
                   />
                 </div>
-                <div className="absolute -inset-4 bg-chapter-accent/10 rounded-3xl blur-2xl -z-10" />
+                <div 
+                  className="absolute -inset-4 rounded-3xl -z-10"
+                  style={{ 
+                    background: 'radial-gradient(circle, rgba(255, 140, 66, 0.15) 0%, transparent 70%)'
+                  }}
+                />
                 
-                {/* Fun stat */}
-                <div className="absolute -bottom-6 -right-6 p-4 bg-env-surface rounded-xl border border-env-border shadow-lg">
-                  <p className="text-3xl font-bold text-chapter-accent">100%</p>
-                  <p className="text-env-tertiary text-sm">of participants say<br/>it changed them!</p>
+                {/* Stat card */}
+                <div 
+                  className="absolute -bottom-6 -right-6 p-5 rounded-2xl shadow-xl"
+                  style={{ 
+                    backgroundColor: 'var(--env-surface)',
+                    border: '1px solid var(--env-border)'
+                  }}
+                >
+                  <p className="text-4xl font-bold text-[#FF8C42]">100%</p>
+                  <p className="text-env-tertiary text-sm">
+                    of participants say<br/>it changed them!
+                  </p>
                 </div>
               </div>
             </AnimatedSection>
             
           </div>
+          
         </div>
       </section>
 
@@ -517,67 +497,68 @@ export default function LaunchPadPage() {
           
           <AnimatedSection animation="fade-up">
             <div className="text-center mb-12">
-              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent-soft rounded-full border border-chapter-accent/20">
+              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-[#14B8B8] bg-[#14B8B8]/10 rounded-full border border-[#14B8B8]/20">
                 How It Started
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-4">
                 LaunchPad 2025 — Our First Launch
               </h2>
-              <p className="text-env-secondary max-w-2xl mx-auto text-lg">
+              <p className="text-lg text-env-secondary max-w-2xl mx-auto">
                 It was small. But the impact? Massive.
               </p>
             </div>
           </AnimatedSection>
           
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
             {previousEditionStats.map((stat, index) => (
-              <AnimatedSection key={stat.label} animation="scale" delay={index * 100}>
-                <div className="text-center p-6 rounded-xl bg-env-surface border border-env-border hover-glow transition-smooth">
-                  <div className="text-4xl md:text-5xl font-black text-chapter-accent mb-2">
+              <AnimatedSection key={stat.label} animation="scale-in" delay={index * 100}>
+                <div className="text-center p-6 rounded-2xl bg-env-surface border border-env-border">
+                  <div className="text-4xl md:text-5xl font-black text-[#FF8C42] mb-2">
                     {stat.value}
                   </div>
-                  <div className="text-env-tertiary text-sm font-medium">{stat.label}</div>
+                  <div className="text-env-tertiary text-sm">{stat.label}</div>
                 </div>
               </AnimatedSection>
             ))}
           </div>
 
           {/* 2025 Winners */}
-          <AnimatedSection animation="fade-up">
+          <AnimatedSection animation="fade-up" delay={200}>
             <div className="text-center mb-8">
-              <h3 className="text-2xl font-bold text-env-primary">
-                2025 Winners 🏆
-              </h3>
+              <h3 className="text-2xl font-bold text-env-primary">2025 Winners 🏆</h3>
             </div>
           </AnimatedSection>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-12">
             {previousYearPrizes.map((prize, index) => (
-              <AnimatedSection key={prize.position} animation="scale" delay={index * 150}>
-                <div className={`p-6 rounded-xl bg-gradient-to-br ${prize.color} border ${prize.borderColor} text-center hover-lift transition-smooth`}>
+              <AnimatedSection key={prize.position} animation="scale-in" delay={index * 150}>
+                <div className={`p-6 rounded-2xl bg-gradient-to-br ${prize.color} border ${prize.borderColor} text-center transition-all duration-300 hover:scale-[1.02]`}>
                   <span className="text-5xl block mb-3">{prize.icon}</span>
                   <h4 className="text-xl font-bold text-env-primary mb-1">{prize.position}</h4>
-                  <p className="text-2xl font-bold text-chapter-accent">{prize.amount}</p>
+                  <p className="text-2xl font-bold text-[#FF8C42]">{prize.amount}</p>
                 </div>
               </AnimatedSection>
             ))}
           </div>
 
           {/* 2025 Partners */}
-          <AnimatedSection animation="fade-up" delay={200}>
-            <div className="mt-16">
+          <AnimatedSection animation="fade-up" delay={300}>
+            <div className="mt-12">
               <h3 className="text-xl font-bold text-env-primary text-center mb-8">
                 2025 Partners & Supporters 🤝
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {partners2025.map((partner, index) => (
-                  <div key={`partner-${index}`} className="p-6 rounded-xl bg-env-surface border border-env-border text-center hover-lift transition-smooth">
-                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-chapter-accent-soft flex items-center justify-center">
-                      <span className="text-2xl">🤝</span>
+                  <div 
+                    key={`partner-${index}`} 
+                    className="p-6 rounded-2xl bg-env-surface border border-env-border text-center transition-all duration-300 hover:border-[#FF8C42]/30"
+                  >
+                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#FF8C42]/10 flex items-center justify-center">
+                      <IconCommunity size={32} color="#FF8C42" />
                     </div>
-                    <h4 className="font-semibold text-env-primary mb-1">{partner.name}</h4>
-                    <p className="text-chapter-accent text-sm mb-2">{partner.role}</p>
+                    <h4 className="font-bold text-env-primary mb-1">{partner.name}</h4>
+                    <p className="text-[#FF8C42] text-sm mb-2">{partner.role}</p>
                     <p className="text-env-tertiary text-sm">{partner.contribution}</p>
                   </div>
                 ))}
@@ -589,18 +570,18 @@ export default function LaunchPadPage() {
       </section>
 
       {/* ==================== TESTIMONIALS ==================== */}
-      <section className="section-padding">
+      <section className="section-padding bg-env-bg-primary">
         <div className="container-forge">
           
           <AnimatedSection animation="fade-up">
             <div className="text-center mb-12">
-              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent-soft rounded-full border border-chapter-accent/20">
+              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-[#FF8C42] bg-[#FF8C42]/10 rounded-full border border-[#FF8C42]/20">
                 Real Stories
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-4">
                 Don't Just Take Our Word For It
               </h2>
-              <p className="text-env-secondary max-w-2xl mx-auto">
+              <p className="text-env-secondary max-w-2xl mx-auto text-lg">
                 Here's what 2025 participants have to say:
               </p>
             </div>
@@ -609,20 +590,25 @@ export default function LaunchPadPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {testimonials.map((testimonial, index) => (
               <AnimatedSection key={index} animation="fade-up" delay={index * 100}>
-                <div className="p-6 rounded-xl bg-env-surface border border-env-border h-full hover-glow transition-smooth relative">
-                  <div className="text-5xl text-chapter-accent/20 absolute top-4 left-4">"</div>
-                  <p className="text-env-secondary leading-relaxed mb-6 italic pt-8 text-lg">
+                <div className="h-full p-6 md:p-8 rounded-2xl bg-env-surface border border-env-border relative">
+                  <div className="text-6xl text-[#FF8C42]/20 absolute top-4 left-6">"</div>
+                  <p className="text-env-primary leading-relaxed mb-6 italic pt-8 text-lg">
                     {testimonial.quote}
                   </p>
-                  <div className="flex items-center space-x-3 border-t border-env-border pt-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-chapter-accent to-purple-500 flex items-center justify-center text-white font-bold">
+                  <div className="flex items-center gap-3 border-t border-env-border pt-4">
+                    <div 
+                      className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold"
+                      style={{
+                        background: 'linear-gradient(135deg, #FF8C42, #A855F7)'
+                      }}
+                    >
                       {testimonial.name.charAt(0)}
                     </div>
                     <div>
                       <h4 className="font-semibold text-env-primary">{testimonial.name}</h4>
                       <p className="text-env-tertiary text-xs">{testimonial.school}</p>
                       {testimonial.placement && (
-                        <p className="text-chapter-accent text-xs font-bold">{testimonial.placement} 🏆</p>
+                        <p className="text-[#FF8C42] text-xs font-bold">{testimonial.placement} 🏆</p>
                       )}
                     </div>
                   </div>
@@ -640,13 +626,13 @@ export default function LaunchPadPage() {
           
           <AnimatedSection animation="fade-up">
             <div className="text-center mb-12">
-              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent-soft rounded-full border border-chapter-accent/20">
+              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-[#52B788] bg-[#52B788]/10 rounded-full border border-[#52B788]/20">
                 What You Get
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-4">
                 More Than Just Prizes
               </h2>
-              <p className="text-env-secondary max-w-2xl mx-auto">
+              <p className="text-env-secondary max-w-2xl mx-auto text-lg">
                 Every participant walks away with skills that last a lifetime:
               </p>
             </div>
@@ -655,7 +641,7 @@ export default function LaunchPadPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {programBenefits.map((benefit, index) => (
               <AnimatedSection key={benefit.title} animation="fade-up" delay={index * 75}>
-                <div className="p-6 rounded-xl bg-env-surface border border-env-border hover:border-chapter-accent/50 transition-smooth hover-lift h-full group">
+                <div className="h-full p-6 rounded-2xl bg-env-surface border border-env-border hover:border-[#FF8C42]/30 transition-all duration-300 group">
                   <span className="text-5xl mb-4 block group-hover:scale-110 transition-transform">{benefit.icon}</span>
                   <h3 className="text-xl font-bold text-env-primary mb-2">{benefit.title}</h3>
                   <p className="text-env-secondary leading-relaxed">{benefit.description}</p>
@@ -668,18 +654,18 @@ export default function LaunchPadPage() {
       </section>
 
       {/* ==================== HOW TO APPLY ==================== */}
-      <section className="section-padding">
+      <section className="section-padding bg-env-bg-primary">
         <div className="container-forge">
           
           <AnimatedSection animation="fade-up">
             <div className="text-center mb-12">
-              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent-soft rounded-full border border-chapter-accent/20">
+              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-[#14B8B8] bg-[#14B8B8]/10 rounded-full border border-[#14B8B8]/20">
                 How It Works
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-4">
                 4 Simple Steps
               </h2>
-              <p className="text-env-secondary max-w-2xl mx-auto">
+              <p className="text-env-secondary max-w-2xl mx-auto text-lg">
                 Getting started is easy. Here's how:
               </p>
             </div>
@@ -689,9 +675,14 @@ export default function LaunchPadPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {applicationSteps.map((step, index) => (
                 <AnimatedSection key={step.step} animation="fade-up" delay={index * 100}>
-                  <div className="p-6 rounded-xl bg-env-surface border border-env-border hover-glow transition-smooth h-full">
-                    <div className="flex items-start space-x-4">
-                      <div className="w-14 h-14 rounded-full bg-gradient-to-br from-chapter-accent to-purple-500 flex items-center justify-center flex-shrink-0 text-white font-bold text-xl">
+                  <div className="p-6 rounded-2xl bg-env-surface border border-env-border h-full">
+                    <div className="flex items-start gap-4">
+                      <div 
+                        className="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0 text-white font-bold text-xl"
+                        style={{
+                          background: 'linear-gradient(135deg, #FF8C42, #A855F7)'
+                        }}
+                      >
                         {step.step}
                       </div>
                       <div>
@@ -716,7 +707,7 @@ export default function LaunchPadPage() {
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-10">
                 <span className="text-6xl block mb-4">🚀</span>
-                <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent-soft rounded-full border border-chapter-accent/20">
+                <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-[#FF8C42] bg-[#FF8C42]/10 rounded-full border border-[#FF8C42]/20">
                   Student Application
                 </span>
                 <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-4">
@@ -724,9 +715,15 @@ export default function LaunchPadPage() {
                 </h2>
                 
                 {!registrationOpen ? (
-                  <div className="mb-8 p-8 rounded-2xl bg-gradient-to-r from-chapter-accent/20 to-purple-500/20 border-2 border-chapter-accent/50">
+                  <div 
+                    className="mb-8 p-8 rounded-2xl"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(255, 140, 66, 0.2), rgba(168, 85, 247, 0.2))',
+                      border: '2px solid rgba(255, 140, 66, 0.5)'
+                    }}
+                  >
                     <p className="text-2xl font-bold text-env-primary mb-3">
-                      📅 Registration Opens: {REGISTRATION_OPENS}
+                      📅 Registration Opens: <span className="text-[#FF8C42]">{REGISTRATION_OPENS}</span>
                     </p>
                     <p className="text-lg text-env-secondary mb-4">
                       Applications aren't open yet, but you can prepare!
@@ -740,20 +737,17 @@ export default function LaunchPadPage() {
                     <p className="text-env-secondary max-w-2xl mx-auto text-lg mb-4">
                       Your journey starts here. Fill out the form below and take your first step toward becoming an entrepreneur!
                     </p>
-                    <div className="space-y-2">
-                      <p className="text-chapter-accent font-bold text-xl">
-                        🆓 Entry is 100% FREE
-                      </p>
-                      <p className="text-env-primary font-medium">
-                        Open to ALL Lagos SSS3 students!
-                      </p>
+                    <div className="space-y-2 mb-6">
+                      <p className="text-[#FF8C42] font-bold text-xl">🆓 Entry is 100% FREE</p>
+                      <p className="text-env-primary font-medium">Open to ALL Lagos SSS3 students!</p>
                       {LAUNCHPAD_CONFIG.applicationDeadline && (
                         <p className="text-env-tertiary">
-                          ⏰ Deadline: <span className="text-chapter-accent font-bold">{new Date(LAUNCHPAD_CONFIG.applicationDeadline).toLocaleDateString('en-NG', { 
-                            day: 'numeric', 
-                            month: 'long', 
-                            year: 'numeric' 
-                          })}</span>
+                          ⏰ Deadline:{' '}
+                          <span className="text-[#FF8C42] font-bold">
+                            {new Date(LAUNCHPAD_CONFIG.applicationDeadline).toLocaleDateString('en-NG', { 
+                              day: 'numeric', month: 'long', year: 'numeric' 
+                            })}
+                          </span>
                         </p>
                       )}
                     </div>
@@ -762,7 +756,10 @@ export default function LaunchPadPage() {
               </div>
               
               {registrationOpen && (
-                <div className="p-6 md:p-8 rounded-2xl bg-env-surface border-2 border-chapter-accent/30">
+                <div 
+                  className="p-6 md:p-8 rounded-2xl bg-env-surface"
+                  style={{ border: '2px solid rgba(255, 140, 66, 0.3)' }}
+                >
                   <StudentApplicationForm />
                 </div>
               )}
@@ -773,12 +770,12 @@ export default function LaunchPadPage() {
       </section>
 
       {/* ==================== SPONSOR BENEFITS ==================== */}
-      <section className="section-padding">
+      <section className="section-padding bg-env-bg-primary">
         <div className="container-forge">
           
           <AnimatedSection animation="fade-up">
             <div className="text-center mb-12">
-              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-purple-400 bg-purple-500/10 rounded-full border border-purple-500/20">
+              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-[#A855F7] bg-[#A855F7]/10 rounded-full border border-[#A855F7]/20">
                 For Partners & Sponsors
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-4">
@@ -793,7 +790,13 @@ export default function LaunchPadPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {sponsorBenefits.map((benefit, index) => (
               <AnimatedSection key={benefit.title} animation="fade-up" delay={index * 75}>
-                <div className="p-6 rounded-xl bg-gradient-to-br from-purple-500/10 to-purple-500/5 border border-purple-500/20 h-full hover-lift transition-smooth">
+                <div 
+                  className="h-full p-6 rounded-2xl transition-all duration-300 hover:scale-[1.02]"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(168, 85, 247, 0.02))',
+                    border: '1px solid rgba(168, 85, 247, 0.2)'
+                  }}
+                >
                   <span className="text-4xl mb-4 block">{benefit.icon}</span>
                   <h3 className="font-bold text-env-primary mb-2 text-lg">{benefit.title}</h3>
                   <p className="text-env-secondary">{benefit.description}</p>
@@ -808,14 +811,21 @@ export default function LaunchPadPage() {
               <h3 className="text-2xl font-bold text-env-primary mb-6 text-center">
                 Who Should Partner With Us? 🤝
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {sponsorCategories.map((category) => (
-                  <div key={category.category} className="p-4 rounded-xl bg-purple-500/5 border border-purple-500/20">
-                    <h4 className="font-bold text-purple-400 mb-3 text-lg">{category.category}</h4>
-                    <ul className="space-y-2 text-env-secondary">
+                  <div 
+                    key={category.category} 
+                    className="p-5 rounded-xl"
+                    style={{
+                      background: 'rgba(168, 85, 247, 0.05)',
+                      border: '1px solid rgba(168, 85, 247, 0.15)'
+                    }}
+                  >
+                    <h4 className="font-bold text-[#A855F7] mb-3 text-lg">{category.category}</h4>
+                    <ul className="space-y-2">
                       {category.examples.map((example) => (
-                        <li key={example} className="flex items-center">
-                          <span className="text-purple-400 mr-2">→</span>
+                        <li key={example} className="flex items-center text-env-secondary">
+                          <span className="text-[#A855F7] mr-2">→</span>
                           {example}
                         </li>
                       ))}
@@ -837,7 +847,7 @@ export default function LaunchPadPage() {
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-10">
                 <span className="text-6xl block mb-4">💼</span>
-                <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-purple-400 bg-purple-500/10 rounded-full border border-purple-500/20">
+                <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-wider text-[#A855F7] bg-[#A855F7]/10 rounded-full border border-[#A855F7]/20">
                   Become a Sponsor
                 </span>
                 <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-4">
@@ -848,7 +858,10 @@ export default function LaunchPadPage() {
                 </p>
               </div>
               
-              <div className="p-6 md:p-8 rounded-2xl bg-env-surface border-2 border-purple-500/30">
+              <div 
+                className="p-6 md:p-8 rounded-2xl bg-env-surface"
+                style={{ border: '2px solid rgba(168, 85, 247, 0.3)' }}
+              >
                 <SponsorApplicationForm />
               </div>
             </div>
@@ -858,7 +871,12 @@ export default function LaunchPadPage() {
       </section>
 
       {/* ==================== FINAL CTA ==================== */}
-      <section className="section-padding bg-gradient-to-b from-env-bg-primary via-chapter-accent/5 to-env-bg-primary">
+      <section 
+        className="section-padding"
+        style={{
+          background: 'linear-gradient(180deg, var(--env-bg-primary) 0%, rgba(255, 140, 66, 0.05) 50%, var(--env-bg-primary) 100%)'
+        }}
+      >
         <div className="container-forge">
           
           <AnimatedSection animation="fade-up">
@@ -869,17 +887,31 @@ export default function LaunchPadPage() {
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-env-primary mb-6 leading-tight">
                 The future belongs to those who
                 <br />
-                <span className="gradient-text">start building it today.</span>
+                <span 
+                  className="bg-clip-text text-transparent"
+                  style={{
+                    backgroundImage: 'linear-gradient(135deg, #FF8C42, #FFD54F, #A855F7)'
+                  }}
+                >
+                  start building it today.
+                </span>
               </h2>
               
               <p className="text-xl text-env-secondary mb-8 max-w-2xl mx-auto">
-                Whether you're a student with big dreams or an organization that believes in youth — <strong className="text-env-primary">your moment is now!</strong>
+                Whether you're a student with big dreams or an organization that believes in youth —{' '}
+                <strong className="text-env-primary">your moment is now!</strong>
               </p>
               
               {!registrationOpen && (
-                <div className="mb-8 p-6 rounded-2xl bg-gradient-to-r from-chapter-accent/20 to-purple-500/20 border-2 border-chapter-accent/50 max-w-2xl mx-auto">
+                <div 
+                  className="mb-8 p-6 rounded-2xl max-w-2xl mx-auto"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(255, 140, 66, 0.2), rgba(168, 85, 247, 0.2))',
+                    border: '2px solid rgba(255, 140, 66, 0.5)'
+                  }}
+                >
                   <p className="text-2xl font-bold text-env-primary mb-2">
-                    📅 Registration Opens: <span className="text-chapter-accent">{REGISTRATION_OPENS}</span>
+                    📅 Registration Opens: <span className="text-[#FF8C42]">{REGISTRATION_OPENS}</span>
                   </p>
                   <p className="text-env-secondary">
                     Mark your calendar! Get your ideas ready!
@@ -887,7 +919,7 @@ export default function LaunchPadPage() {
                 </div>
               )}
               
-              <p className="text-2xl text-chapter-accent font-bold mb-8">
+              <p className="text-2xl text-[#FF8C42] font-bold mb-8">
                 LaunchPad {LAUNCHPAD_CONFIG.currentYear}: ₦10,000,000+ in Prizes! 🚀
               </p>
               
@@ -895,25 +927,35 @@ export default function LaunchPadPage() {
                 {registrationOpen ? (
                   <a
                     href="#apply"
-                    className="px-10 py-5 bg-chapter-accent hover:bg-chapter-accent-hover text-white font-bold rounded-xl transition-smooth glow hover-lift text-xl"
+                    className="px-10 py-5 bg-[#FF8C42] hover:bg-[#E85D04] text-[#1A1A1A] font-bold rounded-xl transition-all duration-300 hover:scale-[1.02] text-xl shadow-lg shadow-[#FF8C42]/25"
                   >
                     Apply Now (Students)
                   </a>
                 ) : (
-                  <div className="px-10 py-5 bg-env-surface text-env-primary font-bold rounded-xl border-2 border-chapter-accent/30 text-xl">
+                  <div 
+                    className="px-10 py-5 font-bold rounded-xl text-xl"
+                    style={{
+                      backgroundColor: 'var(--env-surface)',
+                      color: 'var(--env-text-primary)',
+                      border: '2px solid rgba(255, 140, 66, 0.3)'
+                    }}
+                  >
                     Applications Open May 1
                   </div>
                 )}
                 <a
                   href="#sponsor"
-                  className="px-10 py-5 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl transition-smooth hover-lift text-xl"
+                  className="px-10 py-5 bg-[#A855F7] hover:bg-[#9333EA] text-white font-bold rounded-xl transition-all duration-300 hover:scale-[1.02] text-xl shadow-lg shadow-[#A855F7]/25"
                 >
                   Become a Sponsor
                 </a>
               </div>
               
               <p className="mt-8 text-env-tertiary">
-                Questions? Email us at <a href="mailto:launchpad@forgeintellitech.com" className="text-chapter-accent hover:underline">launchpad@forgeintellitech.com</a>
+                Questions? Email us at{' '}
+                <a href="mailto:launchpad@forgeintellitech.com" className="text-[#FF8C42] hover:underline">
+                  launchpad@forgeintellitech.com
+                </a>
               </p>
               
             </div>
@@ -924,17 +966,23 @@ export default function LaunchPadPage() {
 
       {/* Mobile CTA Bar */}
       {registrationOpen && (
-        <div className="fixed bottom-0 left-0 right-0 p-4 bg-env-bg-primary/95 backdrop-blur-sm border-t border-env-border md:hidden z-40">
+        <div 
+          className="fixed bottom-0 left-0 right-0 p-4 backdrop-blur-sm border-t md:hidden z-40"
+          style={{ 
+            backgroundColor: 'rgba(var(--env-bg-primary-rgb), 0.95)',
+            borderColor: 'var(--env-border)'
+          }}
+        >
           <div className="flex gap-3">
             <a
               href="#apply"
-              className="flex-1 py-3 bg-chapter-accent text-white font-bold rounded-lg text-center"
+              className="flex-1 py-3 bg-[#FF8C42] text-[#1A1A1A] font-bold rounded-lg text-center"
             >
               🚀 Apply Now
             </a>
             <a
               href="#sponsor"
-              className="flex-1 py-3 bg-purple-600 text-white font-bold rounded-lg text-center"
+              className="flex-1 py-3 bg-[#A855F7] text-white font-bold rounded-lg text-center"
             >
               💼 Sponsor
             </a>
