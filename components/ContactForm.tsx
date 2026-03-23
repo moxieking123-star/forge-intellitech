@@ -68,7 +68,7 @@ export default function ContactForm() {
           onClick={() => reset()}
           className="px-6 py-3 rounded-xl bg-[var(--chapter-accent)] hover:bg-[var(--chapter-accent-hover)] text-white font-semibold transition-all"
         >
-          Send Another Message
+          Have More to say? Send Another Message!
         </button>
       </div>
     );
@@ -101,7 +101,7 @@ export default function ContactForm() {
             value={formData.name}
             onChange={handleChange}
             required
-            placeholder="John Doe"
+            placeholder="Adeniyi Moxie"
             className="
               w-full px-4 py-3.5 rounded-xl
               bg-[var(--env-bg-primary)] border border-[var(--env-border)]
@@ -123,7 +123,7 @@ export default function ContactForm() {
             value={formData.email}
             onChange={handleChange}
             required
-            placeholder="john@example.com"
+            placeholder="moxie@example.com"
             className="
               w-full px-4 py-3.5 rounded-xl
               bg-[var(--env-bg-primary)] border border-[var(--env-border)]

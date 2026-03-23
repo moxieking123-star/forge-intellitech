@@ -24,8 +24,8 @@ const contactMethods = [
     icon: IconMail,
     title: "Email",
     description: "Send us a message anytime",
-    value: "admin@forgeintellitech.com",
-    href: "mailto:admin@forgeintellitech.com",
+    value: "info@forgeintellitech.com",
+    href: "mailto:info@forgeintellitech.com",
     color: "#FF8C42",
   },
   {
@@ -48,8 +48,8 @@ const contactMethods = [
     icon: IconSocial,
     title: "Social",
     description: "Follow us for updates",
-    value: "@forgeintelli",
-    href: "https://twitter.com/forgeintelli",
+    value: "@forgeintellitech",
+    href: "https://twitter.com/forgeintellitech",
     color: "#A855F7",
   },
 ];
@@ -252,8 +252,8 @@ export default function ContactPage() {
                   </div>
                   <div className="flex items-center gap-3">
                     <IconMail size={20} color="#FF8C42" />
-                    <a href="mailto:admin@forgeintellitech.com" className="text-[#FF8C42] hover:underline">
-                      admin@forgeintellitech.com
+                    <a href="mailto:info@forgeintellitech.com" className="text-[#FF8C42] hover:underline">
+                      info@forgeintellitech.com
                     </a>
                   </div>
                 </div>

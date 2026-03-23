@@ -737,81 +737,209 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       </section>
 
       {/* ==================== ARTICLE CONTENT ==================== */}
-      <section className="py-12 md:py-16">
-        <div className="container-forge">
-          <div className="max-w-3xl mx-auto">
-            
-            <AnimatedSection animation="fade-up" delay={100}>
-              <article 
-                className="
-                  prose prose-lg max-w-none
-                  
-                  prose-headings:text-env-primary 
-                  prose-headings:font-bold
-                  prose-headings:leading-tight
-                  
-                  prose-h2:text-2xl 
-                  prose-h2:md:text-3xl 
-                  prose-h2:mt-12 
-                  prose-h2:mb-6
-                  prose-h2:pb-4
-                  prose-h2:border-b
-                  prose-h2:border-env-border
-                  
-                  prose-h3:text-xl 
-                  prose-h3:md:text-2xl 
-                  prose-h3:mt-10 
-                  prose-h3:mb-4
-                  
-                  prose-p:text-env-secondary 
-                  prose-p:text-lg
-                  prose-p:leading-relaxed 
-                  prose-p:mb-6
-                  
-                  prose-a:text-chapter-accent 
-                  prose-a:no-underline 
-                  prose-a:font-medium
-                  hover:prose-a:underline
-                  
-                  prose-strong:text-env-primary 
-                  prose-strong:font-semibold
-                  
-                  prose-em:text-env-primary 
-                  prose-em:italic
-                  
-                  prose-ul:text-env-secondary 
-                  prose-ul:my-8
-                  prose-ul:pl-0
-                  prose-ul:list-none
-                  
-                  prose-li:my-3
-                  prose-li:pl-8
-                  prose-li:relative
-                  prose-li:text-lg
-                  prose-li:leading-relaxed
-                  prose-li:before:content-['→']
-                  prose-li:before:absolute
-                  prose-li:before:left-0
-                  prose-li:before:text-chapter-accent
-                  prose-li:before:font-bold
-                  
-                  prose-blockquote:border-l-4
-                  prose-blockquote:border-l-chapter-accent 
-                  prose-blockquote:bg-chapter-accent/5
-                  prose-blockquote:py-6 
-                  prose-blockquote:px-8 
-                  prose-blockquote:rounded-r-xl
-                  prose-blockquote:my-8
-                  prose-blockquote:italic
-                  prose-blockquote:text-env-primary
-                "
-                dangerouslySetInnerHTML={{ __html: post.content }}
-              />
-            </AnimatedSection>
-            
-          </div>
-        </div>
-      </section>
+<section className="py-12 md:py-16">
+  <div className="container-forge">
+    <div className="max-w-3xl mx-auto">
+      
+      <AnimatedSection animation="fade-up" delay={100}>
+        <article 
+          className="blog-article"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
+      </AnimatedSection>
+      
+      {/* Add this style tag */}
+      <style jsx global>{`
+        .blog-article {
+          font-family: var(--font-opensans), Georgia, serif;
+          font-size: 1.125rem;
+          line-height: 1.9;
+          color: var(--env-text-secondary);
+          letter-spacing: 0.01em;
+          word-spacing: 0.05em;
+        }
+
+        /* ===== DROP CAP ===== */
+        .blog-article > p:first-of-type::first-letter {
+          float: left;
+          font-family: Georgia, 'Times New Roman', serif;
+          font-size: 4.5rem;
+          line-height: 0.8;
+          font-weight: 700;
+          margin-right: 0.12em;
+          margin-top: 0.08em;
+          color: #FF8C42;
+          text-shadow: 3px 3px 0 rgba(255, 140, 66, 0.1);
+        }
+
+        /* ===== HEADINGS ===== */
+        .blog-article h2 {
+          font-family: var(--font-poppins), system-ui, sans-serif;
+          font-size: 1.875rem;
+          font-weight: 700;
+          color: var(--env-text-primary);
+          margin-top: 3rem;
+          margin-bottom: 1.25rem;
+          padding-bottom: 0.75rem;
+          border-bottom: 2px solid rgba(255, 140, 66, 0.2);
+          line-height: 1.3;
+          letter-spacing: -0.02em;
+        }
+
+        .blog-article h3 {
+          font-family: var(--font-poppins), system-ui, sans-serif;
+          font-size: 1.5rem;
+          font-weight: 600;
+          color: #14B8B8;
+          margin-top: 2.5rem;
+          margin-bottom: 1rem;
+          line-height: 1.35;
+        }
+
+        /* ===== PARAGRAPHS ===== */
+        .blog-article p {
+          margin-bottom: 1.75em;
+          text-align: left;
+        }
+
+        /* ===== LINKS ===== */
+        .blog-article a {
+          color: #FF8C42;
+          text-decoration: none;
+          border-bottom: 1px solid rgba(255, 140, 66, 0.3);
+          transition: all 0.3s ease;
+        }
+
+        .blog-article a:hover {
+          color: #FFD54F;
+          border-bottom-color: #FFD54F;
+        }
+
+        /* ===== EMPHASIS ===== */
+        .blog-article strong {
+          color: var(--env-text-primary);
+          font-weight: 600;
+        }
+
+        .blog-article em {
+          color: var(--env-text-primary);
+          font-style: italic;
+        }
+
+        /* ===== BLOCKQUOTES ===== */
+        .blog-article blockquote {
+          position: relative;
+          margin: 2.5rem 0;
+          padding: 2rem 2.5rem;
+          background: linear-gradient(135deg, rgba(255, 140, 66, 0.08), rgba(20, 184, 184, 0.05));
+          border-left: 4px solid #FF8C42;
+          border-radius: 0 1rem 1rem 0;
+          font-style: italic;
+          font-size: 1.2rem;
+          line-height: 1.8;
+          color: var(--env-text-primary);
+        }
+
+        .blog-article blockquote::before {
+          content: '"';
+          position: absolute;
+          top: -0.2em;
+          left: 0.5em;
+          font-size: 5rem;
+          font-family: Georgia, serif;
+          color: rgba(255, 140, 66, 0.12);
+          line-height: 1;
+        }
+
+        .blog-article blockquote p {
+          margin-bottom: 0;
+        }
+
+        /* ===== LISTS ===== */
+        .blog-article ul,
+        .blog-article ol {
+          margin: 1.75rem 0;
+          padding-left: 0;
+          list-style: none;
+        }
+
+        .blog-article ul li,
+        .blog-article ol li {
+          position: relative;
+          margin-bottom: 0.875rem;
+          padding-left: 2rem;
+          line-height: 1.8;
+        }
+
+        .blog-article ul li::before {
+          content: '→';
+          position: absolute;
+          left: 0;
+          color: #FF8C42;
+          font-weight: bold;
+        }
+
+        .blog-article ol {
+          counter-reset: list-counter;
+        }
+
+        .blog-article ol li {
+          counter-increment: list-counter;
+        }
+
+        .blog-article ol li::before {
+          content: counter(list-counter);
+          position: absolute;
+          left: 0;
+          width: 1.5rem;
+          height: 1.5rem;
+          background: rgba(255, 140, 66, 0.15);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 0.8rem;
+          font-weight: 700;
+          color: #FF8C42;
+        }
+
+        /* ===== HORIZONTAL RULE ===== */
+        .blog-article hr {
+          border: none;
+          height: 1px;
+          background: linear-gradient(to right, transparent, rgba(255, 140, 66, 0.4), transparent);
+          margin: 3rem 0;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+          .blog-article {
+            font-size: 1rem;
+            line-height: 1.8;
+          }
+
+          .blog-article > p:first-of-type::first-letter {
+            font-size: 3.5rem;
+          }
+
+          .blog-article h2 {
+            font-size: 1.5rem;
+          }
+
+          .blog-article h3 {
+            font-size: 1.25rem;
+          }
+
+          .blog-article blockquote {
+            padding: 1.5rem;
+            font-size: 1.1rem;
+          }
+        }
+      `}</style>
+      
+    </div>
+  </div>
+</section>
 
       {/* ==================== TAGS & SHARE (MOBILE) ==================== */}
       <section className="py-8 border-t border-env-border">

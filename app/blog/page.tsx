@@ -3,11 +3,12 @@ import Link from "next/link";
 import { ChapterWrapper } from "../../components/ChapterWrapper";
 import { AnimatedSection } from "../../components/AnimatedSection";
 import { CTASection } from "../../components/CTASection";
+import BlogHero from "../../components/blog/BlogHero";
 
 // Metadata for SEO
 export const metadata = {
-  title: "Blog - Forge Intellitech",
-  description: "Insights, updates, and stories from Forge Intellitech. Explore our thoughts on African technology, education, and innovation.",
+  title: "Blog - Forge Intellitech | Stories From the Field",
+  description: "Real stories about building Africa's future. Insights on education, technology, leadership, and innovation from Forge Intellitech.",
 };
 
 // Blog categories
@@ -21,7 +22,7 @@ const categories = [
   { name: "African Leadership", slug: "leadership", active: false },
 ];
 
-// Blog posts data
+// Blog posts data (keep your existing data)
 const blogPosts = [
   {
     slug: "iran-self-reliance-lessons-for-africa",
@@ -88,50 +89,8 @@ export default function BlogPage() {
   return (
     <ChapterWrapper chapter="forge">
       
-      {/* ==================== HERO SECTION ==================== */}
-      <section className="relative min-h-[60vh] flex items-center overflow-hidden">
-        
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/blog/blog-hero.jpg"
-            alt="Forge Intellitech Blog"
-            fill
-            className="object-cover"
-            priority
-            quality={85}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-env-bg-primary via-env-bg-primary/90 to-env-bg-primary/70" />
-        </div>
-
-        {/* Decorative Elements */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute top-1/3 right-1/4 w-72 h-72 bg-chapter-accent/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-1/3 left-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
-        </div>
-
-        <div className="container-forge relative z-10 py-20">
-          <AnimatedSection animation="fade-up">
-            <div className="max-w-2xl">
-              
-              <span className="inline-block px-4 py-2 mb-6 text-sm font-semibold uppercase tracking-wider text-chapter-accent bg-chapter-accent/10 rounded-full border border-chapter-accent/20">
-                Our Blog
-              </span>
-              
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-env-primary mb-6 leading-tight">
-                Stories From <span className="text-chapter-accent">the Field</span>
-              </h1>
-              
-              <p className="text-xl text-env-secondary leading-relaxed">
-                Real stories about building Africa's future. 
-                No corporate speak — just honest thoughts on education, leadership, 
-                and what it takes to build from within.
-              </p>
-              
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
+      {/* ==================== ANIMATED HERO ==================== */}
+      <BlogHero />
 
       {/* ==================== CATEGORIES ==================== */}
       <section className="py-8 bg-env-bg-primary border-b border-env-border">
