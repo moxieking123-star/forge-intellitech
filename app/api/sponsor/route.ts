@@ -1,32 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase, isDatabaseConnected } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase';
+import { resend, FROM_EMAIL, ADMIN_EMAIL } from '@/lib/resend';
 
 export async function POST(request: NextRequest) {
   try {
-    // Check database connection first
-    if (!isDatabaseConnected() || !supabase) {
-      console.error('Database not connected - check environment variables');
-      return NextResponse.json(
-        { 
-          error: 'Database configuration error',
-          details: 'Please check server environment variables'
-        },
-        { status: 500 }
-      );
-    }
-
     const body = await request.json();
-    console.log('Received sponsor inquiry:', body);
+    
+    console.log('📨 Sponsor inquiry received:', body);
 
     const {
       companyName,
       contactName,
       email,
       phone,
-      website,
       sponsorshipType,
-      budgetRange,
-      message
+      message,
     } = body;
 
     // Validation
@@ -34,6 +22,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: 'Company name, contact name, and email are required' },
         { status: 400 }
+      );
+    }
+
+    if (!supabase) {
+      console.error('❌ Supabase not initialized');
+      return NextResponse.json(
+        { error: 'Database connection error' },
+        { status: 500 }
       );
     }
 
@@ -46,9 +42,7 @@ export async function POST(request: NextRequest) {
           contact_name: contactName,
           email,
           phone: phone || null,
-          website: website || null,
           sponsorship_type: sponsorshipType || null,
-          budget_range: budgetRange || null,
           message: message || null,
           status: 'new'
         }
@@ -57,26 +51,45 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (error) {
-      console.error('Supabase insert error:', error);
+      console.error('❌ Supabase error:', error);
       return NextResponse.json(
-        { error: 'Failed to save sponsor inquiry', details: error.message },
+        { error: 'Failed to save inquiry', details: error.message },
         { status: 500 }
       );
     }
 
-    console.log('✅ Sponsor inquiry saved:', data);
+    console.log('✅ Sponsor inquiry saved:', data.id);
+
+    // Send email notification
+    if (resend) {
+      try {
+        await resend.emails.send({
+          from: FROM_EMAIL,
+          to: ADMIN_EMAIL,
+          subject: `💼 New Sponsor Inquiry from ${companyName}`,
+          html: `
+            <h2>New Sponsor Inquiry</h2>
+            <p><strong>Company:</strong> ${companyName}</p>
+            <p><strong>Contact:</strong> ${contactName}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
+            <p><strong>Type:</strong> ${sponsorshipType || 'Not specified'}</p>
+            <p><strong>Message:</strong> ${message || 'No message'}</p>
+          `,
+        });
+        console.log('✅ Email notification sent');
+      } catch (emailError) {
+        console.error('❌ Email error:', emailError);
+      }
+    }
 
     return NextResponse.json(
-      { 
-        success: true, 
-        message: 'Sponsor inquiry submitted successfully!', 
-        id: data.id 
-      },
+      { success: true, message: 'Inquiry submitted successfully!', id: data.id },
       { status: 201 }
     );
 
   } catch (error) {
-    console.error('Sponsor API error:', error);
+    console.error('❌ Sponsor API error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

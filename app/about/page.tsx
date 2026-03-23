@@ -40,8 +40,8 @@ const values = [
 // Team members
 const team = [
   { name: "Jehovah God", role: "Founder", bio: "The timeless Creator and supreme founder, the source of wisdom and the purpose guiding ForgeITS mission to build Africa's future.", image: "/images/team/realfounder.jpg", color: "#FF8C42" },
-  { name: "Adeola Oyewoler", role: "Chairman", bio: "A leader committed to strengthening African institutions and empowering the next generation.", image: "/images/team/chairman.jpg", color: "#14B8B8" },
-  { name: "Adeola Oyewoler", role: "Chairman", bio: "A leader committed to strengthening African institutions and empowering the next generation.", image: "/images/team/chairman.jpg", color: "#14B8B8" },
+  { name: "Moxie Adeniyi", role: "Chief Executive Officer", bio: "A visionary CEO driving African innovation through human capacity development, building scalable systems that empower youth, strengthen institutions, and position the continent as a global force in technology and enterprise.", image: "/images/team/founder.jpg", color: "#14B8B8" },
+  { name: "Adeola Oyewole", role: "Chairman", bio: "A leader committed to strengthening African institutions and empowering the next generation.", image: "/images/team/chairman.jpg", color: "#14B8B8" },
 ];
 
 

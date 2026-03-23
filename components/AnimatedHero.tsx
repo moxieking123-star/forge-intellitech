@@ -524,147 +524,125 @@ const AnimatedHero = () => {
         }}
       />
 
-      {/* ========== MAIN CONTENT CONTAINER ========== */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16 py-16 sm:py-20 lg:py-24">
-        <div className="max-w-2xl lg:max-w-3xl">
-          
-          {/* Eyebrow Badge */}
-          <div 
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 animate-fade-in"
-            style={{ 
-              backgroundColor: 'rgba(255, 140, 66, 0.1)',
-              border: '1px solid rgba(255, 140, 66, 0.2)'
-            }}
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#52B788] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#52B788]"></span>
-            </span>
-            <span 
-              className="text-sm font-medium"
-              style={{ color: 'var(--hero-text-secondary)' }}
-            >
-              Building Africa's Technology Infrastructure
-            </span>
-          </div>
+{/* ========== MAIN CONTENT CONTAINER ========== */}
+<div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16 py-16 sm:py-20 lg:py-24">
+  <div className="max-w-2xl lg:max-w-3xl">
+    
+    {/* Main Question Headline */}
+    <h1 
+      className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-6 animate-fade-in-up"
+      style={{ color: 'var(--hero-text)' }}
+    >
+      What if Africa{' '}
+      <span className="block sm:inline">
+        <span className="bg-gradient-to-r from-[#FF8C42] via-[#FFD54F] to-[#14B8B8] bg-clip-text text-transparent">
+          stopped importing
+        </span>
+      </span>
+      {' '}its future
+      <span className="text-[#FF8C42]">?</span>
+    </h1>
 
-          {/* Main Question Headline */}
-          <h1 
-            className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-6 animate-fade-in-up"
-            style={{ color: 'var(--hero-text)' }}
-          >
-            What if Africa{' '}
-            <span className="block sm:inline">
-              <span className="bg-gradient-to-r from-[#FF8C42] via-[#FFD54F] to-[#14B8B8] bg-clip-text text-transparent">
-                stopped importing
-              </span>
-            </span>
-            {' '}its future
-            <span className="text-[#FF8C42]">?</span>
-          </h1>
+    {/* Powerful Subtitle */}
+    <p 
+      className="text-xl sm:text-2xl lg:text-3xl leading-snug mb-6 animate-fade-in-up font-medium"
+      style={{ color: 'var(--hero-text)', animationDelay: '0.1s' }}
+    >
+      And decides to ForgeIT —{' '}
+      <span className="text-[#14B8B8]">one mind at a time.</span>
+    </p>
+    
+    {/* Strategic Quote */}
+    <div 
+      className="p-5 rounded-xl mb-8 animate-fade-in-up"
+      style={{ 
+        backgroundColor: 'rgba(255, 140, 66, 0.08)',
+        borderLeft: '4px solid #FF8C42',
+        animationDelay: '0.2s'
+      }}
+    >
+      <p 
+        className="text-base sm:text-lg italic leading-relaxed"
+        style={{ color: 'var(--hero-text)' }}
+      >
+        "This is the infrastructure that breaks dependency and builds sovereignty by a generation whose Ancestors created civilisation."
+      </p>
+    </div>
 
-          {/* Powerful Subtitle */}
-          <p 
-            className="text-xl sm:text-2xl lg:text-3xl leading-snug mb-6 animate-fade-in-up font-medium"
-            style={{ color: 'var(--hero-text)', animationDelay: '0.1s' }}
-          >
-            And decides to ForgeIT —{' '}
-            <span className="text-[#14B8B8]">one mind at a time.</span>
-          </p>
-          
-          
-          {/* Strategic Quote */}
-          <div 
-            className="p-5 rounded-xl mb-8 animate-fade-in-up"
-            style={{ 
-              backgroundColor: 'rgba(255, 140, 66, 0.08)',
-              borderLeft: '4px solid #FF8C42',
-              animationDelay: '0.2s'
-            }}
-          >
-            <p 
-              className="text-base sm:text-lg italic leading-relaxed"
-              style={{ color: 'var(--hero-text)' }}
-            >
-              "This is the infrastructure that breaks dependency and builds sovereignty by a generation whose Ancestors created civilisation."
-            </p>
-          </div>
+    {/* CTA Buttons */}
+    <div 
+      className="flex flex-col sm:flex-row gap-4 mb-10 animate-fade-in-up"
+      style={{ animationDelay: '0.3s' }}
+    >
+      <Link
+        href="/about"
+        className="
+          group inline-flex items-center justify-center gap-2
+          px-8 py-4 rounded-xl
+          bg-[#FF8C42] text-[#1A1A1A] font-bold text-base
+          transition-all duration-300 ease-out
+          hover:bg-[#E85D04] hover:scale-[1.02]
+          shadow-lg shadow-[#FF8C42]/20
+        "
+      >
+        Discover Our Vision
+        <svg 
+          className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </Link>
 
+      <Link
+        href="/contact"
+        className="
+          inline-flex items-center justify-center gap-2
+          px-8 py-4 rounded-xl
+          font-semibold text-base
+          transition-all duration-300 ease-out
+          hover:scale-[1.02] hover:bg-white/10
+        "
+        style={{
+          backgroundColor: 'rgba(255,255,255,0.06)',
+          color: 'var(--hero-text)',
+          border: '1px solid rgba(255,255,255,0.12)'
+        }}
+      >
+        Partner With Us
+      </Link>
+    </div>
 
-          {/* CTA Buttons */}
-          <div 
-            className="flex flex-col sm:flex-row gap-4 mb-10 animate-fade-in-up"
-            style={{ animationDelay: '0.3s' }}
-          >
-            <Link
-              href="/about"
-              className="
-                group inline-flex items-center justify-center gap-2
-                px-8 py-4 rounded-xl
-                bg-[#FF8C42] text-[#1A1A1A] font-bold text-base
-                transition-all duration-300 ease-out
-                hover:bg-[#E85D04] hover:scale-[1.02]
-                shadow-lg shadow-[#FF8C42]/20
-              "
-            >
-              Discover Our Vision
-              <svg 
-                className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
+    {/* Audience Tags */}
+    <div 
+      className="flex flex-wrap items-center gap-2 animate-fade-in-up"
+      style={{ animationDelay: '0.35s' }}
+    >
+      <span 
+        className="text-xs uppercase tracking-wider font-medium"
+        style={{ color: 'var(--hero-text-tertiary, rgba(255,255,255,0.5))' }}
+      >
+        Calling:
+      </span>
+      {['Investors', 'Parents', 'Educators', 'Government', 'Sponsors', 'Researchers'].map((tag) => (
+        <span
+          key={tag}
+          className="px-3 py-1.5 rounded-full text-xs font-medium transition-colors hover:bg-white/10"
+          style={{
+            backgroundColor: 'rgba(255,255,255,0.05)',
+            color: 'var(--hero-text-secondary)',
+            border: '1px solid rgba(255,255,255,0.06)'
+          }}
+        >
+          {tag}
+        </span>
+      ))}
+    </div>
 
-            <Link
-              href="/contact"
-              className="
-                inline-flex items-center justify-center gap-2
-                px-8 py-4 rounded-xl
-                font-semibold text-base
-                transition-all duration-300 ease-out
-                hover:scale-[1.02] hover:bg-white/10
-              "
-              style={{
-                backgroundColor: 'rgba(255,255,255,0.06)',
-                color: 'var(--hero-text)',
-                border: '1px solid rgba(255,255,255,0.12)'
-              }}
-            >
-              Partner With Us
-            </Link>
-          </div>
-
-          {/* Audience Tags */}
-          <div 
-            className="flex flex-wrap items-center gap-2 animate-fade-in-up"
-            style={{ animationDelay: '0.35s' }}
-          >
-            <span 
-              className="text-xs uppercase tracking-wider font-medium"
-              style={{ color: 'var(--hero-text-tertiary, rgba(255,255,255,0.5))' }}
-            >
-              Calling:
-            </span>
-            {['Investors', 'Parents', 'Educators', 'Government', 'Sponsors', 'Researchers'].map((tag) => (
-              <span
-                key={tag}
-                className="px-3 py-1.5 rounded-full text-xs font-medium transition-colors hover:bg-white/10"
-                style={{
-                  backgroundColor: 'rgba(255,255,255,0.05)',
-                  color: 'var(--hero-text-secondary)',
-                  border: '1px solid rgba(255,255,255,0.06)'
-                }}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-
-        </div>
-      </div>
+  </div>
+</div>
 
       {/* ========== SCROLL INDICATOR ========== */}
       <div 

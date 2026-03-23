@@ -373,105 +373,140 @@ const TechUpHero = () => {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           
           {/* Content */}
-          <div>
-            <div className="flex items-center gap-3 mb-6">
-              <span className="text-5xl">🎓</span>
-              <Badge status="active" pulse>Flagship Programme</Badge>
-            </div>
+<div>
+  <div className="flex items-center gap-3 mb-6">
+    <span className="text-5xl">🎓</span>
+    <Badge status="active" pulse>In-School Digital Skills</Badge>
+  </div>
 
-            <h1 
-              className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-4"
-              style={{ color: 'var(--hero-text)' }}
-            >
-              TechUp
-            </h1>
+  <h1 
+    className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-4"
+    style={{ color: 'var(--hero-text)' }}
+  >
+    TechUp
+  </h1>
 
-            <p 
-              className="text-xl sm:text-2xl font-medium mb-4"
-              style={{ color: '#14B8B8' }}
-            >
-              Training students to build technology,
-              <br />not just use it.
-            </p>
+  <p 
+    className="text-xl sm:text-2xl font-medium mb-4"
+    style={{ color: '#14B8B8' }}
+  >
+    Digital skills delivered directly in schools.
+    <br />We handle everything — you see results.
+  </p>
 
-            <p 
-              className="text-lg sm:text-xl leading-relaxed mb-6"
-              style={{ color: 'var(--hero-text-secondary)' }}
-            >
-              A six-year journey built into schools — taking students from digital basics 
-              all the way to career-ready skills. Three pathways. One mission.{' '}
-              <span className="font-semibold" style={{ color: 'var(--hero-text)' }}>
-                Create builders, not just users.
-              </span>
-            </p>
+  <p 
+    className="text-lg sm:text-xl leading-relaxed mb-6"
+    style={{ color: 'var(--hero-text-secondary)' }}
+  >
+    TechUp brings practical digital education into secondary schools.{' '}
+    <span className="font-semibold" style={{ color: 'var(--hero-text)' }}>
+      We provide the curriculum, instructors, and resources
+    </span>{' '}
+    — delivering 70% practical, 30% theory classes that produce real outcomes. 
+    Teachers stay focused on what they do best. We take care of the rest.
+  </p>
 
-            {/* Pathway Pills */}
-            <div className="flex flex-wrap gap-3 mb-8">
-              {[
-                { name: 'Builder', color: '#14B8B8', icon: '💻' },
-                { name: 'Strategist', color: '#52B788', icon: '📊' },
-                { name: 'Storyteller', color: '#A855F7', icon: '🎨' },
-              ].map((pathway) => (
-                <div 
-                  key={pathway.name}
-                  className="flex items-center gap-2 px-4 py-2 rounded-full"
-                  style={{ 
-                    backgroundColor: pathway.color + '15',
-                    border: `1px solid ${pathway.color}30`
-                  }}
-                >
-                  <span>{pathway.icon}</span>
-                  <span style={{ color: pathway.color }} className="font-medium text-sm">
-                    {pathway.name}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                href="/contact"
-                className="
-                  inline-flex items-center justify-center gap-2
-                  px-8 py-4 rounded-xl
-                  bg-[#14B8B8] text-[#1A1A1A] font-bold text-base
-                  transition-all duration-300
-                  hover:bg-[#0E9494] hover:scale-[1.02]
-                  shadow-lg shadow-[#14B8B8]/25
-                "
-              >
-                Bring TechUp to Your School
-              </Link>
-              <a
-                href="#how-it-works"
-                className="
-                  inline-flex items-center justify-center gap-2
-                  px-8 py-4 rounded-xl font-semibold
-                  transition-all duration-300 hover:scale-[1.02]
-                "
-                style={{
-                  backgroundColor: 'rgba(255,255,255,0.06)',
-                  color: 'var(--hero-text)',
-                  border: '1px solid rgba(255,255,255,0.12)'
-                }}
-              >
-                See How It Works
-              </a>
-            </div>
-          </div>
-
-          {/* Animation */}
-          <div className="relative h-[400px] lg:h-[500px] order-first lg:order-last">
-            <canvas
-              ref={canvasRef}
-              className="absolute inset-0 w-full h-full"
-              aria-hidden="true"
-            />
-          </div>
-
-        </div>
+  {/* Key Benefits */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+    {[
+      { icon: '📚', text: 'Complete curriculum provided' },
+      { icon: '👨‍🏫', text: 'Trained instructors included' },
+      { icon: '💻', text: '70% practical learning' },
+      { icon: '🎯', text: 'Outcome-focused approach' },
+    ].map((item) => (
+      <div 
+        key={item.text}
+        className="flex items-center gap-3 px-4 py-3 rounded-xl"
+        style={{ 
+          backgroundColor: 'rgba(20, 184, 184, 0.08)',
+          border: '1px solid rgba(20, 184, 184, 0.15)'
+        }}
+      >
+        <span className="text-xl">{item.icon}</span>
+        <span className="text-sm font-medium" style={{ color: 'var(--hero-text-secondary)' }}>
+          {item.text}
+        </span>
       </div>
+    ))}
+  </div>
+
+  {/* Pathway Pills */}
+  <div className="mb-6">
+    <p className="text-sm font-medium mb-3" style={{ color: 'var(--hero-text-tertiary)' }}>
+      Students choose their pathway:
+    </p>
+    <div className="flex flex-wrap gap-3">
+      {[
+        { name: 'Builder', color: '#14B8B8', icon: '💻', desc: 'Code & Development' },
+        { name: 'Strategist', color: '#52B788', icon: '📊', desc: 'Business & Analysis' },
+        { name: 'Storyteller', color: '#A855F7', icon: '🎨', desc: 'Design & Content' },
+      ].map((pathway) => (
+        <div 
+          key={pathway.name}
+          className="flex items-center gap-2 px-4 py-2 rounded-full"
+          style={{ 
+            backgroundColor: pathway.color + '15',
+            border: `1px solid ${pathway.color}30`
+          }}
+        >
+          <span>{pathway.icon}</span>
+          <div>
+            <span style={{ color: pathway.color }} className="font-semibold text-sm">
+              {pathway.name}
+            </span>
+            <span className="text-xs ml-1" style={{ color: 'var(--hero-text-tertiary)' }}>
+              — {pathway.desc}
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {/* CTAs */}
+  <div className="flex flex-col sm:flex-row gap-4">
+    <Link
+      href="/contact"
+      className="
+        inline-flex items-center justify-center gap-2
+        px-8 py-4 rounded-xl
+        bg-[#14B8B8] text-[#1A1A1A] font-bold text-base
+        transition-all duration-300
+        hover:bg-[#0E9494] hover:scale-[1.02]
+        shadow-lg shadow-[#14B8B8]/25
+      "
+    >
+      Bring TechUp to Your School
+    </Link>
+    <a
+      href="#how-it-works"
+      className="
+        inline-flex items-center justify-center gap-2
+        px-8 py-4 rounded-xl font-semibold
+        transition-all duration-300 hover:scale-[1.02]
+      "
+      style={{
+        backgroundColor: 'rgba(255,255,255,0.06)',
+        color: 'var(--hero-text)',
+        border: '1px solid rgba(255,255,255,0.12)'
+      }}
+    >
+      See How It Works
+    </a>
+  </div>
+</div>
+
+        {/* Animation */}
+        <div className="relative h-[400px] lg:h-[500px] order-first lg:order-last">
+          <canvas
+            ref={canvasRef}
+            className="absolute inset-0 w-full h-full"
+            aria-hidden="true"
+          />
+        </div>
+
+      </div>
+    </div>
     </section>
   );
 };
