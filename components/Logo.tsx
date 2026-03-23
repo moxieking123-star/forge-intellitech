@@ -1,21 +1,17 @@
 /**
  * Logo Component
  * 
- * Reusable logo component for Navbar and Footer.
- * Loads the company logo from /public/images/logo.png
- * 
- * Usage:
- *   <Logo />                    // Default (auto height)
- *   <Logo size="sm" />          // Small (24px height)
- *   <Logo size="lg" />          // Large (48px height)
- *   <Logo className="..." />    // Custom classes
+ * Reusable logo component with dark background support for light mode.
  */
+
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
+import { useTheme } from "./ThemeProvider";
 
 interface LogoProps {
-  /** Size preset: sm (50px), md (75px), lg (96px) */
+  /** Size preset: sm (40px), md (56px), lg (72px) */
   size?: "sm" | "md" | "lg";
   /** Additional CSS classes */
   className?: string;
@@ -25,11 +21,11 @@ interface LogoProps {
   showText?: boolean;
 }
 
-// Size mappings in pixels
+// Size mappings
 const sizeMap = {
-  sm: { height: 100, width: 300 },
-  md: { height: 200, width: 428 },
-  lg: { height: 260, width: 640 },
+  sm: { height: 40, width: 120 },
+  md: { height: 56, width: 168 },
+  lg: { height: 72, width: 216 },
 };
 
 export function Logo({ 
@@ -38,16 +34,28 @@ export function Logo({
   linkToHome = true,
   showText = false,
 }: LogoProps) {
+  const { mode } = useTheme();
   const dimensions = sizeMap[size];
   
   const logoElement = (
-    <div className={`flex items-center gap-2 ${className}`}>
+    <div 
+      className={`
+        flex items-center gap-2 
+        transition-all duration-300
+        ${mode === "light" 
+          ? "bg-[#1A1A1A] px-3 py-2 rounded-xl shadow-md" 
+          : ""
+        }
+        ${className}
+      `}
+    >
       <Image
         src="/images/logo.png"
         alt="Forge Intellitech"
         width={dimensions.width}
         height={dimensions.height}
         className="object-contain"
+        style={{ height: dimensions.height, width: 'auto' }}
         priority
       />
       {showText && (
@@ -62,7 +70,7 @@ export function Logo({
     return (
       <Link 
         href="/" 
-        className="transition-opacity hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-chapter-accent rounded"
+        className="inline-block transition-transform hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-chapter-accent rounded"
         aria-label="Forge Intellitech - Home"
       >
         {logoElement}
@@ -73,5 +81,4 @@ export function Logo({
   return logoElement;
 }
 
-// Also export as default for flexibility
 export default Logo;

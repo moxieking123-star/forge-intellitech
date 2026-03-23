@@ -102,6 +102,7 @@ function ThemeToggle() {
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { mode } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -146,20 +147,32 @@ export default function Navbar() {
       >
         <div className="flex items-center justify-between h-20 md:h-24 px-6 sm:px-10 md:px-16 lg:px-24">
           
-          {/* Logo */}
+          {/* Logo with dark background in light mode */}
           <Link
             href="/"
             className="relative z-10 flex-shrink-0 group"
             aria-label="Forge Intellitech - Home"
           >
-            <Image
-              src="/images/logo.png"
-              alt="Forge Intellitech"
-              width={180}
-              height={60}
-              className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-              priority
-            />
+            <div 
+              className={`
+                flex items-center justify-center
+                px-3 py-2 rounded-xl
+                transition-all duration-300
+                ${mode === "light" 
+                  ? "bg-[#1A1A1A] shadow-lg" 
+                  : "bg-transparent"
+                }
+              `}
+            >
+              <Image
+                src="/images/logo.png"
+                alt="Forge Intellitech"
+                width={200}
+                height={70}
+                className="h-12 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                priority
+              />
+            </div>
           </Link>
 
           {/* Desktop Navigation */}

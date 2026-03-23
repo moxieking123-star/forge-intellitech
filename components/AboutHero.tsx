@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 
 const AboutHero = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -265,7 +266,7 @@ const AboutHero = () => {
         const spark = sparks[i];
         spark.x += spark.vx;
         spark.y += spark.vy;
-        spark.vy += 0.02; // Slight gravity
+        spark.vy += 0.02;
         spark.life -= 0.015;
 
         if (spark.life <= 0) {
@@ -302,81 +303,126 @@ const AboutHero = () => {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[80vh] flex items-center overflow-hidden"
+      className="relative w-full min-h-screen flex items-center overflow-hidden"
       style={{ backgroundColor: 'var(--hero-bg)' }}
     >
+      {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#FF8C42]/5 via-transparent to-[#52B788]/5" />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 lg:py-20">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      {/* Gradient overlays for readability */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            linear-gradient(to right, 
+              var(--hero-bg) 0%, 
+              rgba(var(--hero-bg-rgb, 10,10,10), 0.85) 30%, 
+              rgba(var(--hero-bg-rgb, 10,10,10), 0.4) 60%, 
+              transparent 100%
+            )
+          `
+        }}
+      />
+
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16 py-16 sm:py-20 lg:py-24">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
           {/* Content */}
-          <div>
-            <span 
-              className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold uppercase tracking-wider rounded-full"
+          <div className="max-w-2xl lg:max-w-3xl">
+            {/* Badge */}
+            <div 
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 animate-fade-in-up"
               style={{ 
-                color: '#FF8C42',
                 backgroundColor: 'rgba(255, 140, 66, 0.1)',
                 border: '1px solid rgba(255, 140, 66, 0.2)'
               }}
             >
-              About Forge
-            </span>
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF8C42] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF8C42]"></span>
+              </span>
+              <span className="text-sm font-medium" style={{ color: 'var(--hero-text-secondary)' }}>
+                About Forge Intellitech
+              </span>
+            </div>
 
+            {/* Main Headline */}
             <h1 
-              className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6"
+              className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-6 animate-fade-in-up"
               style={{ color: 'var(--hero-text)' }}
             >
-              Africa won't become great by copying other people's playbook.
-              <br />
-              <span className="text-[#FF8C42]">
-                We'll get there by writing our own.
+              Africa won't become great by{' '}
+              <span className="block sm:inline">
+                <span className="bg-gradient-to-r from-[#FF8C42] via-[#FFD54F] to-[#52B788] bg-clip-text text-transparent">
+                  copying playbooks
+                </span>
               </span>
+              <span className="text-[#FF8C42]">.</span>
             </h1>
 
+            {/* Powerful Subtitle */}
             <p 
-              className="text-lg sm:text-xl leading-relaxed mb-6"
-              style={{ color: 'var(--hero-text-secondary)' }}
+              className="text-xl sm:text-2xl lg:text-3xl leading-snug mb-6 animate-fade-in-up font-medium"
+              style={{ color: 'var(--hero-text)', animationDelay: '0.1s' }}
             >
-              That's why Forge exists. Not to run quick tech trainings and call it a day — 
-              but to build{' '}
-              <span className="font-semibold" style={{ color: 'var(--hero-text)' }}>
-                pipelines that take young Africans from curiosity to capability, 
-                from learning to leading.
-              </span>
+              We'll get there by{' '}
+              <span className="text-[#14B8B8]">writing our own.</span>
             </p>
 
+            {/* Strategic Quote */}
             <div 
-              className="p-5 rounded-xl mb-8"
+              className="p-5 rounded-xl mb-8 animate-fade-in-up"
               style={{ 
                 backgroundColor: 'rgba(255, 140, 66, 0.08)',
-                borderLeft: '4px solid #FF8C42'
+                borderLeft: '4px solid #FF8C42',
+                animationDelay: '0.2s'
               }}
             >
-              <p style={{ color: 'var(--hero-text)' }} className="font-medium">
-                We start with students.{' '}
-                <span className="text-[#FF8C42]">But we're building for the whole continent.</span>
+              <p 
+                className="text-base sm:text-lg leading-relaxed"
+                style={{ color: 'var(--hero-text)' }}
+              >
+                That's why Forge exists. Not to run quick tech trainings and call it a day — 
+                but to build <span className="font-semibold text-[#FF8C42]">pipelines that take young Africans 
+                from curiosity to capability, from learning to leading.</span>
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-4">
-              <a
+            {/* CTA Buttons */}
+            <div 
+              className="flex flex-col sm:flex-row gap-4 mb-10 animate-fade-in-up"
+              style={{ animationDelay: '0.3s' }}
+            >
+              <Link
                 href="#our-edge"
                 className="
-                  inline-flex items-center gap-2
-                  px-6 py-3 rounded-xl
-                  bg-[#FF8C42] text-[#1A1A1A] font-bold
-                  transition-all duration-300 hover:scale-[1.02]
+                  group inline-flex items-center justify-center gap-2
+                  px-8 py-4 rounded-xl
+                  bg-[#FF8C42] text-[#1A1A1A] font-bold text-base
+                  transition-all duration-300 ease-out
+                  hover:bg-[#E85D04] hover:scale-[1.02]
+                  shadow-lg shadow-[#FF8C42]/20
                 "
               >
                 Our Approach
-              </a>
-              <a
+                <svg 
+                  className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+
+              <Link
                 href="#values"
                 className="
-                  inline-flex items-center gap-2
-                  px-6 py-3 rounded-xl font-semibold
-                  transition-all duration-300 hover:scale-[1.02]
+                  inline-flex items-center justify-center gap-2
+                  px-8 py-4 rounded-xl
+                  font-semibold text-base
+                  transition-all duration-300 ease-out
+                  hover:scale-[1.02] hover:bg-white/10
                 "
                 style={{
                   backgroundColor: 'rgba(255,255,255,0.06)',
@@ -385,7 +431,33 @@ const AboutHero = () => {
                 }}
               >
                 Our Values
-              </a>
+              </Link>
+            </div>
+
+            {/* Focus Areas */}
+            <div 
+              className="flex flex-wrap items-center gap-2 animate-fade-in-up"
+              style={{ animationDelay: '0.35s' }}
+            >
+              <span 
+                className="text-xs uppercase tracking-wider font-medium"
+                style={{ color: 'var(--hero-text-tertiary, rgba(255,255,255,0.5))' }}
+              >
+                We focus on:
+              </span>
+              {['Education', 'Incubation', 'Innovation', 'Impact'].map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1.5 rounded-full text-xs font-medium transition-colors hover:bg-white/10"
+                  style={{
+                    backgroundColor: 'rgba(255,255,255,0.05)',
+                    color: 'var(--hero-text-secondary)',
+                    border: '1px solid rgba(255,255,255,0.06)'
+                  }}
+                >
+                  {tag}
+                </span>
+              ))}
             </div>
           </div>
 
@@ -398,6 +470,30 @@ const AboutHero = () => {
             />
           </div>
 
+        </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div 
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 animate-fade-in hidden sm:flex" 
+        style={{ animationDelay: '0.6s' }}
+      >
+        <div className="flex flex-col items-center gap-2">
+          <span 
+            className="text-xs uppercase tracking-widest font-medium"
+            style={{ color: 'var(--hero-text-secondary)' }}
+          >
+            Explore
+          </span>
+          <div 
+            className="w-6 h-10 rounded-full flex items-start justify-center p-2"
+            style={{ border: '2px solid rgba(255,255,255,0.15)' }}
+          >
+            <div 
+              className="w-1.5 h-3 rounded-full animate-bounce bg-[#FF8C42]"
+              style={{ animationDuration: '1.5s' }}
+            />
+          </div>
         </div>
       </div>
     </section>

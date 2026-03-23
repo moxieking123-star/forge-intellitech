@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import { resend, FROM_EMAIL } from '@/lib/resend';
 
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info@forgeintellitech.com';
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -84,8 +86,9 @@ export async function POST(request: NextRequest) {
 
     console.log('✅ Newsletter subscription saved:', data.id);
 
-    // Send welcome email
+    // Send emails using Resend
     if (resend) {
+      // 1. Send welcome email to subscriber
       try {
         await resend.emails.send({
           from: FROM_EMAIL,
@@ -107,10 +110,46 @@ export async function POST(request: NextRequest) {
             </div>
           `,
         });
-        console.log('✅ Welcome email sent');
+        console.log('✅ Welcome email sent to subscriber');
       } catch (emailError) {
         console.error('❌ Welcome email failed:', emailError);
       }
+
+      // 2. Send notification to ADMIN 👈 THIS WAS MISSING!
+      try {
+        await resend.emails.send({
+          from: FROM_EMAIL,
+          to: ADMIN_EMAIL,
+          subject: '📬 New Newsletter Subscriber!',
+          html: `
+            <div style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+              <h2 style="color: #FF8C42;">New Newsletter Subscription</h2>
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Email:</strong></td>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee;">${email}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Name:</strong></td>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee;">${name || 'Not provided'}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Time:</strong></td>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee;">${new Date().toLocaleString()}</td>
+                </tr>
+              </table>
+              <p style="margin-top: 20px; color: #666;">
+                View all subscribers in your <a href="https://supabase.com/dashboard">Supabase Dashboard</a>
+              </p>
+            </div>
+          `,
+        });
+        console.log('✅ Admin notification sent to:', ADMIN_EMAIL);
+      } catch (adminEmailError) {
+        console.error('❌ Admin notification failed:', adminEmailError);
+      }
+    } else {
+      console.log('⚠️ Resend not configured, skipping emails');
     }
 
     return NextResponse.json(

@@ -29,7 +29,7 @@ import {
 
 // Company values
 const values = [
-  { title: "Ubuntu", meaning: "I am because we are", description: "We succeed when our communities succeed.", icon: IconUbuntu, color: "#FF8C42" },
+  { title: "Originality", meaning: "Creating solution to fit Africans reality", description: "We succeed when our communities succeed.", icon: IconUbuntu, color: "#FF8C42" },
   { title: "Excellence", meaning: "World-class, homegrown", description: "Global quality, African soul.", icon: IconStar, color: "#FFD54F" },
   { title: "Integrity", meaning: "Trust as foundation", description: "We do what we say, every time.", icon: IconIntegrity, color: "#14B8B8" },
   { title: "Innovation", meaning: "Solutions from within", description: "Built from our reality, not borrowed ideas.", icon: IconInnovation, color: "#FF8C42" },
@@ -39,7 +39,7 @@ const values = [
 
 // Team members
 const team = [
-  { name: "Jehovah God", role: "Founder", bio: "The timeless Creator and supreme founder, the source of wisdom and the purpose guiding ForgeITS mission to build Africa's future.", image: "/images/team/realfounder.jpg", color: "#FF8C42" },
+  { name: "Jehovah God", role: "Founder", bio: "The timeless Creator and supreme founder, the source of wisdom and the purpose guiding ForgeITS mission to build Africa's future.", image: "/images/team/god.jpg", color: "#FF8C42" },
   { name: "Moxie Adeniyi", role: "Chief Executive Officer", bio: "A visionary CEO driving African innovation through human capacity development, building scalable systems that empower youth, strengthen institutions, and position the continent as a global force in technology and enterprise.", image: "/images/team/founder.jpg", color: "#14B8B8" },
   { name: "Adeola Oyewole", role: "Chairman", bio: "A leader committed to strengthening African institutions and empowering the next generation.", image: "/images/team/chairman.jpg", color: "#14B8B8" },
 ];

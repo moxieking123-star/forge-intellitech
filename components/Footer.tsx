@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from "next/link";
 import Image from "next/image";
 import { useFormSubmit } from '@/hooks/useFormSubmit';
+import { useTheme } from './ThemeProvider';
 
 const footerSections = [
   {
@@ -91,10 +92,11 @@ const socialLinks = [
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const [email, setEmail] = useState('');
+  const { mode } = useTheme();
   
   const { submitForm, isLoading, success, error, reset } = useFormSubmit({
-  endpoint: '/api/newsletter',
-  onSuccess: () => {
+    endpoint: '/api/newsletter',
+    onSuccess: () => {
       setEmail('');
     },
   });
@@ -211,13 +213,25 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="col-span-2">
             <Link href="/" className="inline-block mb-6 group">
-              <Image
-                src="/images/logo.png"
-                alt="Forge Intellitech"
-                width={180}
-                height={60}
-                className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-              />
+              <div 
+                className={`
+                  inline-flex items-center justify-center
+                  px-3 py-2 rounded-xl
+                  transition-all duration-300
+                  ${mode === "light" 
+                    ? "bg-[#1A1A1A] shadow-lg" 
+                    : "bg-transparent"
+                  }
+                `}
+              >
+                <Image
+                  src="/images/logo.png"
+                  alt="Forge Intellitech"
+                  width={200}
+                  height={70}
+                  className="h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
             </Link>
             
             <p className="text-[var(--env-text-secondary)] leading-relaxed mb-8 max-w-xs">

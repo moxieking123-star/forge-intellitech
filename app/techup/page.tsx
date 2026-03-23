@@ -68,11 +68,11 @@ const seniorPathways = [
 
 // What makes TechUp different
 const differentiators = [
-  { title: "Built Into Schools", description: "Not weekend workshops that fade away. TechUp runs inside school systems, year after year.", icon: IconSchool, color: "#14B8B8" },
-  { title: "Six-Year Journey", description: "From digital basics to career-ready skills — built step by step, the right way.", icon: IconPath, color: "#FF8C42" },
+  { title: "Expert Instructors", description: "Professional tech practitioners who work in the industry come into schools to teach. Real skills from real professionals.", icon: IconTeam, color: "#14B8B8" },
+  { title: "Built Into Schools", description: "Not weekend workshops that fade away. TechUp runs inside school systems, year after year.", icon: IconSchool, color: "#FF8C42" },
+  { title: "Six-Year Journey", description: "From digital basics to career-ready skills — built step by step, the right way.", icon: IconPath, color: "#52B788" },
   { title: "Ethics First", description: "We teach responsible tech use, digital citizenship, and Nigerian cybercrime law from day one.", icon: IconEthics, color: "#FFD54F" },
-  { title: "Real Projects", description: "Students build actual products, not just practice exercises. Every term ends with something real.", icon: IconBuilder, color: "#52B788" },
-  { title: "Clear Career Paths", description: "By graduation, students know what they're good at — and have the portfolio to prove it.", icon: IconTarget, color: "#A855F7" },
+  { title: "Real Projects", description: "Students build actual products, not just practice exercises. Every term ends with something real.", icon: IconBuilder, color: "#A855F7" },
   { title: "Path to Entrepreneurship", description: "Top students move directly into LaunchPad, where they can turn their ideas into businesses.", icon: IconLaunch, color: "#FF8C42" },
 ];
 
@@ -84,12 +84,13 @@ const impactStats = [
   { value: "3", label: "Career Pathways" },
 ];
 
-// FAQs
+// FAQs - UPDATED to remove teacher training mentions
 const faqs = [
   { question: "What age is TechUp for?", answer: "TechUp is for secondary school students from JSS1 (age 10-11) through SS3 (age 16-17). The curriculum grows with them over six years." },
-  { question: "Does it replace our computer classes?", answer: "No. TechUp adds real, practical skills on top of what you already teach. We work with schools, not against them." },
+  { question: "Does it replace our computer classes?", answer: "No. TechUp adds real, practical skills on top of what schools already teach. We work with schools, not against them." },
   { question: "What equipment do we need?", answer: "TechUp works with basic devices and slow internet. We design for real African schools, not ideal conditions." },
-  { question: "What about our teachers?", answer: "We train them. TechUp strengthens your teachers with curriculum, guides, and ongoing support. We're building school capacity, not creating dependency." },
+  { question: "Who teaches the students?", answer: "Our instructors are practicing tech professionals — developers, designers, and strategists who work in the industry. They bring real-world experience directly into the classroom." },
+  { question: "What does the school provide?", answer: "Just the time slot and classroom space. We bring the instructors, curriculum, lesson materials, and all teaching resources. Schools focus on what they do best." },
   { question: "What happens to top students?", answer: "They get identified early and prepared for Forge's LaunchPad program — where they can access funding and mentorship to build their own ventures." },
   { question: "Is this only for private schools?", answer: "Absolutely not. TechUp is designed for both public and private schools, including low-resource environments. Every Nigerian student deserves this." },
 ];
@@ -156,8 +157,8 @@ export default function TechUpPage() {
                 }}
               >
                 <p className="text-lg text-env-primary font-medium">
-                  TechUp is different. We work{' '}
-                  <span className="text-[#14B8B8]">inside schools, over years</span> — not weekends.
+                  TechUp is different. We bring{' '}
+                  <span className="text-[#14B8B8]">professional tech instructors into schools</span> — not for weekends, but for years.
                 </p>
               </div>
             </AnimatedSection>
@@ -540,7 +541,7 @@ export default function TechUpPage() {
         </div>
       </section>
 
-      {/* ==================== FOR SCHOOLS ==================== */}
+      {/* ==================== FOR SCHOOLS (UPDATED) ==================== */}
       <section className="section-padding bg-env-secondary">
         <div className="container-forge">
           
@@ -552,20 +553,20 @@ export default function TechUpPage() {
                   School Partnership
                 </span>
                 <h2 className="text-3xl md:text-4xl font-bold text-env-primary mb-6">
-                  Bringing TechUp to Your School
+                  We Handle Everything
                 </h2>
                 <p className="text-lg text-env-secondary leading-relaxed mb-6">
-                  We don't replace teachers — we strengthen them. TechUp works within 
-                  your existing structure, giving your staff the curriculum, training, 
-                  and support they need.
+                  Schools provide the time and space. We bring everything else — 
+                  professional instructors, complete curriculum, and all teaching resources.
+                  Your staff stays focused on what they do best.
                 </p>
                 
                 <div className="space-y-4 mb-8">
                   {[
-                    { icon: IconTeam, label: "Teacher Training", desc: "We train your teachers, not replace them", color: "#14B8B8" },
-                    { icon: IconLearn, label: "Complete Materials", desc: "Teaching guides, lesson plans, assessments", color: "#52B788" },
-                    { icon: IconTarget, label: "Works Anywhere", desc: "Designed for low-resource settings", color: "#FF8C42" },
-                    { icon: IconCheck, label: "Quality Checks", desc: "Regular monitoring and improvement", color: "#A855F7" },
+                    { icon: IconTeam, label: "Professional Instructors", desc: "Practicing tech experts who work in the industry", color: "#14B8B8" },
+                    { icon: IconLearn, label: "Complete Curriculum", desc: "Lesson plans, assessments, and all materials included", color: "#52B788" },
+                    { icon: IconTarget, label: "Works Anywhere", desc: "Designed for low-resource settings with basic devices", color: "#FF8C42" },
+                    { icon: IconCheck, label: "Full Support", desc: "Ongoing coordination and quality assurance", color: "#A855F7" },
                   ].map((item) => {
                     const Icon = item.icon;
                     return (
@@ -618,7 +619,7 @@ export default function TechUpPage() {
                   }}
                 >
                   <p className="text-3xl font-bold text-[#14B8B8]">100%</p>
-                  <p className="text-env-tertiary text-sm">Teacher support<br/>included</p>
+                  <p className="text-env-tertiary text-sm">Everything<br/>provided</p>
                 </div>
               </div>
             </AnimatedSection>
