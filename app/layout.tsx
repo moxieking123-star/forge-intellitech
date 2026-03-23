@@ -1,4 +1,4 @@
-import { GoogleAnalytics } from '@next/third-parties/google';
+import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from "next";
 import { Poppins, Open_Sans } from "next/font/google";
 import "./globals.css";
@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import { ThemeProvider } from "../components/ThemeProvider";
 import { GlowCursor } from "../components/GlowCursor";
 import CookieConsent from "../components/CookieConsent";
+import GoogleAnalytics from "../components/GoogleAnalytics";
 
 // Heading font - Poppins
 const poppins = Poppins({ 
@@ -186,6 +187,7 @@ export default function RootLayout({
           <CookieConsent />
         </ThemeProvider>
         <GoogleAnalytics gaId="G-KE1R66TB7V" />
+<Analytics />
       </body>
     </html>
   );
