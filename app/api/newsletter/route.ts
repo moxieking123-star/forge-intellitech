@@ -1,24 +1,35 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import { resend, FROM_EMAIL } from '@/lib/resend';
-import { newsletterWelcomeEmail } from '@/lib/email-templates';
 
 export async function POST(request: NextRequest) {
   try {
-    if (!supabase) {
-      return NextResponse.json(
-        { error: 'Database connection unavailable' },
-        { status: 500 }
-      );
-    }
-
     const body = await request.json();
     const { email, name } = body;
+
+    console.log('📧 Newsletter subscription:', email);
 
     if (!email) {
       return NextResponse.json(
         { error: 'Email is required' },
         { status: 400 }
+      );
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { error: 'Invalid email format' },
+        { status: 400 }
+      );
+    }
+
+    if (!supabase) {
+      console.error('❌ Supabase not initialized');
+      return NextResponse.json(
+        { error: 'Database connection error' },
+        { status: 500 }
       );
     }
 
@@ -32,17 +43,18 @@ export async function POST(request: NextRequest) {
     if (existing) {
       if (existing.status === 'active') {
         return NextResponse.json(
-          { message: 'You are already subscribed!' },
+          { success: true, message: 'You are already subscribed!' },
           { status: 200 }
         );
       } else {
+        // Reactivate subscription
         await supabase
           .from('newsletter_subscribers')
-          .update({ status: 'active', unsubscribed_at: null })
+          .update({ status: 'active' })
           .eq('id', existing.id);
 
         return NextResponse.json(
-          { success: true, message: 'Welcome back! Subscription reactivated.' },
+          { success: true, message: 'Welcome back! Your subscription has been reactivated.' },
           { status: 200 }
         );
       }
@@ -51,38 +63,66 @@ export async function POST(request: NextRequest) {
     // Insert new subscriber
     const { data, error } = await supabase
       .from('newsletter_subscribers')
-      .insert([{ email, name: name || null, status: 'active', source: 'website' }])
+      .insert([
+        {
+          email,
+          name: name || null,
+          status: 'active',
+          source: 'website'
+        }
+      ])
       .select()
       .single();
 
     if (error) {
-      console.error('Newsletter subscription error:', error);
-      return NextResponse.json({ error: 'Failed to subscribe' }, { status: 500 });
+      console.error('❌ Newsletter error:', error);
+      return NextResponse.json(
+        { error: 'Failed to subscribe', details: error.message },
+        { status: 500 }
+      );
     }
 
-    // Send welcome email to subscriber
+    console.log('✅ Newsletter subscription saved:', data.id);
+
+    // Send welcome email
     if (resend) {
       try {
-        const emailContent = newsletterWelcomeEmail(email);
         await resend.emails.send({
           from: FROM_EMAIL,
           to: email,
-          subject: emailContent.subject,
-          html: emailContent.html,
+          subject: '🎉 Welcome to Forge Intellitech!',
+          html: `
+            <div style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+              <h1 style="color: #FF8C42;">Welcome to Forge Intellitech! 🎉</h1>
+              <p>Thanks for subscribing to our newsletter.</p>
+              <p>You'll receive updates about:</p>
+              <ul>
+                <li>✨ New programs and opportunities</li>
+                <li>💡 Tech insights and resources</li>
+                <li>🚀 LaunchPad and TechUp news</li>
+                <li>🎯 Exclusive content and early access</li>
+              </ul>
+              <p>Stay tuned for exciting updates!</p>
+              <p>— The Forge Intellitech Team</p>
+            </div>
+          `,
         });
-        console.log('Welcome email sent to:', email);
+        console.log('✅ Welcome email sent');
       } catch (emailError) {
-        console.error('Failed to send welcome email:', emailError);
+        console.error('❌ Welcome email failed:', emailError);
       }
     }
 
     return NextResponse.json(
-      { success: true, message: 'Successfully subscribed to newsletter!' },
+      { success: true, message: 'Successfully subscribed! Check your email.' },
       { status: 201 }
     );
 
   } catch (error) {
-    console.error('Newsletter API error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    console.error('❌ Newsletter API error:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
   }
 }

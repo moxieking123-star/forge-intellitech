@@ -19,17 +19,13 @@ export function FormModal({ isOpen, onClose, title, children }: FormModalProps) 
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
-      {/* Backdrop */}
       <div 
         className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
         onClick={onClose}
       />
       
-      {/* Modal Container */}
       <div className="flex min-h-full items-center justify-center p-4">
-        {/* Modal Content */}
         <div className="relative w-full max-w-2xl bg-env-surface border border-env-border rounded-2xl shadow-2xl transform transition-all">
-          {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-env-border">
             <h2 className="text-xl font-bold text-env-primary">{title}</h2>
             <button
@@ -53,7 +49,6 @@ export function FormModal({ isOpen, onClose, title, children }: FormModalProps) 
             </button>
           </div>
           
-          {/* Body */}
           <div className="p-6 max-h-[70vh] overflow-y-auto">
             {children}
           </div>
@@ -108,16 +103,36 @@ export function StudentApplicationForm() {
     setErrorMessage("");
 
     try {
-      // 🔧 TEMPORARY: Log form data (backend not connected yet)
-      console.log("📧 LaunchPad Application:", {
-        ...formData,
-        submittedAt: new Date().toISOString(),
+      const response = await fetch('/api/launchpad/apply', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: formData.fullName.split(' ')[0],
+          lastName: formData.fullName.split(' ').slice(1).join(' ') || '',
+          email: formData.email,
+          phone: formData.phone,
+          gender: formData.gender,
+          schoolName: formData.schoolName,
+          classLevel: formData.schoolLevel,
+          guardianName: formData.parentName,
+          guardianPhone: formData.parentPhone,
+          ideaTitle: formData.businessTitle,
+          ideaCategory: formData.businessCategory,
+          ideaDescription: formData.solution,
+          problemSolving: formData.problemStatement,
+          whyParticipate: formData.whyJoin,
+          previousExperience: formData.aiIntegration,
+        }),
       });
 
-      // Simulate network delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const result = await response.json();
 
-      // Simulate success
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to submit application');
+      }
+
       setStatus("success");
       setFormData({
         fullName: "",
@@ -148,17 +163,16 @@ export function StudentApplicationForm() {
   if (status === "success") {
     return (
       <div className="text-center py-12">
-        <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-baobab-500/20 flex items-center justify-center">
-          <svg className="w-8 h-8 text-baobab-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-[#52B788]/20 flex items-center justify-center">
+          <svg className="w-8 h-8 text-[#52B788]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-2xl font-bold text-env-primary mb-2">Application Submitted!</h3>
+        <h3 className="text-2xl font-bold text-env-primary mb-2">Application Submitted! 🎉</h3>
         <p className="text-env-secondary max-w-md mx-auto">
           Thank you for applying to LaunchPad {LAUNCHPAD_CONFIG.currentYear}. 
-          We&apos;ll review your application and contact you soon.
+          We'll review your application and contact you soon.
         </p>
-        <p className="text-xs text-env-tertiary mt-4">(Demo Mode - Database not connected)</p>
       </div>
     );
   }
@@ -168,7 +182,7 @@ export function StudentApplicationForm() {
       {/* Personal Information */}
       <div>
         <h3 className="text-lg font-semibold text-env-primary mb-4 flex items-center">
-          <span className="text-chapter-accent mr-2">👤</span>
+          <span className="text-[#FF8C42] mr-2">👤</span>
           Personal Information
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -183,7 +197,7 @@ export function StudentApplicationForm() {
               value={formData.fullName}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth"
+              className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary placeholder-env-tertiary focus:border-[#FF8C42] focus:ring-1 focus:ring-[#FF8C42] transition-all"
               placeholder="Enter your full name"
             />
           </div>
@@ -198,7 +212,7 @@ export function StudentApplicationForm() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth"
+              className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary placeholder-env-tertiary focus:border-[#FF8C42] focus:ring-1 focus:ring-[#FF8C42] transition-all"
               placeholder="your.email@example.com"
             />
           </div>
@@ -213,7 +227,7 @@ export function StudentApplicationForm() {
               value={formData.phone}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth"
+              className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary placeholder-env-tertiary focus:border-[#FF8C42] focus:ring-1 focus:ring-[#FF8C42] transition-all"
               placeholder="+234..."
             />
           </div>
@@ -227,7 +241,7 @@ export function StudentApplicationForm() {
               value={formData.gender}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth"
+              className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary focus:border-[#FF8C42] focus:ring-1 focus:ring-[#FF8C42] transition-all"
             >
               <option value="">Select gender</option>
               <option value="male">Male</option>
@@ -241,7 +255,7 @@ export function StudentApplicationForm() {
       {/* School Information */}
       <div>
         <h3 className="text-lg font-semibold text-env-primary mb-4 flex items-center">
-          <span className="text-chapter-accent mr-2">🏫</span>
+          <span className="text-[#FF8C42] mr-2">🏫</span>
           School Information
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -256,7 +270,7 @@ export function StudentApplicationForm() {
               value={formData.schoolName}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth"
+              className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary placeholder-env-tertiary focus:border-[#FF8C42] focus:ring-1 focus:ring-[#FF8C42] transition-all"
               placeholder="Enter your school name"
             />
           </div>
@@ -270,7 +284,7 @@ export function StudentApplicationForm() {
               value={formData.schoolLevel}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth"
+              className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary focus:border-[#FF8C42] focus:ring-1 focus:ring-[#FF8C42] transition-all"
             >
               <option value="">Select level</option>
               <option value="SS1">SS1</option>
@@ -284,7 +298,7 @@ export function StudentApplicationForm() {
       {/* Parent/Guardian Information */}
       <div>
         <h3 className="text-lg font-semibold text-env-primary mb-4 flex items-center">
-          <span className="text-chapter-accent mr-2">👨‍👩‍👧</span>
+          <span className="text-[#FF8C42] mr-2">👨‍👩‍👧</span>
           Parent/Guardian Information
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -299,7 +313,7 @@ export function StudentApplicationForm() {
               value={formData.parentName}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth"
+              className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary placeholder-env-tertiary focus:border-[#FF8C42] focus:ring-1 focus:ring-[#FF8C42] transition-all"
               placeholder="Enter parent/guardian name"
             />
           </div>
@@ -314,7 +328,7 @@ export function StudentApplicationForm() {
               value={formData.parentPhone}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth"
+              className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary placeholder-env-tertiary focus:border-[#FF8C42] focus:ring-1 focus:ring-[#FF8C42] transition-all"
               placeholder="+234..."
             />
           </div>
@@ -324,7 +338,7 @@ export function StudentApplicationForm() {
       {/* Business Idea */}
       <div>
         <h3 className="text-lg font-semibold text-env-primary mb-4 flex items-center">
-          <span className="text-chapter-accent mr-2">💡</span>
+          <span className="text-[#FF8C42] mr-2">💡</span>
           Your Business Idea
         </h3>
         <div className="space-y-4">
@@ -339,7 +353,7 @@ export function StudentApplicationForm() {
                 value={formData.businessCategory}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth"
+                className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary focus:border-[#FF8C42] focus:ring-1 focus:ring-[#FF8C42] transition-all"
               >
                 <option value="">Select category</option>
                 <option value="technology">Technology</option>
@@ -362,7 +376,7 @@ export function StudentApplicationForm() {
                 value={formData.businessTitle}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth"
+                className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary placeholder-env-tertiary focus:border-[#FF8C42] focus:ring-1 focus:ring-[#FF8C42] transition-all"
                 placeholder="Give your idea a name"
               />
             </div>
@@ -378,7 +392,7 @@ export function StudentApplicationForm() {
               onChange={handleChange}
               required
               rows={3}
-              className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth resize-none"
+              className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary placeholder-env-tertiary focus:border-[#FF8C42] focus:ring-1 focus:ring-[#FF8C42] transition-all resize-none"
               placeholder="Describe the problem you want to solve..."
             />
           </div>
@@ -393,7 +407,7 @@ export function StudentApplicationForm() {
               onChange={handleChange}
               required
               rows={3}
-              className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth resize-none"
+              className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary placeholder-env-tertiary focus:border-[#FF8C42] focus:ring-1 focus:ring-[#FF8C42] transition-all resize-none"
               placeholder="How will your idea solve this problem?"
             />
           </div>
@@ -407,7 +421,7 @@ export function StudentApplicationForm() {
               value={formData.aiIntegration}
               onChange={handleChange}
               rows={2}
-              className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-chapter-accent focus:ring-1 focus:ring-chapter-accent transition-smooth resize-none"
+              className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary placeholder-env-tertiary focus:border-[#FF8C42] focus:ring-1 focus:ring-[#FF8C42] transition-all resize-none"
               placeholder="Optional: Describe how AI could enhance your solution..."
             />
           </div>
@@ -424,7 +438,7 @@ export function StudentApplicationForm() {
             checked={formData.parentConsent}
             onChange={handleChange}
             required
-            className="w-5 h-5 mt-0.5 rounded border-env-border text-chapter-accent focus:ring-chapter-accent"
+            className="w-5 h-5 mt-0.5 rounded border-env-border text-[#FF8C42] focus:ring-[#FF8C42]"
           />
           <label htmlFor="student-parentConsent" className="text-sm text-env-secondary cursor-pointer">
             I confirm that my parent/guardian has given permission for me to participate in LaunchPad {LAUNCHPAD_CONFIG.currentYear}. *
@@ -438,7 +452,7 @@ export function StudentApplicationForm() {
             checked={formData.termsAccepted}
             onChange={handleChange}
             required
-            className="w-5 h-5 mt-0.5 rounded border-env-border text-chapter-accent focus:ring-chapter-accent"
+            className="w-5 h-5 mt-0.5 rounded border-env-border text-[#FF8C42] focus:ring-[#FF8C42]"
           />
           <label htmlFor="student-termsAccepted" className="text-sm text-env-secondary cursor-pointer">
             I agree to the terms and conditions of the LaunchPad program. *
@@ -457,9 +471,16 @@ export function StudentApplicationForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="w-full py-4 bg-chapter-accent hover:bg-chapter-accent-hover text-white font-semibold rounded-lg transition-smooth glow disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full py-4 bg-[#FF8C42] hover:bg-[#E85D04] text-[#1A1A1A] font-bold rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-[#FF8C42]/20"
       >
-        {status === "loading" ? "Submitting..." : "Submit Application"}
+        {status === "loading" ? (
+          <span className="flex items-center justify-center gap-2">
+            <span className="w-5 h-5 border-2 border-[#1A1A1A]/30 border-t-[#1A1A1A] rounded-full animate-spin" />
+            Submitting...
+          </span>
+        ) : (
+          "Submit Application 🚀"
+        )}
       </button>
     </form>
   );
@@ -502,17 +523,38 @@ export function SponsorApplicationForm() {
     setErrorMessage("");
 
     try {
-      // 🔧 TEMPORARY: Log form data (backend not connected yet)
-      console.log("📧 Sponsor Inquiry:", {
-        ...formData,
-        submittedAt: new Date().toISOString(),
+      const response = await fetch('/api/sponsor', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          companyName: formData.organizationName,
+          contactName: formData.contactName,
+          email: formData.contactEmail,
+          phone: formData.contactPhone,
+          sponsorshipType: formData.tier,
+          message: formData.sponsorshipGoals,
+        }),
       });
 
-      // Simulate network delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const result = await response.json();
 
-      // Simulate success
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to submit inquiry');
+      }
+
       setStatus("success");
+      setFormData({
+        organizationName: "",
+        organizationType: "",
+        contactName: "",
+        contactEmail: "",
+        contactPhone: "",
+        tier: "",
+        sponsorshipGoals: "",
+        termsAccepted: false,
+      });
     } catch (err) {
       setStatus("error");
       setErrorMessage(
@@ -524,17 +566,16 @@ export function SponsorApplicationForm() {
   if (status === "success") {
     return (
       <div className="text-center py-12">
-        <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-purple-500/20 flex items-center justify-center">
-          <svg className="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-[#A855F7]/20 flex items-center justify-center">
+          <svg className="w-8 h-8 text-[#A855F7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-2xl font-bold text-env-primary mb-2">Inquiry Received!</h3>
+        <h3 className="text-2xl font-bold text-env-primary mb-2">Inquiry Received! 🎉</h3>
         <p className="text-env-secondary max-w-md mx-auto">
           Thank you for your interest in sponsoring LaunchPad. 
           Our partnerships team will contact you within 48 hours.
         </p>
-        <p className="text-xs text-env-tertiary mt-4">(Demo Mode - Database not connected)</p>
       </div>
     );
   }
@@ -554,7 +595,7 @@ export function SponsorApplicationForm() {
             value={formData.organizationName}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-smooth"
+            className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary placeholder-env-tertiary focus:border-[#A855F7] focus:ring-1 focus:ring-[#A855F7] transition-all"
             placeholder="Enter organization name"
           />
         </div>
@@ -568,7 +609,7 @@ export function SponsorApplicationForm() {
             value={formData.organizationType}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-smooth"
+            className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary focus:border-[#A855F7] focus:ring-1 focus:ring-[#A855F7] transition-all"
           >
             <option value="">Select type</option>
             <option value="corporate">Corporate</option>
@@ -593,7 +634,7 @@ export function SponsorApplicationForm() {
             value={formData.contactName}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-smooth"
+            className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary placeholder-env-tertiary focus:border-[#A855F7] focus:ring-1 focus:ring-[#A855F7] transition-all"
             placeholder="Your name"
           />
         </div>
@@ -608,7 +649,7 @@ export function SponsorApplicationForm() {
             value={formData.contactEmail}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-smooth"
+            className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary placeholder-env-tertiary focus:border-[#A855F7] focus:ring-1 focus:ring-[#A855F7] transition-all"
             placeholder="email@organization.com"
           />
         </div>
@@ -623,7 +664,7 @@ export function SponsorApplicationForm() {
             value={formData.contactPhone}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-smooth"
+            className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary placeholder-env-tertiary focus:border-[#A855F7] focus:ring-1 focus:ring-[#A855F7] transition-all"
             placeholder="+234..."
           />
         </div>
@@ -640,7 +681,7 @@ export function SponsorApplicationForm() {
           value={formData.tier}
           onChange={handleChange}
           required
-          className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-smooth"
+          className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary focus:border-[#A855F7] focus:ring-1 focus:ring-[#A855F7] transition-all"
         >
           <option value="">Select a tier</option>
           {sponsorshipTiers.map((tier) => (
@@ -663,7 +704,7 @@ export function SponsorApplicationForm() {
           value={formData.sponsorshipGoals}
           onChange={handleChange}
           rows={3}
-          className="w-full px-4 py-3 rounded-lg bg-env-surface border border-env-border text-env-primary placeholder-env-tertiary focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-smooth resize-none"
+          className="w-full px-4 py-3 rounded-lg bg-env-bg-primary border border-env-border text-env-primary placeholder-env-tertiary focus:border-[#A855F7] focus:ring-1 focus:ring-[#A855F7] transition-all resize-none"
           placeholder="Tell us what you hope to achieve through this partnership..."
         />
       </div>
@@ -677,7 +718,7 @@ export function SponsorApplicationForm() {
           checked={formData.termsAccepted}
           onChange={handleChange}
           required
-          className="w-5 h-5 mt-0.5 rounded border-env-border text-purple-500 focus:ring-purple-500"
+          className="w-5 h-5 mt-0.5 rounded border-env-border text-[#A855F7] focus:ring-[#A855F7]"
         />
         <label htmlFor="sponsor-termsAccepted" className="text-sm text-env-secondary cursor-pointer">
           I agree to be contacted regarding sponsorship opportunities. *
@@ -695,9 +736,16 @@ export function SponsorApplicationForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="w-full py-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-smooth disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full py-4 bg-[#A855F7] hover:bg-[#9333EA] text-white font-bold rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-[#A855F7]/20"
       >
-        {status === "loading" ? "Submitting..." : "Submit Sponsorship Inquiry"}
+        {status === "loading" ? (
+          <span className="flex items-center justify-center gap-2">
+            <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+            Submitting...
+          </span>
+        ) : (
+          "Submit Sponsorship Inquiry 💼"
+        )}
       </button>
     </form>
   );

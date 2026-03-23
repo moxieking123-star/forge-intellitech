@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     
-    console.log('📨 Sponsor inquiry received:', body);
+    console.log('📨 Sponsor inquiry:', body);
 
     const {
       companyName,
@@ -17,7 +17,6 @@ export async function POST(request: NextRequest) {
       message,
     } = body;
 
-    // Validation
     if (!companyName || !contactName || !email) {
       return NextResponse.json(
         { error: 'Company name, contact name, and email are required' },
@@ -33,7 +32,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Insert into Supabase
     const { data, error } = await supabase
       .from('sponsor_inquiries')
       .insert([
@@ -66,15 +64,16 @@ export async function POST(request: NextRequest) {
         await resend.emails.send({
           from: FROM_EMAIL,
           to: ADMIN_EMAIL,
-          subject: `💼 New Sponsor Inquiry from ${companyName}`,
+          subject: `💼 New Sponsor Inquiry: ${companyName}`,
           html: `
             <h2>New Sponsor Inquiry</h2>
             <p><strong>Company:</strong> ${companyName}</p>
             <p><strong>Contact:</strong> ${contactName}</p>
             <p><strong>Email:</strong> ${email}</p>
             <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
-            <p><strong>Type:</strong> ${sponsorshipType || 'Not specified'}</p>
-            <p><strong>Message:</strong> ${message || 'No message'}</p>
+            <p><strong>Tier:</strong> ${sponsorshipType || 'Not specified'}</p>
+            <p><strong>Goals:</strong> ${message || 'Not provided'}</p>
+            <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
           `,
         });
         console.log('✅ Email notification sent');
@@ -84,7 +83,7 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json(
-      { success: true, message: 'Inquiry submitted successfully!', id: data.id },
+      { success: true, message: 'Inquiry submitted successfully!' },
       { status: 201 }
     );
 
