@@ -31,6 +31,76 @@ export const metadata: Metadata = {
     template: "%s | Forge Intellitech",
   },
   description: "We build technology solutions rooted in African realities. From education to fintech, we create products that understand and serve our continent.",
+  
+  // Keywords for SEO
+  keywords: [
+    'technology',
+    'software development',
+    'Africa',
+    'Nigeria',
+    'fintech',
+    'education technology',
+    'LaunchPad',
+    'Forge Intellitech'
+  ],
+  
+  // Author info
+  authors: [{ name: 'Forge Intellitech' }],
+  creator: 'Forge Intellitech',
+  publisher: 'Forge Intellitech',
+  
+  // Favicon & Icons
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
+      { url: '/icon.png', sizes: '192x192', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
+  
+  // Open Graph (Facebook, LinkedIn, etc.)
+  openGraph: {
+    title: 'Forge Intellitech | Technology Built for Africa',
+    description: 'We build technology solutions rooted in African realities. From education to fintech, we create products that understand and serve our continent.',
+    url: 'https://forgeintellitech.com',
+    siteName: 'Forge Intellitech',
+    locale: 'en_US',
+    type: 'website',
+    images: [
+      {
+        url: '/images/og-image.png', // Create this image (1200x630px)
+        width: 1200,
+        height: 630,
+        alt: 'Forge Intellitech',
+      },
+    ],
+  },
+  
+  // Twitter Card
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Forge Intellitech | Technology Built for Africa',
+    description: 'We build technology solutions rooted in African realities.',
+    images: ['/images/og-image.png'], // Same image as OpenGraph
+  },
+  
+  // Robots
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  
+  // RSS Feed
   alternates: {
     types: {
       'application/rss+xml': 'https://forgeintellitech.com/rss.xml',
