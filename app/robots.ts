@@ -1,17 +1,14 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  // ⚠️ CHANGE THIS to your actual domain
-  const baseUrl = 'https://forgeintellitech.com'
-  
   return {
     rules: [
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/admin/'],
+        disallow: ['/api/', '/admin/', '/_next/'],
       },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
-  }
+    sitemap: 'https://forgeintellitech.com/sitemap.xml',
+  };
 }
