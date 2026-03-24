@@ -37,9 +37,9 @@ const products = [
   },
   {
     name: "LaunchPad",
-    tagline: "Your idea, your company, your future",
+    tagline: "Your idea, your company, our platform",
     description: "Got a solution in your head? We give you money, mentorship, and a team that actually wants you to succeed — and we don't take equity. This is about you, not us.",
-    status: "development" as const,
+    status: "pilot" as const,
     href: "/launchpad",
     color: "#FF8C42",
   },
@@ -100,21 +100,21 @@ const impactStats = [
 // Testimonials
 const voices = [
   {
-    quote: "Forge isn't just teaching code. They're teaching young people that they can actually build things that matter. That's different. That's what we need.",
-    name: "Dr. Amaka Eze",
-    role: "Education Policy Researcher, University of Lagos",
+    quote: "What stands out about Forge is how they think. They’re not trying to copy what’s already working elsewhere. Everything they’re building starts from how things actually work here. That kind of thinking is what we’ve been missing.",
+    name: "Mrs. Amaka Eze",
+    role: "Education Policy Researcher",
     color: "#14B8B8",
   },
   {
-    quote: "When Forge came to our school, something shifted. Students started asking 'how does this work?' instead of 'when is break time?' That's not small.",
-    name: "Mr. Chukwuemeka Obi",
-    role: "Vice Principal, Partner Secondary School",
+    quote: "Forge is solving problems from the root, not just the surface. You can tell they’re intentional about how their systems are designed—simple, practical, and built for real everyday use. That approach is what makes the difference.",
+    name: "Mrs. B. Adebanjo",
+    role: "Principal, Dan and Dav College",
     color: "#FF8C42",
   },
   {
-    quote: "I've seen many NGOs promise to transform education. Forge actually shows up, does the work, and the students can prove what they've learned. That's rare.",
-    name: "Mrs. Folake Adeyemi",
-    role: "Parent & Education Advocate",
+    quote: "There’s a clarity in what Forge is doing. It’s not charity, and it’s not hype. It’s a long-term play to build systems that actually work in this environment. That level of focus and discipline is not common. It’s what gives me confidence that they’ll succeed.",
+    name: "Bar. David Adeyemi",
+    role: "Lawyer and Parent",
     color: "#52B788",
   },
 ];
@@ -137,9 +137,9 @@ export default function HomePageClient() {
                   Let's Be Honest
                 </span>
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-env-primary mb-6 leading-tight">
-                  Africa has talent.
+                  Africa does not lack talent.
                   <br />
-                  <span className="text-env-secondary">What we don't have is the system to grow it.</span>
+                  <span className="text-env-secondary">What we lack is the system to grow it.</span>
                 </h2>
               </div>
             </AnimatedSection>
@@ -498,7 +498,7 @@ export default function HomePageClient() {
             <AnimatedSection animation="fade-up">
               <div className="relative h-[350px] md:h-[400px] rounded-2xl overflow-hidden">
                 <Image
-                  src="/images/launchpad/students-learning.jpg"
+                  src="/images/students-learning.jpg"
                   alt="Students collaborating on a project"
                   fill
                   className="object-cover"

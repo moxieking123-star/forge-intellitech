@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     'LaunchPad',
     'digital skills training',
     'Lagos tech startup',
+    'Digital education Nigeria',
+    'African innovation',
+    'EdTech startup',
   ],
   openGraph: {
     title: 'Forge Intellitech | Technology Built for Africa',

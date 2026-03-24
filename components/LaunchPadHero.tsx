@@ -589,7 +589,7 @@ const LaunchPadHero = () => {
               style={{ animationDelay: '0.3s' }}
             >
               <Link
-                href="#apply"
+                href="/launchpad/apply"
                 className="
                   group inline-flex items-center justify-center gap-2
                   px-8 py-4 rounded-xl

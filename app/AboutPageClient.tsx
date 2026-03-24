@@ -41,9 +41,9 @@ const values = [
 
 // Team members
 const team = [
-  { name: "Jehovah God", role: "Founder", bio: "The timeless Creator and supreme founder, the source of wisdom and the purpose guiding Forge Intellitech's mission to build Africa's future.", image: "/images/team/god.jpg", color: "#FF8C42" },
-  { name: "Moxie Adeniyi", role: "Chief Executive Officer", bio: "A visionary CEO driving African innovation through human capacity development, building scalable systems that empower youth, strengthen institutions, and position the continent as a global force in technology and enterprise.", image: "/images/team/founder.jpg", color: "#14B8B8" },
-  { name: "Adeola Oyewole", role: "Chairman", bio: "A leader committed to strengthening African institutions and empowering the next generation through strategic partnerships and sustainable growth.", image: "/images/team/chairman.jpg", color: "#52B788" },
+  { name: "Jehovah God", role: "Founder", bio: "The timeless Creator and supreme founder, the source of wisdom and purpose guiding Forge Intellitech's mission to build Africa's future with clarity.", image: "/images/team/god.jpg", color: "#FF8C42" },
+  { name: "Moxie Adeniyi", role: "Chief Executive Officer", bio: "Visionary in driving African innovation through human capacity development, building scalable systems that empower youth, and position the continent globally.", image: "/images/team/founder.jpg", color: "#14B8B8" },
+  { name: "Adeola Oyewole", role: "Chairman", bio: "A leader committed to strengthening African EdTech institutions and empowering the next generation through strategic partnerships, sustainable growth and lasting impact.", image: "/images/team/chairman.jpg", color: "#52B788" },
 ];
 
 // Partners
