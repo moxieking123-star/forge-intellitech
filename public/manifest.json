@@ -1,0 +1,21 @@
+{
+  "name": "Forge Intellitech",
+  "short_name": "Forge",
+  "description": "Building Africa's next generation of innovators through digital skills education and entrepreneurship programs.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A0A0A",
+  "theme_color": "#FF8C42",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

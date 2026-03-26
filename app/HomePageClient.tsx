@@ -38,7 +38,7 @@ const products = [
   {
     name: "LaunchPad",
     tagline: "Your idea, your company, our platform",
-    description: "Got a solution in your head? We give you money, mentorship, and a team that actually wants you to succeed — and we don't take equity. This is about you, not us.",
+    description: "Skills unlock creativity. Creativity births ideas. LaunchPad is where those ideas get funded. We give young Nigerians with real solutions a stage to compete, a platform to pitch, and business grants to make it happen.",
     status: "pilot" as const,
     href: "/launchpad",
     color: "#FF8C42",
@@ -46,7 +46,7 @@ const products = [
   {
     name: "BiteBank",
     tagline: "Eating well shouldn't be complicated",
-    description: "A meal planning app that understands how we eat here. Nigerian food, local vendors, family portions, your budget. Simple. Healthy. Ours.",
+    description: "Plan your meals a month ahead. Lock in your budget. Get food delivered on your schedule. For busy people, disciplined eaters, and parents who want to know their kids are actually eating — not just spending.",
     status: "development" as const,
     href: "/products#bitebank",
     color: "#52B788",
@@ -54,7 +54,7 @@ const products = [
   {
     name: "Trego",
     tagline: "Moving cities forward",
-    description: "What if public transport in African cities actually worked? Clean buses, real schedules, safe rides. We're building the mobility system we deserve.",
+    description: "Electric buses. Real schedules. Book via USSD or app. Hop on, fare handled. Public transport that actually works — because African cities deserve better than what we've settled for.",
     status: "development" as const,
     href: "/products#trego",
     color: "#FFD54F",

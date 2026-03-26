@@ -243,8 +243,8 @@ export const sponsorBenefits = [
 
 export const sponsorshipTiers = [
   {
-    name: "Platinum",
-    amount: "₦5,000,000+",
+    name: "Headline",
+    amount: "₦15M - ₦20M",
     benefits: [
       "Exclusive title sponsorship",
       "Keynote speaking opportunity",
@@ -255,7 +255,7 @@ export const sponsorshipTiers = [
   },
   {
     name: "Gold",
-    amount: "₦2,500,000 - ₦4,999,999",
+    amount: "₦5,000,000 - ₦4,999,999",
     benefits: [
       "Co-sponsorship recognition",
       "Panel participation",
@@ -266,7 +266,7 @@ export const sponsorshipTiers = [
   },
   {
     name: "Silver",
-    amount: "₦1,000,000 - ₦2,499,999",
+    amount: "₦3,000,000 - ₦1,500,000",
     benefits: [
       "Supporting sponsor recognition",
       "Logo on event materials",
@@ -276,7 +276,17 @@ export const sponsorshipTiers = [
   },
   {
     name: "Bronze",
-    amount: "₦500,000 - ₦999,999",
+    amount: "₦1,500,000 - ₦999,999",
+    benefits: [
+      "Contributor recognition",
+      "Logo on website",
+      "Certificate of appreciation",
+      "Event tickets",
+    ],
+  },
+  {
+    name: "Institutional Partner",
+    amount: "In-Kind",
     benefits: [
       "Contributor recognition",
       "Logo on website",
