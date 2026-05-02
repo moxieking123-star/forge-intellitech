@@ -30,8 +30,8 @@ import {
 } from "../lib/launchpadData";
 
 // Registration config
-const REGISTRATION_OPENS = "May 1, 2026";
-const REGISTRATION_OPENS_DATE = new Date("2026-05-01");
+const REGISTRATION_OPENS = "June 1, 2026";
+const REGISTRATION_OPENS_DATE = new Date("2026-06-01");
 
 // ==================== CUSTOM ICONS ====================
 const VideoIcon = ({ size = 24, color = "#FF8C42" }) => (
