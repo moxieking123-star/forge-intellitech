@@ -6,6 +6,146 @@ import { ChapterWrapper } from "../../../components/ChapterWrapper";
 // Complete blog posts data with full content
 const blogPosts = [
   {
+    slug: "national-digital-corps-not-another-nysc-scheme",
+    title: "Nigeria Doesn't Need Another NYSC Scheme. It Needs a National Digital Corps.",
+    excerpt: "The new digital tech curriculum was outdated before it finished printing. If Nigeria is serious about competing on AI, it needs a standing national agency for digital education and certification — not a review every few years while the technology moves every few months.",
+    author: "Forge Team",
+    date: "September 18, 2026",
+    category: "Education Policy",
+    readTime: "10 min read",
+    featured: true,
+    image: "/images/blog/national-digital-corps.jpg",
+    content: `<p>Let's start with the good news, because there is some.</p>
+
+<p>For the 2026/2027 academic session, the Federal Ministry of Education's "Lighter Load, Sharper Skills" curriculum reform made Digital Technologies a compulsory subject for every Nigerian secondary school student — arts, sciences, commercial, vocational, all of them. The scheme of work under it covers programming in Python, JavaScript, and HTML/CSS, data science basics, artificial intelligence, robotics, and digital entrepreneurship.</p>
+
+<p>A little over a year ago, on this same blog, we celebrated the shift from "ICT" to "Digital Technology" as the moment Nigerian education stopped teaching Microsoft Word and started teaching how the internet actually works. We meant it. We still do.</p>
+
+<p>But something happened between that celebration and today that nobody accounted for in the scheme of work: OpenAI released GPT-6 Astra.</p>
+
+<h2>The Curriculum vs. The Calendar</h2>
+
+<p>On September 3rd, 2026, OpenAI rolled out GPT-6 Astra — a model it calls state-of-the-art on computer use, software engineering, cybersecurity, and professional work. Sam Altman told CNBC it represents "a new capability level." Parts of the industry are openly asking whether it clears the bar for AGI.</p>
+
+<p>Sit with the timing. A national curriculum built around "AI" as a topic was finalized, printed, and distributed to schools for a session that started the same month a frontier AI model crossed into territory the industry itself isn't sure how to name yet.</p>
+
+<p>This is not a criticism of the people who wrote the scheme of work. It's a criticism of trying to pin down a moving target with a fixed document.</p>
+
+<h2>What the Scheme of Work Gets Right</h2>
+
+<p>Give credit where it's due. Compared to what came before it, this is a serious document:</p>
+
+<ul>
+<li>Programming languages students can actually build things with — Python, JavaScript, HTML/CSS</li>
+<li>Data science basics, not just "what is data"</li>
+<li>Robotics, moving beyond theory into hands-on building</li>
+<li>Digital entrepreneurship, connecting skill to income</li>
+<li>AI, named explicitly as a topic, for the first time in a compulsory Nigerian secondary curriculum</li>
+</ul>
+
+<p>That last one matters. A year ago, "AI" barely appeared in a Nigerian scheme of work. Now every senior secondary student in the country is supposed to encounter it. That's real progress, and it deserves to be said plainly before we get to the hard part.</p>
+
+<h2>What It Still Doesn't Cover</h2>
+
+<p>Here's where it falls short — not because anyone was lazy, but because no printed document can keep pace with what's actually happening in AI right now.</p>
+
+<h3>1. "AI Awareness" Is Not the Same Skill As Building With AI</h3>
+
+<p>Most curricula, this one included, treat AI the way older ICT syllabuses treated the internet: as a thing to define, explain, and use responsibly. Definitions matter. But the students competing for opportunity in 2027 and beyond won't be judged on whether they can define a large language model — they'll be judged on whether they can direct one to build something, debug something, research something, ship something. That's a different skill, and it has to be taught by doing, inside the subject, not appended as an ethics footnote.</p>
+
+<h3>2. The Exam Still Rewards the Wrong Thing</h3>
+
+<p>You can put "AI" and "robotics" in a scheme of work and still test it the way WAEC has always tested ICT — definitions, diagrams, multiple choice. If the assessment doesn't change, the classroom won't either. Teachers teach to the exam. That's not a uniquely Nigerian problem, but it's the one lever that decides whether this reform lives in the classroom or only on paper.</p>
+
+<h3>3. Nobody Owns the Update Cycle</h3>
+
+<p>NERDC reviews curricula on a multi-year cycle, as it should — that's how you keep a national syllabus coherent instead of chaotic. But AI capability isn't moving on a multi-year cycle. It moved from GPT-5.5 to GPT-6 Astra inside a single academic session. A subject like Digital Technologies needs something no other subject has ever needed: a standing body whose only job is watching that gap and updating the syllabus, the teacher training, and the certification continuously — not waiting for the next scheduled review.</p>
+
+<h2>Which Brings Us Back to NYSC</h2>
+
+<p>This is not a coincidence. Nigeria is already having a version of this conversation — just not in the place it needs to happen.</p>
+
+<p>The NYSC digitisation plan moving through 2026–2028 includes a ₦2 billion Innovation Fund, a Unified Digital Command and Service Platform, and a partnership with NITDA to roll out a National Digital Literacy Framework for corps members. Good pieces. Real money. Real intent.</p>
+
+<p>But look at where they sit: NITDA owns one piece. NYSC owns another. NERDC owns the curriculum. States own implementation. Nobody owns the whole pipeline — from the JSS1 student encountering "Digital Technologies" for the first time, through the SS student learning Python, through the NYSC corps member getting a literacy certificate, to the graduate trying to convert any of it into income.</p>
+
+<p>That's the gap a National Digital Corps would close. Not a rebrand of NYSC. Not another twelve-month scheme with a launch ceremony and a hashtag. A standing national agency — the way NAFDAC owns food and drug regulation, the way JAMB owns university entry — whose entire mandate is digital education and certification, accountable for keeping the curriculum, the teacher training, and the credentials current against whatever OpenAI, Google, or Anthropic ship next.</p>
+
+<p>Nigeria has had the pieces of this conversation for years, scattered across ministries and press releases. It's time it became one conversation, with one agency answerable for the outcome.</p>
+
+<h2>What We'd Ask For</h2>
+
+<p>Three things, in order:</p>
+
+<ul>
+<li><strong>A standing digital curriculum body</strong> — not a review committee that meets every few years, but a unit inside government whose job is permanent: track what AI can do, update what schools teach, every session if it has to.</li>
+<li><strong>Assessment that matches the subject</strong> — a Digital Technologies exam that asks a student to build and direct, not just define and recall.</li>
+<li><strong>One accountable pipeline</strong> — from secondary school through NYSC to certification, owned by one body Nigerians can actually hold to a number, not five agencies each claiming a slice of the credit.</li>
+</ul>
+
+<p>We're not waiting for that agency to exist before we act. Through TechUp, we're already in secondary school classrooms teaching students to build with technology, not just study it. Through LaunchPad, we're funding the ideas that come out of those classrooms before their authors ever reach NYSC age.</p>
+
+<p>But a handful of programs in Lagos schools isn't a national pipeline. It's proof the pipeline is buildable. The rest is a policy choice — and a curriculum, however well-intentioned, will always be a year behind the technology it's trying to teach until someone is paid, full-time, to keep it from falling behind.</p>`,
+  },
+  {
+    slug: "what-nigerian-youth-should-listen-for-2027",
+    title: "2027 Is Coming. Here's What Nigerian Youth Should Actually Be Listening For.",
+    excerpt: "Politicians show up every election season promising to 'empower' young people. Before 2027, here's the difference between noise and an actual plan — and the five questions that tell them apart.",
+    author: "Forge Team",
+    date: "September 20, 2026",
+    category: "Education Policy",
+    readTime: "8 min read",
+    featured: false,
+    image: "/images/blog/2027-youth-digital-future.jpg",
+    content: `<p>Election season has a sound. You'll hear it soon if you haven't already: "youth empowerment." "Digital economy." "Skills for the future." Every candidate will say a version of it, usually standing next to a banner, usually followed by an announcement of cash, kits, or a one-day training with a certificate that opens exactly zero doors.</p>
+
+<p>We're not writing this to tell you who to vote for. We're writing it because ahead of 2027, young Nigerians are about to be talked <em>at</em> about digital skills more than at any point in this country's history — and most of it will be noise dressed up as a plan.</p>
+
+<p>Here's how to tell the difference.</p>
+
+<h2>The Promises You've Already Heard</h2>
+
+<p>Nigeria doesn't lack digital skills announcements. In the last two years alone: a target to train 50,000 youth in digital competencies. A federal partnership with Ericsson for a four-month innovation hackathon reaching another 50,000 young people. The 3 Million Technical Talent programme (3MTT), promising three million trained tech professionals by 2027. NITDA's own strategic pillars toward a $100 billion digital economy.</p>
+
+<p>Big numbers. Real budgets, in some cases. And a legitimate question underneath all of them that almost nobody in government has had to answer publicly: what happened to the last cohort?</p>
+
+<p>As one Oyo State lawmaker put it ahead of 2027, politicians should stop sharing money and start investing in youth digital future instead. He's right — but that line only means something if young people know exactly what to ask for when a politician claims to be doing it.</p>
+
+<h2>Five Things to Actually Listen For</h2>
+
+<h3>1. A Number You Can Check Later</h3>
+
+<p>"We trained thousands of youth" is a launch photo. "1,200 of the 3,000 we trained in 2025 are now employed or running a registered business, and here's the published report" is a program. If a politician can't tell you how many people from the <em>last</em> initiative actually converted training into income, they're describing a photo-op, not a policy.</p>
+
+<h3>2. Who Pays for the Data and the Device</h3>
+
+<p>You cannot build a digital skill you cannot afford to practice. A free coding bootcamp means nothing to a student without a laptop or the data to attend it online. Ask what the actual commitment is on connectivity and hardware — not "we'll partner with the private sector," which is what politicians say when there's no line item.</p>
+
+<h3>3. A Certificate That Means Something</h3>
+
+<p>Training without recognized certification is a badge for a wall. Ask whether the credential is tied to something that carries real weight — globally recognized, or backed by an accountable national body — or whether it's a participation certificate with a government logo on it.</p>
+
+<h3>4. Where It Actually Starts</h3>
+
+<p>Most digital skills policy in Nigeria targets people already out of school — NYSC corps members, "youth" defined as 18 to 35. But the students who'll be job-hunting in 2030 are in JSS2 right now. A politician serious about the next generation's digital wealth is talking about secondary school, not just post-service training. If the plan only starts after graduation, it starts too late for the people it claims to be for.</p>
+
+<h3>5. One Name You Can Hold Accountable</h3>
+
+<p>Ask who, specifically, is responsible if this doesn't work. Not "the Federal Government." Not "a multi-agency collaboration." A name, a ministry, a body that reports numbers publicly and can be pointed at in four years. When digital skills policy is spread across five agencies with no single owner, nobody answers for it when it quietly disappears after the election.</p>
+
+<h2>What This Isn't</h2>
+
+<p>This isn't an argument against cash transfers, grants, or immediate relief — young Nigerians need income now as much as they need skills for later, and pretending otherwise is its own kind of dishonesty. It's an argument against treating the two as competitors, when the politicians who are serious answer both questions instead of hiding behind the easier one.</p>
+
+<p>It's also not cynicism for its own sake. The infrastructure for a real answer already exists in pieces — 3MTT's ambition, NITDA's strategic pillars, the NYSC digitisation plan, state-level coding programmes springing up from Kwara to Lagos. What's missing isn't announcements. It's the follow-through, and the willingness to be measured on it.</p>
+
+<h2>Before You Nod Along Next Time</h2>
+
+<p>The next time a candidate stands in front of a banner and promises to hand young people "the digital economy," don't just listen for the number. Listen for the report on the last number. Listen for who pays when the laptop and the data bill are the real barrier. Listen for whether the plan reaches a 14-year-old in a public school or only a 24-year-old already in Lagos.</p>
+
+<p>And listen for one name attached to the outcome — because a promise with no owner is just a sound election season makes, and 2027 doesn't have to sound like every year before it.</p>`,
+  },
+  {
     slug: "iran-self-reliance-lessons-for-africa",
     title: "What Africa Can Learn From Iran's Self-Reliance: Building From Within, Not From Handouts",
     excerpt: "We're not picking sides in global politics. But there's a lesson in watching a nation build advanced technology under crushing sanctions — while Africa, with all its freedom and resources, still waits for help from abroad. The lesson isn't about missiles. It's about will.",

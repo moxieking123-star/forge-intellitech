@@ -25,6 +25,28 @@ const categories = [
 // Blog posts data (keep your existing data)
 const blogPosts = [
   {
+    slug: "national-digital-corps-not-another-nysc-scheme",
+    title: "Nigeria Doesn't Need Another NYSC Scheme. It Needs a National Digital Corps.",
+    excerpt: "The new digital tech curriculum was outdated before it finished printing. If Nigeria is serious about competing on AI, it needs a standing national agency for digital education and certification — not a review every few years while the technology moves every few months.",
+    author: "Forge Team",
+    date: "September 18, 2026",
+    category: "Education Policy",
+    readTime: "10 min read",
+    featured: true,
+    image: "/images/blog/national-digital-corps.jpg",
+  },
+  {
+    slug: "what-nigerian-youth-should-listen-for-2027",
+    title: "2027 Is Coming. Here's What Nigerian Youth Should Actually Be Listening For.",
+    excerpt: "Politicians show up every election season promising to 'empower' young people. Before 2027, here's the difference between noise and an actual plan — and the five questions that tell them apart.",
+    author: "Forge Team",
+    date: "September 20, 2026",
+    category: "Education Policy",
+    readTime: "8 min read",
+    featured: false,
+    image: "/images/blog/2027-youth-digital-future.jpg",
+  },
+  {
     slug: "iran-self-reliance-lessons-for-africa",
     title: "What Africa Can Learn From Iran's Self-Reliance: Building From Within, Not From Handouts",
     excerpt: "We're not picking sides in global politics. But there's a lesson in watching a nation build advanced technology under crushing sanctions — while Africa, with all its freedom and resources, still waits for help from abroad. The lesson isn't about missiles. It's about will.",
@@ -32,7 +54,7 @@ const blogPosts = [
     date: "March 15, 2026",
     category: "African Leadership",
     readTime: "12 min read",
-    featured: true,
+    featured: false,
     image: "/images/blog/africa-self-reliance.jpg",
   },
   {
