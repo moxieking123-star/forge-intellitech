@@ -1,359 +1,266 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowRight,
-  Briefcase,
-  GraduationCap,
-  Lightbulb,
-  Plus,
-} from "@phosphor-icons/react/dist/ssr";
-import styles from "../components/home/Home.module.css";
+import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
+import ProductRow from "../components/home/ProductRow";
+import styles from "../components/home/Editorial.module.css";
 
 const work = [
   {
     title: "Learn to build.",
-    description: (
-      <>
-        ElyTech for primary schools.
-        <br />
-        TechUp for secondary schools.
-      </>
-    ),
-    href: "/techup",
-    label: "Explore our school programmes",
+    subtitle: "TechUp & ElyTech",
+    description: "Practical technology education for real opportunities.",
+    href: "/programmes",
   },
   {
-    title: "Give an idea a beginning.",
-    description: (
-      <>
-        In-school LaunchPad.
-        <br />
-        Practical enterprise learning.
-      </>
-    ),
+    title: "Turn an idea into a beginning.",
+    subtitle: "In-school LaunchPad",
+    description: "Support for promising ideas, right where young people are.",
     href: "/launchpad",
-    label: "Explore LaunchPad",
   },
   {
-    title: "Build for life here.",
-    description: (
-      <>
-        Products in development.
-        <br />
-        Solutions rooted in African realities.
-      </>
-    ),
-    href: "/products",
-    label: "Explore our products",
+    title: "Build solutions for life here.",
+    subtitle: "Our products",
+    description: "Technology designed for real needs in Nigeria.",
+    href: "#products",
   },
 ];
-
+const stories = [
+  {
+    title: "From school to paid internship",
+    copy: "Finishing secondary school should open a door. Our intern is gaining practical experience, earning an income and receiving monthly support towards his education throughout his internship. A beginning should give you somewhere to go.",
+  },
+  {
+    title: "Ideas taking shape in school",
+    copy: "Students in SSS 2 are already thinking about the businesses they could build. We have taught them to speak to a market before developing an idea, and offered to support the branding of their ideas. Their questions today could become solutions tomorrow.",
+  },
+  {
+    title: "What a laptop makes possible",
+    copy: "We have given students laptops so learning can continue beyond a workshop. The device is only the beginning. With time, guidance and the chance to practise, a young person can move from watching what others build to creating something of their own.",
+  },
+];
 export default function HomePageClient() {
   return (
     <div className={styles.page} id="home-content" tabIndex={-1}>
-      <section className={styles.hero} aria-labelledby="home-title">
-        <Image
-          className={styles.heroImage}
-          src="/images/home/lagos-future.webp"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-        />
-        <div className={styles.heroShade} />
-        <div className={styles.heroInner}>
-          <div className={styles.heroCopy}>
-            <h1 id="home-title">
-              Africa can
-              <br />
-              create this.
-              <br />
-              <span>Let’s forge it.</span>
-            </h1>
-            <p>
-              We build useful technology, teach practical skills, and back ideas
-              born here.
-            </p>
-            <div className={styles.heroActions}>
-              <Link className={styles.button} href="/join">
-                Build with us <ArrowRight size={23} aria-hidden />
-              </Link>
-              <a className={styles.heroSecondary} href="#work">
-                Explore our work <ArrowRight size={21} aria-hidden />
-              </a>
-            </div>
-          </div>
-          <p className={styles.visionCaption}>A vision of what we can build.</p>
-        </div>
-      </section>
-
-      <section id="work" className={styles.work} aria-labelledby="work-title">
-        <div className={styles.container}>
-          <p className={styles.eyebrow}>Forge Intellitech Services Ltd</p>
-          <div className={styles.companyIntro}>
-            <h2 id="work-title">
-              The next big thing
-              <br className={styles.desktopBreak} /> can be built here.
-            </h2>
-            <p>
-              We are a technology company building African solutions. Forge ITs
-              is the movement within it: people creating what our future needs.
-            </p>
-          </div>
-          <div className={styles.workRows}>
-            {work.map((item, index) => (
-              <Link
-                key={item.title}
-                href={item.href}
-                className={styles.workRow}
-                aria-label={item.label}
-              >
-                <span className={styles.rowNumber}>0{index + 1}</span>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-                <ArrowRight
-                  className={styles.rowArrow}
-                  size={29}
-                  weight="light"
-                  aria-hidden
-                />
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section
-        id="movement"
-        className={styles.campaign}
-        aria-labelledby="movement-title"
+        id="company"
+        className={styles.hero}
+        aria-labelledby="home-title"
       >
-        <div className={`${styles.container} ${styles.campaignInner}`}>
-          <div className={styles.campaignCopy}>
-            <p className={styles.eyebrow}>
-              Endless Possibilities <span>· A Forge ITs movement</span>
-            </p>
-            <h2 id="movement-title">
-              Give a child
-              <br />a <span>laptop.</span>
-            </h2>
-            <p className={styles.campaignLead}>
-              Someone else’s child. Our shared future.
-              <br />
-              You provide a device. We provide a year of training.
-            </p>
+        <div className={styles.heroCopy}>
+          <h1 id="home-title">
+            The next
+            <br />
+            big thing
+            <br />
+            can be
+            <br />
+            built <span>here.</span>
+          </h1>
+          <p>
+            We are Forge Intellitech Services Ltd.
+            <br />
+            Building useful technology. Teaching people to create. Backing ideas
+            that deserve
+            <br className={styles.desktopBreak} /> a beginning.
+          </p>
+          <div className={styles.actions}>
+            <a href="#work" className={styles.button}>
+              Explore what we’re building <ArrowRight size={24} aria-hidden />
+            </a>
+            <Link href="/join" className={styles.textLink}>
+              Work with Forge
+            </Link>
           </div>
-          <div className={styles.campaignPicture}>
+        </div>
+        <figure className={styles.heroPicture}>
+          <div className={styles.heroImage}>
             <Image
-              src="/images/home/laptop-opportunity.webp"
-              alt="A laptop ready to become a tool for learning and creating"
+              src="/images/home/studio-beginning.webp"
+              alt="An illustrative Nigerian workspace with a laptop, ideas on paper and a view towards the city"
               fill
-              sizes="(max-width: 700px) 100vw, 55vw"
+              priority
+              sizes="(max-width: 700px) 100vw, 52vw"
             />
           </div>
-          <div className={styles.campaignBottom}>
-            <div className={styles.campaignActions}>
-              <a href="#movement-details" className={styles.button}>
-                Explore the movement <ArrowRight size={23} aria-hidden />
-              </a>
-              <Link href="/contact?interest=laptop" className={styles.textLink}>
-                Register donor interest <ArrowRight size={20} aria-hidden />
-              </Link>
+          <figcaption>Tools. Skills. Ideas. A place to start.</figcaption>
+        </figure>
+      </section>
+      <p className={styles.manifesto}>Made of possibility.</p>
+      <section id="work" className={styles.work} aria-label="Our work">
+        {work.map((item, index) => (
+          <Link key={item.title} href={item.href} className={styles.workRow}>
+            <span className={styles.number}>0{index + 1}</span>
+            <div>
+              <h2>{item.title}</h2>
+              <span className={styles.subtitle}>{item.subtitle}</span>
             </div>
-            <p className={styles.eligibility}>
-              For secondary-school students in public and low-income private
-              schools.
-              <br />
-              Devices are requested only against verified student need.
-            </p>
+            <p>{item.description}</p>
+            <ArrowRight size={31} weight="light" aria-hidden />
+          </Link>
+        ))}
+      </section>
+      <ProductRow />
+      <section
+        id="movement"
+        className={styles.movement}
+        aria-labelledby="movement-title"
+      >
+        <Image
+          src="/images/home/orange-beginning.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          className={styles.movementImage}
+        />
+        <div className={styles.movementCopy}>
+          <p className={styles.eyebrow}>
+            Endless Possibilities — a Forge ITs movement
+          </p>
+          <h2 id="movement-title">
+            Someone else’s child.
+            <br />
+            <span>Our shared future.</span>
+          </h2>
+          <p className={styles.movementLead}>
+            Give a child a laptop. We’ll help them learn to build with it.
+          </p>
+          <div className={styles.actions}>
+            <a className={styles.button} href="#movement-details">
+              Discover Endless Possibilities{" "}
+              <ArrowRight size={24} aria-hidden />
+            </a>
+            <Link href="/contact?interest=movement" className={styles.textLink}>
+              Volunteer your time
+            </Link>
           </div>
         </div>
       </section>
-
-      <details className={styles.movementAccordion}>
+      <section
+        id="stories"
+        className={styles.newsroom}
+        aria-labelledby="stories-title"
+      >
+        <p className={styles.eyebrow}>From our newsroom</p>
+        <div className={styles.newsGrid}>
+          <h2 id="stories-title">
+            Proof,
+            <br />
+            <span>told properly.</span>
+          </h2>
+          {stories.map((story) => (
+            <article key={story.title}>
+              <details>
+                <summary>
+                  <h3>{story.title}</h3>
+                  <ArrowRight size={27} weight="light" aria-hidden />
+                </summary>
+                <p>{story.copy}</p>
+              </details>
+            </article>
+          ))}
+        </div>
+      </section>
+      <details className={styles.movementDetails}>
         <summary>
-          <span>
-            How a beginning happens
-            <small>Devices, eligibility and a year of learning</small>
-          </span>
-          <Plus size={24} aria-hidden />
+          There is a place for what you can give.{" "}
+          <ArrowRight size={24} aria-hidden />
         </summary>
-        <section
-          id="movement-details"
-          className={styles.movementDetails}
-          aria-labelledby="beginning-title"
-        >
-          <div className={styles.container}>
-            <div className={styles.movementIntro}>
-              <p className={styles.eyebrow}>A device is a beginning</p>
-              <h2 id="beginning-title">
-                The possibility is
+        <section id="movement-details" aria-labelledby="possibilities-title">
+          <div className={styles.movementIntro}>
+            <div>
+              <p className={styles.eyebrow}>Endless Possibilities</p>
+              <h2 id="possibilities-title">
+                We are Nigerians.
                 <br />
-                what happens next.
+                We can create what comes next.
               </h2>
+            </div>
+            <div>
               <p>
-                Giving a child the means to create can change a future we all
-                share. We match devices to vetted students, then help them
-                learn, build and keep going.
+                How many children have grown up believing they are not good
+                enough, simply because nobody introduced them to something they
+                could be good at? Sometimes what is missing is not intelligence.
+                It is exposure, a useful tool, and someone willing to stay long
+                enough to help them learn.
+              </p>
+              <p>
+                A laptop will not solve every problem in a child’s life. But we
+                refuse to believe that a meaningful opportunity cannot change
+                its direction. Someone else’s child is part of our future too.
+                Give them a device, and we will help them discover what they can
+                create with it.
+              </p>
+              <p>
+                Forge ITs is the movement within Forge Intellitech Services Ltd.
+                We are Nigerians. We do not have to be perfectly prepared to
+                begin taking responsibility for what comes next. Join as a
+                volunteer, educator, sponsor or patron. Government, companies,
+                communities and international organisations: bring the device,
+                the skill, the time or the support you can give. Let us turn
+                what we believe is possible into something a young person can
+                actually use.
               </p>
             </div>
-            <ol className={styles.steps}>
-              <li>
-                <span>01</span>
-                <h3>A student asks.</h3>
-                <p>
-                  A secondary-school student applies or is identified through a
-                  workshop.
-                </p>
-              </li>
-              <li>
-                <span>02</span>
-                <h3>Forge verifies.</h3>
-                <p>
-                  We review their school, need and readiness for a year of
-                  training.
-                </p>
-              </li>
-              <li>
-                <span>03</span>
-                <h3>A donor is matched.</h3>
-                <p>We agree on a suitable device and a supported handover.</p>
-              </li>
-              <li>
-                <span>04</span>
-                <h3>A year of building.</h3>
-                <p>
-                  Training and guidance help the learner turn access into
-                  practical skills.
-                </p>
-              </li>
-            </ol>
-            <div className={styles.movementNote}>
+          </div>
+          <ol className={styles.steps}>
+            <li>
+              <span>01</span>
+              <h3>A student asks.</h3>
               <p>
-                New or used Windows laptops: Core i5, 5th generation or newer,
-                at least 4 GB RAM and a 128 GB SSD.
+                A secondary-school student applies or is identified through a
+                school workshop.
               </p>
-              <Link
-                className={styles.textLink}
-                href="/contact?interest=movement"
-              >
-                Offer a device, time or support{" "}
-                <ArrowRight size={21} aria-hidden />
-              </Link>
-            </div>
-            <p className={styles.processNote}>
-              Forge coordinates eligibility, matching and delivery with students
-              and their parents or schools. A request does not guarantee a
-              device.{" "}
-              <Link href="/contact?interest=student-support">
-                Ask about student support.
-              </Link>
-            </p>
+            </li>
+            <li>
+              <span>02</span>
+              <h3>Forge verifies.</h3>
+              <p>
+                We review their school, need and readiness for a full year of
+                training.
+              </p>
+            </li>
+            <li>
+              <span>03</span>
+              <h3>A donor is matched.</h3>
+              <p>
+                We agree on a suitable device and coordinate the handover with
+                the family or school.
+              </p>
+            </li>
+            <li>
+              <span>04</span>
+              <h3>A year of building.</h3>
+              <p>
+                The student receives a device, structured learning and guidance
+                to keep creating.
+              </p>
+            </li>
+          </ol>
+          <p className={styles.requirements}>
+            New or used Windows laptops: Core i5, 5th generation or newer, at
+            least 4 GB RAM and a 128 GB SSD. For students in public secondary
+            schools and low-income private secondary schools. Devices are
+            requested only against verified student need.
+          </p>
+          <div className={styles.actions}>
+            <Link className={styles.button} href="/contact?interest=laptop">
+              Register donor interest <ArrowRight size={22} aria-hidden />
+            </Link>
+            <Link
+              className={styles.textLink}
+              href="/contact?interest=student-support"
+            >
+              Request student support
+            </Link>
+            <Link
+              className={styles.textLink}
+              href="/contact?interest=partnership"
+            >
+              Partner or invest
+            </Link>
           </div>
         </section>
       </details>
-
-      <section
-        id="stories"
-        className={styles.stories}
-        aria-labelledby="stories-title"
-      >
-        <div className={styles.container}>
-          <p className={styles.eyebrow}>Stories from the movement</p>
-          <h2 id="stories-title">A beginning changes what comes next.</h2>
-          <div className={styles.storyGrid}>
-            <article className={styles.story}>
-              <div className={styles.storyPicture}>
-                <Image
-                  src="/images/home/ideas-in-motion.webp"
-                  alt="Illustrative project notebook and tools in a sunlit workspace"
-                  fill
-                  sizes="(max-width: 700px) 28vw, 170px"
-                />
-              </div>
-              <div>
-                <h3>From school to paid internship</h3>
-                <p>
-                  A first job, practical experience and support for the
-                  education still ahead.
-                </p>
-                <details className={styles.storyDetails}>
-                  <summary>
-                    Read the story <Plus size={18} aria-hidden />
-                  </summary>
-                  <p>
-                    One of our interns joined Forge after secondary school.
-                    Alongside paid work, he receives a monthly education support
-                    fund through the internship. It is one way we are helping a
-                    young person keep learning while gaining real experience.
-                  </p>
-                </details>
-              </div>
-            </article>
-            <article className={styles.story}>
-              <div className={styles.storyPicture}>
-                <Image
-                  src="/images/home/laptop-opportunity.webp"
-                  alt="An illustrative laptop for continued learning"
-                  fill
-                  sizes="(max-width: 700px) 28vw, 170px"
-                />
-              </div>
-              <div>
-                <h3>Learning continues beyond the laptop</h3>
-                <p>
-                  A device opens a door. Guidance gives a learner a reason to
-                  keep going.
-                </p>
-                <details className={styles.storyDetails}>
-                  <summary>
-                    Read the story <Plus size={18} aria-hidden />
-                  </summary>
-                  <p>
-                    We have provided laptops to students so they can continue
-                    learning. The device is part of a longer commitment:
-                    practical skills, support and the confidence to turn an idea
-                    into something useful.
-                  </p>
-                </details>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.invitation} aria-labelledby="invitation-title">
-        <div className={`${styles.container} ${styles.invitationInner}`}>
-          <h2 id="invitation-title">
-            There is work
-            <br />
-            worth doing <span>here.</span>
-          </h2>
-          <div className={styles.invitationLinks}>
-            <Link href="/techup">
-              <GraduationCap size={35} weight="light" aria-hidden />
-              <span>
-                Bring Forge to your school<small>Explore the programmes</small>
-              </span>
-              <ArrowRight size={22} aria-hidden />
-            </Link>
-            <Link href="/join#talent">
-              <Briefcase size={33} weight="light" aria-hidden />
-              <span>
-                Work with Forge<small>Find your place</small>
-              </span>
-              <ArrowRight size={22} aria-hidden />
-            </Link>
-            <Link href="/contact?interest=partnership">
-              <Lightbulb size={35} weight="light" aria-hidden />
-              <span>
-                Partner or invest<small>Start a conversation</small>
-              </span>
-              <ArrowRight size={22} aria-hidden />
-            </Link>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

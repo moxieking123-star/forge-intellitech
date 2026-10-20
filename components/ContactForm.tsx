@@ -26,6 +26,10 @@ export default function ContactForm() {
       "interest",
     );
     const contexts: Record<string, { inquiryType: string; subject: string }> = {
+      schools: {
+        inquiryType: "schools",
+        subject: "TechUp & ElyTech — school programme enquiry",
+      },
       laptop: {
         inquiryType: "support",
         subject: "Give a Child a Laptop — donor interest",

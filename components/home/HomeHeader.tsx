@@ -7,10 +7,11 @@ import { ArrowRight, List, X } from "@phosphor-icons/react";
 import styles from "./Home.module.css";
 
 const links = [
+  { label: "Company", href: "/#company" },
   { label: "Our work", href: "/#work" },
-  { label: "Schools", href: "/techup" },
-  { label: "The movement", href: "/#movement" },
+  { label: "Forge ITs", href: "/#movement" },
   { label: "Stories", href: "/#stories" },
+  { label: "Join us", href: "/join" },
 ];
 
 export default function HomeHeader() {
@@ -65,12 +66,6 @@ export default function HomeHeader() {
           <div className={styles.headerActions}>
             <Link href="/#movement" className={styles.donorNav}>
               Give a laptop <ArrowRight size={19} aria-hidden />
-            </Link>
-            <Link
-              href="/join"
-              className={`${styles.button} ${styles.headerCta}`}
-            >
-              Build with us <ArrowRight size={19} aria-hidden />
             </Link>
             <button
               ref={trigger}

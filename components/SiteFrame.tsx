@@ -9,7 +9,8 @@ import HomeHeader from "./home/HomeHeader";
 import HomeFooter from "./home/HomeFooter";
 
 export default function SiteFrame({ children }: { children: React.ReactNode }) {
-  const homepage = usePathname() === "/";
+  const pathname = usePathname();
+  const homepage = pathname === "/" || pathname === "/programmes";
   return (
     <>
       {!homepage && <GlowCursor />}

@@ -17,7 +17,7 @@ export default function HomeFooter() {
         </Link>
         <nav aria-label="Footer navigation">
           <Link href="/#work">Our work</Link>
-          <Link href="/techup">Schools</Link>
+          <Link href="/programmes">School programmes</Link>
           <Link href="/#movement">The movement</Link>
           <Link href="/#stories">Stories</Link>
           <Link href="/contact">Contact</Link>

@@ -4,9 +4,10 @@ export function OrganizationSchema() {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Forge Intellitech',
+    name: 'Forge Intellitech Services Ltd',
+    alternateName: 'Forge',
     url: 'https://forgeintellitech.com',
-    logo: 'https://forgeintellitech.com/images/logo.png',
+    logo: 'https://forgeintellitech.com/images/brand/forge-wordmark.png',
     description: 'We build technology solutions rooted in African realities. From education to fintech, we create products that understand and serve our continent.',
     foundingDate: '2023',
     founders: [

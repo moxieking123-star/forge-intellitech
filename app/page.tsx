@@ -4,9 +4,11 @@ import { Metadata } from "next";
 import HomePageClient from "./HomePageClient";
 
 export const metadata: Metadata = {
-  title: "Forge Intellitech | Technology Built for Africa",
+  title: {
+    absolute: "Forge Intellitech | Technology, Skills & Possibility in Nigeria",
+  },
   description:
-    "We build technology solutions rooted in African realities. Through education and innovation, we create products that understand and serve our continent. Based in Lagos, Nigeria.",
+    "Useful technology. Practical skills. Ideas with a beginning. Meet Forge Intellitech, TechUp, ElyTech and the Endless Possibilities laptop movement in Nigeria.",
   keywords: [
     "Forge Intellitech",
     "African tech company",
@@ -21,17 +23,15 @@ export const metadata: Metadata = {
     "EdTech startup",
   ],
   openGraph: {
-    title: "Forge Intellitech | Technology Built for Africa",
+    title: "The next big thing can be built here | Forge Intellitech",
     description:
       "We build technology solutions rooted in African realities. Through education and innovation, we create products that understand and serve our continent.",
     url: "https://forgeintellitech.com",
     type: "website",
     images: [
       {
-        url: "/images/home/lagos-future.webp",
-        width: 1672,
-        height: 941,
-        alt: "Forge Intellitech - Technology Built for Africa",
+        url: "/images/home/studio-beginning.webp",
+        alt: "A place to start creating — Forge Intellitech",
       },
     ],
   },
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Forge Intellitech | Technology Built for Africa",
     description: "We build technology solutions rooted in African realities.",
-    images: ["/images/home/lagos-future.webp"],
+    images: ["/images/home/studio-beginning.webp"],
   },
   alternates: {
     canonical: "https://forgeintellitech.com",

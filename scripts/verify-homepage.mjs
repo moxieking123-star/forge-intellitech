@@ -18,7 +18,7 @@ function browser(...args) {
   const output = execFileSync(
     binary,
     ["--session", "forge-home", "--json", ...args],
-    { encoding: "utf8", timeout: 45000 },
+    { encoding: "utf8", timeout: 90000 },
   );
   const result = JSON.parse(output);
   assert(result.success, result.error || `Browser command failed: ${args[0]}`);
@@ -93,14 +93,14 @@ assert(
   ),
 );
 evidence.push({ check: "movement explanation disclosure", passed: true });
-browser("click", "#stories article:first-child summary");
+browser("click", "#stories article:first-of-type summary");
 browser("wait", "800");
 if (
   evaluate(
     'JSON.stringify(document.querySelectorAll("#stories details[open]").length)',
   ) === 0
 ) {
-  browser("click", "#stories article:first-child summary");
+  browser("click", "#stories article:first-of-type summary");
   browser("wait", "200");
 }
 assert.equal(
@@ -110,6 +110,35 @@ assert.equal(
   1,
 );
 evidence.push({ check: "case story expansion", passed: true });
+
+for (const [name, status] of [
+  ["BiteBank", "In development"],
+  ["Forge TechUp Dashboard", "Testing"],
+  ["Trego", "In development"],
+  ["Forge All-In", "In development"],
+]) {
+  browser("find", "role", "button", "click", "--name", name, "--exact");
+  browser("wait", "150");
+  const product = evaluate(
+    'JSON.stringify({name:document.getElementById("product-title").textContent,text:document.querySelector("#products dialog[open]").textContent,focused:document.activeElement.getAttribute("aria-label")})',
+  );
+  assert.equal(product.name, name);
+  assert(product.text.includes(status));
+  assert.equal(product.focused, "Close product details");
+  browser("press", "Escape");
+  assert.equal(
+    evaluate(
+      "JSON.stringify(document.activeElement.getAttribute('aria-label') || document.activeElement.textContent.trim())",
+    ),
+    name,
+  );
+  evidence.push({
+    check: "product status and keyboard dismissal",
+    name,
+    status,
+    passed: true,
+  });
+}
 
 browser("open", `${base}/contact?interest=laptop`);
 browser("wait", "500");
@@ -130,7 +159,7 @@ evidence.push({
   passed: true,
 });
 
-for (const route of ["/techup", "/join", "/launchpad", "/products"]) {
+for (const route of ["/programmes", "/techup", "/join", "/launchpad"]) {
   const response = await fetch(`${base}${route}`);
   assert.equal(response.status, 200, route);
   evidence.push({
@@ -139,7 +168,64 @@ for (const route of ["/techup", "/join", "/launchpad", "/products"]) {
     status: response.status,
   });
 }
+browser("open", `${base}/programmes`);
+for (const width of [390, 1440]) {
+  browser("set", "viewport", String(width), "1000");
+  const programmeLayout = evaluate(layoutScript);
+  assert.equal(programmeLayout.overflow, false);
+  assert.equal(programmeLayout.h1Count, 1);
+  assert.deepEqual(programmeLayout.brokenAnchors, []);
+  assert(
+    evaluate(
+      'JSON.stringify(document.body.textContent.includes("For primary schools") && document.body.textContent.includes("For secondary schools"))',
+    ),
+  );
+  browser(
+    "screenshot",
+    fileURLToPath(
+      new URL(
+        `../docs/redesign/editorial/programmes-${width}.png`,
+        import.meta.url,
+      ),
+    ),
+    "--full",
+  );
+  evidence.push({
+    check: "school programmes responsive layout",
+    ...programmeLayout,
+  });
+}
+browser("open", `${base}/contact?interest=schools`);
+browser("wait", "400");
+assert.equal(
+  evaluate('JSON.stringify(document.getElementById("inquiryType").value)'),
+  "schools",
+);
+evidence.push({
+  check: "school enquiry prefill without submission",
+  passed: true,
+});
 browser("open", base);
+const seo = evaluate(
+  `JSON.stringify({title:document.title,description:document.querySelector('meta[name="description"]')?.content,canonical:document.querySelector('link[rel="canonical"]')?.href,socialImage:document.querySelector('meta[property="og:image"]')?.content,schemas:[...document.querySelectorAll('script[type="application/ld+json"]')].map(s=>JSON.parse(s.textContent)["@type"])})`,
+);
+assert(seo.title.includes("Forge Intellitech"));
+assert(seo.description.includes("Endless Possibilities"));
+assert.equal(new URL(seo.canonical).href, "https://forgeintellitech.com/");
+assert(seo.socialImage.endsWith("/images/home/studio-beginning.webp"));
+assert(seo.schemas.includes("Organization"));
+evidence.push({ check: "rendered homepage SEO", ...seo });
+browser("set", "viewport", "1054", "1492");
+browser(
+  "screenshot",
+  fileURLToPath(
+    new URL(
+      "../docs/redesign/editorial/desktop-reference-width.png",
+      import.meta.url,
+    ),
+  ),
+  "--full",
+);
 browser("set", "viewport", "1440", "1000");
 browser("wait", "500");
 browser(

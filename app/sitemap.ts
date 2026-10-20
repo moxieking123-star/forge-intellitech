@@ -9,6 +9,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Define all your pages
   const routes = [
     {
+      url: `${baseUrl}/programmes`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
+    {
       url: baseUrl,
       lastModified: currentDate,
       changeFrequency: 'weekly' as const,

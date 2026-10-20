@@ -1246,3 +1246,44 @@
     width: calc(100% - 40px);
   }
 }
+/* Editorial reference: quiet cream masthead and outlined donor action. */
+.header {
+  border-bottom: 0;
+  background: #f4f1e9;
+  color: #101c19;
+}
+.headerInner {
+  height: clamp(74px, 7vw, 100px);
+}
+.desktopNav {
+  gap: 32px;
+}
+.donorNav {
+  border: 1px solid #e34816;
+  border-radius: 12px;
+  padding: 12px 24px;
+  color: #c2360b !important;
+}
+.donorNav svg {
+  display: block;
+}
+@media (max-width: 960px) {
+  .headerInner {
+    height: 78px;
+  }
+  .donorNav {
+    padding: 8px 12px;
+  }
+}
+@media (max-width: 700px) {
+  .headerInner {
+    height: 70px;
+  }
+  .headerActions {
+    gap: 8px;
+  }
+  .donorNav {
+    border: 0;
+    padding: 4px;
+  }
+}
