@@ -4,6 +4,8 @@
 
 Work branch: `codex/forge-website-redesign`.
 
+**Current review:** the founder selected a combination of the first direction's cinematic opening and the second direction's typography and editorial layout. See the [refined desktop and mobile homepage](refined/README.md), now using the new Forge-only wordmark retrieved from Drive. The original studies below remain exploration history, not the current visual target.
+
 **Release rule:** no deployment or promotion to production, merge into the production branch, or live-domain reassignment until the full website is complete and the founder gives explicit final approval. A choice of homepage direction approves design development only.
 
 ## The brief
