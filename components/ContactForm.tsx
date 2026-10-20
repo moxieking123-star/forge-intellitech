@@ -1,35 +1,62 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useFormSubmit } from '@/hooks/useFormSubmit';
+import { useEffect, useState } from "react";
+import { useFormSubmit } from "@/hooks/useFormSubmit";
 
 const inquiryTypes = [
-  { value: 'general', label: 'General Inquiry' },
-  { value: 'partnership', label: 'Partnership' },
-  { value: 'schools', label: 'Schools / Education' },
-  { value: 'careers', label: 'Careers' },
-  { value: 'press', label: 'Press / Media' },
-  { value: 'support', label: 'Support' },
+  { value: "general", label: "General Inquiry" },
+  { value: "partnership", label: "Partnership" },
+  { value: "schools", label: "Schools / Education" },
+  { value: "careers", label: "Careers" },
+  { value: "press", label: "Press / Media" },
+  { value: "support", label: "Support" },
 ];
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    inquiryType: 'general',
-    subject: '',
-    message: '',
+    name: "",
+    email: "",
+    inquiryType: "general",
+    subject: "",
+    message: "",
   });
 
+  useEffect(() => {
+    const interest = new URLSearchParams(window.location.search).get(
+      "interest",
+    );
+    const contexts: Record<string, { inquiryType: string; subject: string }> = {
+      laptop: {
+        inquiryType: "support",
+        subject: "Give a Child a Laptop — donor interest",
+      },
+      movement: {
+        inquiryType: "support",
+        subject: "Endless Possibilities — offer support",
+      },
+      "student-support": {
+        inquiryType: "support",
+        subject: "Endless Possibilities — student support enquiry",
+      },
+      partnership: {
+        inquiryType: "partnership",
+        subject: "Partnership or investment enquiry",
+      },
+    };
+    if (interest && contexts[interest]) {
+      setFormData((previous) => ({ ...previous, ...contexts[interest] }));
+    }
+  }, []);
+
   const { submitForm, isLoading, error, success, reset } = useFormSubmit({
-  endpoint: '/api/contact',
-  onSuccess: () => {
+    endpoint: "/api/contact",
+    onSuccess: () => {
       setFormData({
-        name: '',
-        email: '',
-        inquiryType: 'general',
-        subject: '',
-        message: '',
+        name: "",
+        email: "",
+        inquiryType: "general",
+        subject: "",
+        message: "",
       });
     },
   });
@@ -40,11 +67,13 @@ export default function ContactForm() {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
     // Clear error when user starts typing
     if (error) reset();
   };
@@ -54,8 +83,18 @@ export default function ContactForm() {
     return (
       <div className="text-center py-12">
         <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-green-500/10 flex items-center justify-center">
-          <svg className="w-10 h-10 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          <svg
+            className="w-10 h-10 text-green-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 13l4 4L19 7"
+            />
           </svg>
         </div>
         <h3 className="text-2xl font-bold text-[var(--env-text-primary)] mb-3">
@@ -80,8 +119,18 @@ export default function ContactForm() {
       {error && (
         <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500">
           <div className="flex items-center gap-3">
-            <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <svg
+              className="w-5 h-5 flex-shrink-0"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
             </svg>
             <span>{error}</span>
           </div>
@@ -91,7 +140,10 @@ export default function ContactForm() {
       {/* Name & Email Row */}
       <div className="grid md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-[var(--env-text-primary)] mb-2">
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-[var(--env-text-primary)] mb-2"
+          >
             Your Name <span className="text-red-500">*</span>
           </label>
           <input
@@ -113,7 +165,10 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-[var(--env-text-primary)] mb-2">
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-[var(--env-text-primary)] mb-2"
+          >
             Email Address <span className="text-red-500">*</span>
           </label>
           <input
@@ -137,7 +192,10 @@ export default function ContactForm() {
 
       {/* Inquiry Type */}
       <div>
-        <label htmlFor="inquiryType" className="block text-sm font-medium text-[var(--env-text-primary)] mb-2">
+        <label
+          htmlFor="inquiryType"
+          className="block text-sm font-medium text-[var(--env-text-primary)] mb-2"
+        >
           What's this about?
         </label>
         <select
@@ -154,7 +212,7 @@ export default function ContactForm() {
             cursor-pointer
           "
         >
-          {inquiryTypes.map(type => (
+          {inquiryTypes.map((type) => (
             <option key={type.value} value={type.value}>
               {type.label}
             </option>
@@ -164,7 +222,10 @@ export default function ContactForm() {
 
       {/* Subject */}
       <div>
-        <label htmlFor="subject" className="block text-sm font-medium text-[var(--env-text-primary)] mb-2">
+        <label
+          htmlFor="subject"
+          className="block text-sm font-medium text-[var(--env-text-primary)] mb-2"
+        >
           Subject
         </label>
         <input
@@ -186,7 +247,10 @@ export default function ContactForm() {
 
       {/* Message */}
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-[var(--env-text-primary)] mb-2">
+        <label
+          htmlFor="message"
+          className="block text-sm font-medium text-[var(--env-text-primary)] mb-2"
+        >
           Your Message <span className="text-red-500">*</span>
         </label>
         <textarea
@@ -224,17 +288,42 @@ export default function ContactForm() {
       >
         {isLoading ? (
           <>
-            <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+            <svg
+              className="animate-spin w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              />
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              />
             </svg>
             <span>Sending...</span>
           </>
         ) : (
           <>
             <span>Send Message</span>
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              />
             </svg>
           </>
         )}
@@ -242,8 +331,11 @@ export default function ContactForm() {
 
       {/* Privacy Note */}
       <p className="text-center text-sm text-[var(--env-text-tertiary)]">
-        By submitting this form, you agree to our{' '}
-        <a href="/privacy" className="text-[var(--chapter-accent)] hover:underline">
+        By submitting this form, you agree to our{" "}
+        <a
+          href="/privacy"
+          className="text-[var(--chapter-accent)] hover:underline"
+        >
           Privacy Policy
         </a>
         .

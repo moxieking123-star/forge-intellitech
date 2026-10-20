@@ -1,127 +1,121 @@
 // app/layout.tsx
 
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
-import { Poppins, Open_Sans } from "next/font/google";
+import "@fontsource/poppins/400.css";
+import "@fontsource/poppins/500.css";
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
+import "@fontsource/open-sans/400.css";
+import "@fontsource/open-sans/500.css";
+import "@fontsource/open-sans/600.css";
+import "@fontsource/open-sans/700.css";
+import "@fontsource-variable/manrope";
 import "./globals.css";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import SiteFrame from "../components/SiteFrame";
 import { ThemeProvider } from "../components/ThemeProvider";
-import { GlowCursor } from "../components/GlowCursor";
-import CookieConsent from "../components/CookieConsent";
-import { GoogleAnalytics } from '@next/third-parties/google';
-import { OrganizationSchema, WebsiteSchema, LocalBusinessSchema } from '../components/StructuredData';
-
-// Heading font - Poppins
-const poppins = Poppins({ 
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-poppins",
-  display: "swap",
-});
-
-// Body font - Open Sans
-const openSans = Open_Sans({ 
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-opensans",
-  display: "swap",
-});
+import { GoogleAnalytics } from "@next/third-parties/google";
+import {
+  OrganizationSchema,
+  WebsiteSchema,
+  LocalBusinessSchema,
+} from "../components/StructuredData";
 
 // Viewport configuration
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
   maximumScale: 5,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
   ],
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://forgeintellitech.com'),
-  
+  metadataBase: new URL("https://forgeintellitech.com"),
+
   title: {
     default: "Forge Intellitech | Technology Built for Africa",
     template: "%s | Forge Intellitech",
   },
-  
-  description: "We build technology solutions rooted in African realities. From education to fintech, we create products that understand and serve our continent. Based in Lagos, Nigeria.",
-  
+
+  description:
+    "We build technology solutions rooted in African realities. From education to fintech, we create products that understand and serve our continent. Based in Lagos, Nigeria.",
+
   // Enhanced Keywords
   keywords: [
-    'Forge Intellitech',
-    'technology solutions Africa',
-    'software development Nigeria',
-    'African tech company',
-    'Lagos tech startup',
-    'education technology Africa',
-    'fintech Nigeria',
-    'TechUp digital skills',
-    'LaunchPad startup incubator',
-    'digital skills training Nigeria',
-    'coding bootcamp Lagos',
-    'African software developers',
-    'technology for Africa',
-    'Nigerian tech innovation',
-    'youth empowerment technology',
+    "Forge Intellitech",
+    "technology solutions Africa",
+    "software development Nigeria",
+    "African tech company",
+    "Lagos tech startup",
+    "education technology Africa",
+    "fintech Nigeria",
+    "TechUp digital skills",
+    "LaunchPad startup incubator",
+    "digital skills training Nigeria",
+    "coding bootcamp Lagos",
+    "African software developers",
+    "technology for Africa",
+    "Nigerian tech innovation",
+    "youth empowerment technology",
   ],
-  
+
   // Author & Publisher
-  authors: [{ name: 'Forge Intellitech', url: 'https://forgeintellitech.com' }],
-  creator: 'Forge Intellitech',
-  publisher: 'Forge Intellitech',
-  
+  authors: [{ name: "Forge Intellitech", url: "https://forgeintellitech.com" }],
+  creator: "Forge Intellitech",
+  publisher: "Forge Intellitech",
+
   // Category
-  category: 'Technology',
-  
+  category: "Technology",
+
   // Favicon & Icons
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
-      { url: '/icon.png', sizes: '192x192', type: 'image/png' },
-      { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
+      { url: "/favicon.ico", sizes: "32x32", type: "image/x-icon" },
+      { url: "/icon.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
     ],
-    shortcut: '/favicon.ico',
-    apple: [
-      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
-    ],
+    shortcut: "/favicon.ico",
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
   },
-  
+
   // Manifest
-  manifest: '/manifest.json',
-  
+  manifest: "/manifest.json",
+
   // Open Graph (Facebook, LinkedIn, WhatsApp)
   openGraph: {
-    title: 'Forge Intellitech | Technology Built for Africa',
-    description: 'We build technology solutions rooted in African realities. From education to fintech, we create products that understand and serve our continent.',
-    url: 'https://forgeintellitech.com',
-    siteName: 'Forge Intellitech',
-    locale: 'en_US',
-    type: 'website',
+    title: "Forge Intellitech | Technology Built for Africa",
+    description:
+      "We build technology solutions rooted in African realities. From education to fintech, we create products that understand and serve our continent.",
+    url: "https://forgeintellitech.com",
+    siteName: "Forge Intellitech",
+    locale: "en_US",
+    type: "website",
     images: [
       {
-        url: '/images/og-image.png',
+        url: "/images/og-image.png",
         width: 1200,
         height: 630,
-        alt: 'Forge Intellitech - Technology Built for Africa',
-        type: 'image/png',
+        alt: "Forge Intellitech - Technology Built for Africa",
+        type: "image/png",
       },
     ],
   },
-  
+
   // Twitter Card
   twitter: {
-    card: 'summary_large_image',
-    title: 'Forge Intellitech | Technology Built for Africa',
-    description: 'We build technology solutions rooted in African realities. From education to fintech, we create products that understand and serve our continent.',
-    site: '@forgeintellitech',
-    creator: '@forgeintellitech',
-    images: ['/images/og-image.png'],
+    card: "summary_large_image",
+    title: "Forge Intellitech | Technology Built for Africa",
+    description:
+      "We build technology solutions rooted in African realities. From education to fintech, we create products that understand and serve our continent.",
+    site: "@forgeintellitech",
+    creator: "@forgeintellitech",
+    images: ["/images/og-image.png"],
   },
-  
+
   // Robots
   robots: {
     index: true,
@@ -131,30 +125,30 @@ export const metadata: Metadata = {
       index: true,
       follow: true,
       noimageindex: false,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
-  
+
   // Verification (add your verification codes)
   verification: {
-    google: 'your-google-verification-code', // Get from Search Console
+    google: "your-google-verification-code", // Get from Search Console
     // yandex: 'your-yandex-code',
     // bing: 'your-bing-code',
   },
-  
+
   // Alternates
   alternates: {
-    canonical: 'https://forgeintellitech.com',
+    canonical: "https://forgeintellitech.com",
     types: {
-      'application/rss+xml': 'https://forgeintellitech.com/rss.xml',
+      "application/rss+xml": "https://forgeintellitech.com/rss.xml",
     },
   },
-  
+
   // Other
-  applicationName: 'Forge Intellitech',
-  referrer: 'origin-when-cross-origin',
+  applicationName: "Forge Intellitech",
+  referrer: "origin-when-cross-origin",
   formatDetection: {
     email: false,
     address: false,
@@ -168,29 +162,33 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${poppins.variable} ${openSans.variable}`}>
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* Structured Data / JSON-LD */}
         <OrganizationSchema />
         <WebsiteSchema />
         <LocalBusinessSchema />
-        
+
         {/* RSS Feed Link */}
-        <link 
-          rel="alternate" 
-          type="application/rss+xml" 
-          title="Forge Intellitech Blog" 
-          href="/rss.xml" 
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Forge Intellitech Blog"
+          href="/rss.xml"
         />
-        
+
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
-        
+
         {/* DNS Prefetch */}
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-        
+
         {/* Theme initialization script */}
         <script
           dangerouslySetInnerHTML={{
@@ -210,7 +208,7 @@ export default function RootLayout({
             `,
           }}
         />
-        
+
         {/* Google Analytics Consent Mode */}
         <script
           dangerouslySetInnerHTML={{
@@ -238,18 +236,12 @@ export default function RootLayout({
           }}
         />
       </head>
-      
-      <body className={`${openSans.className} min-h-screen flex flex-col bg-env-bg-primary`}>
+
+      <body className="local-open-sans min-h-screen flex flex-col bg-env-bg-primary">
         <ThemeProvider defaultMode="dark" defaultChapter="forge">
-          <GlowCursor />
-          <Navbar />
-          <main className="flex-grow">
-            {children}
-          </main>
-          <Footer />
-          <CookieConsent />
+          <SiteFrame>{children}</SiteFrame>
         </ThemeProvider>
-        
+
         {/* Analytics */}
         <GoogleAnalytics gaId="G-KE1R66TB7V" />
         <Analytics />
