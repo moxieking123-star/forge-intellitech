@@ -15,7 +15,7 @@ const work = [
     title: "Turn an idea into a beginning.",
     subtitle: "In-school LaunchPad",
     description: "Support for promising ideas, right where young people are.",
-    href: "/launchpad",
+    href: "/endless-possibilities/in-school-launchpad",
   },
   {
     title: "Build solutions for life here.",
@@ -125,11 +125,14 @@ export default function HomePageClient() {
             Give a child a laptop. We’ll help them learn to build with it.
           </p>
           <div className={styles.actions}>
-            <a className={styles.button} href="#movement-details">
+            <Link className={styles.button} href="/endless-possibilities">
               Discover Endless Possibilities{" "}
               <ArrowRight size={24} aria-hidden />
-            </a>
-            <Link href="/contact?interest=movement" className={styles.textLink}>
+            </Link>
+            <Link
+              href="/endless-possibilities#join-movement"
+              className={styles.textLink}
+            >
               Volunteer your time
             </Link>
           </div>

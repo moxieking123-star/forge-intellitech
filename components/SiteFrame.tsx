@@ -10,7 +10,10 @@ import HomeFooter from "./home/HomeFooter";
 
 export default function SiteFrame({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const homepage = pathname === "/" || pathname === "/programmes";
+  const homepage =
+    pathname === "/" ||
+    pathname === "/programmes" ||
+    pathname.startsWith("/endless-possibilities");
   return (
     <>
       {!homepage && <GlowCursor />}

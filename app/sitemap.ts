@@ -8,6 +8,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Define all your pages
   const routes = [
+    ...['launchpad', 'give-a-child-a-laptop', 'in-school-launchpad', 'intern-with-forge', 'public-school-seminars'].map(slug => ({
+      url: `${baseUrl}/endless-possibilities/${slug}`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    })),
+    {
+      url: `${baseUrl}/endless-possibilities`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
     {
       url: `${baseUrl}/programmes`,
       lastModified: currentDate,

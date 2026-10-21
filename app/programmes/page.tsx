@@ -75,7 +75,10 @@ export default function ProgrammesPage() {
           public schools and low-income private schools.
         </p>
         <div className={styles.actions}>
-          <Link className={styles.button} href="/#movement">
+          <Link
+            className={styles.button}
+            href="/endless-possibilities/give-a-child-a-laptop"
+          >
             Give a child a laptop <ArrowRight size={22} aria-hidden />
           </Link>
           <Link className={styles.textLink} href="/contact?interest=schools">

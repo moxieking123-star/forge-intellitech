@@ -87,10 +87,9 @@
       "passed": true
     },
     {
-      "check": "mobile movement anchor",
+      "check": "mobile movement navigation",
       "open": false,
-      "top": 24.109375,
-      "hash": "#movement"
+      "path": "/endless-possibilities"
     },
     {
       "check": "movement explanation disclosure",

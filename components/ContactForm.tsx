@@ -26,6 +26,38 @@ export default function ContactForm() {
       "interest",
     );
     const contexts: Record<string, { inquiryType: string; subject: string }> = {
+      launchpad: {
+        inquiryType: "partnership",
+        subject: "LaunchPad 2027 — participation or support enquiry",
+      },
+      "in-school-launchpad": {
+        inquiryType: "schools",
+        subject: "In-school LaunchPad — school or student enterprise enquiry",
+      },
+      internship: {
+        inquiryType: "careers",
+        subject: "Intern with Forge — school-leaver internship enquiry",
+      },
+      seminars: {
+        inquiryType: "schools",
+        subject: "Endless Possibilities — government-school seminar enquiry",
+      },
+      volunteer: {
+        inquiryType: "support",
+        subject: "Endless Possibilities — volunteer enquiry",
+      },
+      educator: {
+        inquiryType: "support",
+        subject: "Endless Possibilities — educator enquiry",
+      },
+      sponsor: {
+        inquiryType: "support",
+        subject: "Endless Possibilities — sponsorship enquiry",
+      },
+      patron: {
+        inquiryType: "partnership",
+        subject: "Endless Possibilities — patron enquiry",
+      },
       schools: {
         inquiryType: "schools",
         subject: "TechUp & ElyTech — school programme enquiry",

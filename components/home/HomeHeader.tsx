@@ -9,7 +9,7 @@ import styles from "./Home.module.css";
 const links = [
   { label: "Company", href: "/#company" },
   { label: "Our work", href: "/#work" },
-  { label: "Forge ITs", href: "/#movement" },
+  { label: "Forge ITs", href: "/endless-possibilities" },
   { label: "Stories", href: "/#stories" },
   { label: "Join us", href: "/join" },
 ];
@@ -64,7 +64,10 @@ export default function HomeHeader() {
             ))}
           </nav>
           <div className={styles.headerActions}>
-            <Link href="/#movement" className={styles.donorNav}>
+            <Link
+              href="/endless-possibilities/give-a-child-a-laptop#give-device"
+              className={styles.donorNav}
+            >
               Give a laptop <ArrowRight size={19} aria-hidden />
             </Link>
             <button

@@ -73,19 +73,16 @@ assert.equal(layout.focusedControl, "Open navigation");
 evidence.push({ check: "menu Escape and focus restoration", passed: true });
 
 browser("click", 'button[aria-controls="home-menu"]');
-browser("click", 'dialog a[href="/#movement"]');
+browser("click", 'dialog a[href="/endless-possibilities"]');
 browser("wait", "800");
 const anchor = evaluate(
-  'JSON.stringify({open:!!document.querySelector("dialog[open]"),top:document.getElementById("movement").getBoundingClientRect().top,hash:location.hash})',
+  'JSON.stringify({open:!!document.querySelector("dialog[open]"),path:location.pathname})',
 );
-assert(!anchor.open && anchor.hash === "#movement");
-assert(
-  Math.abs(anchor.top) < 160,
-  `Mobile movement navigation landed at ${anchor.top}px`,
-);
-evidence.push({ check: "mobile movement anchor", ...anchor });
+assert(!anchor.open && anchor.path === "/endless-possibilities");
+evidence.push({ check: "mobile movement navigation", ...anchor });
 
-browser("click", 'a[href="#movement-details"]');
+browser("open", base);
+browser("click", 'details[class*="movementDetails"] > summary');
 browser("wait", "1000");
 assert(
   evaluate(
