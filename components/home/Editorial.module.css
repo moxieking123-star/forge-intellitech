@@ -154,7 +154,7 @@
   -webkit-text-stroke: 1px #59615d;
   font-weight: 800;
   letter-spacing: -0.065em;
-  font-size: 11vw;
+  font-size: 9.5vw;
   line-height: 1 !important;
   margin: 8px 0 0 !important;
 }
@@ -553,7 +553,7 @@
     padding: 10px 24px;
   }
   .manifesto {
-    font-size: 11vw;
+    font-size: 9.5vw;
     margin-top: 10px !important;
   }
   .work {

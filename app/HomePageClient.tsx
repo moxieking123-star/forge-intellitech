@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
-import HeroPlay from "../components/home/HeroPlay";
 import ProductRow from "../components/home/ProductRow";
 import styles from "../components/home/Editorial.module.css";
 
@@ -71,11 +70,11 @@ export default function HomePageClient() {
             <Link href="/join" className={styles.textLink}>
               Work with Forge
             </Link>
+            <a href="#ndeca" className={styles.textLink}>A bigger possibility: NDECA ↓</a>
           </div>
         </div>
         <figure className={styles.heroPicture}>
           <div className={styles.heroImage}>
-            <HeroPlay />
             <Image
               src="/images/home/studio-beginning.webp"
               alt="An illustrative Nigerian workspace with a laptop, ideas on paper and a view towards the city"
@@ -165,7 +164,7 @@ export default function HomePageClient() {
           ))}
         </div>
       </section>
-      <section className={styles.nextChapter} aria-labelledby="ndeca-title">
+      <section id="ndeca" className={styles.nextChapter} aria-labelledby="ndeca-title">
         <div>
           <p className={styles.eyebrow}>A bigger possibility · NDECA</p>
           <h2 id="ndeca-title">Build it here.<br /><span>Make room for scale.</span></h2>

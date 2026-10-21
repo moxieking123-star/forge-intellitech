@@ -1,3 +1,5 @@
+> Superseded by the ambient story in ../story/README.md. This document and its screenshots record the earlier experiment.
+
 # Homepage continuation - 21 October 2026
 
 Scope: NDECA proposal introduction, community invitation, optional hero letter-building interaction and restrained entrance/link motion. Existing approved homepage composition, photographs and navigation are preserved. Copy follows the founder-provided writing sample.

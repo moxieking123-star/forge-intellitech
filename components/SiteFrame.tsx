@@ -8,6 +8,7 @@ import CookieConsent from "./CookieConsent";
 import WatchForge from "./WatchForge";
 import HomeHeader from "./home/HomeHeader";
 import HomeFooter from "./home/HomeFooter";
+import ForgeJourney from "./story/ForgeJourney";
 
 export default function SiteFrame({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -21,6 +22,7 @@ export default function SiteFrame({ children }: { children: React.ReactNode }) {
       </main>
       {homepage && <WatchForge />}
       {homepage ? <HomeFooter /> : <Footer />}
+      {homepage && <ForgeJourney />}
       <CookieConsent />
     </>
   );

@@ -1,0 +1,60 @@
+.journey { --look:0px; position:fixed; right:18px; bottom:14px; width:270px; z-index:35; color:#17372b; font-family:"Manrope Variable",sans-serif; pointer-events:none; filter:drop-shadow(0 3px 12px #10211c12); }
+.topline { display:flex; align-items:center; gap:4px; justify-content:flex-end; height:28px; opacity:0; transition:opacity .2s; pointer-events:auto; }
+.journey:hover .topline,.journey:focus-within .topline { opacity:1; }
+.topline span { font-size:9px; background:#f4f1e9ed; padding:5px 9px; border-radius:20px; margin-right:auto; }
+.topline button,.restore { border:1px solid #b5bcb0; background:#f4f1e9; color:#17372b; border-radius:50%; width:30px; height:30px; cursor:pointer; font:inherit; font-size:15px; }
+.storyButton { display:block; width:100%; background:transparent; border:0; padding:0; color:inherit; cursor:pointer; pointer-events:auto; text-align:center; }
+.storyButton:focus-visible,.topline button:focus-visible,.restore:focus-visible { outline:3px solid #1785b4; outline-offset:3px; }
+.scene { width:100%; overflow:visible; display:block; }
+.chapter { animation:arrive .5s ease both; background:radial-gradient(ellipse at 50% 100%,#f4f1e9e6 0%,#f4f1e9b0 45%,transparent 72%); border-radius:50%; }
+.caption { display:inline-block; max-width:100%; font-size:10px; line-height:1.35; font-weight:700; background:#f4f1e9f5; padding:6px 10px; border:1px solid #a7b3a3; border-radius:3px 12px 12px 12px; }
+.progress { display:flex; justify-content:center; gap:4px; margin-top:7px; }
+.progress i { width:17px; height:2px; background:#b4bbae; }
+.progress i[data-current=true] { background:#d94b1c; }
+.eyes { transform:translateX(var(--look)); }
+.wave { transform-origin:0 -31px; animation:wave 1.4s ease-in-out infinite; }
+.cheer { animation:cheer 3s ease-in-out infinite; }
+.head { transform-origin:0 -36px; animation:look 4s ease-in-out infinite; }
+.struggle { transform-origin:105px 95px; animation:heave 3s ease-in-out infinite; }
+.sweat { animation:sweat 3s ease-in-out infinite; }
+.carry { animation:carry 7s ease-in-out infinite; }
+.walker .leftLeg { transform-origin:0 -16px; animation:step .7s ease-in-out infinite alternate; }
+.walker .rightLeg { transform-origin:0 -16px; animation:step .7s ease-in-out infinite alternate-reverse; }
+.arrival { animation:arrival 5s ease-in-out infinite; }
+.wheel { transform-origin:208px 94px; animation:roll 5s linear infinite; }
+.idea { animation:spark 2s ease-in-out infinite; }
+.bridge { animation:build .8s ease-out both; transform-origin:160px 105px; }
+.vehicle { animation:drive 7s ease-in-out infinite; }
+.driveHome { animation:home 7s ease-in-out infinite; }
+.workshop { animation:build .9s ease-out both; transform-origin:236px 106px; }
+.confetti { animation:spark 1.8s ease-in-out infinite; }
+.journey[data-direction=back] .carry { animation-direction:reverse; }
+.journey[data-paused=true] * { animation-play-state:paused !important; transition:none!important; }
+.journey[data-focus=true] { opacity:0; visibility:hidden; }
+.restore { position:fixed; right:18px; bottom:16px; z-index:35; width:36px; height:36px; }
+.dialog { margin:auto; width:min(610px,calc(100% - 32px)); max-height:calc(100dvh - 32px); overflow:auto; padding:42px 32px 30px; border:1px solid #9ba68f; border-radius:14px; background:#f4f1e9; color:#10211c; font-family:"Manrope Variable",sans-serif; }
+.dialog::backdrop { background:#071a14c9; backdrop-filter:blur(6px); }
+.close { position:absolute; right:10px; top:8px; width:44px; height:44px; font-size:28px; cursor:pointer; background:transparent; border:0; }
+.eyebrow { text-transform:uppercase; letter-spacing:.17em; font-size:10px; margin-bottom:16px; }
+.dialog h2 { font:800 clamp(27px,5vw,42px)/1.05 "Manrope Variable",sans-serif; letter-spacing:-.05em; color:#10211c; }
+.gameScene { margin:12px 0; background:#eae5d8; border-radius:12px; }
+.dialog p[role=status] { min-height:48px; font-size:16px; line-height:1.5; }
+.build { background:#102e23; color:#fff; padding:16px 20px; border-radius:7px; width:100%; margin-top:14px; font:750 15px "Manrope Variable",sans-serif; display:flex; justify-content:space-between; gap:20px; cursor:pointer; }
+.build span { color:#ff7b3a; }
+.hint { margin-top:18px; font-size:11px; line-height:1.5; color:#506055; }
+@keyframes arrive { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+@keyframes look { 0%,65%,100%{transform:rotate(0)} 35%{transform:rotate(9deg)} }
+@keyframes wave { 0%,100%{transform:rotate(-6deg)} 50%{transform:rotate(8deg)} }
+@keyframes cheer { 0%,65%,100%{transform:translateY(0)} 78%{transform:translateY(-4px)} }
+@keyframes heave { 0%,20%,100%{transform:translateX(0) rotate(0)} 45%,65%{transform:translateX(4px) rotate(-2deg)} }
+@keyframes sweat { 0%,30%,100%{opacity:0} 50%,70%{opacity:1} }
+@keyframes carry { 0%,100%{transform:translateX(-18px) translateY(0)} 50%{transform:translateX(18px) translateY(-2px)} }
+@keyframes step { from{transform:rotate(-13deg)} to{transform:rotate(13deg)} }
+@keyframes arrival { 0%,100%{transform:translateX(22px)} 45%,70%{transform:translateX(-8px)} }
+@keyframes roll { to{transform:rotate(-360deg)} }
+@keyframes spark { 0%,100%{opacity:.2;transform:translateY(2px)} 50%{opacity:1;transform:translateY(-2px)} }
+@keyframes build { from{opacity:0;transform:scaleY(.1)} to{opacity:1;transform:scaleY(1)} }
+@keyframes drive { 0%{transform:translateX(-130px)} 35%,70%{transform:translateX(0)} 100%{transform:translateX(125px)} }
+@keyframes home { 0%,10%{transform:translateX(-130px)} 65%,100%{transform:translateX(65px)} }
+@media(max-width:700px) { .journey { width:210px; right:10px; bottom:10px; } .caption { font-size:9px; } .topline { opacity:1; } .topline span { font-size:8px; } .dialog { padding:42px 22px 24px; } }
+@media(prefers-reduced-motion:reduce) { .journey *, .dialog * { animation:none!important; transition:none!important; } .eyes { transform:none; } .topline { opacity:1; } }

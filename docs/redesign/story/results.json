@@ -1,0 +1,15 @@
+{
+  "result": "passed",
+  "checks": [
+    "Automatic scene choreography and subtle pointer glances are active",
+    "Page and full possibility text fit 320/390/768/1440 widths",
+    "All six chapters unfold from scrolling without clicking",
+    "Reverse scroll returns to the beginning; pause holds chapter and resume restores it",
+    "Optional object-building activity completes and Escape restores character focus",
+    "Programme page introduces the girl and her new idea",
+    "Reduced motion leaves static scenes and disables decorative animations",
+    "Hide and restore controls work",
+    "Story gets out of the way while a visitor completes a form"
+  ],
+  "realSubmissions": 0
+}
