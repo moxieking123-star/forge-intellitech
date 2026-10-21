@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
+import HeroPlay from "../components/home/HeroPlay";
 import ProductRow from "../components/home/ProductRow";
 import styles from "../components/home/Editorial.module.css";
 
@@ -74,6 +75,7 @@ export default function HomePageClient() {
         </div>
         <figure className={styles.heroPicture}>
           <div className={styles.heroImage}>
+            <HeroPlay />
             <Image
               src="/images/home/studio-beginning.webp"
               alt="An illustrative Nigerian workspace with a laptop, ideas on paper and a view towards the city"
@@ -161,6 +163,27 @@ export default function HomePageClient() {
               </details>
             </article>
           ))}
+        </div>
+      </section>
+      <section className={styles.nextChapter} aria-labelledby="ndeca-title">
+        <div>
+          <p className={styles.eyebrow}>A bigger possibility · NDECA</p>
+          <h2 id="ndeca-title">Build it here.<br /><span>Make room for scale.</span></h2>
+        </div>
+        <div>
+          <p>What if the things we are building could reach beyond the schools and communities we can serve on our own?</p>
+          <p>That is the thinking behind NDECA. We are developing something designed to scale, with governance through a public–private partnership. We are preparing to present it to the appropriate authorities. The proposal is still in development; no partnership has been approved.</p>
+          <Link href="/contact?interest=partnership" className={styles.textLink}>Talk to us about partnership <ArrowRight size={22} aria-hidden /></Link>
+        </div>
+      </section>
+      <section className={styles.community} aria-labelledby="community-title">
+        <p className={styles.eyebrow}>There is room for you here</p>
+        <h2 id="community-title">We do not have all the answers.<br /><span>But we can forge it. Together.</span></h2>
+        <p>We do not think we are perfect. Some ideas will need to change. Some things will take more work than we imagined. That is why we want a community of people who can see a problem, bring what they know, and help us build something useful.</p>
+        <p>You do not need to arrive with everything. Bring a skill, a question, a little time, or the willingness to begin.</p>
+        <div className={styles.actions}>
+          <Link href="/join" className={styles.button}>Find your place at Forge <ArrowRight size={22} aria-hidden /></Link>
+          <Link href="/earn-with-forge" className={styles.textLink}>Introduce us to a school</Link>
         </div>
       </section>
       <details className={styles.movementDetails}>

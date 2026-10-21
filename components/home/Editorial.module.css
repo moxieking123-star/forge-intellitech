@@ -1,3 +1,21 @@
+.nextChapter { padding:72px max(24px,5.55vw); display:grid; grid-template-columns:1fr 1fr; gap:64px; background:#eeeae0; border-bottom:1px solid #bcc0b4; }
+.nextChapter h2 { font-size:clamp(36px,4.6vw,66px); margin-top:22px; }
+.nextChapter h2 span { color:#bf390c; }
+.nextChapter p + p { margin-top:20px; }
+.nextChapter > div > p:not(.eyebrow) { font-size:18px; max-width:640px; }
+.nextChapter .textLink { margin-top:24px; }
+.community { padding:72px max(24px,5.55vw); }
+.community h2 { font-size:clamp(36px,4.8vw,70px); margin:24px 0 30px; max-width:1050px; }
+.community h2 span { color:#bf390c; }
+.community > p:not(.eyebrow) { max-width:800px; font-size:20px; margin-top:18px; }
+@media(max-width:700px) { .nextChapter { grid-template-columns:1fr; gap:30px; padding-block:44px; } .community { padding-block:44px; } .community > p:not(.eyebrow) { font-size:18px; } }
+@media(prefers-reduced-motion:no-preference) {
+  .heroCopy { animation:forge-arrive .65s ease-out both; }
+  .heroPicture { animation:forge-arrive .85s .1s ease-out both; }
+  .workRow > svg { transition:transform .2s ease; }
+  .workRow:hover > svg { transform:translateX(6px); }
+  @keyframes forge-arrive { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+}
 .page {
   --paper: #f4f1e9;
   --ink: #101c19;

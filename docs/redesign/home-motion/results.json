@@ -1,0 +1,11 @@
+{
+  "result": "passed",
+  "checks": [
+    "320/390/768/1440 no overflow",
+    "NDECA proposal status and community section",
+    "Out-of-order collection, completion and restart",
+    "Keyboard Enter activation",
+    "Reduced-motion emulation disables character transitions and hero entrance"
+  ],
+  "externalMessages": 0
+}
