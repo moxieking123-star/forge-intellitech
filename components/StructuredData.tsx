@@ -1,48 +1,39 @@
+import { socialChannels } from "@/lib/public-channels";
 // components/StructuredData.tsx
 
 export function OrganizationSchema() {
   const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'Forge Intellitech Services Ltd',
-    alternateName: 'Forge',
-    url: 'https://forgeintellitech.com',
-    logo: 'https://forgeintellitech.com/images/brand/forge-wordmark.png',
-    description: 'We build technology solutions rooted in African realities. From education to fintech, we create products that understand and serve our continent.',
-    foundingDate: '2023',
-    founders: [
-      {
-        '@type': 'Person',
-        name: 'Forge Intellitech Team',
-      },
-    ],
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Forge Intellitech Services Ltd",
+    alternateName: "Forge",
+    url: "https://forgeintellitech.com",
+    logo: "https://forgeintellitech.com/images/brand/forge-wordmark.png",
+    description:
+      "We build technology solutions rooted in African realities. From education to fintech, we create products that understand and serve our continent.",
     address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Lagos',
-      addressRegion: 'Lagos State',
-      addressCountry: 'NG',
+      "@type": "PostalAddress",
+      addressLocality: "Lagos",
+      addressRegion: "Lagos State",
+      addressCountry: "NG",
     },
-    sameAs: [
-      'https://twitter.com/forgeintellitech',
-      'https://linkedin.com/company/forgeintellitech',
-      'https://instagram.com/forgeintellitech',
-    ],
+    sameAs: socialChannels.filter((s) => s.url).map((s) => s.url),
     contactPoint: {
-      '@type': 'ContactPoint',
-      contactType: 'customer service',
-      email: 'hello@forgeintellitech.com',
-      availableLanguage: ['English'],
+      "@type": "ContactPoint",
+      contactType: "customer service",
+      email: "info@forgeintellitech.com",
+      availableLanguage: ["English"],
     },
     areaServed: {
-      '@type': 'Place',
-      name: 'Africa',
+      "@type": "Place",
+      name: "Africa",
     },
     knowsAbout: [
-      'Technology',
-      'Education',
-      'Software Development',
-      'Fintech',
-      'Digital Skills Training',
+      "Technology",
+      "Education",
+      "Software Development",
+      "Fintech",
+      "Digital Skills Training",
     ],
   };
 
@@ -56,15 +47,15 @@ export function OrganizationSchema() {
 
 export function WebsiteSchema() {
   const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'Forge Intellitech',
-    alternateName: 'Forge ITS',
-    url: 'https://forgeintellitech.com',
-    description: 'Technology Built for Africa',
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Forge Intellitech",
+    alternateName: "Forge ITS",
+    url: "https://forgeintellitech.com",
+    description: "Technology Built for Africa",
     publisher: {
-      '@type': 'Organization',
-      name: 'Forge Intellitech',
+      "@type": "Organization",
+      name: "Forge Intellitech",
     },
   };
 
@@ -78,26 +69,26 @@ export function WebsiteSchema() {
 
 export function LocalBusinessSchema() {
   const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'ProfessionalService',
-    name: 'Forge Intellitech',
-    image: 'https://forgeintellitech.com/images/og-image.png',
-    url: 'https://forgeintellitech.com',
-    telephone: '',
-    email: 'hello@forgeintellitech.com',
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: "Forge Intellitech",
+    image: "https://forgeintellitech.com/images/og-image.png",
+    url: "https://forgeintellitech.com",
+    telephone: "",
+    email: "info@forgeintellitech.com",
     address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Lagos',
-      addressRegion: 'Lagos State',
-      addressCountry: 'NG',
+      "@type": "PostalAddress",
+      addressLocality: "Lagos",
+      addressRegion: "Lagos State",
+      addressCountry: "NG",
     },
-    priceRange: '$$',
-    openingHours: 'Mo-Fr 09:00-18:00',
+    priceRange: "$$",
+    openingHours: "Mo-Fr 09:00-18:00",
     serviceType: [
-      'Technology Solutions',
-      'Software Development',
-      'Digital Skills Training',
-      'Educational Technology',
+      "Technology Solutions",
+      "Software Development",
+      "Digital Skills Training",
+      "Educational Technology",
     ],
   };
 
@@ -110,29 +101,29 @@ export function LocalBusinessSchema() {
 }
 
 // For product pages like TechUp, LaunchPad
-export function ProductSchema({ 
-  name, 
-  description, 
-  url 
-}: { 
-  name: string; 
-  description: string; 
+export function ProductSchema({
+  name,
+  description,
+  url,
+}: {
+  name: string;
+  description: string;
   url: string;
 }) {
   const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
+    "@context": "https://schema.org",
+    "@type": "Product",
     name: name,
     description: description,
     url: url,
     brand: {
-      '@type': 'Brand',
-      name: 'Forge Intellitech',
+      "@type": "Brand",
+      name: "Forge Intellitech",
     },
     provider: {
-      '@type': 'Organization',
-      name: 'Forge Intellitech',
-      url: 'https://forgeintellitech.com',
+      "@type": "Organization",
+      name: "Forge Intellitech",
+      url: "https://forgeintellitech.com",
     },
   };
 
@@ -145,15 +136,19 @@ export function ProductSchema({
 }
 
 // For FAQ sections
-export function FAQSchema({ faqs }: { faqs: { question: string; answer: string }[] }) {
+export function FAQSchema({
+  faqs,
+}: {
+  faqs: { question: string; answer: string }[];
+}) {
   const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
     mainEntity: faqs.map((faq) => ({
-      '@type': 'Question',
+      "@type": "Question",
       name: faq.question,
       acceptedAnswer: {
-        '@type': 'Answer',
+        "@type": "Answer",
         text: faq.answer,
       },
     })),
@@ -168,16 +163,16 @@ export function FAQSchema({ faqs }: { faqs: { question: string; answer: string }
 }
 
 // For breadcrumbs
-export function BreadcrumbSchema({ 
-  items 
-}: { 
-  items: { name: string; url: string }[] 
+export function BreadcrumbSchema({
+  items,
+}: {
+  items: { name: string; url: string }[];
 }) {
   const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
     itemListElement: items.map((item, index) => ({
-      '@type': 'ListItem',
+      "@type": "ListItem",
       position: index + 1,
       name: item.name,
       item: item.url,

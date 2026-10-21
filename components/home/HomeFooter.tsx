@@ -1,4 +1,6 @@
 import Link from "next/link";
+import CookieSettings from "../CookieSettings";
+import { socialChannels } from "@/lib/public-channels";
 import Image from "next/image";
 import styles from "./Home.module.css";
 
@@ -16,12 +18,34 @@ export default function HomeFooter() {
           />
         </Link>
         <nav aria-label="Footer navigation">
-          <Link href="/#work">Our work</Link>
+          <Link href="/work">Our work</Link>
           <Link href="/programmes">School programmes</Link>
           <Link href="/endless-possibilities">The movement</Link>
-          <Link href="/#stories">Stories</Link>
+          <Link href="/blog">Stories</Link>
           <Link href="/contact">Contact</Link>
+          <Link href="/gallery">Gallery</Link>
+          <Link href="/earn-with-forge">Earn with Forge</Link>
+          <Link href="/programmes/resources">School resources</Link>
+          <Link href="/privacy">Privacy</Link>
+          <Link href="/terms">Terms</Link>
+          <CookieSettings />
         </nav>
+        {socialChannels.some((channel) => channel.url) && (
+          <nav aria-label="Forge social media">
+            {socialChannels
+              .filter((channel) => /^https:\/\//.test(channel.url))
+              .map((channel) => (
+                <a
+                  key={channel.label}
+                  href={channel.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {channel.label} ↗
+                </a>
+              ))}
+          </nav>
+        )}
         <div className={styles.footerIdentity}>
           <p>Forge Intellitech Services Ltd.</p>
           <span>Building technology. People. Possibilities.</span>

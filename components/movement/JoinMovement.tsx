@@ -120,7 +120,9 @@ export default function JoinMovement({
             href={
               focus === "movement" && selected.id === "laptop"
                 ? "/endless-possibilities/give-a-child-a-laptop"
-                : `/contact?interest=${selected.id}`
+                : selected.id === "laptop"
+                  ? "/endless-possibilities/give-a-child-a-laptop/donate"
+                  : `/contact?interest=${selected.id}`
             }
             className={styles.button}
           >

@@ -1,0 +1,9 @@
+{
+ "result":"passed",
+ "project":"forge-web",
+ "schema":"forge_redesign_test",
+ "checks":9,
+ "coverage":["shared school queue","single-use referral","owner mismatch rejection","assisted automatic attribution","duplicate school atomic rejection","school authorisation","both link creation caps","service-only operations and private school payloads","cross-account row isolation"],
+ "fixtures":"Synthetic test users and records were rolled back. Follow-up counts on all three test tables were zero.",
+ "limits":"No browser-to-auth-to-live-API flow or SMTP delivery test yet. Existing public tables and their row policies were not changed."
+}

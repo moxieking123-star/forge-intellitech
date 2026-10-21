@@ -114,268 +114,97 @@ export default function ContactForm() {
     if (error) reset();
   };
 
-  // Success state
-  if (success) {
+  if (success)
     return (
-      <div className="text-center py-12">
-        <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-green-500/10 flex items-center justify-center">
-          <svg
-            className="w-10 h-10 text-green-500"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
-        </div>
-        <h3 className="text-2xl font-bold text-[var(--env-text-primary)] mb-3">
-          Message Sent!
-        </h3>
-        <p className="text-[var(--env-text-secondary)] mb-6">
-          Thank you for reaching out. We'll get back to you within 24-48 hours.
+      <div role="status">
+        <h2>Enquiry received.</h2>
+        <p>
+          Thank you for starting the conversation. Forge will review your
+          message and follow up about the next steps.
         </p>
-        <button
-          onClick={() => reset()}
-          className="px-6 py-3 rounded-xl bg-[var(--chapter-accent)] hover:bg-[var(--chapter-accent-hover)] text-white font-semibold transition-all"
-        >
-          Have More to say? Send Another Message!
+        <button type="button" onClick={reset}>
+          Send another enquiry
         </button>
       </div>
     );
-  }
-
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Error Display */}
+    <form onSubmit={handleSubmit}>
+      <h2>Tell us what you have in mind.</h2>
       {error && (
-        <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500">
-          <div className="flex items-center gap-3">
-            <svg
-              className="w-5 h-5 flex-shrink-0"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            <span>{error}</span>
-          </div>
+        <div role="alert">
+          {error} Your answers are still here. You can try again or email
+          info@forgeintellitech.com.
         </div>
       )}
-
-      {/* Name & Email Row */}
-      <div className="grid md:grid-cols-2 gap-6">
-        <div>
-          <label
-            htmlFor="name"
-            className="block text-sm font-medium text-[var(--env-text-primary)] mb-2"
-          >
-            Your Name <span className="text-red-500">*</span>
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            placeholder="Adeniyi Moxie"
-            className="
-              w-full px-4 py-3.5 rounded-xl
-              bg-[var(--env-bg-primary)] border border-[var(--env-border)]
-              text-[var(--env-text-primary)] placeholder:text-[var(--env-text-tertiary)]
-              focus:outline-none focus:border-[var(--chapter-accent)] focus:ring-2 focus:ring-[var(--chapter-accent)]/20
-              transition-all duration-300
-            "
-          />
-        </div>
-
-        <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-[var(--env-text-primary)] mb-2"
-          >
-            Email Address <span className="text-red-500">*</span>
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            placeholder="moxie@example.com"
-            className="
-              w-full px-4 py-3.5 rounded-xl
-              bg-[var(--env-bg-primary)] border border-[var(--env-border)]
-              text-[var(--env-text-primary)] placeholder:text-[var(--env-text-tertiary)]
-              focus:outline-none focus:border-[var(--chapter-accent)] focus:ring-2 focus:ring-[var(--chapter-accent)]/20
-              transition-all duration-300
-            "
-          />
-        </div>
-      </div>
-
-      {/* Inquiry Type */}
-      <div>
-        <label
-          htmlFor="inquiryType"
-          className="block text-sm font-medium text-[var(--env-text-primary)] mb-2"
-        >
-          What's this about?
-        </label>
-        <select
-          id="inquiryType"
-          name="inquiryType"
-          value={formData.inquiryType}
-          onChange={handleChange}
-          className="
-            w-full px-4 py-3.5 rounded-xl
-            bg-[var(--env-bg-primary)] border border-[var(--env-border)]
-            text-[var(--env-text-primary)]
-            focus:outline-none focus:border-[var(--chapter-accent)] focus:ring-2 focus:ring-[var(--chapter-accent)]/20
-            transition-all duration-300
-            cursor-pointer
-          "
-        >
-          {inquiryTypes.map((type) => (
-            <option key={type.value} value={type.value}>
-              {type.label}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {/* Subject */}
-      <div>
-        <label
-          htmlFor="subject"
-          className="block text-sm font-medium text-[var(--env-text-primary)] mb-2"
-        >
-          Subject
-        </label>
-        <input
-          type="text"
-          id="subject"
-          name="subject"
-          value={formData.subject}
-          onChange={handleChange}
-          placeholder="Brief subject of your message"
-          className="
-            w-full px-4 py-3.5 rounded-xl
-            bg-[var(--env-bg-primary)] border border-[var(--env-border)]
-            text-[var(--env-text-primary)] placeholder:text-[var(--env-text-tertiary)]
-            focus:outline-none focus:border-[var(--chapter-accent)] focus:ring-2 focus:ring-[var(--chapter-accent)]/20
-            transition-all duration-300
-          "
-        />
-      </div>
-
-      {/* Message */}
-      <div>
-        <label
-          htmlFor="message"
-          className="block text-sm font-medium text-[var(--env-text-primary)] mb-2"
-        >
-          Your Message <span className="text-red-500">*</span>
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          required
-          rows={6}
-          placeholder="Tell us how we can help you..."
-          className="
-            w-full px-4 py-3.5 rounded-xl
-            bg-[var(--env-bg-primary)] border border-[var(--env-border)]
-            text-[var(--env-text-primary)] placeholder:text-[var(--env-text-tertiary)]
-            focus:outline-none focus:border-[var(--chapter-accent)] focus:ring-2 focus:ring-[var(--chapter-accent)]/20
-            transition-all duration-300
-            resize-none
-          "
-        />
-      </div>
-
-      {/* Submit Button */}
+      <label htmlFor="name">Your name</label>
+      <input
+        id="name"
+        name="name"
+        autoComplete="name"
+        required
+        maxLength={120}
+        value={formData.name}
+        onChange={handleChange}
+      />
+      <label htmlFor="email">Email</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        autoComplete="email"
+        required
+        maxLength={254}
+        value={formData.email}
+        onChange={handleChange}
+      />
+      <label htmlFor="inquiryType">What would you like to discuss?</label>
+      <select
+        id="inquiryType"
+        name="inquiryType"
+        value={formData.inquiryType}
+        onChange={handleChange}
+      >
+        {inquiryTypes.map((i) => (
+          <option key={i.value} value={i.value}>
+            {i.label}
+          </option>
+        ))}
+      </select>
+      <label htmlFor="subject">Subject</label>
+      <input
+        id="subject"
+        name="subject"
+        required
+        maxLength={250}
+        value={formData.subject}
+        onChange={handleChange}
+      />
+      <label htmlFor="message">Your message</label>
+      <textarea
+        id="message"
+        name="message"
+        required
+        maxLength={20000}
+        value={formData.message}
+        onChange={handleChange}
+      />
+      <label className="consent">
+        <input type="checkbox" required />I have read the{" "}
+        <a href="/privacy">privacy notice</a> and agree that Forge may use these
+        details to review and respond to my enquiry.
+      </label>
       <button
         type="submit"
         disabled={isLoading}
-        className="
-          w-full py-4 rounded-xl
-          bg-[var(--chapter-accent)] hover:bg-[var(--chapter-accent-hover)]
-          text-white font-semibold text-lg
-          transition-all duration-300
-          hover:shadow-lg hover:shadow-[var(--chapter-accent)]/25
-          disabled:opacity-50 disabled:cursor-not-allowed
-          flex items-center justify-center gap-3
-        "
+        style={{
+          background: "#10211d",
+          color: "#fff",
+          padding: "15px 24px",
+          borderRadius: 5,
+        }}
       >
-        {isLoading ? (
-          <>
-            <svg
-              className="animate-spin w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-              />
-              <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-              />
-            </svg>
-            <span>Sending...</span>
-          </>
-        ) : (
-          <>
-            <span>Send Message</span>
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-              />
-            </svg>
-          </>
-        )}
+        {isLoading ? "Sending…" : "Send enquiry →"}
       </button>
-
-      {/* Privacy Note */}
-      <p className="text-center text-sm text-[var(--env-text-tertiary)]">
-        By submitting this form, you agree to our{" "}
-        <a
-          href="/privacy"
-          className="text-[var(--chapter-accent)] hover:underline"
-        >
-          Privacy Policy
-        </a>
-        .
-      </p>
     </form>
   );
 }

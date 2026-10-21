@@ -1,0 +1,17 @@
+# Friday release work — 23 October 2026
+## Confirmed
+15% of the approved school payment balance after internet, direct school operations and tax; salaries are not deducted. Earned when teaching starts, payable in the fourth week after start subject to receipt/cost reconciliation. The earlier 10% statement was superseded by the founder’s explicit 15% reply. Actual accounting basis for full contract versus received first instalment must be confirmed before financial automation; no automatic crediting from public forms.
+Each referrer has an account reference and a separate single-use link per school. The link the school submits establishes the referral, subject to duplicate school verification. Authenticated referrers may submit for an authorised school; the server derives their identity and routes it into the same onboarding table/process. A registration request is not service activation.
+School commercial pricing stays private. Schools choose their own parent-facing fee without Forge approval. Proposals with commercial terms must be shared privately. Parent resources provide editable drafts and manual WhatsApp sharing; API delivery follows a working approved WhatsApp Business integration.
+
+## Current safety boundary
+Local code and migration only; REFERRALS_ENABLED remains false until isolated integration testing. No live schema/data/auth settings changed. Existing forge-web metadata inspection on 21 October found RLS disabled on seven legacy public tables. Policies, grants and current callers must be reviewed before enabling RLS; enabling it without replacement server access can break live forms. No customer rows were read.
+
+## Setup needed for backend activation
+Designate a non-production Supabase project/branch. Put its URL/publishable key and server-only service key in ignored environment settings. Configure email confirmation, redirect allowlist (/earn-with-forge) and Zoho custom SMTP in Supabase Auth. Provide SMTP host/port/username via secure configuration and an app password, not a normal password in chat. Confirm the approved sender mailbox and receiving mailbox. Test delivery and expiry with designated test accounts; add anti-abuse controls before public signup. Apply/review the generated migration on that test project and run cross-account, reused-link, duplicate-school, concurrent-claim and assisted-submission tests.
+
+## Deferred deliberately
+Homepage NDECA introduction and community message in the planned homepage pass. Wording must not imply an approved PPP. Full hero/cursor/logo motion after page review. Supply YouTube video IDs and actual social URLs; do not ship empty players or invented destinations. Supply approved commercial proposal and marketing collateral. Decide account closure/deletion and financial record retention before automating deletion; no deletion-on-payment currently runs. Manual payout approval and status updates remain a release task, not an invented payment integration.
+
+## Setup updates
+Founder selected forge-web. Its current plan does not support development branches; isolated forge_redesign_test schema created through the migration tool on 21 October. Existing public tables, policies and customer records unchanged. Database fixtures are synthetic and rolled back. The public-schema SQL remains a proposal and has not been applied. Zoho sender and school-request recipient selected: programs@forgeintellitech.com. SMTP credentials and delivery still pending secure configuration.

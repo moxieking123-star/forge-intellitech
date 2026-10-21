@@ -137,7 +137,7 @@ export default function EndlessPossibilitiesPage() {
               Find your place in the movement
             </a>
             <Link
-              href="/contact?interest=student-support"
+              href="/endless-possibilities/give-a-child-a-laptop/request-support"
               className={styles.lightButton}
             >
               Student or parent? Talk to us <ArrowRight size={21} aria-hidden />
@@ -209,7 +209,7 @@ export default function EndlessPossibilitiesPage() {
             Devices are requested only against verified student need.
           </p>
           <Link
-            href="/contact?interest=student-support"
+            href="/endless-possibilities/give-a-child-a-laptop/request-support"
             className={styles.textLink}
           >
             Ask about student support <ArrowRight size={21} aria-hidden />
@@ -259,7 +259,10 @@ export default function EndlessPossibilitiesPage() {
             approved. Tell us its specifications and condition, and we will
             discuss the right next step.
           </p>
-          <Link href="/contact?interest=laptop" className={styles.lightButton}>
+          <Link
+            href="/endless-possibilities/give-a-child-a-laptop/donate"
+            className={styles.lightButton}
+          >
             Register donor interest <ArrowRight size={23} aria-hidden />
           </Link>
         </div>

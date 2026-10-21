@@ -1,7 +1,7 @@
 // app/layout.tsx
 
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import ConsentAnalytics from "../components/ConsentAnalytics";
+
 import type { Metadata, Viewport } from "next";
 import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/500.css";
@@ -15,7 +15,7 @@ import "@fontsource-variable/manrope";
 import "./globals.css";
 import SiteFrame from "../components/SiteFrame";
 import { ThemeProvider } from "../components/ThemeProvider";
-import { GoogleAnalytics } from "@next/third-parties/google";
+
 import {
   OrganizationSchema,
   WebsiteSchema,
@@ -111,8 +111,7 @@ export const metadata: Metadata = {
     title: "Forge Intellitech | Technology Built for Africa",
     description:
       "We build technology solutions rooted in African realities. From education to fintech, we create products that understand and serve our continent.",
-    site: "@forgeintellitech",
-    creator: "@forgeintellitech",
+
     images: ["/images/og-image.png"],
   },
 
@@ -133,7 +132,6 @@ export const metadata: Metadata = {
 
   // Verification (add your verification codes)
   verification: {
-    google: "your-google-verification-code", // Get from Search Console
     // yandex: 'your-yandex-code',
     // bing: 'your-bing-code',
   },
@@ -167,7 +165,6 @@ export default function RootLayout({
         {/* Structured Data / JSON-LD */}
         <OrganizationSchema />
         <WebsiteSchema />
-        <LocalBusinessSchema />
 
         {/* RSS Feed Link */}
         <link
@@ -243,9 +240,7 @@ export default function RootLayout({
         </ThemeProvider>
 
         {/* Analytics */}
-        <GoogleAnalytics gaId="G-KE1R66TB7V" />
-        <Analytics />
-        <SpeedInsights />
+        <ConsentAnalytics />
       </body>
     </html>
   );

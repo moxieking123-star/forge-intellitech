@@ -1,0 +1,13 @@
+{
+  "result": "passed",
+  "checks": [
+    "Custom school, parent fee, optional device paragraph and WhatsApp handoff; no message sent",
+    "Printable public programme overview is downloadable",
+    "School onboarding validates, retains link, reviews and keeps answers after actual disabled-backend failure",
+    "School form accepts mocked 201 only; actual storage/email is not claimed",
+    "Assisted onboarding fails closed when authentication is not configured",
+    "Mobile menu Escape and trigger focus restoration"
+  ],
+  "realSubmissions": 0,
+  "externalMessagesSent": 0
+}

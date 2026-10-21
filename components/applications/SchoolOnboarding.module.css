@@ -1,0 +1,316 @@
+.page {
+  background: #f5f2e9;
+  color: #172f26;
+  font-family: "Manrope Variable", "Manrope", sans-serif;
+  min-height: 100vh;
+  padding: 140px 24px 100px;
+}
+.wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+.back {
+  display: inline-block;
+  color: inherit;
+  font-size: 14px;
+  margin-bottom: 44px;
+}
+.eyebrow {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  line-height: 1.7;
+}
+.hero {
+  max-width: 880px;
+  margin-bottom: 58px;
+}
+.hero h1 {
+  font-family: inherit;
+  font-size: clamp(42px, 6.8vw, 82px);
+  line-height: 1.06;
+  letter-spacing: -0.055em;
+  margin: 21px 0 25px;
+  font-weight: 700;
+}
+.hero h1 span {
+  color: #a7441f;
+}
+.intro {
+  max-width: 740px;
+  font-size: clamp(17px, 2vw, 21px);
+  line-height: 1.75;
+}
+.layout {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 54px;
+  align-items: start;
+}
+.aside {
+  padding-top: 18px;
+}
+.marker {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-top: 3px solid #b64f28;
+  padding-top: 14px;
+}
+.aside h2 {
+  font:
+    700 30px/1.2 "Manrope Variable",
+    "Manrope",
+    sans-serif;
+  letter-spacing: -0.04em;
+  margin: 20px 0;
+}
+.aside p {
+  font-size: 15px;
+  line-height: 1.8;
+  margin: 20px 0;
+}
+.aside a {
+  font-size: 14px;
+  line-height: 1.7;
+  font-weight: 700;
+  display: block;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  margin: 26px 0;
+}
+.aside .small {
+  margin-top: 40px;
+}
+.panel {
+  background: #fffdf7;
+  border: 1px solid #c9cec3;
+  padding: clamp(23px, 4vw, 44px);
+  border-radius: 3px;
+  min-width: 0;
+}
+.panel h2 {
+  font:
+    700 clamp(26px, 3.2vw, 38px) / 1.2 "Manrope Variable",
+    "Manrope",
+    sans-serif;
+  letter-spacing: -0.04em;
+  margin: 16px 0;
+}
+.panel p {
+  line-height: 1.75;
+}
+.panel a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.progress {
+  list-style: none;
+  display: flex;
+  padding: 0 0 25px;
+  margin: 0 0 32px;
+  border-bottom: 1px solid #ccd1c5;
+  gap: 20px;
+}
+.progress li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  flex: 1;
+  color: #57665a;
+}
+.progress li span {
+  color: #a7441f;
+  font-size: 11px;
+}
+.progress li[aria-current] {
+  font-weight: 800;
+  color: #172f26;
+}
+.small {
+  font-size: 13px;
+  line-height: 1.75;
+  color: #526157;
+}
+.field {
+  margin: 26px 0;
+}
+.field label {
+  display: block;
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 13px 14px;
+  font: inherit;
+  font-size: 16px;
+  color: #172f26;
+  background: #fff;
+  border: 1px solid #89998c;
+  border-radius: 2px;
+}
+.field textarea {
+  resize: vertical;
+}
+.field small {
+  display: block;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #526157;
+  margin-top: 7px;
+}
+.field [aria-invalid="true"] {
+  border-color: #a1261e;
+}
+.error {
+  display: block;
+  color: #a1261e;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-top: 7px;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 30px 0 20px;
+}
+.actions button {
+  font:
+    700 14px/1.5 "Manrope Variable",
+    "Manrope",
+    sans-serif;
+  padding: 15px 23px;
+  min-height: 50px;
+  color: #fffdf7;
+  background: #174e38;
+  border: 1px solid #174e38;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.actions .secondary {
+  color: #174e38;
+  background: transparent;
+}
+.actions button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+.page :focus-visible {
+  outline: 3px solid #b64f28;
+  outline-offset: 4px;
+}
+.review {
+  margin: 25px 0;
+}
+.review > div {
+  padding: 15px 0;
+  border-bottom: 1px solid #d7dacd;
+}
+.review dt {
+  font-size: 12px;
+  font-weight: 800;
+}
+.review dd {
+  margin: 7px 0 0;
+  line-height: 1.7;
+  font-size: 15px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.referral {
+  background: #eeeee3;
+  border-left: 3px solid #a7441f;
+  padding: 18px 20px;
+  margin: 28px 0;
+}
+.referral h3 {
+  font:
+    800 14px/1.5 "Manrope Variable",
+    "Manrope",
+    sans-serif;
+  margin: 0;
+}
+.referral p {
+  font-size: 13px;
+  margin: 9px 0 0;
+}
+.referral code {
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+.consent {
+  margin: 24px 0;
+}
+.consent label {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.8;
+  display: block;
+}
+.consent input {
+  width: 20px;
+  height: 20px;
+  accent-color: #174e38;
+  vertical-align: middle;
+  margin-right: 12px;
+}
+.failure {
+  background: #f9e9de;
+  color: #80241e;
+  border-left: 4px solid #a1261e;
+  padding: 14px 18px;
+  font-size: 14px;
+}
+@media (max-width: 850px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .aside {
+    max-width: 650px;
+  }
+  .aside h2 br {
+    display: none;
+  }
+  .aside .small {
+    margin-top: 22px;
+  }
+  .hero {
+    margin-bottom: 30px;
+  }
+}
+@media (max-width: 500px) {
+  .page {
+    padding: 110px 18px 65px;
+  }
+  .back {
+    margin-bottom: 32px;
+  }
+  .progress {
+    gap: 10px;
+  }
+  .progress li {
+    gap: 6px;
+    font-size: 12px;
+  }
+  .actions button {
+    flex: 1;
+  }
+  .panel {
+    padding: 23px 20px;
+  }
+}
+
+.page :is(h1,h2,h3,h4,h5,h6){color:inherit;font-family:inherit}
+.page :is(p,span,li,td,th,label){font-family:inherit}

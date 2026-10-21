@@ -1,0 +1,251 @@
+.page {
+  background: #f4f1e9;
+  color: #10211d;
+  font-family: "Manrope Variable", Arial, sans-serif;
+  outline: none;
+}
+.page h1,
+.page h2,
+.page h3 {
+  font:
+    800 42px/1.06 "Manrope Variable",
+    Arial,
+    sans-serif;
+  letter-spacing: -0.055em;
+  margin: 0;
+  color: inherit;
+}
+.page p {
+  line-height: 1.65;
+  margin: 0;
+}
+.page a {
+  color: inherit;
+  text-underline-offset: 5px;
+  font-weight: 750;
+}
+.page button,
+.page input,
+.page select,
+.page textarea {
+  font: inherit;
+}
+.page a:focus-visible,
+.page button:focus-visible,
+.page input:focus-visible,
+.page select:focus-visible,
+.page textarea:focus-visible,
+.message:focus-visible {
+  outline: 3px solid #1684b6;
+  outline-offset: 4px;
+}
+.eyebrow {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+.intro {
+  padding: 55px max(24px, 5.55vw);
+}
+.intro h1 {
+  font-size: clamp(49px, 6.6vw, 94px);
+  margin: 28px 0;
+}
+.intro h1 span {
+  color: #c33e12;
+}
+.intro > p:not(.eyebrow) {
+  font-size: 20px;
+  max-width: 700px;
+  margin-bottom: 25px;
+}
+.intro > a {
+  font-size: 13px;
+}
+.builder {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 65px;
+  padding: 45px max(24px, 5.55vw) 60px;
+  background: #e9e6db;
+}
+.builder h2 {
+  font-size: 35px;
+  margin: 20px 0;
+}
+.form > p:not(.eyebrow) {
+  font-size: 15px;
+}
+.form > label:not(.checkbox) {
+  display: block;
+  font-size: 13px;
+  font-weight: 750;
+  margin: 24px 0 9px;
+}
+.form > input,
+.form > select,
+.form > textarea {
+  width: 100%;
+  min-height: 49px;
+  border: 1px solid #8a9985;
+  border-radius: 4px;
+  background: #fbf9f3;
+  color: #10211d;
+  padding: 12px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+.form textarea {
+  resize: vertical;
+}
+.help {
+  font-size: 12px !important;
+  color: #43533f;
+  margin-top: 10px !important;
+  line-height: 1.6 !important;
+}
+.checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 24px;
+  font-size: 14px;
+  font-weight: 750;
+  cursor: pointer;
+}
+.checkbox input {
+  accent-color: #10211d;
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.message {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: #fbf9f3;
+  border-top: 4px solid #c33e12;
+  padding: 25px;
+  margin-top: 24px;
+  font-size: 15px;
+  line-height: 1.7;
+  max-height: 650px;
+  overflow: auto;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+.actions button {
+  border: 1px solid #10211d;
+  border-radius: 5px;
+  background: #10211d;
+  color: #f4f1e9;
+  font-size: 12px;
+  font-weight: 750;
+  min-height: 47px;
+  padding: 12px 15px;
+  cursor: pointer;
+}
+.actions button:hover {
+  background: #294d3d;
+}
+.templateButton {
+  border: 0;
+  border-bottom: 1px solid #10211d;
+  background: transparent;
+  color: #10211d;
+  font-size: 13px !important;
+  font-weight: 750 !important;
+  padding: 0 0 6px;
+  margin-top: 28px;
+  cursor: pointer;
+}
+.error {
+  font-size: 13px;
+  color: #9a260a;
+  margin-top: 15px !important;
+}
+.status {
+  font-size: 13px;
+  color: #234d30;
+  margin-top: 10px !important;
+}
+.overview {
+  padding: 60px max(24px, 5.55vw);
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 80px;
+  background: #10211d;
+  color: #f4f1e9;
+}
+.overview h2 {
+  margin: 22px 0;
+}
+.overview h3 {
+  font-size: 30px;
+  margin: 0 0 22px;
+}
+.overview p:not(.eyebrow) {
+  font-size: 16px;
+  max-width: 600px;
+}
+.overview a {
+  display: inline-block;
+  margin-top: 25px;
+  color: #ff996b;
+}
+.overview > div:last-child {
+  border-left: 1px solid #768574;
+  padding-left: 40px;
+}
+@media (max-width: 850px) {
+  .builder {
+    gap: 30px;
+  }
+  .builder h2 {
+    font-size: 30px;
+  }
+  .overview {
+    gap: 35px;
+  }
+}
+@media (max-width: 650px) {
+  .intro {
+    padding: 35px 24px;
+  }
+  .intro h1 {
+    font-size: 50px;
+  }
+  .intro > p:not(.eyebrow) {
+    font-size: 18px;
+  }
+  .builder,
+  .overview {
+    grid-template-columns: 1fr;
+    padding: 35px 24px;
+    gap: 40px;
+  }
+  .overview > div:last-child {
+    border-left: 0;
+    border-top: 1px solid #768574;
+    padding: 28px 0 0;
+  }
+  .message {
+    padding: 20px;
+    font-size: 14px;
+    max-height: none;
+  }
+  .page h2 {
+    font-size: 34px;
+  }
+  .actions button {
+    flex-grow: 1;
+  }
+}
+.preview {
+  min-width: 0;
+}

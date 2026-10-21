@@ -246,12 +246,15 @@ export default function HomePageClient() {
             requested only against verified student need.
           </p>
           <div className={styles.actions}>
-            <Link className={styles.button} href="/contact?interest=laptop">
+            <Link
+              className={styles.button}
+              href="/endless-possibilities/give-a-child-a-laptop/donate"
+            >
               Register donor interest <ArrowRight size={22} aria-hidden />
             </Link>
             <Link
               className={styles.textLink}
-              href="/contact?interest=student-support"
+              href="/endless-possibilities/give-a-child-a-laptop/request-support"
             >
               Request student support
             </Link>

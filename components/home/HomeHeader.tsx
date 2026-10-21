@@ -7,10 +7,10 @@ import { ArrowRight, List, X } from "@phosphor-icons/react";
 import styles from "./Home.module.css";
 
 const links = [
-  { label: "Company", href: "/#company" },
-  { label: "Our work", href: "/#work" },
+  { label: "Company", href: "/about" },
+  { label: "Our work", href: "/work" },
   { label: "Forge ITs", href: "/endless-possibilities" },
-  { label: "Stories", href: "/#stories" },
+  { label: "Stories", href: "/blog" },
   { label: "Join us", href: "/join" },
 ];
 
@@ -41,7 +41,7 @@ export default function HomeHeader() {
 
   return (
     <>
-      <a className={styles.skipLink} href="#home-content">
+      <a className={styles.skipLink} href="#main-content">
         Skip to content
       </a>
       <header className={styles.header}>
