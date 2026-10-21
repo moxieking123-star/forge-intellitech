@@ -27,7 +27,9 @@ export function commissionKobo(input: {
     BigInt(input.internetKobo) -
     BigInt(input.directSchoolOperationsKobo) -
     BigInt(input.taxKobo);
-  return Number(net > BigInt(0) ? (net * BigInt(15) + BigInt(50)) / BigInt(100) : BigInt(0));
+  return Number(
+    net > BigInt(0) ? (net * BigInt(15) + BigInt(50)) / BigInt(100) : BigInt(0),
+  );
 }
 export function payableDate(startsOn: string) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(startsOn)) throw new Error("Use an ISO date");
@@ -90,6 +92,9 @@ export function validateSchool(input: unknown) {
     ...out,
     schoolName: out.schoolName as string,
     location: out.location as string,
+    name: out.name as string,
+    email: out.email as string,
+    phone: out.phone as string,
     learnerCount: b.learnerCount as number,
     consent: true,
     referralCode: code || null,

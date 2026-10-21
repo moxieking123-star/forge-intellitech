@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/home/studio-beginning.webp",
+        url: "/images/editorial/movement-beginnings.webp",
         alt: "Tools, ideas and a place to begin — Endless Possibilities",
       },
     ],
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     title: "Endless Possibilities | Forge ITs",
     description:
       "An opportunity to discover. A reason to create. A future we build together.",
-    images: ["/images/home/studio-beginning.webp"],
+    images: ["/images/editorial/movement-beginnings.webp"],
   },
 };
 export default function EndlessPossibilitiesPage() {
@@ -65,14 +65,16 @@ export default function EndlessPossibilitiesPage() {
         <figure>
           <div>
             <Image
-              src="/images/home/studio-beginning.webp"
-              alt="Illustrative workspace with a laptop, ideas on paper and room to create"
+              src="/images/editorial/movement-beginnings.webp"
+              alt="Illustrative stepping forms, a growing plant and practical tools leading towards an open doorway"
               fill
               priority
               sizes="(max-width:700px) 100vw, 48vw"
             />
           </div>
-          <figcaption>A vision of what an opportunity can open.</figcaption>
+          <figcaption>
+            AI illustration · different beginnings, a shared possibility.
+          </figcaption>
         </figure>
       </section>
       <section className={styles.belief} aria-labelledby="belief-title">

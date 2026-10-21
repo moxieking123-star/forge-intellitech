@@ -1,3 +1,4 @@
+import EditorialVisual from "@/components/site/EditorialVisual";
 import type { Metadata } from "next";
 import Link from "next/link";
 import s from "@/components/site/Site.module.css";
@@ -14,6 +15,11 @@ export default function Page() {
         <p className={s.eyebrow}>Using this website</p>
         <h1>A clear beginning.</h1>
       </header>
+      <EditorialVisual
+        src="/images/editorial/terms-shared-ground.webp"
+        alt="Illustrative crafted wooden shapes fitting together beside blank paper"
+        caption="AI-generated illustration · clarity and shared understanding."
+      />
       <article className={s.legal}>
         <h2>Information and enquiries</h2>
         <p>

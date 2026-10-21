@@ -3,6 +3,7 @@ export type Story = {
   title: string;
   category: string;
   excerpt: string;
+  image: { src: string; alt: string };
   sections: { title: string; paragraphs: string[] }[];
   sources: { title: string; url: string; note: string }[];
   cta: { label: string; href: string };
@@ -26,6 +27,7 @@ const unicef = {
 export const stories: Story[] = [
   {
     slug: "the-future-we-can-start-building",
+    image: { src: "/images/editorial/stories/future-building.webp", alt: "Wooden blocks form a rising staircase on a green sheet in warm sunlight." },
     title: "The future we can start building",
     category: "Our point of view",
     excerpt:
@@ -68,6 +70,7 @@ export const stories: Story[] = [
   },
   {
     slug: "exposure-is-a-place-to-begin",
+    image: { src: "/images/editorial/stories/exposure-beginning.webp", alt: "A circuit board, copper wire, magnifying glass and wooden shapes arranged for discovery." },
     title: "Exposure is a place to begin",
     category: "Practical education",
     excerpt:
@@ -110,6 +113,7 @@ export const stories: Story[] = [
   },
   {
     slug: "a-portfolio-begins-with-one-useful-project",
+    image: { src: "/images/editorial/stories/portfolio-project.webp", alt: "Paper compositions develop across three sheets beside a ruler and green binder clips." },
     title: "A portfolio begins with one useful project",
     category: "Learning by doing",
     excerpt:
@@ -149,6 +153,7 @@ export const stories: Story[] = [
   },
   {
     slug: "a-laptop-needs-a-learning-plan",
+    image: { src: "/images/editorial/stories/laptop-plan.webp", alt: "An open laptop with a blank screen beside a journal and pencils on a green desk." },
     title: "A laptop needs a learning plan",
     category: "Endless Possibilities",
     excerpt:
@@ -191,6 +196,7 @@ export const stories: Story[] = [
   },
   {
     slug: "an-idea-needs-someone-to-question-it",
+    image: { src: "/images/editorial/stories/idea-questions.webp", alt: "A cardboard prototype with a loose component, measuring tape and pencils, ready for revision." },
     title: "An idea needs someone to question it",
     category: "School to enterprise",
     excerpt:

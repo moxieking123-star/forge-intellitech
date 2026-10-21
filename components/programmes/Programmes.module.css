@@ -542,5 +542,82 @@
   }
 }
 
-.page :is(h1,h2,h3,h4,h5,h6){color:inherit;font-family:inherit}
-.page :is(p,span,li,td,th,label){font-family:inherit}
+.page :is(h1, h2, h3, h4, h5, h6) {
+  color: inherit;
+  font-family: inherit;
+}
+.page :is(p, span, li, td, th, label) {
+  font-family: inherit;
+}
+.chisanbop {
+  display: grid;
+  grid-template-columns: 52% 48%;
+  background: #e9e6db;
+}
+.chisanbop figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+.chisanbopPicture {
+  position: relative;
+  min-height: 540px;
+  flex: 1;
+}
+.chisanbopPicture img {
+  object-fit: cover;
+  object-position: center;
+}
+.chisanbop figcaption {
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 13px 22px;
+  line-height: 1.6;
+}
+.chisanbopCopy {
+  padding: 55px max(32px, 5.55vw) 55px 45px;
+}
+.chisanbopCopy h2 {
+  font-size: clamp(36px, 3.8vw, 55px);
+  margin: 25px 0;
+}
+.chisanbopCopy h2 span {
+  color: var(--orange);
+}
+.chisanbopCopy > p:not(.eyebrow) {
+  font-size: 17px;
+  margin-top: 18px;
+}
+.chisanbopCopy .textLink {
+  font-size: 12px;
+  line-height: 1.6;
+}
+@media (max-width: 1050px) {
+  .chisanbopCopy {
+    padding: 38px 30px;
+  }
+  .chisanbopPicture {
+    min-height: 570px;
+  }
+}
+@media (max-width: 700px) {
+  .chisanbop {
+    grid-template-columns: 1fr;
+  }
+  .chisanbopPicture {
+    min-height: 0;
+    height: 340px;
+    flex: none;
+  }
+  .chisanbopCopy {
+    padding: 32px 24px 40px;
+  }
+  .chisanbopCopy h2 {
+    font-size: 37px;
+  }
+  .chisanbop figcaption {
+    font-size: 8px;
+    padding-inline: 24px;
+  }
+}

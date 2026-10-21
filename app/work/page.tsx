@@ -1,3 +1,4 @@
+import EditorialVisual from "@/components/site/EditorialVisual";
 import type { Metadata } from "next";
 import s from "@/components/site/Site.module.css";
 import { Campaign, Rows } from "@/components/site/PageParts";
@@ -23,6 +24,11 @@ export default function Page() {
           An idea that grows into an enterprise. This is where our work begins.
         </p>
       </header>
+      <EditorialVisual
+        src="/images/editorial/work-systems.webp"
+        alt="Illustrative connected prototype objects, circuit components and design cards"
+        caption="AI-generated illustration · ideas taking a useful shape."
+      />
       <section className={s.section}>
         <h2>Made of possibility.</h2>
         <Rows

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import styles from "./SchoolOnboarding.module.css";
@@ -360,6 +361,17 @@ export default function SchoolOnboarding({
             </p>
           )}
         </header>
+        <figure className={styles.editorial}>
+          <Image
+            src={`/images/editorial/applications/${assisted ? "school-assisted" : "school-self"}.webp`}
+            alt={assisted ? "A fictional Nigerian school leader and referrer working together at a laptop." : "The welcoming entry and classroom of a fictional Nigerian school."}
+            width={1440}
+            height={960}
+            sizes="(max-width: 1228px) 100vw, 1180px"
+            priority
+          />
+          <figcaption>{assisted ? "AI-generated scene with fictional adults; not Forge staff or partners." : "AI-generated school scene; not an actual partner institution."}</figcaption>
+        </figure>
         <div className={styles.layout}>
           <aside className={styles.aside} aria-label="What happens next">
             <span className={styles.marker}>Start here</span>

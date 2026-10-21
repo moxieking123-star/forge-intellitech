@@ -1,3 +1,5 @@
+import { resend, FROM_EMAIL } from "@/lib/resend";
+import { notificationMailboxes } from "@/lib/notification-routing";
 import { schoolKey, validateSchool } from "@/lib/referrals/policy";
 import {
   ensureReferrer,
@@ -68,10 +70,35 @@ export async function POST(request: Request) {
         );
       throw error;
     }
+    let notification = "not_configured";
+    if (resend) {
+      try {
+        const result = await resend.emails.send({
+          from: FROM_EMAIL,
+          to: notificationMailboxes.programmes,
+          replyTo: input.email as string,
+          subject: "School onboarding request received",
+          text: [
+            "School onboarding request saved for private review.",
+            `Request: ${data}`,
+            `School: ${input.schoolName}`,
+            `Location: ${input.location}`,
+            `Contact: ${input.name}`,
+            `Email: ${input.email}`,
+            `Phone: ${input.phone}`,
+            `Assisted submission: ${input.assisted ? "Yes" : "No"}`,
+          ].join("\n"),
+        });
+        notification = result.error ? "pending" : "sent";
+      } catch {
+        notification = "pending";
+      }
+    }
     return response(
       {
         success: true,
         id: data,
+        notification,
         message: "School onboarding request received for review.",
       },
       201,

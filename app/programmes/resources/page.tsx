@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import SchoolResources from "../../../components/programmes/SchoolResources";
 import styles from "../../../components/programmes/SchoolResources.module.css";
@@ -14,6 +15,7 @@ export default function ResourcesPage() {
   return (
     <div id="home-content" tabIndex={-1} className={styles.page}>
       <header className={styles.intro}>
+        <div className={styles.resourceHeroCopy}>
         <p className={styles.eyebrow}>For school teams · practical resources</p>
         <h1>
           Bring parents into
@@ -25,6 +27,11 @@ export default function ResourcesPage() {
           the details, then copy, download or share the message yourself.
         </p>
         <Link href="/programmes">← Explore ElyTech & TechUp</Link>
+        </div>
+        <figure className={styles.resourceHeroFigure}>
+          <div><Image src="/images/editorial/school-resource-kit.webp" alt="Cream stationery, a forest-green folder and an orange pencil arranged as a school communication kit" fill priority sizes="(max-width: 700px) 100vw, 43vw" /></div>
+          <figcaption>AI-generated still life · a clear beginning for the conversation</figcaption>
+        </figure>
       </header>
       <SchoolResources />
       <section className={styles.overview}>

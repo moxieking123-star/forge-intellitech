@@ -2,7 +2,7 @@
   background: #f5f2e9;
   color: #172f26;
   font-family: "Manrope Variable", "Manrope", sans-serif;
-  padding: 135px 24px 90px;
+  padding: 112px 24px 90px;
   min-height: 100vh;
 }
 .wrap {
@@ -11,7 +11,7 @@
 }
 .back {
   display: inline-block;
-  margin-bottom: 38px;
+  margin-bottom: 24px;
   color: inherit;
 }
 .eyebrow {
@@ -32,7 +32,7 @@
   font-size: clamp(17px, 2.5vw, 21px);
   line-height: 1.7;
   max-width: 740px;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 }
 .panel {
   background: #fffdf7;
@@ -194,3 +194,9 @@
 
 .page :is(h1,h2,h3,h4,h5,h6){color:inherit;font-family:inherit}
 .page :is(p,span,li,td,th,label){font-family:inherit}
+
+.editorial { margin: 0 0 28px; }
+.editorial img { display: block; width: 100%; height: clamp(150px, 22vw, 230px); object-fit: cover; border-radius: 4px; }
+.editorial figcaption { margin-top: 8px; color: #526157; font-size: 11px; line-height: 1.5; }
+
+.editorial img { object-position: center 35%; }

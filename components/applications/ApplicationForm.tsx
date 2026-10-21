@@ -1,9 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Field, Journey, journeys } from "./journeys";
 import styles from "./Applications.module.css";
+
+const journeyImages: Record<Journey, { file: string; alt: string; caption: string }> = {
+  donor: { file: "donor", alt: "A laptop and its care accessories arranged on a desk.", caption: "AI-generated editorial illustration of device care." },
+  student: { file: "student", alt: "A fictional Nigerian secondary school student learning with a laptop.", caption: "AI-generated scene with a fictional student; not a programme participant." },
+  school: { file: "school-enquiry", alt: "Notebooks and practical project tools on a classroom table.", caption: "AI-generated editorial illustration of practical learning." },
+  talent: { file: "talent", alt: "Creative prototypes, textile swatches and a sketchbook on a worktable.", caption: "AI-generated editorial illustration of creative practice." },
+};
 
 const consent: Field = {
   id: "contactConsent",
@@ -13,6 +21,7 @@ const consent: Field = {
 };
 export default function ApplicationForm({ journey }: { journey: Journey }) {
   const config = journeys[journey];
+  const image = journeyImages[journey];
   const [step, setStep] = useState(0);
   const [values, setValues] = useState<Record<string, string>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -114,10 +123,23 @@ export default function ApplicationForm({ journey }: { journey: Journey }) {
           email: values.email.trim(),
           phone: values.phone.trim(),
           inquiryType:
-            journey === "talent" &&
-            ["Patronage", "Partnership"].includes(values.contribution)
-              ? "partnership"
+            journey === "talent"
+              ? values.contribution === "Volunteering"
+                ? "support"
+                : ["Patronage", "Partnership"].includes(values.contribution)
+                  ? "partnership"
+                  : "careers"
               : config.inquiryType,
+          submissionSource:
+            journey === "donor" || journey === "student"
+              ? "endless-possibilities"
+              : journey === "school"
+                ? "programmes"
+                : ["Volunteering", "Patronage"].includes(values.contribution)
+                  ? "endless-possibilities"
+                  : values.contribution === "Partnership"
+                    ? "general"
+                    : "work",
           subject: config.subject,
           message: [
             config.subject,
@@ -245,6 +267,10 @@ export default function ApplicationForm({ journey }: { journey: Journey }) {
         </p>
         <h1>{config.title}</h1>
         <p className={styles.intro}>{config.intro}</p>
+        <figure className={styles.editorial}>
+          <Image src={`/images/editorial/applications/${image.file}.webp`} alt={image.alt} width={1440} height={960} sizes="(max-width: 948px) 100vw, 900px" priority />
+          <figcaption>{image.caption}</figcaption>
+        </figure>
         {success ? (
           <section className={styles.panel} role="status">
             <h2 ref={heading} tabIndex={-1}>

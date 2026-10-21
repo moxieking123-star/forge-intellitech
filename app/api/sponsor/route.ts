@@ -1,39 +1,34 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
-import { resend, FROM_EMAIL, ADMIN_EMAIL } from '@/lib/resend';
+import { notificationMailboxes } from "@/lib/notification-routing";
+import { NextRequest, NextResponse } from "next/server";
+import { supabase } from "@/lib/supabase";
+import { resend, FROM_EMAIL } from "@/lib/resend";
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    
-    console.log('📨 Sponsor inquiry:', body);
 
-    const {
-      companyName,
-      contactName,
-      email,
-      phone,
-      sponsorshipType,
-      message,
-    } = body;
+    console.log("📨 Sponsor inquiry:", body);
+
+    const { companyName, contactName, email, phone, sponsorshipType, message } =
+      body;
 
     if (!companyName || !contactName || !email) {
       return NextResponse.json(
-        { error: 'Company name, contact name, and email are required' },
-        { status: 400 }
+        { error: "Company name, contact name, and email are required" },
+        { status: 400 },
       );
     }
 
     if (!supabase) {
-      console.error('❌ Supabase not initialized');
+      console.error("❌ Supabase not initialized");
       return NextResponse.json(
-        { error: 'Database connection error' },
-        { status: 500 }
+        { error: "Database connection error" },
+        { status: 500 },
       );
     }
 
     const { data, error } = await supabase
-      .from('sponsor_inquiries')
+      .from("sponsor_inquiries")
       .insert([
         {
           company_name: companyName,
@@ -42,56 +37,55 @@ export async function POST(request: NextRequest) {
           phone: phone || null,
           sponsorship_type: sponsorshipType || null,
           message: message || null,
-          status: 'new'
-        }
+          status: "new",
+        },
       ])
       .select()
       .single();
 
     if (error) {
-      console.error('❌ Supabase error:', error);
+      console.error("❌ Supabase error:", error);
       return NextResponse.json(
-        { error: 'Failed to save inquiry', details: error.message },
-        { status: 500 }
+        { error: "Failed to save inquiry", details: error.message },
+        { status: 500 },
       );
     }
 
-    console.log('✅ Sponsor inquiry saved:', data.id);
+    console.log("✅ Sponsor inquiry saved:", data.id);
 
     // Send email notification
     if (resend) {
       try {
         await resend.emails.send({
           from: FROM_EMAIL,
-          to: ADMIN_EMAIL,
+          to: notificationMailboxes.movement,
           subject: `💼 New Sponsor Inquiry: ${companyName}`,
           html: `
             <h2>New Sponsor Inquiry</h2>
             <p><strong>Company:</strong> ${companyName}</p>
             <p><strong>Contact:</strong> ${contactName}</p>
             <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
-            <p><strong>Tier:</strong> ${sponsorshipType || 'Not specified'}</p>
-            <p><strong>Goals:</strong> ${message || 'Not provided'}</p>
+            <p><strong>Phone:</strong> ${phone || "Not provided"}</p>
+            <p><strong>Tier:</strong> ${sponsorshipType || "Not specified"}</p>
+            <p><strong>Goals:</strong> ${message || "Not provided"}</p>
             <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
           `,
         });
-        console.log('✅ Email notification sent');
+        console.log("✅ Email notification sent");
       } catch (emailError) {
-        console.error('❌ Email error:', emailError);
+        console.error("❌ Email error:", emailError);
       }
     }
 
     return NextResponse.json(
-      { success: true, message: 'Inquiry submitted successfully!' },
-      { status: 201 }
+      { success: true, message: "Inquiry submitted successfully!" },
+      { status: 201 },
     );
-
   } catch (error) {
-    console.error('❌ Sponsor API error:', error);
+    console.error("❌ Sponsor API error:", error);
     return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
+      { error: "Internal server error" },
+      { status: 500 },
     );
   }
 }

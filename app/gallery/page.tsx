@@ -11,13 +11,6 @@ export const metadata: Metadata = {
 };
 const photographs = [
   {
-    src: "/images/movement/launchpad-2025-group.webp",
-    alt: "LaunchPad attendees gathered on stage with a presentation cheque",
-    caption: "A shared moment on stage · LaunchPad 2025",
-    width: 1600,
-    height: 1200,
-  },
-  {
     src: "/images/movement/launchpad-2025-pitch.webp",
     alt: "A LaunchPad participant holding a microphone on stage",
     caption: "An idea meets the room · LaunchPad 2025",

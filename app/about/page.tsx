@@ -52,13 +52,14 @@ export default function Page() {
         <figure>
           <Image
             className={s.image}
-            src="/images/home/studio-beginning.webp"
-            alt="A laptop and working materials in a sunlit studio"
+            src="/images/editorial/company-team.webp"
+            alt="AI illustration of Nigerian adults collaborating on an idea in a creative technology studio"
             width={1024}
             height={1024}
           />
           <figcaption className={s.caption}>
-            An illustrative vision of a place to begin.
+            AI illustration of a Nigerian creative team; not a photograph of
+            Forge staff.
           </figcaption>
         </figure>
       </section>

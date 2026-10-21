@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { notFound, permanentRedirect } from "next/navigation";
 import { stories, legacyStoryRedirects } from "@/lib/stories";
@@ -23,6 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           title: story.title,
           description: story.excerpt,
           type: "article",
+          images: [{ url: story.image.src, alt: story.image.alt }],
         },
       }
     : { title: "Stories | Forge Intellitech" };
@@ -47,6 +49,10 @@ export default async function StoryPage({ params }: Props) {
           <p className={s.intro}>{story.excerpt}</p>
           <p className={s.byline}>Forge editorial · Perspective</p>
         </header>
+        <figure className={`${s.wrap} ${s.editorialFigure} ${s.articleImage}`}>
+          <Image src={story.image.src} alt={story.image.alt} width={1440} height={960} priority sizes="(max-width: 1230px) 100vw, 1180px" />
+          <figcaption>AI-generated illustration · An editorial interpretation, not a record of a Forge programme.</figcaption>
+        </figure>
         <div className={`${s.wrap} ${s.articleGrid}`}>
           <aside className={s.aside} aria-label="In this essay">
             <p>In this essay</p>

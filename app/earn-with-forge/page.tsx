@@ -1,3 +1,4 @@
+import EditorialVisual from "@/components/site/EditorialVisual";
 import type { Metadata } from "next";
 import Link from "next/link";
 import ReferralAccount from "@/components/referrals/ReferralAccount";
@@ -35,6 +36,13 @@ export default function EarnWithForgePage() {
           </Link>
         </div>
       </header>
+      <div className={s.wrap}>
+        <EditorialVisual
+          src="/images/editorial/referral-connections.webp"
+          alt="Illustrative school model connected to several distinct paths"
+          caption="AI-generated illustration · useful introductions, new beginnings."
+        />
+      </div>
       <section
         className={`${s.wrap} ${s.steps}`}
         aria-labelledby="how-it-works"

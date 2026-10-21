@@ -1,3 +1,4 @@
+import EditorialVisual from "@/components/site/EditorialVisual";
 import type { Metadata } from "next";
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
@@ -24,6 +25,11 @@ export default function Page() {
         </p>
         <a href="mailto:info@forgeintellitech.com">info@forgeintellitech.com</a>
       </header>
+      <EditorialVisual
+        src="/images/editorial/contact-conversation.webp"
+        alt="Illustrative sculptural forms connected by an open paper bridge"
+        caption="AI-generated illustration · a place to begin a conversation."
+      />
       <section className={s.split}>
         <div>
           <h2>A useful place to start.</h2>
@@ -42,6 +48,26 @@ export default function Page() {
             </Link>
             <Link href="/join/apply">Join Forge →</Link>
           </div>
+          <dl>
+            <dt>Work with Forge</dt>
+            <dd>
+              <a href="mailto:work@forgeintellitech.com">
+                work@forgeintellitech.com
+              </a>
+            </dd>
+            <dt>School programmes</dt>
+            <dd>
+              <a href="mailto:programs@forgeintellitech.com">
+                programs@forgeintellitech.com
+              </a>
+            </dd>
+            <dt>Endless Possibilities</dt>
+            <dd>
+              <a href="mailto:admin@forgeintellitech.com">
+                admin@forgeintellitech.com
+              </a>
+            </dd>
+          </dl>
           <p>
             Please keep private documents, identity numbers and sensitive
             student details out of a general enquiry.

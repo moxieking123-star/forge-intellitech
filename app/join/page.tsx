@@ -1,3 +1,4 @@
+import EditorialVisual from "@/components/site/EditorialVisual";
 import type { Metadata } from "next";
 import Link from "next/link";
 import s from "@/components/site/Site.module.css";
@@ -32,6 +33,11 @@ export default function Page() {
           </Link>
         </div>
       </header>
+      <EditorialVisual
+        src="/images/editorial/programme-preparation.webp"
+        alt="AI-generated Nigerian adult educators preparing a practical technology lesson"
+        caption="AI-generated illustration of Nigerian educators; not actual Forge staff."
+      />
       <section className={s.section}>
         <h2>There is more than one way to join.</h2>
         <Rows

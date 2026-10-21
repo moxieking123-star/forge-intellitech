@@ -1,0 +1,46 @@
+.notice {
+  font-family: "Manrope Variable", sans-serif;
+  background: #e9e7dc;
+  color: #19352b;
+  padding: 25px max(24px, calc((100vw - 1280px) / 2));
+  border-block: 1px solid #d2d5c8;
+}
+.notice h2 {
+  font-family: inherit !important;
+  color: inherit;
+  font-size: clamp(21px, 2vw, 28px);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+  margin-bottom: 12px;
+}
+.notice p {
+  font-family: inherit !important;
+  font-size: 14px;
+  line-height: 1.7;
+  max-width: 1050px;
+  margin: 10px 0;
+}
+.notice a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.notice summary {
+  font-weight: 750;
+  font-size: 13px;
+  cursor: pointer;
+}
+.notice :is(a, summary):focus-visible {
+  outline: 3px solid #d44819;
+  outline-offset: 5px;
+}
+.compact {
+  width: min(1280px, calc(100% - 48px));
+  margin: 24px auto 0;
+  padding: 15px 20px;
+  border: 1px solid #d2d5c8;
+  background: transparent;
+}
+.compact p {
+  font-size: 12px;
+}

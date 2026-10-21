@@ -1,0 +1,536 @@
+{
+  "result": "passed",
+  "editorialImages": 33,
+  "checks": [
+    {
+      "route": "/",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/home/studio-beginning.webp",
+        "/images/home/orange-beginning.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/home/studio-beginning.webp",
+        "/images/home/orange-beginning.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/about",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/company-team.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/about",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/company-team.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/work",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/work-systems.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/work",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/work-systems.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/join",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/programme-preparation.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/join",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/programme-preparation.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/contact",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/contact-conversation.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/contact",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/contact-conversation.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/privacy",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/privacy-care.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/privacy",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/privacy-care.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/terms",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/terms-shared-ground.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/terms",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/terms-shared-ground.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/earn-with-forge",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/referral-connections.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/earn-with-forge",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/referral-connections.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/earn-with-forge/onboard",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/applications/school-assisted.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/earn-with-forge/onboard",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/applications/school-assisted.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/programmes",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/nigerian-student-tech-class.webp",
+        "/images/editorial/chisanbop-class.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/programmes",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/nigerian-student-tech-class.webp",
+        "/images/editorial/chisanbop-class.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/programmes/enquire",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/applications/school-enquiry.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/programmes/enquire",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/applications/school-enquiry.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/programmes/onboard",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/applications/school-self.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/programmes/onboard",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/applications/school-self.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/programmes/resources",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/school-resource-kit.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/programmes/resources",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/school-resource-kit.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/join/apply",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/applications/talent.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/join/apply",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/applications/talent.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/endless-possibilities",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/movement-beginnings.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/endless-possibilities",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/movement-beginnings.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/endless-possibilities/give-a-child-a-laptop",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/laptop-campaign.webp",
+        "/images/editorial/learning-after-device.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/endless-possibilities/give-a-child-a-laptop",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/laptop-campaign.webp",
+        "/images/editorial/learning-after-device.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/endless-possibilities/give-a-child-a-laptop/donate",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/applications/donor.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/endless-possibilities/give-a-child-a-laptop/donate",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/applications/donor.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/endless-possibilities/give-a-child-a-laptop/request-support",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/applications/student.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/endless-possibilities/give-a-child-a-laptop/request-support",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/applications/student.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/endless-possibilities/launchpad",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/movement/launchpad-2025-group.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/endless-possibilities/launchpad",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/movement/launchpad-2025-group.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/endless-possibilities/in-school-launchpad",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/student-enterprise.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/endless-possibilities/in-school-launchpad",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/student-enterprise.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/endless-possibilities/intern-with-forge",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/internship-mentorship.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/endless-possibilities/intern-with-forge",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/internship-mentorship.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/endless-possibilities/public-school-seminars",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/home/ideas-in-motion.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/endless-possibilities/public-school-seminars",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/home/ideas-in-motion.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/gallery",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/movement/launchpad-2025-pitch.webp",
+        "/images/movement/launchpad-2025-award.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/gallery",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/movement/launchpad-2025-pitch.webp",
+        "/images/movement/launchpad-2025-award.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/blog",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/stories/journal-index.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/blog",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/stories/journal-index.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/blog/the-future-we-can-start-building",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/stories/future-building.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/blog/the-future-we-can-start-building",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/stories/future-building.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/blog/exposure-is-a-place-to-begin",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/stories/exposure-beginning.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/blog/exposure-is-a-place-to-begin",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/stories/exposure-beginning.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/blog/a-portfolio-begins-with-one-useful-project",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/stories/portfolio-project.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/blog/a-portfolio-begins-with-one-useful-project",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/stories/portfolio-project.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/blog/a-laptop-needs-a-learning-plan",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/stories/laptop-plan.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/blog/a-laptop-needs-a-learning-plan",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/stories/laptop-plan.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/blog/an-idea-needs-someone-to-question-it",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/stories/idea-questions.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/blog/an-idea-needs-someone-to-question-it",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/stories/idea-questions.webp"
+      ],
+      "bad": []
+    }
+  ]
+}

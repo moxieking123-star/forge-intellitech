@@ -57,7 +57,7 @@ export const initiatives: Initiative[] = [
     card: "Someone else’s child. Our shared future. Match a device to verified need and help a learner keep building.",
     headline: "Someone else’s child. Our shared future.",
     intro: "Give a child a laptop. We will help them learn to build with it.",
-    image: "/images/home/orange-beginning.webp",
+    image: "/images/editorial/laptop-campaign.webp",
     imageAlt: "A laptop ready for a new beginning",
     caption: "A device. A year of learning.",
     sections: [],
@@ -75,9 +75,10 @@ export const initiatives: Initiative[] = [
     headline: "An enterprise can begin before school ends.",
     intro:
       "Sometimes the next useful business starts with a student noticing a problem everyone else has learned to live with. In-school LaunchPad creates a way to take that observation seriously, test the idea and begin building an enterprise alongside the student.",
-    image: "/images/home/studio-beginning.webp",
-    imageAlt: "Illustrative workspace with a laptop and project sketches",
-    caption: "Ideas, practical tools and somewhere to begin.",
+    image: "/images/editorial/student-enterprise.webp",
+    imageAlt:
+      "AI illustration of an early irrigation prototype and market research sketches",
+    caption: "AI illustration · a possible idea, not a real student project.",
     sections: [
       {
         title: "Notice what is already there.",
@@ -108,10 +109,11 @@ export const initiatives: Initiative[] = [
     headline: "Finishing school should open a door.",
     intro:
       "What happens to a young person's potential between finishing secondary school and finding their next opportunity? Intern with Forge creates a practical bridge: learn through work, earn an income and receive support towards continuing education.",
-    image: "/images/home/studio-beginning.webp",
+    image: "/images/editorial/internship-mentorship.webp",
     imageAlt:
-      "Illustrative technology workspace with tools for practical learning",
-    caption: "Practical skills. Real responsibility. A next step.",
+      "AI illustration of a Nigerian young adult and mentor working on a technology project",
+    caption:
+      "AI illustration of Nigerian adults at work; not Forge staff or a real intern.",
     sections: [
       {
         title: "Learn through doing useful work.",

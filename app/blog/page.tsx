@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { stories } from "@/lib/stories";
 import { StoriesCampaign } from "@/components/stories/Campaign";
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
   description:
     "Ideas and reflections on practical learning, useful technology and making opportunity possible in Nigeria.",
   alternates: { canonical: "/blog" },
+  openGraph: { images: [{ url: "/images/editorial/stories/journal-index.webp", alt: "A blank journal in warm sunlight." }] },
 };
 export default function StoriesPage() {
   const featured = stories[0];
@@ -31,17 +33,10 @@ export default function StoriesPage() {
           </div>
         </header>
         <section className={s.featured} aria-labelledby="featured-story">
-          <div className={s.featureArt} aria-hidden="true">
-            <span>A place to start</span>
-            <strong>
-              The future
-              <br />
-              we can
-              <br />
-              <i>build here.</i>
-            </strong>
-            <span>Tools. Skills. Shared responsibility.</span>
-          </div>
+          <figure className={s.editorialFigure}>
+            <Image src="/images/editorial/stories/journal-index.webp" alt="An open blank journal, green pencil and terracotta cup on a sunlit wooden desk." width={1440} height={960} priority sizes="(max-width: 760px) 100vw, 50vw" />
+            <figcaption>AI-generated illustration · A place for ideas to begin.</figcaption>
+          </figure>
           <div className={s.featureText}>
             <p className={s.eyebrow}>{featured.category}</p>
             <h2 id="featured-story">

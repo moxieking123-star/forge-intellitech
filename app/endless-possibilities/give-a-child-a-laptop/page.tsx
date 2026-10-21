@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/home/orange-beginning.webp",
+        url: "/images/editorial/laptop-campaign.webp",
         alt: "A laptop, a place to begin — Endless Possibilities",
       },
     ],
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Endless Possibilities | Forge",
     description: "A device. A year of learning. A different kind of beginning.",
-    images: ["/images/home/orange-beginning.webp"],
+    images: ["/images/editorial/laptop-campaign.webp"],
   },
 };
 
@@ -109,7 +109,7 @@ export default function EndlessPossibilitiesPage() {
       </nav>
       <section className={styles.hero} aria-labelledby="movement-title">
         <Image
-          src="/images/home/orange-beginning.webp"
+          src="/images/editorial/laptop-campaign.webp"
           alt=""
           fill
           priority
@@ -272,14 +272,15 @@ export default function EndlessPossibilitiesPage() {
         <figure>
           <div className={styles.learningPicture}>
             <Image
-              src="/images/home/studio-beginning.webp"
-              alt="Illustrative workspace with a laptop and project sketches, showing tools for learning and creating"
+              src="/images/editorial/learning-after-device.webp"
+              alt="AI illustration of Nigerian adult hands testing a simple circuit and robot mechanism"
               fill
               sizes="(max-width: 700px) 100vw, 43vw"
             />
           </div>
           <figcaption>
-            A vision of the space an opportunity can open.
+            AI illustration of guided practical learning; not a recipient
+            photograph.
           </figcaption>
         </figure>
         <div className={styles.learningCopy}>

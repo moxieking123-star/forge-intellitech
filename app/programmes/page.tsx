@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import LearningStages from "../../components/programmes/LearningStages";
+import StudentImageNotice from "../../components/StudentImageNotice";
 import styles from "../../components/programmes/Programmes.module.css";
 
 export const metadata: Metadata = {
@@ -75,15 +76,15 @@ export default function ProgrammesPage() {
         <figure>
           <div className={styles.picture}>
             <Image
-              src="/images/home/studio-beginning.webp"
-              alt="A laptop and notebook in a sunlit creative workspace"
+              src="/images/editorial/nigerian-student-tech-class.webp"
+              alt="AI-generated scene of Nigerian students exploring technology in a classroom"
               fill
               priority
               sizes="(max-width: 700px) 100vw, 47vw"
             />
           </div>
           <figcaption>
-            Illustrative workspace · room for an idea to begin
+            AI-generated Nigerian students · not actual client students
           </figcaption>
         </figure>
       </section>
@@ -130,6 +131,50 @@ export default function ProgrammesPage() {
           </article>
         ))}
       </section>
+      <section className={styles.chisanbop} aria-labelledby="chisanbop-heading">
+        <figure>
+          <div className={styles.chisanbopPicture}>
+            <Image
+              src="/images/editorial/chisanbop-class.webp"
+              alt="AI-generated young Nigerian children in school uniforms practising finger arithmetic with an instructor"
+              fill
+              sizes="(max-width: 700px) 100vw, 52vw"
+            />
+          </div>
+          <figcaption>
+            AI-generated Nigerian children and instructor · not actual client
+            students
+          </figcaption>
+        </figure>
+        <div className={styles.chisanbopCopy}>
+          <p className={styles.eyebrow}>
+            Chisanbop · learning through practice
+          </p>
+          <h2 id="chisanbop-heading">
+            A world of numbers.
+            <br />
+            <span>Already at hand.</span>
+          </h2>
+          <p>
+            Sometimes an idea begins with the simplest tools. Chisanbop is a
+            finger-arithmetic method that represents tens on the left hand and
+            units on the right.
+          </p>
+          <p>
+            With an instructor’s guidance, young learners can explore numbers
+            through demonstration, careful practice and questions. Another
+            invitation to try something, understand it and try again.
+          </p>
+          <a
+            className={styles.textLink}
+            href="https://www.korea.net/NewsFocus/HonoraryReporters/view?articleId=190993"
+          >
+            Read about the method on Korea.net{" "}
+            <ArrowRight size={18} aria-hidden />
+          </a>
+        </div>
+      </section>
+      <StudentImageNotice />
       <section className={styles.learning}>
         <p className={styles.eyebrow}>How learning becomes making</p>
         <h2>

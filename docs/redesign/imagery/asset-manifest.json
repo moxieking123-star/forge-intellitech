@@ -1,0 +1,51 @@
+{
+  "created": "2026-10-21",
+  "method": "Built-in image_gen tool; optimized locally with Sharp",
+  "assets": [
+    {
+      "file": "/images/editorial/company-team.webp",
+      "route": "/about",
+      "prompt": "Photorealistic editorial Nigerian creative technology workshop; three Nigerian adults collaborating over a paper prototype and desktop monitor; warm natural light, cream plaster, forest details; no logos/text/white people; illustrative, not actual Forge staff.",
+      "type": "AI-generated illustration"
+    },
+    {
+      "file": "/images/editorial/programme-preparation.webp",
+      "route": "/join",
+      "prompt": "Nigerian adult educators preparing a coding/electronics lesson at a classroom workbench; robot prototype, circuit components, sketch cards and tablet; warm cream, orange trays, green chalkboard; no children, logos or readable text; illustrative, not a Forge event.",
+      "type": "AI-generated illustration"
+    },
+    {
+      "file": "/images/editorial/movement-beginnings.webp",
+      "route": "/endless-possibilities",
+      "prompt": "Cinematic editorial still-life of terracotta and green stepping forms becoming an open doorway; notebook, simple circuit and plant; warm tactile materials and long shadows; no people/laptop/text/logo.",
+      "type": "AI-generated illustration"
+    },
+    {
+      "file": "/images/editorial/student-enterprise.webp",
+      "route": "/endless-possibilities/in-school-launchpad",
+      "prompt": "Photorealistic early irrigation prototype, planter, recycled electronics and research diagram cards on a cream worktable in a Nigerian classroom; no people/laptop/legible text; not a real student project.",
+      "type": "AI-generated illustration"
+    },
+    {
+      "file": "/images/editorial/internship-mentorship.webp",
+      "route": "/endless-possibilities/intern-with-forge",
+      "prompt": "Nigerian male young adult and female mentor working on a desktop monitor and electronic prototype in a modest technology studio; candid and practical; no children, logos or white people; not actual Forge staff/intern.",
+      "type": "AI-generated illustration"
+    },
+    {
+      "file": "/images/editorial/learning-after-device.webp",
+      "route": "/endless-possibilities/give-a-child-a-laptop#learning-title",
+      "prompt": "Close-up of Nigerian adult educator/learner hands assembling a simple LED circuit and robot mechanism; notebook and multimeter; warm daylight, cream background, green/orange components; no faces/laptop/logo/text; not a recipient photograph.",
+      "type": "AI-generated illustration"
+    },
+    {
+      "file": "/images/editorial/laptop-campaign.webp",
+      "route": "/endless-possibilities/give-a-child-a-laptop",
+      "prompt": "Wide cinematic campaign banner: front-facing open unbranded laptop at far right on a wooden school desk, abstract green/cream screen; left two-thirds clear, evenly lit orange plaster wall; no people/logos/text; distinct from the homepage laptop image.",
+      "type": "AI-generated illustration"
+    }
+  ],
+  "reuse": "Each editorial image appears on one page only. Brand and product logos intentionally remain shared UI identity. Existing Nigerian LaunchPad archive: group on LaunchPad, award and pitch in Gallery.",
+  "rights": "No Pinterest downloads or third-party stock photographs used for the additions. Generated assets are original illustrative outputs, not documentary evidence. Existing event photos were supplied in the site archive and their reuse was expressly requested by the founder; no claim that archive photos are public domain. No paid stock licence was purchased.",
+  "scope": "Initial seven assets only; programme-preparation.webp is now used on /join. See README.md and the additional prompt files for the complete 27-image set."
+}

@@ -1,3 +1,4 @@
+import EditorialVisual from "@/components/site/EditorialVisual";
 import type { Metadata } from "next";
 import Link from "next/link";
 import s from "@/components/site/Site.module.css";
@@ -18,6 +19,11 @@ export default function Page() {
           behind it.
         </p>
       </header>
+      <EditorialVisual
+        src="/images/editorial/privacy-care.webp"
+        alt="Illustrative frosted glass sheltering a paper form and a living leaf"
+        caption="AI-generated illustration · care for the people behind the information."
+      />
       <article className={s.legal}>
         <p>
           Forge Intellitech Services Ltd handles information submitted through
@@ -67,6 +73,20 @@ export default function Page() {
           Public stories and progress updates require separate care and
           appropriate permission. Financial responsibilities and device
           agreements are discussed separately before participation.
+        </p>
+        <h2 id="student-imagery">Student imagery and privacy</h2>
+        <p>
+          We use AI-generated student imagery to illustrate learning and protect
+          the privacy of children in our client schools. These illustrations do
+          not show real client students and are labelled as AI-generated.
+        </p>
+        <p>
+          Our policy requires appropriate parent or guardian and school
+          permissions, together with applicable data-protection and safeguarding
+          checks, before publishing a real student photograph. Historical
+          archive photographs are identified separately. Permission for
+          programme participation is not treated as blanket permission to
+          publish a child's image.
         </p>
         <h2>Cookies and analytics</h2>
         <p>

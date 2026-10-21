@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { sourceForInterest } from "@/lib/notification-routing";
 import { useFormSubmit } from "@/hooks/useFormSubmit";
 
 const inquiryTypes = [
@@ -99,7 +100,13 @@ export default function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await submitForm(formData);
+    const interest = new URLSearchParams(window.location.search).get(
+      "interest",
+    );
+    await submitForm({
+      ...formData,
+      submissionSource: sourceForInterest(interest),
+    });
   };
 
   const handleChange = (
@@ -132,8 +139,8 @@ export default function ContactForm() {
       <h2>Tell us what you have in mind.</h2>
       {error && (
         <div role="alert">
-          {error} Your answers are still here. You can try again or email
-          info@forgeintellitech.com.
+          {error} Your answers are still here. You can try again or use the
+          relevant contact route below.
         </div>
       )}
       <label htmlFor="name">Your name</label>

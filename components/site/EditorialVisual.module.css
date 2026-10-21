@@ -1,0 +1,36 @@
+.figure {
+  margin: 0 0 45px;
+  font-family: "Manrope Variable", sans-serif;
+}
+.figure > div {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/7;
+  overflow: hidden;
+  background: #e9e4d7;
+}
+.figure img {
+  object-fit: cover;
+  object-position: 50% 35%;
+}
+.figure figcaption {
+  font:
+    500 12px/1.6 "Manrope Variable",
+    sans-serif;
+  color: #526159;
+  margin-top: 9px;
+}
+.compact > div {
+  aspect-ratio: 3/1;
+}
+@media (max-width: 700px) {
+  .figure {
+    margin-bottom: 30px;
+  }
+  .figure > div {
+    aspect-ratio: 4/3;
+  }
+  .compact > div {
+    aspect-ratio: 3/2;
+  }
+}

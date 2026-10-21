@@ -1,4 +1,5 @@
 import Link from "next/link";
+import StudentImageNotice from "../StudentImageNotice";
 import CookieSettings from "../CookieSettings";
 import { socialChannels } from "@/lib/public-channels";
 import Image from "next/image";
@@ -51,6 +52,7 @@ export default function HomeFooter() {
           <span>Building technology. People. Possibilities.</span>
         </div>
       </div>
+      <StudentImageNotice compact />
       <div className={styles.footerBottom}>
         <span>Forged in Nigeria. Built for what comes next.</span>
         <span>

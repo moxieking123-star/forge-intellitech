@@ -1,6 +1,10 @@
+import {
+  isSubmissionSource,
+  notificationRecipient,
+} from "@/lib/notification-routing";
 import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
-import { resend, FROM_EMAIL, ADMIN_EMAIL } from "@/lib/resend";
+import { resend, FROM_EMAIL } from "@/lib/resend";
 import { contactNotificationEmail } from "@/lib/email-templates";
 
 export async function POST(request: NextRequest) {
@@ -8,7 +12,25 @@ export async function POST(request: NextRequest) {
     const body = await request.json().catch(() => null);
     if (!body || typeof body !== "object" || Array.isArray(body))
       return NextResponse.json({ error: "Invalid request" }, { status: 400 });
-    const { name, email, subject, message, inquiryType, phone } = body;
+    const {
+      name,
+      email,
+      subject,
+      message,
+      inquiryType,
+      phone,
+      submissionSource,
+    } = body;
+    if (submissionSource !== undefined && !isSubmissionSource(submissionSource))
+      return NextResponse.json(
+        { error: "Invalid submission source" },
+        { status: 400 },
+      );
+    const recipient = notificationRecipient({
+      inquiryType,
+      subject,
+      submissionSource,
+    });
 
     // Validation
     if (
@@ -44,8 +66,7 @@ export async function POST(request: NextRequest) {
       console.error("❌ Supabase not initialized");
       return NextResponse.json(
         {
-          error:
-            "Submissions are temporarily unavailable. Please email info@forgeintellitech.com.",
+          error: `Submissions are temporarily unavailable. Please email ${recipient}.`,
         },
         { status: 500 },
       );
@@ -82,7 +103,7 @@ export async function POST(request: NextRequest) {
 
     // Send email notification
     if (resend) {
-      console.log("📨 Sending email to:", ADMIN_EMAIL);
+      console.log("Notification recipient selected");
       console.log("📨 From:", FROM_EMAIL);
 
       try {
@@ -97,7 +118,7 @@ export async function POST(request: NextRequest) {
 
         const emailResult = await resend.emails.send({
           from: FROM_EMAIL,
-          to: ADMIN_EMAIL,
+          to: recipient,
           subject: emailContent.subject,
           html: emailContent.html,
         });

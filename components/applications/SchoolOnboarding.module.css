@@ -3,7 +3,7 @@
   color: #172f26;
   font-family: "Manrope Variable", "Manrope", sans-serif;
   min-height: 100vh;
-  padding: 140px 24px 100px;
+  padding: 112px 24px 100px;
 }
 .wrap {
   max-width: 1180px;
@@ -13,7 +13,7 @@
   display: inline-block;
   color: inherit;
   font-size: 14px;
-  margin-bottom: 44px;
+  margin-bottom: 24px;
 }
 .eyebrow {
   font-size: 11px;
@@ -24,7 +24,7 @@
 }
 .hero {
   max-width: 880px;
-  margin-bottom: 58px;
+  margin-bottom: 26px;
 }
 .hero h1 {
   font-family: inherit;
@@ -314,3 +314,9 @@
 
 .page :is(h1,h2,h3,h4,h5,h6){color:inherit;font-family:inherit}
 .page :is(p,span,li,td,th,label){font-family:inherit}
+
+.editorial { margin: 0 0 28px; }
+.editorial img { display: block; width: 100%; height: clamp(150px, 22vw, 230px); object-fit: cover; border-radius: 4px; }
+.editorial figcaption { margin-top: 8px; color: #526157; font-size: 11px; line-height: 1.5; }
+
+.editorial img { object-position: center 35%; }

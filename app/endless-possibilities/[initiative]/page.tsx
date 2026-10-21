@@ -114,32 +114,10 @@ export default async function InitiativePage({ params }: Props) {
               <span>Next edition in planning</span>
             </div>
           </div>
-          <div className={styles.archiveImages}>
-            <figure>
-              <div>
-                <Image
-                  src="/images/movement/launchpad-2025-award.webp"
-                  alt="An award presentation at LaunchPad 2025"
-                  fill
-                  sizes="(max-width:700px) 100vw, 58vw"
-                />
-              </div>
-              <figcaption>
-                Practical backing for a young person's idea.
-              </figcaption>
-            </figure>
-            <figure>
-              <div>
-                <Image
-                  src="/images/movement/launchpad-2025-pitch.webp"
-                  alt="A student presenting at the original LaunchPad event"
-                  fill
-                  sizes="(max-width:700px) 100vw, 32vw"
-                />
-              </div>
-              <figcaption>A platform to be heard.</figcaption>
-            </figure>
-          </div>
+          <Link className={styles.textLink} href="/gallery">
+            See more photographs from LaunchPad 2025{" "}
+            <ArrowRight size={22} aria-hidden />
+          </Link>
           <p className={styles.smallPrint}>
             From LaunchPad 2025. Historical details reflect the 2025 event; 2027
             dates and participation arrangements are still being planned.
