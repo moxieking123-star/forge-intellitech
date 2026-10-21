@@ -56,5 +56,5 @@
 @keyframes build { from{opacity:0;transform:scaleY(.1)} to{opacity:1;transform:scaleY(1)} }
 @keyframes drive { 0%{transform:translateX(-130px)} 35%,70%{transform:translateX(0)} 100%{transform:translateX(125px)} }
 @keyframes home { 0%,10%{transform:translateX(-130px)} 65%,100%{transform:translateX(65px)} }
-@media(max-width:700px) { .journey { width:210px; right:10px; bottom:10px; } .caption { font-size:9px; } .topline { opacity:1; } .topline span { font-size:8px; } .dialog { padding:42px 22px 24px; } }
+@media(max-width:700px) { .journey { width:210px; right:10px; bottom:10px; } .caption { font-size:9px; } .topline { opacity:1; } .topline span { display:none; } .dialog { padding:42px 22px 24px; } }
 @media(prefers-reduced-motion:reduce) { .journey *, .dialog * { animation:none!important; transition:none!important; } .eyes { transform:none; } .topline { opacity:1; } }

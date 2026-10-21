@@ -1,0 +1,4 @@
+.motionRoot [data-reveal] { transition:opacity .65s ease,transform .65s cubic-bezier(.2,.7,.3,1); }
+.motionRoot [data-reveal=waiting] { opacity:0; transform:translateY(18px); }
+.motionRoot [data-reveal=seen] { opacity:1; transform:translateY(0); }
+@media(prefers-reduced-motion:reduce) { .motionRoot [data-reveal] { opacity:1; transform:none; transition:none; } }

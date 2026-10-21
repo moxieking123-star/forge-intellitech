@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
+import LivingHero from "../components/home/LivingHero";
 import ProductRow from "../components/home/ProductRow";
 import styles from "../components/home/Editorial.module.css";
 
@@ -41,51 +42,7 @@ const stories = [
 export default function HomePageClient() {
   return (
     <div className={styles.page} id="home-content" tabIndex={-1}>
-      <section
-        id="company"
-        className={styles.hero}
-        aria-labelledby="home-title"
-      >
-        <div className={styles.heroCopy}>
-          <h1 id="home-title">
-            The next
-            <br />
-            big thing
-            <br />
-            can be
-            <br />
-            built <span>here.</span>
-          </h1>
-          <p>
-            We are Forge Intellitech Services Ltd.
-            <br />
-            Building useful technology. Teaching people to create. Backing ideas
-            that deserve
-            <br className={styles.desktopBreak} /> a beginning.
-          </p>
-          <div className={styles.actions}>
-            <a href="#work" className={styles.button}>
-              Explore what we’re building <ArrowRight size={24} aria-hidden />
-            </a>
-            <Link href="/join" className={styles.textLink}>
-              Work with Forge
-            </Link>
-            <a href="#ndeca" className={styles.textLink}>A bigger possibility: NDECA ↓</a>
-          </div>
-        </div>
-        <figure className={styles.heroPicture}>
-          <div className={styles.heroImage}>
-            <Image
-              src="/images/home/studio-beginning.webp"
-              alt="An illustrative Nigerian workspace with a laptop, ideas on paper and a view towards the city"
-              fill
-              priority
-              sizes="(max-width: 700px) 100vw, 52vw"
-            />
-          </div>
-          <figcaption>Tools. Skills. Ideas. A place to start.</figcaption>
-        </figure>
-      </section>
+      <LivingHero />
       <p className={styles.manifesto}>Made of possibility.</p>
       <section id="work" className={styles.work} aria-label="Our work">
         {work.map((item, index) => (

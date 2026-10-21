@@ -23,15 +23,15 @@ export const metadata: Metadata = {
     "EdTech startup",
   ],
   openGraph: {
-    title: "The next big thing can be built here | Forge Intellitech",
+    title: "We can forge what comes next | Forge Intellitech",
     description:
       "We build technology solutions rooted in African realities. Through education and innovation, we create products that understand and serve our continent.",
     url: "https://forgeintellitech.com",
     type: "website",
     images: [
       {
-        url: "/images/home/studio-beginning.webp",
-        alt: "A place to start creating — Forge Intellitech",
+        url: "/images/home/nigeria-possibility.webp",
+        alt: "An imagined future of a Nigerian neighbourhood — a vision to work towards",
       },
     ],
   },
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Forge Intellitech | Technology Built for Africa",
     description: "We build technology solutions rooted in African realities.",
-    images: ["/images/home/studio-beginning.webp"],
+    images: ["/images/home/nigeria-possibility.webp"],
   },
   alternates: {
     canonical: "https://forgeintellitech.com",
