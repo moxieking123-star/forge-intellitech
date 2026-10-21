@@ -15,6 +15,8 @@ const routes = [
   "/earn-with-forge",
   "/earn-with-forge/onboard",
   "/programmes",
+  "/programmes/techup",
+  "/programmes/elytech",
   "/programmes/enquire",
   "/programmes/onboard",
   "/programmes/resources",
@@ -33,7 +35,7 @@ const routes = [
 ];
 function b(args, input) {
  let output;
- try { output=execFileSync(binary,["--session","forge-home","--json",...args],{encoding:"utf8",input,timeout:45000}); }
+ try { output=execFileSync(binary,["--session",process.env.FORGE_BROWSER_SESSION||"forge-home","--json",...args],{encoding:"utf8",input,timeout:45000}); }
  catch(error){if(error.stdout?.includes('"success":true'))output=error.stdout;else throw error;}
  const result=JSON.parse(output);assert(result.success,result.error);return result.data;
 }

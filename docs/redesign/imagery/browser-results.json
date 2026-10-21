@@ -1,13 +1,14 @@
 {
   "result": "passed",
-  "editorialImages": 33,
+  "editorialImages": 36,
   "checks": [
     {
       "route": "/",
       "width": 390,
       "scroll": 390,
       "sources": [
-        "/images/home/studio-beginning.webp",
+        "/images/home/nigeria-today.webp",
+        "/images/home/nigeria-possibility.webp",
         "/images/home/orange-beginning.webp"
       ],
       "bad": []
@@ -17,7 +18,8 @@
       "width": 1440,
       "scroll": 1440,
       "sources": [
-        "/images/home/studio-beginning.webp",
+        "/images/home/nigeria-today.webp",
+        "/images/home/nigeria-possibility.webp",
         "/images/home/orange-beginning.webp"
       ],
       "bad": []
@@ -183,6 +185,42 @@
       "sources": [
         "/images/editorial/nigerian-student-tech-class.webp",
         "/images/editorial/chisanbop-class.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/programmes/techup",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/programmes/techup-project-studio.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/programmes/techup",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/programmes/techup-project-studio.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/programmes/elytech",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/programmes/elytech-discovery-studio.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/programmes/elytech",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/programmes/elytech-discovery-studio.webp"
       ],
       "bad": []
     },

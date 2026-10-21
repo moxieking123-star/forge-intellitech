@@ -5,3 +5,6 @@ Verify production build, desktop/mobile page layouts, metadata, local links, con
 
 ## Page phase delivered
 Company, Work, Join, Contact, programmes, five sourced essays, Gallery, policies and four application routes are implemented. Added Earn with Forge, school self-onboarding, authenticated assisted onboarding, parent resource kit, privacy-enhanced click-to-load video infrastructure and later-link social configuration. See root design-qa.md for actual checks and Friday release notes for outstanding backend activation, proposal, media and motion work.
+
+## Programme detail follow-through
+Added /programmes/techup and /programmes/elytech with original imagery, interactive examples, support walkthroughs, school actions and metadata. Legacy routes and hub navigation updated. All 31 canonical public pages passed the imagery/responsive audit; secure backend/email activation remains a separate release dependency. See page-inventory.md and programme-details/results.json.

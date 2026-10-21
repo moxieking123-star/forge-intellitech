@@ -127,11 +127,12 @@ export default function ProgrammesPage() {
                 Talk to us about {offer.name}{" "}
                 <ArrowRight size={20} aria-hidden />
               </Link>
+              <p><Link className={styles.textLink} href={`/programmes/${offer.id}`}>Explore the {offer.name} learning journey <ArrowRight size={20} aria-hidden /></Link></p>
             </div>
           </article>
         ))}
       </section>
-      <section className={styles.chisanbop} aria-labelledby="chisanbop-heading">
+      <section id="chisanbop" className={styles.chisanbop} aria-labelledby="chisanbop-heading">
         <figure>
           <div className={styles.chisanbopPicture}>
             <Image

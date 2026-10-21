@@ -9,6 +9,8 @@ export const socialChannels = [
 export const pageVideos: Record<string, { id: string; title: string }> = {
   // "/about": {id: "APPROVED_ID", title: "Meet Forge"},
   // "/programmes": {id: "APPROVED_ID", title: "Learning with Forge"},
+  // "/programmes/techup": {id: "APPROVED_ID", title: "TechUp"},
+  // "/programmes/elytech": {id: "APPROVED_ID", title: "ElyTech"},
 };
 export function videoForPath(path: string) {
   const key = Object.keys(pageVideos)

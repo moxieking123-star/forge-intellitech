@@ -8,6 +8,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "join",
     "contact",
     "programmes",
+    "programmes/techup",
+    "programmes/elytech",
     "programmes/onboard",
     "programmes/resources",
     "earn-with-forge",
