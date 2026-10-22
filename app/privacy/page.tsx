@@ -52,8 +52,7 @@ export default function Page() {
         </p>
         <h2>Storage and access</h2>
         <p>
-          The submission service is designed to save enquiries in Supabase
-          before attempting an email notification through Resend. Access is for
+          Website submissions are currently disabled while the redesigned frontend is being prepared. Completing a form on this preview does not save or send an enquiry. When a submission service is connected, this notice will be updated to explain its providers and storage. Access is for
           authorised people handling the request and the service providers
           needed to operate it. These providers may process information outside
           Nigeria. We do not publish applications or sell enquiry information.
@@ -76,12 +75,11 @@ export default function Page() {
         </p>
         <h2 id="student-imagery">Student imagery and privacy</h2>
         <p>
-          We use AI-generated student imagery to illustrate learning and protect
-          the privacy of children in our client schools. These illustrations do
-          not show real client students and are labelled as AI-generated.
+          We teach respect for people’s identity online and offline, and apply the same care ourselves. We do not use photographs of children from our client schools to promote other people or organisations. We use illustrative student imagery to protect
+          the privacy of children in our client schools. These illustrations do not show real client students.
         </p>
         <p>
-          Our policy requires appropriate parent or guardian and school
+          A future impact story may use a real child’s photograph only when the story directly benefits that child and the relevant permissions and safeguarding review are in place. We do not assume that an existing photograph means permission has been given. Our policy requires appropriate parent or guardian and school
           permissions, together with applicable data-protection and safeguarding
           checks, before publishing a real student photograph. Historical
           archive photographs are identified separately. Permission for
@@ -106,7 +104,7 @@ export default function Page() {
         </p>
         <p>
           This notice will be reviewed before the redesigned website is
-          published. Last updated: 21 October 2026.
+          published. Last updated: 22 October 2026.
         </p>
         <Link href="/contact">Contact Forge →</Link>
       </article>

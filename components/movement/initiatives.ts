@@ -18,13 +18,13 @@ export type Initiative = {
 export const initiatives: Initiative[] = [
   {
     slug: "launchpad",
-    name: "LaunchPad",
-    label: "The annual opportunity · 2027 in planning",
-    audience: "Young people with ideas worth taking seriously",
-    card: "A platform for young people to present ideas, find backing and take a first step towards enterprise.",
+    name: "Launchpad 2.0",
+    label: "Launchpad 2.0 — Coming soon",
+    audience: "Students who have completed SSCE and are waiting to enter university",
+    card: "A practical beginning after SSCE: develop an idea, learn how a business works and find support to keep building.",
     headline: "An idea deserves more than ‘maybe one day’.",
     intro:
-      "A young person should not have to wait until someone calls them successful before their thinking is taken seriously. LaunchPad gives ideas a place to be heard, questioned and supported. The next edition is being planned for 2027, and we are building towards something bigger and better.",
+      "The time between SSCE and university can be a beginning. Launchpad helps school leavers take an idea seriously, question it and learn what it takes to build a useful business. Launchpad 2.0 is coming soon. We are bringing together the people and resources needed to support the next edition.",
     image: "/images/movement/launchpad-2025-group.webp",
     imageAlt:
       "Participants and supporters at the original LaunchPad 2025 event",
@@ -32,20 +32,24 @@ export const initiatives: Initiative[] = [
     sections: [
       {
         title: "Where the story began.",
-        text: "LaunchPad 2025 took place on 4 July 2025 at the Ikosi-Isheri LCDA Council Hall. Young people presented their ideas, and two winners received ₦100,000 each. The point was bigger than the award: an idea from a student was given a platform and practical backing.",
+        text: "The first Launchpad took place on 4 July 2025 at the Ikosi-Isheri LCDA Council Hall. Before pitching, participants spent a month learning business development and preparing their presentations, decks and branding. The aim was to help school leavers turn the practical skills they had learned into a business idea they could explain and develop.",
       },
       {
-        title: "The next edition: 2027.",
-        text: "We are planning the next LaunchPad for 2027 with a bigger and better ambition: create more room for young people to develop ideas, meet people who can help and take a meaningful next step. Dates, venue, format and entry details will be announced when confirmed.",
+        title: "What the first edition made possible.",
+        text: "Two participants each received a ₦100,000 award. Forge’s follow-up records describe a peer-to-peer tutoring idea developing further, with continued mentoring on raising funding. They also describe an organic farm-market venture continuing as its founder prepared for university, a participant gaining admission to the University of Lagos while developing a brand, and another joining Forge as a paid intern.",
+      },
+      {
+        title: "The work after the applause.",
+        text: "That first edition was a small beginning, carried by limited resources and people willing to help. An award could open a door; it could not provide everything a young business needed. We have stayed engaged as participants move towards school and university. The next challenge is helping them keep building alongside their studies, with practical guidance and support that can continue.",
       },
       {
         title: "Help an idea find its next step.",
-        text: "There is work to do before the event and after the applause. We welcome conversations with mentors, sponsors, educators, volunteers and organisations willing to help promising ideas develop. Tell us the expertise, time, resources or connections you can bring.",
+        text: "We want Launchpad 2.0 to give participants more room to test their ideas, understand customers and develop useful businesses. Funding is needed for training, mentorship, devices and support after the event. Sponsors, patrons and experienced people can help us make that possible. Dates and entry details will follow when confirmed.",
       },
     ],
     eligibility:
-      "The 2027 edition is in planning. Participant eligibility, selection and application arrangements will be published when confirmed. For ongoing enterprise support within a TechUp partner school, explore In-school LaunchPad below.",
-    action: "Be part of LaunchPad 2027",
+      "The main Launchpad is for students who have completed SSCE and are waiting to enter university. Launchpad 2.0 is coming soon; registration is not open. Selection and application arrangements will be announced when confirmed. In-school Launchpad is a separate pathway for SS1–SS3 learners in schools participating in TechUp.",
+    action: "Talk to us about Launchpad 2.0",
     interest: "launchpad",
     support: "Mentor, volunteer or support the next edition.",
   },
@@ -70,7 +74,7 @@ export const initiatives: Initiative[] = [
     slug: "in-school-launchpad",
     name: "In-school LaunchPad",
     label: "From a school idea to an enterprise",
-    audience: "Schools offering Forge’s TechUp programme",
+    audience: "SS1–SS3 learners in schools participating in Forge’s TechUp programme",
     card: "We identify student ideas and projects, then work alongside the students to help build an enterprise.",
     headline: "An enterprise can begin before school ends.",
     intro:
@@ -94,7 +98,7 @@ export const initiatives: Initiative[] = [
       },
     ],
     eligibility:
-      "In-school LaunchPad is open to schools offering Forge’s TechUp programme. Schools can discuss promising student projects and ideas with Forge. Selection and the support offered are considered with the student and school; participation does not automatically guarantee funding or enterprise formation.",
+      "In-school LaunchPad is for SS1–SS3 learners in schools participating in Forge’s TechUp programme. Schools can discuss promising student projects and ideas with Forge. Selection and the support offered are considered with the student and school; participation does not automatically guarantee funding or enterprise formation.",
     action: "Bring a student idea to Forge",
     interest: "in-school-launchpad",
     support:
@@ -104,7 +108,7 @@ export const initiatives: Initiative[] = [
     slug: "intern-with-forge",
     name: "Intern with Forge",
     label: "After SSCE · practical experience + education support",
-    audience: "School leavers from schools offering our technology programme",
+    audience: "Eligible trained school leavers, matched to available work",
     card: "Paid practical technology experience after secondary school, with contributions towards the learner’s education.",
     headline: "Finishing school should open a door.",
     intro:
@@ -125,11 +129,11 @@ export const initiatives: Initiative[] = [
       },
       {
         title: "Build a pathway with the school.",
-        text: "This opportunity connects to schools offering our technology programme. We work through the learner's readiness and the available placement with the school. The work, duration, pay and education-support arrangements are discussed clearly before an internship begins.",
+        text: "This opportunity connects to participating programme schools and public-school learners who have been onboarded and trained by Forge. We consider demonstrated learning and skills against the available placement. The work, duration, pay and education-support arrangements are discussed clearly before an internship begins.",
       },
     ],
     eligibility:
-      "For recent SSCE completers from schools offering Forge’s technology programme, including TechUp. Schools and interested school leavers can enquire about the pathway. Available placements, selection and individual terms are confirmed through that conversation; no fixed intake is advertised here.",
+      "For recent SSCE completers from participating programme schools, or public-school learners onboarded and trained by Forge, whose demonstrated learning and skills fit an available opportunity. Schools and eligible learners can enquire about the pathway. Available placements, selection and individual terms are confirmed through that conversation; no fixed intake is advertised here.",
     action: "Ask about the internship pathway",
     interest: "internship",
     support:
@@ -163,7 +167,7 @@ export const initiatives: Initiative[] = [
       },
     ],
     eligibility:
-      "This seminar initiative is for government secondary schools. School leaders, educators and partners can enquire about arranging a visit. Dates, format, requirements and support are agreed with the school; this is separate from the TechUp partner-school eligibility for In-school LaunchPad and internships.",
+      "This seminar initiative is for government secondary schools. School leaders, educators and partners can enquire about arranging a visit. Dates, format, requirements and support are agreed with the school; each pathway has its own eligibility and selection arrangements.",
     action: "Discuss a seminar for your school",
     interest: "seminars",
     support:

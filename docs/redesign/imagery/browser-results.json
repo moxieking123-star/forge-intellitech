@@ -1,6 +1,6 @@
 {
   "result": "passed",
-  "editorialImages": 36,
+  "editorialImages": 38,
   "checks": [
     {
       "route": "/",
@@ -29,6 +29,8 @@
       "width": 390,
       "scroll": 390,
       "sources": [
+        "/images/team/founder.jpg",
+        "/images/team/chairman.jpg",
         "/images/editorial/company-team.webp"
       ],
       "bad": []
@@ -38,6 +40,8 @@
       "width": 1440,
       "scroll": 1440,
       "sources": [
+        "/images/team/founder.jpg",
+        "/images/team/chairman.jpg",
         "/images/editorial/company-team.webp"
       ],
       "bad": []
@@ -65,7 +69,7 @@
       "width": 390,
       "scroll": 390,
       "sources": [
-        "/images/editorial/programme-preparation.webp"
+        "/images/editorial/join-office-planning.webp"
       ],
       "bad": []
     },
@@ -74,7 +78,7 @@
       "width": 1440,
       "scroll": 1440,
       "sources": [
-        "/images/editorial/programme-preparation.webp"
+        "/images/editorial/join-office-planning.webp"
       ],
       "bad": []
     },
@@ -441,22 +445,38 @@
       "bad": []
     },
     {
-      "route": "/gallery",
+      "route": "/products",
       "width": 390,
       "scroll": 390,
       "sources": [
-        "/images/movement/launchpad-2025-pitch.webp",
-        "/images/movement/launchpad-2025-award.webp"
+        "/images/products/product-workbench.svg"
       ],
       "bad": []
     },
     {
-      "route": "/gallery",
+      "route": "/products",
       "width": 1440,
       "scroll": 1440,
       "sources": [
-        "/images/movement/launchpad-2025-pitch.webp",
-        "/images/movement/launchpad-2025-award.webp"
+        "/images/products/product-workbench.svg"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/partner",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/partner-seed.svg"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/partner",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/partner-seed.svg"
       ],
       "bad": []
     },

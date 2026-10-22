@@ -6,7 +6,7 @@ import ProductRow from "@/components/home/ProductRow";
 export const metadata: Metadata = {
   title: "Our work — technology, skills and possibilities",
   description:
-    "Explore Forge’s school programmes, products in development and pathways for young people to learn, create and build enterprises.",
+    "Explore Forge’s school programmes, products and platforms and pathways for young people to learn, create and build enterprises.",
   alternates: { canonical: "/work" },
 };
 export default function Page() {
@@ -41,9 +41,9 @@ export default function Page() {
             },
             {
               title: "Turn an idea into a beginning.",
-              body: "Through In-school LaunchPad, we identify ideas among students in TechUp partner schools and explore building an enterprise alongside them.",
-              href: "/endless-possibilities/in-school-launchpad",
-              link: "Explore In-school LaunchPad",
+              body: "Launchpad helps young people who have finished SSCE and are waiting for university explore what they could create. In-school Launchpad is a separate pathway for students in participating schools.",
+              href: "/endless-possibilities/launchpad",
+              link: "Explore Launchpad",
             },
             {
               title: "Create access to opportunity.",
@@ -55,7 +55,7 @@ export default function Page() {
         />
       </section>
       <section className={s.section} aria-labelledby="product-heading">
-        <p className={s.eyebrow}>Products / work in progress</p>
+        <p className={s.eyebrow}>Products / in use and in production</p>
         <h2 id="product-heading">What we’re building.</h2>
         <ProductRow />
       </section>

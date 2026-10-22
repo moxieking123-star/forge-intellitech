@@ -621,3 +621,14 @@
     padding-inline: 24px;
   }
 }
+
+.secondaryLearning { padding: 80px max(24px, 7vw); background: #ebe7dc; color: #173f31; }
+.secondaryLearning h2 { font-size: clamp(30px, 4vw, 54px); line-height: 1.1; margin-bottom: 36px; }
+.secondaryColumns { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 48px; margin-bottom: 28px; }
+.secondaryColumns h3 { font-size: 25px; margin-bottom: 18px; }
+.secondaryColumns p, .secondaryLearning > p, .secondaryColumns dd { line-height: 1.8; }
+.secondaryColumns p { margin-bottom: 18px; }
+.secondaryColumns dt { font-weight: 700; margin-top: 16px; }
+.secondaryColumns dd { margin: 4px 0 12px; }
+.secondaryColumns a { text-decoration: underline; text-underline-offset: 3px; }
+@media(max-width: 750px) { .secondaryColumns { grid-template-columns: 1fr; gap: 28px; } .secondaryLearning { padding-block: 48px; } }

@@ -1,6 +1,7 @@
 """Build review PDFs. Private proposal is never written beneath public/."""
 from pathlib import Path
 import json
+import sys
 from reportlab.pdfgen import canvas
 from reportlab.lib.colors import HexColor, white
 from reportlab.pdfbase import pdfmetrics
@@ -56,35 +57,35 @@ end()
 base(2,'ElyTech')
 y=title('Primary 1 to Primary 6','Before “I can’t”,<br/>let them try.')
 y=para('Sometimes a child needs exposure before they can recognise their own ability. ElyTech gives younger learners a patient, practical beginning.',42,y,495,12)-25
-y=block('Primary 1-3: a strong foundation','Chisanbop develops finger-based mental arithmetic. Touch typing helps children practise finding keys and building confidence without constantly looking down.',y)
-y=block('Primary 3-6: more ways to create','From Basic 3, learners gradually combine those foundations with Scratch coding logic and Canva design. Basic 3 is the transition into all four skills, with practice matched to readiness.',y)
+y=block('Primary 1-3: a strong foundation','Chisanbop provides finger-based mental arithmetic practice. Touch typing helps children practise finding keys and building confidence without constantly looking down.',y)
+y=block('Primary 3-6: more ways to create','From Basic 3, learners combine those foundations with instructions for Scratch sprites and Canva designs that are printed so they can hold their work. Basic 3 is the transition into all four skills, with practice matched to readiness.',y)
 cards=[('01','CHISANBOP','Think through numbers with a practical finger method.'),('02','TOUCH TYPING','Build familiarity, accuracy and keyboard confidence.'),('03','SCRATCH','Sequence actions, test an idea and learn coding logic.'),('04','CANVA','Arrange words, images and ideas to communicate clearly.')]
 top=y-5
 for i,(n,label,text) in enumerate(cards):
     x=42+(i%2)*264; yy=top-(i//2)*133
     c.setFillColor(white);c.roundRect(x,yy-113,247,113,8,fill=1,stroke=0)
     para(n,x+15,yy-13,210,12,ORANGE,True);para(label,x+15,yy-37,210,11,INK,True);para(text,x+15,yy-59,210,10)
-para('Forge supplies Chisanbop learning aids and practice keyboards. Parents prepare a laptop from Basic 3 onward; the device arrangements are explained on page 5.',42,145,495,11)
+para('Forge supplies Chisanbop learning aids and practice keyboards. Parents prepare a laptop from Basic 3 onward; the device arrangements are explained on page 5.',42,95,495,11)
 end()
 
 base(3,'TechUp')
 y=title('JSS1 to SS3','Skills first.<br/>Then a path of their own.')
 y=para('TechUp helps secondary-school students turn curiosity into things they can research, design, explain and build.',42,y,495,12)-23
-y=block('JSS1-3: explore the foundations','Design with Canva and Figma. Organise information in Excel and explore data with Power BI. Build web foundations with HTML and CSS. Practise writing, content planning and digital marketing with thoughtful use of AI. Learn cyber citizenship and awareness of Nigerian cybersecurity law.',y)
+y=block('JSS1-3: explore the foundations','Design with Canva and Figma. Organise information in Excel and explore data with Power BI. Build web foundations with HTML and CSS. All JSS and SS learners explore what AI is, how it is developed, and how human judgement guides its use in building things. Digital citizenship begins in P1 and continues throughout. Senior learners study the Cybercrimes (Prohibition, Prevention, etc.) Act, 2015 and its 2024 amendment.',y)
 for label,body in [('The Builder','Websites, software ideas, automations, data tools and practical prototypes.'),('The Storyteller','Design, writing, video, branding, presentations and media that communicate a useful idea.'),('The Strategist','Research, data, business thinking, product planning and marketing that help an idea find its direction.')]:
     y=block('SS1-3 / '+label,body,y)
-photo('public/images/programmes/techup-web-product-studio-v2.webp',42,92,511,150)
+photo('public/images/programmes/techup-web-product-studio-v2.webp',42,92,511,120)
 para('AI-generated illustration of Nigerian students. Not a record of a participating class.',42,81,500,8)
 end()
 
 base(4,'Learning that continues')
 y=title('The support around the subject','A lesson should not end<br/>when the teacher leaves.')
-for label,body in [('Learning by doing','Students try, make, test and explain. Activities connect tools to a useful task, with room to make mistakes and improve.'),('Internet and classroom support','Internet provision is included in the programme arrangement. During onboarding, we review your school’s timetable, connectivity, teaching space and practical needs together.'),('A dashboard that keeps the journey together','The Forge TechUp dashboard is in testing. Planned school integration brings learning activities, records and guidance into one place. We confirm readiness and access arrangements before activation.'),('Saturday live learning','Saturday live classes support practice beyond the school lesson. Scheduling and access are agreed with participating schools.'),('Something they can carry forward','Students are intended to leave with downloadable learning records and projects as a portfolio of their work. Availability depends on the dashboard features activated for the school.'),('A relationship with the school','We support onboarding and provide parent communication materials. Your school has a clear contact at programs@forgeintellitech.com for questions and coordination.')]:y=block(label,body,y)
+for label,body in [('Learning by doing','Both programmes are 70% practical and 30% theory. Students try, make, test and explain useful tasks, with room to improve.'),('Internet and classroom support','Internet provision is included in the programme arrangement. During onboarding, we review your school’s timetable, connectivity, teaching space and practical needs together.'),('A dashboard that keeps the journey together','The Forge Dashboard is already deployed and used by schools. Access comes with programme onboarding. Students log in for assignments and project submissions; parents have portal logins to follow progress.'),('Saturday live learning','SS1-SS3 only: track-based classes run for about three hours on Saturdays through the portal, focused on building. Eligible students supported with laptops also join.'),('Something they can carry forward','By SS3, students can download project work and assemble a portfolio for future learning, applications and professional profiles, subject to platform age and eligibility rules. Jobs and earnings are not guaranteed.'),('A relationship with the school','We support onboarding and provide parent communication materials. Your school has a clear contact at programs@forgeintellitech.com for questions and coordination.')]:y=block(label,body,y)
 end()
 
 base(5,'Devices and access')
 y=title('A practical plan for families','Start with what<br/>can connect.')
-for label,body in [('For classes: an internet-capable laptop','The school programmes do not impose the donation campaign’s minimum hardware specification. A laptop that connects to the internet can be considered for class use. We review device suitability for the intended activities with the school.'),('Basic 1-2: build the foundations','Forge provides Chisanbop learning aids and practice keyboards. Families begin planning a laptop for Basic 3 and above.'),('When a child has no laptop in class','The dashboard is being designed to guide practice on a parent or family device outside class. This supports continued practice; access arrangements should still be discussed during school onboarding.'),('Supplier introductions, when useful','We can connect families with suppliers offering used laptops suitable for class needs, including options below ₦100,000 when available. Prices, condition, warranty and stock depend on the supplier.'),('Instalments are a supplier arrangement','Some companies supply schools or offer instalment payments. Any purchase or credit agreement is between the family or school and that supplier, subject to its terms and approval. Forge does not guarantee finance or a fixed device price.')]: y=block(label,body,y)
+for label,body in [('For classes: an internet-capable laptop','The school programmes do not impose the donation campaign’s minimum hardware specification. A laptop that connects to the internet can be considered for class use. We review device suitability for the intended activities with the school.'),('Basic 1-2: build the foundations','Forge provides Chisanbop learning aids and practice keyboards. Families begin planning a laptop for Basic 3 and above.'),('When a child has no laptop in class','The dashboard guides practice on a parent or family device outside class. This supports continued practice; access arrangements should still be discussed during school onboarding.'),('Supplier introductions, when useful','We can connect families with suppliers offering used laptops suitable for class needs, including options below ₦100,000 when available. Prices, condition, warranty and stock depend on the supplier.'),('Instalments are a supplier arrangement','Some companies supply schools or offer instalment payments. Any purchase or credit agreement is between the family or school and that supplier, subject to its terms and approval. Forge does not guarantee finance or a fixed device price.')]: y=block(label,body,y)
 para('A different initiative: Give a Child a Laptop matches eligible secondary-school students to donated Windows laptops. That campaign has its own eligibility, specifications and agreement.',42,110,495,10)
 end()
 
@@ -110,6 +111,10 @@ para('Onboarding closes 31 December 2026',60,198,475,17,INK,True)
 para('programs@forgeintellitech.com<br/>forgeintellitech.com/programmes/onboard',60,169,475,11)
 para('We can forge it.',42,91,495,20,INK,True)
 end();c.save()
+
+if '--proposal-only' in sys.argv:
+    print(str(PRIVATE/'forge-school-proposal-2026-10-22-v1.pdf'))
+    raise SystemExit(0)
 
 terms=json.loads((ROOT/'docs/redesign/referral-agreement/terms.json').read_text(encoding='utf-8-sig'))
 out=ROOT/'public/downloads/forge-referral-agreement-draft.pdf'

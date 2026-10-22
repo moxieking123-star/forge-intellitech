@@ -28,7 +28,7 @@ export default function StoriesPage() {
             giving good ideas a beginning.
           </p>
           <div className={s.links}>
-            <Link href="/gallery">From the archive ↗</Link>
+            <Link href="/endless-possibilities/launchpad">The Launchpad story ↗</Link>
             <a href="/rss.xml">Follow by RSS ↗</a>
           </div>
         </header>

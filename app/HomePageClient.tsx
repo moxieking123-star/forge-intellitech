@@ -15,28 +15,31 @@ const work = [
   },
   {
     title: "Turn an idea into a beginning.",
-    subtitle: "In-school LaunchPad",
-    description: "Support for promising ideas, right where young people are.",
-    href: "/endless-possibilities/in-school-launchpad",
+    subtitle: "Launchpad",
+    description: "A place to begin after SSCE, before the next chapter.",
+    href: "/endless-possibilities/launchpad",
   },
   {
     title: "Build solutions for life here.",
     subtitle: "Our products",
     description: "Technology designed for real needs in Nigeria.",
-    href: "#products",
+    href: "/products",
   },
 ];
 const stories = [
   {
     title: "From school to paid internship",
+    href: "/endless-possibilities/intern-with-forge",
     copy: "Finishing secondary school should open a door. Our intern is gaining practical experience, earning an income and receiving monthly support towards his education throughout his internship. A beginning should give you somewhere to go.",
   },
   {
-    title: "Ideas taking shape in school",
-    copy: "Students in SSS 2 are already thinking about the businesses they could build. We have taught them to speak to a market before developing an idea, and offered to support the branding of their ideas. Their questions today could become solutions tomorrow.",
+    title: "Four students building a beginning",
+    href: "/endless-possibilities/in-school-launchpad",
+    copy: "Four secondary-school students are working through what it could mean to build a business together. We have taught them to speak to a market before developing an idea, and offered to support the branding of their ideas. Their questions today could become solutions tomorrow.",
   },
   {
     title: "What a laptop makes possible",
+    href: "/endless-possibilities/give-a-child-a-laptop",
     copy: "We have given students laptops so learning can continue beyond a workshop. The device is only the beginning. With time, guidance and the chance to practise, a young person can move from watching what others build to creating something of their own.",
   },
 ];
@@ -47,15 +50,15 @@ export default function HomePageClient() {
       <p className={styles.manifesto}>Made of possibility.</p>
       <section id="work" className={styles.work} aria-label="Our work">
         {work.map((item, index) => (
-          <Link key={item.title} href={item.href} className={styles.workRow}>
+          <article key={item.title} className={styles.workRow}>
             <span className={styles.number}>0{index + 1}</span>
             <div>
               <h2>{item.title}</h2>
               <span className={styles.subtitle}>{item.subtitle}</span>
             </div>
             <p>{item.description}</p>
-            <ArrowRight size={31} weight="light" aria-hidden />
-          </Link>
+            <div className={styles.workActions}>{index === 0 ? <><Link href="/products#learning">Know more ↗</Link><Link href="/programmes">Learn to build →</Link></> : <Link href={item.href}>Know more <ArrowRight size={22} aria-hidden /></Link>}</div>
+          </article>
         ))}
       </section>
       <ProductRow />
@@ -116,25 +119,15 @@ export default function HomePageClient() {
                   <h3>{story.title}</h3>
                   <ArrowRight size={27} weight="light" aria-hidden />
                 </summary>
-                <p>{story.copy}</p>
+                <p>{story.copy}</p><Link href={story.href} className={styles.textLink}>Follow the story →</Link>
               </details>
             </article>
           ))}
         </div>
       </section>
-      <section className={styles.newJournal} aria-labelledby="journal-title">
-        <div className={styles.journalHeading}><p className={styles.eyebrow}>The Forge journal · Ideas worth staying with</p><Link href="/blog" className={styles.textLink}>Explore the journal <ArrowRight size={22} aria-hidden /></Link></div>
-        <div className={styles.journalFeature}>
-          <div className={styles.journalDrawing}>
-            <svg viewBox="0 0 560 480" role="img" aria-labelledby="journal-art-title"><title id="journal-art-title">An open book becomes a doorway to a city of possibilities</title>
-              <circle cx="280" cy="218" r="182" fill="#e1b952"/><path d="M70 377V205h69v172m20 0V155h76v222m24 0V98h66v279m24 0V177h64v200m23 0V231h59v146" fill="#244c3c" stroke="#f5edda" strokeWidth="3"/>
-              <path d="M108 389q86-48 172-5 86-43 172 5v53q-86-42-172-2-86-40-172 2z" fill="#f5edda" stroke="#244c3c" strokeWidth="4"/><path d="M280 384v56M129 404q65-29 128-4m46 0q63-25 128 4M129 420q65-29 128-4m46 0q63-25 128 4" fill="none" stroke="#244c3c" strokeWidth="3"/>
-              <path d="M203 331V251h153v80m-130 0v-56h104v56" fill="#e76331" stroke="#f5edda" strokeWidth="3"/><path d="M280 331V275" stroke="#f5edda" strokeWidth="3"/><path d="M90 153l21-22m331 34 25-12M208 80l8-24" stroke="#244c3c" strokeWidth="3"/><circle cx="388" cy="94" r="9" fill="#e76331"/>
-            </svg><span>A page can open a possibility.</span>
-          </div>
-          <article className={styles.journalLead}><p className={styles.eyebrow}>{journalStories[0].category}</p><h2 id="journal-title"><Link href={`/blog/${journalStories[0].slug}`}>{journalStories[0].title}</Link></h2><p>{journalStories[0].excerpt}</p><p>I want a future that survives ordinary days: a lesson that continues, a device that can be repaired, a useful idea someone here can actually reach. Imagination can open the door. What we do afterwards matters.</p><Link href={`/blog/${journalStories[0].slug}`} className={styles.textLink}>Read the full reflection <ArrowRight size={24} aria-hidden /></Link></article>
-        </div>
-        <div className={styles.journalEssays}>{journalStories.slice(1,4).map((story,index)=><article key={story.slug}><p className={styles.eyebrow}>0{index+2} / {story.category}</p><h3><Link href={`/blog/${story.slug}`}>{story.title}</Link></h3><p>{story.excerpt}</p><Link href={`/blog/${story.slug}`} className={styles.textLink}>Read the essay <ArrowRight size={20} aria-hidden /></Link></article>)}</div>
+      <section className={`${styles.newJournal} ${styles.compactJournal}`} aria-labelledby="journal-title">
+        <div className={styles.journalHeading}><div><p className={styles.eyebrow}>The Forge journal</p><h2 id="journal-title">A few things worth thinking about.</h2></div><Link href="/blog" className={styles.textLink}>All stories <ArrowRight size={22} aria-hidden /></Link></div>
+        <div className={styles.compactEssays}>{journalStories.slice(0,4).map((story,index)=><article key={story.slug}><p className={styles.eyebrow}>0{index+1} / {story.category}</p><h3><Link href={`/blog/${story.slug}`}>{story.title}</Link></h3><p className={styles.twoLines}>{story.sections[0].paragraphs[0]}</p><Link href={`/blog/${story.slug}`} className={styles.textLink}>Read the story <ArrowRight size={18} aria-hidden /></Link></article>)}</div>
       </section>
       <section id="ndeca" className={styles.nextChapter} aria-labelledby="ndeca-title">
         <div>

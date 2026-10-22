@@ -1,0 +1,11 @@
+{
+  "result": "passed",
+  "checks": [
+    "Homepage product CTA, two learning actions, Launchpad, compact journal, no gallery/full privacy callout and smaller complete mobile navigation",
+    "Four product-specific animations run in view, pause globally and outside view, respect reduced motion; live dashboard and separate All In status; four widths",
+    "Donation amount/purpose → exact bank instructions with no receipt claim; volunteer and instructor conditional fields; four widths",
+    "Leadership, donation/partner destinations, school positioning, Launchpad coming soon, four widths; gallery redirect, sitemap and crawlable JS assets"
+  ],
+  "realSubmissions": 0,
+  "realPayments": 0
+}

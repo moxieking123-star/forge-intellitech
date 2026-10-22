@@ -10,6 +10,7 @@ import HomeHeader from "./home/HomeHeader";
 import HomeFooter from "./home/HomeFooter";
 import ForgeJourney from "./story/ForgeJourney";
 import PageMotion from "./PageMotion";
+import ForgeInteractions from "./motion/ForgeInteractions";
 
 export default function SiteFrame({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -25,6 +26,7 @@ export default function SiteFrame({ children }: { children: React.ReactNode }) {
       {homepage ? <HomeFooter /> : <Footer />}
       {homepage && <ForgeJourney />}
       {homepage && <PageMotion />}
+      {homepage && <ForgeInteractions />}
       <CookieConsent />
     </>
   );

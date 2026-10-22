@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import LearningStages from "../../components/programmes/LearningStages";
 import ProgrammeOfferVisual from "../../components/programmes/ProgrammeOfferVisual";
-import StudentImageNotice from "../../components/StudentImageNotice";
+import SecondaryLearning from "../../components/programmes/SecondaryLearning";
 import styles from "../../components/programmes/Programmes.module.css";
 
 export const metadata: Metadata = {
@@ -27,7 +27,7 @@ const offers = [
       "Forge supplies Chisanbop learning aids and practice keyboards for guided practice.",
     ],
     teaching:
-      "Teaching starts with clear demonstrations and supported practice. Learners try for themselves, share what they notice and build on each discovery.",
+      "70% practical, 30% theory. From P1, digital citizenship introduces safe, respectful choices online. Children practise mental maths with Chisanbop, build keyboard fluency to enter instructions, give Scratch sprites actions through programming logic, and design Canva work they can see in print.",
   },
   {
     id: "techup",
@@ -38,11 +38,11 @@ const offers = [
       "TechUp is a technology subject for all secondary students, with a shared JSS foundation and three senior pathways to develop different interests.",
     skills: [
       "JSS1–JSS3: Canva/Figma design, organising data with Excel, Power BI and HTML/CSS coding.",
-      "Cyber citizenship, awareness of Nigerian cybersecurity law, and AI-assisted content writing, planning and digital marketing.",
+      "Every JSS and SS learner explores what AI is, how it is developed, and how human thinking and judgement guide what we build with it.",
       "SS1–SS3 choose Builder, Storyteller or Strategist, supported by Saturday live classes.",
     ],
     teaching:
-      "Guided instruction leads into practice and project work. Students learn to explain their decisions as well as demonstrate what they have made.",
+      "70% practical, 30% theory. Coding fundamentals and logic support useful projects, rather than years of syntax without making things. Students learn to explain their decisions as well as demonstrate what they have made.",
   },
 ];
 export default function ProgrammesPage() {
@@ -55,13 +55,10 @@ export default function ProgrammesPage() {
             From “I can use it” to <span>“I made it.”</span>
           </h1>
           <p className={styles.lead}>
-            A child’s first encounter with technology can be the beginning of
-            something much bigger.
+            This is a school subject programme, not an in-school club.
           </p>
           <p>
-            Forge helps schools make room for that beginning: practical learning
-            that gives young people the confidence to explore, solve problems
-            and bring their own ideas to life.
+            Forge complements your school’s digital education provision with practical skills students can demonstrate. We work alongside the curriculum: learners use resources available here in Nigeria to explore, solve problems and build useful things.
           </p>
           <Link className={styles.button} href="/programmes/enquire">
             Bring Forge to your school <ArrowRight size={21} aria-hidden />
@@ -134,7 +131,7 @@ export default function ProgrammesPage() {
           </article>
         ))}
       </section>
-      <StudentImageNotice />
+      <SecondaryLearning />
       <section className={styles.learning}>
         <p className={styles.eyebrow}>How learning becomes making</p>
         <h2>
@@ -180,7 +177,7 @@ export default function ProgrammesPage() {
             <div>
               <h3>Dashboard integration</h3>
               <p>
-                The dashboard is in testing pending onboarding activation. It is intended to bring student learning records and project work together. Schools receive access details when setup is ready.
+                The Forge Dashboard is already deployed and used by schools. Access comes with programme onboarding. Students log in for assignments and project submissions; parents receive portal logins to follow their child’s progress.
               </p>
             </div>
           </article>
@@ -189,9 +186,7 @@ export default function ProgrammesPage() {
             <div>
               <h3>A Saturday live class</h3>
               <p>
-                A live Saturday class creates another opportunity for guided
-                learning and questions. The joining arrangements and relevant
-                learner group are confirmed with the school.
+                For SS1–SS3 only: track-based live classes run for about three hours on Saturdays through the portal. Students build, ask questions and improve their work, including eligible students supported with laptops.
               </p>
             </div>
           </article>
@@ -200,16 +195,13 @@ export default function ProgrammesPage() {
       <section className={styles.portfolio}>
         <p className={styles.eyebrow}>Something to carry forward</p>
         <h2>
-          Leave school with more
+          By SS3, show the work.
           <br />
-          than a memory of the lesson.
+          Tell the story behind it.
         </h2>
         <div className={styles.portfolioGrid}>
           <p>
-            A student’s progress should belong to their story. Downloadable
-            student records and projects are intended to help learners build a
-            portfolio: a way to look back at what they explored, show what they
-            made and explain how their thinking developed.
+            Assignments and submitted projects record a student’s learning journey. By SS3, learners can download their work and assemble a portfolio: what they explored, what they built and how their thinking developed.
           </p>
           <div>
             <h3>Work they can point to.</h3>
@@ -218,7 +210,7 @@ export default function ProgrammesPage() {
               is what I built. Here is what I would improve next.”
             </p>
             <p className={styles.note}>
-              The dashboard is in testing. Portfolio downloads and record access depend on onboarding activation and the school’s setup.
+              Over time, this work can support applications and professional profiles such as LinkedIn or, where suitable, Upwork and Fiverr. Each platform has its own age and eligibility rules; a portfolio does not guarantee work or earnings.
             </p>
           </div>
         </div>

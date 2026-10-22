@@ -16,7 +16,7 @@ b(['set','viewport','390','1000']);ev(`document.querySelector('#proposal').scrol
 b(['open',base]);b(['wait','500']);assert(ev(`JSON.stringify(!!document.querySelector('#ndeca') && document.querySelector('main').innerText.includes('If Disney could imagine Wakanda') && document.querySelector('footer [aria-label="Forge social media"]').children.length===5)`));
 assert(ev(`JSON.stringify([...document.querySelectorAll('footer [aria-label="Forge social media"] li')].every(li=>li.textContent.includes('Coming soon')&&!li.querySelector('a')))`));
 checks.push('Homepage journal and NDECA present; five real social icons visibly Coming soon without fake links');
-b(['set','viewport','1440','1000']);ev(`document.querySelector('[aria-labelledby="journal-title"]').scrollIntoView(); true`);b(['wait','300']);b(['screenshot','docs/redesign/document-review/home-journal-1440.png']);
+b(['set','viewport','1440','1000']);ev(`document.querySelector('[aria-labelledby="journal-title"]').scrollIntoView({behavior:'instant'}); true`);b(['wait','300']);b(['screenshot','docs/redesign/document-review/home-journal-1440.png']);
 b(['open',base+'/blog/why-cant-we-build-what-we-imagine']);b(['wait','600']);
 assert(ev(`JSON.stringify(document.querySelectorAll('h1').length===1&&document.querySelector('main').innerText.includes('Wakanda')&&document.querySelector('main').innerText.includes('fictional')&&!document.querySelector('main').innerText.includes('AI-generated'))`));
 checks.push('New founder reflection has fictional context and no child-image disclaimer on adult-free cover');

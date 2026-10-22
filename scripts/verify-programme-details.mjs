@@ -18,11 +18,11 @@ for(const programme of ['techup','elytech']){
  assert(ev(`JSON.stringify(document.querySelector('#${programme}-activity-panel').innerText.includes('${programme==='techup'?'Make a first version.':'Try a different step.'}'))`));
  b(['click',`button[aria-controls="${programme}-activity-panel"]:nth-child(3)`]);
  assert(ev(`JSON.stringify(document.querySelector('#${programme}-activity-panel svg').getAttribute('aria-label').includes('${programme==='techup'?'improved':'creation'}'))`));
- for(let index=1;index<=4;index++){
+ for(let index=1;index<=(programme==='elytech'?3:4);index++){
   b(['click',`button[aria-controls="${programme}-support-panel"]:nth-child(${index})`]);
   assert(ev(`JSON.stringify(document.querySelectorAll('button[aria-controls="${programme}-support-panel"][aria-pressed=true]').length===1)`));
  }
- assert(ev(`JSON.stringify(document.querySelector('#${programme}-support-panel').innerText.includes('dashboard is in testing'))`));
+ assert(ev(`JSON.stringify(document.querySelector('#${programme}-support-panel').innerText.includes('already used by schools'))`));
  ev(`document.querySelector('details summary').focus(); true`);b(['press','Enter']);assert(ev(`JSON.stringify(!!document.querySelector('details[open]'))`));
  b(['set','media','light','reduced-motion']);
  assert(ev(`JSON.stringify([...document.querySelectorAll('#${programme}-support-panel svg path')].every(path=>getComputedStyle(path).animationName==='none'))`));

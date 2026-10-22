@@ -39,6 +39,7 @@ export const stories: Story[] = [
       { title: "What that imagined place asks of me", paragraphs: [
         "If Disney could imagine Wakanda, why can’t we build what we keep imagining? I know the question is bigger than its wording. Wakanda belongs to Marvel’s Black Panther: a fictional African nation whose technological advancement is part of its story. A film can make a world convincing without having to keep its lights on on Monday morning. We have to live with Monday morning. Still, I cannot dismiss what that picture opens up in my mind.",
         "It lets me see African intelligence, beauty and ambition occupying the centre of a future. We should not need a film to believe that is possible. But sometimes a picture reaches a place that another speech cannot. It interrupts the habit of expecting less. My question begins there: after the excitement, what are we prepared to do with the possibility we have seen?",
+        "I also think about vibranium, the fictional resource beneath Wakanda’s ground that helps make its futuristic technology possible. Africa has real resources, and people with the intelligence to do more with what we have. I am not looking for a magic metal. I am asking why we so often expect less of ourselves. That picture of an African society building an extraordinary future makes me want us to take our own capacity seriously, and develop it with care.",
         "I am Nigerian. I know how easily a conversation about what could work becomes a list of everything that does not. Much of that frustration is deserved. People are tired, and many are carrying responsibilities that leave little room for another experiment. I do not want to turn hope into another demand on people who are already doing their best. I want to ask what I can take responsibility for myself."
       ] },
       { title: "Potential needs an introduction", paragraphs: [
@@ -64,6 +65,7 @@ export const stories: Story[] = [
     ],
     sources: [
       { title: "Disney · Discover Wakanda", url: "https://www.disney.co.uk/movies/black-panther/discover-wakanda", note: "Disney describes Wakanda as the fictional technologically advanced African nation in Marvel Studios’ Black Panther. The film is a point of reflection, not evidence of a real technology or an affiliation with Forge." },
+      { title: "Disney · Black Panther activity packet", url: "https://impact.disney.com/app/uploads/2022/01/Black-Panther-Activity-Packet-Final.pdf", note: "Official background on Wakanda, its technology and vibranium. The resource is part of the fiction; the founder’s reflection on Africa’s possibilities is his own." },
       unesco, itu
     ],
     cta: { label: "Bring what you can to the work", href: "/join" }

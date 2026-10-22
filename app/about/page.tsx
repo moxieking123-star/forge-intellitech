@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import leadership from "./Leadership.module.css";
 import s from "@/components/site/Site.module.css";
 import { Campaign, Rows } from "@/components/site/PageParts";
 export const metadata: Metadata = {
@@ -24,12 +25,25 @@ export default function Page() {
           teach people to create and back ideas that deserve a beginning.
         </p>
         <div className={s.actions}>
-          <Link className={s.button} href="/work">
+          <Link className={s.button} href="/products">
             See what we’re building →
           </Link>
           <Link href="/contact?interest=partnership">Build with us →</Link>
         </div>
       </header>
+      <section className={s.section}>
+        <p className={s.eyebrow}>Where this began</p>
+        <h2>With gratitude to Jehovah.</h2>
+        <p>Forge was founded through inspiration from Jehovah. We are grateful that he gave us this beginning, and we hope that what we build, how we work and the care we show people will bring glory to him.</p>
+      </section>
+      <section className={s.section}>
+        <p className={s.eyebrow}>The people carrying the work forward</p>
+        <h2>Leadership, with a responsibility to build.</h2>
+        <div className={leadership.people}>
+          <figure className={leadership.person}><Image src="/images/team/founder.jpg" alt="Moxie Adeniyi" width={400} height={400} /><figcaption><span>01 / Chief Executive Officer</span><h3>Moxie Adeniyi</h3></figcaption></figure>
+          <figure className={leadership.person}><Image src="/images/team/chairman.jpg" alt="Adeola Oyewole" width={400} height={400} /><figcaption><span>02 / Chairman</span><h3>Adeola Oyewole</h3></figcaption></figure>
+        </div>
+      </section>
       <section className={s.split}>
         <div>
           <h2>What if the talent was always there?</h2>
@@ -107,10 +121,14 @@ export default function Page() {
           </Link>
         </div>
       </section>
+      <section className={s.split}>
+        <div><p className={s.eyebrow}>A story you will be able to watch</p><h2>What is Forge?</h2></div>
+        <div><p>A documentary about the thinking and people behind Forge is being prepared for YouTube.</p><p><strong>Coming soon.</strong> The title is provisional; we will share the film here when it is ready.</p></div>
+      </section>
       <section className={s.section}>
         <h2>Help build something that can outlive us.</h2>
         <p>
-          We welcome people who can bring thoughtful work, patient capital,
+          Have a useful skill and a laptop? There may be a place for your contribution here, wherever you are based. We welcome thoughtful work, patient capital,
           practical knowledge or a useful partnership. Tell us what you see,
           what you can contribute and what you would like to build with Forge.
         </p>
@@ -118,7 +136,7 @@ export default function Page() {
           <Link className={s.button} href="/join">
             Work with Forge →
           </Link>
-          <Link href="/contact?interest=partnership">Partner or invest →</Link>
+          <Link href="/partner">Partner or invest →</Link>
         </div>
       </section>
       <Campaign />

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import StudentImageNotice from "../StudentImageNotice";
 import CookieSettings from "../CookieSettings";
 import SocialIcons from "./SocialIcons";
 import Image from "next/image";
@@ -24,7 +23,8 @@ export default function HomeFooter() {
           <Link href="/endless-possibilities">The movement</Link>
           <Link href="/blog">Stories</Link>
           <Link href="/contact">Contact</Link>
-          <Link href="/gallery">Gallery</Link>
+          <Link href="/products">Products</Link>
+          <Link href="/partner">Invest or support</Link>
           <Link href="/earn-with-forge">Earn with Forge</Link>
           <Link href="/programmes/resources">School resources</Link>
           <Link href="/privacy">Privacy</Link>
@@ -37,7 +37,6 @@ export default function HomeFooter() {
           <span>Building technology. People. Possibilities.</span>
         </div>
       </div>
-      <StudentImageNotice compact />
       <div className={styles.footerBottom}>
         <span>Forged in Nigeria. Built for what comes next.</span>
         <span>

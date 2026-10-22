@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import ParticipationForm from "./ParticipationForm";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Field, Journey, journeys } from "./journeys";
@@ -20,6 +21,9 @@ const consent: Field = {
   type: "checkbox",
 };
 export default function ApplicationForm({ journey }: { journey: Journey }) {
+  return journey === "talent" ? <ParticipationForm /> : <ExistingApplicationForm journey={journey} />;
+}
+function ExistingApplicationForm({ journey }: { journey: Journey }) {
   const config = journeys[journey];
   const image = journeyImages[journey];
   const [step, setStep] = useState(0);

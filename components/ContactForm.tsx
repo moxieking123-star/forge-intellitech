@@ -29,7 +29,7 @@ export default function ContactForm() {
     const contexts: Record<string, { inquiryType: string; subject: string }> = {
       launchpad: {
         inquiryType: "partnership",
-        subject: "LaunchPad 2027 — participation or support enquiry",
+        subject: "Launchpad 2.0 — conversation or support enquiry",
       },
       "in-school-launchpad": {
         inquiryType: "schools",

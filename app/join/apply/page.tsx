@@ -3,7 +3,7 @@ import ApplicationForm from '@/components/applications/ApplicationForm';
 
 export const metadata: Metadata = {
   title: 'Apply or contribute to Forge',
-  description: 'Express interest in employment, instruction, volunteering, patronage or partnership with Forge.',
+  description: 'Express interest in work, instructor roles, volunteering, donations or partnership with Forge.',
   alternates: { canonical: '/join/apply' },
 };
 

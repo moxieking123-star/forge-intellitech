@@ -17,7 +17,7 @@ const roles = [
     id: "volunteer",
     label: "Volunteer",
     title: "You do not have to do everything to make a difference.",
-    text: "Give some time to the work around the learning: workshops, coordination, device handovers or helping the movement reach the right people. Tell us what you can do and the time you can realistically give. We will discuss where it fits.",
+    text: "Give some time to the work around learning: workshops, coordination, device handovers or helping the movement reach the right people. Volunteers anywhere in the world can also support the Saturday SS1–SS3 classes: about three hours of building in the learner’s track, accessed through the portal. Tell us your skills, location and availability so we can discuss where they fit.",
     action: "Offer your time",
   },
   {
@@ -122,7 +122,9 @@ export default function JoinMovement({
                 ? "/endless-possibilities/give-a-child-a-laptop"
                 : selected.id === "laptop"
                   ? "/endless-possibilities/give-a-child-a-laptop/donate"
-                  : `/contact?interest=${selected.id}`
+                  : selected.id === "sponsor" || selected.id === "patron"
+                    ? "/partner?interest=sponsorship"
+                    : `/contact?interest=${selected.id}`
             }
             className={styles.button}
           >

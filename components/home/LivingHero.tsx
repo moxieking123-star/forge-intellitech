@@ -22,7 +22,7 @@ export default function LivingHero() {
       <p className={styles.answer}>We can <em>forge</em><br/>what comes next.</p>
       <p className={styles.lead}>The future will not build itself. But give people the tools, the skills and a place to begin—and watch what we can create together.</p>
       <div className={styles.actions}>
-        <a href="#work" className={styles.primary}>See what we are building <span aria-hidden="true">↗</span></a>
+        <Link href="/products" className={styles.primary}>See what we are building <span aria-hidden="true">↗</span></Link>
         <Link href="/endless-possibilities" className={styles.secondary}>Be part of the possibility <span aria-hidden="true">→</span></Link>
       </div>
       <a className={styles.ndeca} href="#ndeca">The bigger picture: NDECA <span aria-hidden="true">↓</span></a>

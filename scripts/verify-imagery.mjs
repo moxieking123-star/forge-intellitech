@@ -29,7 +29,8 @@ const routes = [
   "/endless-possibilities/in-school-launchpad",
   "/endless-possibilities/intern-with-forge",
   "/endless-possibilities/public-school-seminars",
-  "/gallery",
+  "/products",
+  "/partner",
   "/blog",
   ...stories.map((s) => "/blog/" + s.slug),
 ];
@@ -52,7 +53,7 @@ for (const route of routes) {
   for (const w of [390, 1440]) {
     b(["set", "viewport", String(w), "1000"]);
     const r = ev(
-      `JSON.stringify({width:innerWidth,scroll:document.documentElement.scrollWidth,sources:[...document.querySelectorAll('main img')].map(i=>{const u=new URL(i.getAttribute('src'),location.href);return u.searchParams.get('url')||u.pathname}).filter(s=>!s.includes('/brand/')&&!s.includes('/products/')),bad:[...document.querySelectorAll('main img')].filter(i=>i.complete&&i.naturalWidth===0).map(i=>i.src)})`,
+      `JSON.stringify({width:innerWidth,scroll:document.documentElement.scrollWidth,sources:[...document.querySelectorAll('main img')].map(i=>{const u=new URL(i.getAttribute('src'),location.href);return u.searchParams.get('url')||u.pathname}).filter(s=>!s.includes('/brand/')&&!['/images/products/bitebank.webp','/images/products/techup-dashboard.webp','/images/products/trego.webp','/images/products/all-in.webp'].includes(s)),bad:[...document.querySelectorAll('main img')].filter(i=>i.complete&&i.naturalWidth===0).map(i=>i.src)})`,
     );
     assert(r.scroll <= w, route + " overflow");
     assert.deepEqual(r.bad, [], route);

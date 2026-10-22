@@ -1,0 +1,243 @@
+{
+  "result": "passed",
+  "pages": [
+    {
+      "route": "/",
+      "title": "Forge Intellitech | Technology, Skills &amp; Possibility in Nigeria",
+      "description": "Useful technology. Practical skills. Ideas with a beginning. Meet Forge Intellitech, TechUp, ElyTech and the Endless Possibilities laptop movement in Nigeria.",
+      "canonical": "https://forgeintellitech.com"
+    },
+    {
+      "route": "/about",
+      "title": "About Forge — the future we can build | Forge Intellitech",
+      "description": "Meet Forge Intellitech Services Ltd: building useful technology, practical learning and opportunities for people to create in Nigeria.",
+      "canonical": "https://forgeintellitech.com/about"
+    },
+    {
+      "route": "/work",
+      "title": "Our work — technology, skills and possibilities | Forge Intellitech",
+      "description": "Explore Forge’s school programmes, products and platforms and pathways for young people to learn, create and build enterprises.",
+      "canonical": "https://forgeintellitech.com/work"
+    },
+    {
+      "route": "/products",
+      "title": "Products | What Forge is building | Forge Intellitech",
+      "description": "Meet Forge’s learning programmes, school dashboard and products being built around real needs in Nigeria.",
+      "canonical": "https://forgeintellitech.com/products"
+    },
+    {
+      "route": "/partner",
+      "title": "Partner with Forge — invest, sponsor or give | Forge Intellitech",
+      "description": "Begin an investment conversation, sponsor practical learning or contribute to Forge’s work in Nigeria.",
+      "canonical": "https://forgeintellitech.com/partner"
+    },
+    {
+      "route": "/join",
+      "title": "Join Forge — bring what you can | Forge Intellitech",
+      "description": "Work, teach, volunteer, sponsor or partner with Forge. Help build useful technology and practical opportunities for young people in Nigeria.",
+      "canonical": "https://forgeintellitech.com/join"
+    },
+    {
+      "route": "/contact",
+      "title": "Contact Forge — start a useful conversation | Forge Intellitech",
+      "description": "Talk to Forge about school programmes, partnerships, investment or contributing to the Endless Possibilities movement.",
+      "canonical": "https://forgeintellitech.com/contact"
+    },
+    {
+      "route": "/programmes",
+      "title": "TechUp &amp; ElyTech | School Technology Programmes | Forge Intellitech",
+      "description": "ElyTech for primary schools. TechUp for secondary schools. Practical digital confidence, coding foundations, design and projects with Forge.",
+      "canonical": "https://forgeintellitech.com/programmes"
+    },
+    {
+      "route": "/programmes/techup",
+      "title": "TechUp — Secondary schools with Forge | Forge Intellitech",
+      "description": "There is a difference between knowing how to use a tool and discovering what you could create with it. TechUp gives secondary-school learners room to make that discovery.",
+      "canonical": "https://forgeintellitech.com/programmes/techup"
+    },
+    {
+      "route": "/programmes/elytech",
+      "title": "ElyTech — Primary schools with Forge | Forge Intellitech",
+      "description": "A child does not need to have a career plan to begin creating. Sometimes all they need is a question, a little guidance and the chance to discover that their choices can make something happen.",
+      "canonical": "https://forgeintellitech.com/programmes/elytech"
+    },
+    {
+      "route": "/programmes/onboard",
+      "title": "School onboarding request | Forge Intellitech",
+      "description": "Introduce your school and begin a conversation about ElyTech or TechUp. All school onboarding requests are subject to Forge verification and a contract.",
+      "canonical": "https://forgeintellitech.com/programmes/onboard"
+    },
+    {
+      "route": "/programmes/resources",
+      "title": "Parent communication resources | Forge school programmes | Forge Intellitech",
+      "description": "Prepare a clear parent introduction and follow-up for your school&#x27;s ElyTech or TechUp programme.",
+      "canonical": "https://forgeintellitech.com/programmes/resources"
+    },
+    {
+      "route": "/earn-with-forge",
+      "title": "Earn with Forge | Introduce a school | Forge Intellitech",
+      "description": "Introduce schools to practical technology education. Understand Forge’s referral process, payment conditions and your next step.",
+      "canonical": "https://forgeintellitech.com/earn-with-forge"
+    },
+    {
+      "route": "/blog",
+      "title": "Stories | Forge Intellitech | Forge Intellitech",
+      "description": "Ideas and reflections on practical learning, useful technology and making opportunity possible in Nigeria.",
+      "canonical": "https://forgeintellitech.com/blog"
+    },
+    {
+      "route": "/privacy",
+      "title": "Privacy notice | Forge Intellitech",
+      "description": "How Forge handles website enquiries, programme requests and visitor choices.",
+      "canonical": "https://forgeintellitech.com/privacy"
+    },
+    {
+      "route": "/terms",
+      "title": "Website terms | Forge Intellitech",
+      "description": "Information about website enquiries, programmes, products and participation at Forge.",
+      "canonical": "https://forgeintellitech.com/terms"
+    },
+    {
+      "route": "/endless-possibilities",
+      "title": "Endless Possibilities | A Forge ITs Movement | Forge Intellitech",
+      "description": "We are Nigerians. We can create what comes next. Discover LaunchPad, laptops for learners, school enterprise, paid internships and creativity seminars with Forge ITs.",
+      "canonical": "https://forgeintellitech.com/endless-possibilities"
+    },
+    {
+      "route": "/endless-possibilities/launchpad",
+      "title": "Launchpad 2.0 | Endless Possibilities | Forge Intellitech",
+      "description": "A practical beginning after SSCE: develop an idea, learn how a business works and find support to keep building.",
+      "canonical": "https://forgeintellitech.com/endless-possibilities/launchpad"
+    },
+    {
+      "route": "/endless-possibilities/give-a-child-a-laptop",
+      "title": "Give a Child a Laptop | Endless Possibilities | Forge Intellitech",
+      "description": "Someone else&#x27;s child. Our shared future. Join Forge ITs to match Windows laptops with verified secondary-school students in Nigeria and support a full year of learning.",
+      "canonical": "https://forgeintellitech.com/endless-possibilities/give-a-child-a-laptop"
+    },
+    {
+      "route": "/endless-possibilities/in-school-launchpad",
+      "title": "In-school LaunchPad | Endless Possibilities | Forge Intellitech",
+      "description": "We identify student ideas and projects, then work alongside the students to help build an enterprise.",
+      "canonical": "https://forgeintellitech.com/endless-possibilities/in-school-launchpad"
+    },
+    {
+      "route": "/endless-possibilities/intern-with-forge",
+      "title": "Intern with Forge | Endless Possibilities | Forge Intellitech",
+      "description": "Paid practical technology experience after secondary school, with contributions towards the learner’s education.",
+      "canonical": "https://forgeintellitech.com/endless-possibilities/intern-with-forge"
+    },
+    {
+      "route": "/endless-possibilities/public-school-seminars",
+      "title": "Public-school creativity seminars | Endless Possibilities | Forge Intellitech",
+      "description": "Conversations that encourage creativity and help a student see themselves as someone who can solve a problem.",
+      "canonical": "https://forgeintellitech.com/endless-possibilities/public-school-seminars"
+    },
+    {
+      "route": "/blog/why-cant-we-build-what-we-imagine",
+      "title": "If Disney could imagine Wakanda, why can’t we build what we keep imagining? | Forge Stories | Forge Intellitech",
+      "description": "I keep coming back to a question: what would change if we gave our imagination a responsibility, and started within the capacity we have?",
+      "canonical": "https://forgeintellitech.com/blog/why-cant-we-build-what-we-imagine"
+    },
+    {
+      "route": "/blog/the-future-we-can-start-building",
+      "title": "The future we can start building | Forge Stories | Forge Intellitech",
+      "description": "A better future asks something of us now. Sometimes the first useful contribution is closer than we think.",
+      "canonical": "https://forgeintellitech.com/blog/the-future-we-can-start-building"
+    },
+    {
+      "route": "/blog/exposure-is-a-place-to-begin",
+      "title": "Exposure is a place to begin | Forge Stories | Forge Intellitech",
+      "description": "Before we ask what a learner wants to become, we should ask what they have had a chance to try.",
+      "canonical": "https://forgeintellitech.com/blog/exposure-is-a-place-to-begin"
+    },
+    {
+      "route": "/blog/a-portfolio-begins-with-one-useful-project",
+      "title": "A portfolio begins with one useful project | Forge Stories | Forge Intellitech",
+      "description": "Keep the work, the decisions and the revisions. A learner should be able to explain more than the finished screen.",
+      "canonical": "https://forgeintellitech.com/blog/a-portfolio-begins-with-one-useful-project"
+    },
+    {
+      "route": "/blog/a-laptop-needs-a-learning-plan",
+      "title": "A laptop needs a learning plan | Forge Stories | Forge Intellitech",
+      "description": "A device opens a possibility. Practice, guidance and a clear commitment help give that possibility direction.",
+      "canonical": "https://forgeintellitech.com/blog/a-laptop-needs-a-learning-plan"
+    },
+    {
+      "route": "/blog/an-idea-needs-someone-to-question-it",
+      "title": "An idea needs someone to question it | Forge Stories | Forge Intellitech",
+      "description": "Mentorship can give a promising school idea a more useful next step: a smaller test, a clearer problem and honest feedback.",
+      "canonical": "https://forgeintellitech.com/blog/an-idea-needs-someone-to-question-it"
+    },
+    {
+      "route": "/join/apply",
+      "title": "Apply or contribute to Forge | Forge Intellitech",
+      "description": "Express interest in work, instructor roles, volunteering, donations or partnership with Forge.",
+      "canonical": "https://forgeintellitech.com/join/apply"
+    },
+    {
+      "route": "/programmes/enquire",
+      "title": "Enquire about school programmes | Forge Intellitech",
+      "description": "Talk to Forge about ElyTech for primary schools and TechUp for secondary schools.",
+      "canonical": "https://forgeintellitech.com/programmes/enquire"
+    },
+    {
+      "route": "/earn-with-forge/onboard",
+      "title": "Assist a school with onboarding | Forge Intellitech",
+      "description": "Submit an authorised school onboarding request through your Earn with Forge account. Every request remains subject to Forge review, verification and a contract.",
+      "canonical": "https://forgeintellitech.com/earn-with-forge/onboard"
+    },
+    {
+      "route": "/endless-possibilities/give-a-child-a-laptop/donate",
+      "title": "Register laptop donor interest | Forge Intellitech",
+      "description": "Describe your laptop offer and preferences. Forge matches donor interest against vetted secondary-school student need.",
+      "canonical": "https://forgeintellitech.com/endless-possibilities/give-a-child-a-laptop/donate"
+    },
+    {
+      "route": "/endless-possibilities/give-a-child-a-laptop/request-support",
+      "title": "Request student laptop support | Forge Intellitech",
+      "description": "Request laptop and learning support for a secondary-school student, with parent or guardian involvement and school verification.",
+      "canonical": "https://forgeintellitech.com/endless-possibilities/give-a-child-a-laptop/request-support"
+    }
+  ],
+  "checkedInternalDestinations": [
+    "/rss.xml",
+    "/manifest.json",
+    "/",
+    "/about",
+    "/programmes",
+    "/products",
+    "/blog",
+    "/endless-possibilities",
+    "/endless-possibilities/launchpad",
+    "/join",
+    "/partner",
+    "/earn-with-forge",
+    "/programmes/resources",
+    "/work",
+    "/contact",
+    "/endless-possibilities/give-a-child-a-laptop",
+    "/endless-possibilities/intern-with-forge",
+    "/endless-possibilities/in-school-launchpad",
+    "/blog/why-cant-we-build-what-we-imagine",
+    "/blog/the-future-we-can-start-building",
+    "/blog/exposure-is-a-place-to-begin",
+    "/blog/a-portfolio-begins-with-one-useful-project",
+    "/endless-possibilities/give-a-child-a-laptop/donate",
+    "/endless-possibilities/give-a-child-a-laptop/request-support",
+    "/privacy",
+    "/terms",
+    "/join/apply",
+    "/programmes/enquire",
+    "/programmes/elytech",
+    "/programmes/techup",
+    "/programmes/onboard",
+    "/downloads/forge-school-programme-overview.html",
+    "/downloads/forge-referral-agreement-draft.pdf",
+    "/blog/a-laptop-needs-a-learning-plan",
+    "/blog/an-idea-needs-someone-to-question-it",
+    "/endless-possibilities/public-school-seminars",
+    "/techup"
+  ],
+  "note": "Local rendered HTML checks; no search rankings, backlinks or indexing performance measured."
+}

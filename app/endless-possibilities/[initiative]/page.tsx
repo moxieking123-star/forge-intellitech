@@ -110,18 +110,23 @@ export default async function InitiativePage({ params }: Props) {
               <span>₦100,000 awarded to each</span>
             </div>
             <div>
-              <strong>2027</strong>
-              <span>Next edition in planning</span>
+              <strong>Launchpad 2.0</strong>
+              <span>Coming soon</span>
             </div>
           </div>
-          <Link className={styles.textLink} href="/gallery">
-            See more photographs from LaunchPad 2025{" "}
-            <ArrowRight size={22} aria-hidden />
-          </Link>
           <p className={styles.smallPrint}>
-            From LaunchPad 2025. Historical details reflect the 2025 event; 2027
-            dates and participation arrangements are still being planned.
+            Historical details reflect the first edition and Forge’s follow-up
+            records. The next edition’s dates and entry arrangements will be
+            announced when confirmed.
           </p>
+          <div className={styles.actions}>
+            <Link className={styles.button} href="/partner?interest=sponsorship&initiative=launchpad">
+              Sponsor Launchpad 2.0 <ArrowRight size={22} aria-hidden />
+            </Link>
+            <Link className={styles.textLink} href="/contact?interest=patron">
+              Become a patron <ArrowRight size={22} aria-hidden />
+            </Link>
+          </div>
         </section>
       )}
       <section

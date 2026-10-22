@@ -1,4 +1,12 @@
-import { permanentRedirect } from "next/navigation";
-export default function Page() {
-  permanentRedirect("/work#products");
-}
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { products } from "@/lib/products";
+import ProductMark from "@/components/products/ProductMark";
+import s from "@/components/products/Products.module.css";
+export const metadata:Metadata={title:"Products | What Forge is building",description:"Meet Forge’s learning programmes, school dashboard and products being built around real needs in Nigeria.",alternates:{canonical:"/products"}};
+export default function ProductsPage(){return <div className={s.page} id="home-content"><header className={s.hero}><p className={s.eyebrow}>Made at Forge</p><h1>Useful here.<br/><span>Worth building.</span></h1><p>We see the things people keep finding a way around. A school trying to keep learning together. A journey that takes more out of you than it should. An everyday need that could be met with a little more thought. That is where we begin.</p><p>Some of this work is already in use. Some is still taking shape. We will share the details when they are ready.</p></header>
+  <Image src="/images/products/product-workbench.svg" alt="Original illustration of product sketches: a bus, a dashboard graph and connecting rings on a workbench" width={1400} height={420} sizes="100vw" style={{width:'100%',height:'auto'}}/>
+  <section id="learning" className={`${s.section} ${s.overview}`} aria-labelledby="learning-overview"><div><p className={s.eyebrow}>Our learning programmes</p><h2 id="learning-overview">Tools become useful<br/>when people can create.</h2></div><div><p><strong>ElyTech</strong> gives primary-school children a connected beginning in mental maths, keyboard fluency, coding logic and design. <strong>TechUp</strong> helps secondary-school students grow from foundations into building, storytelling or strategy.</p><p>These are practical school subjects for all learners in the relevant classes. The detailed school programme explains the progression, teaching and support.</p><Link href="/programmes">Learn to build: explore the school programme →</Link></div></section>
+  <section className={s.section} aria-labelledby="products-title"><p className={s.eyebrow}>Products and platforms</p><h2 id="products-title">A few things we are forging.</h2><div className={s.productGrid}>{products.map(product=><article className={s.product} id={product.id} key={product.id}><ProductMark id={product.id}/><div><span className={s.status}>{product.status}</span><h3>{product.name}</h3><p><strong>{product.area}</strong></p><p>{product.description}</p><Link href={product.id==="dashboard"?"/programmes":"/partner?interest=investment"}>{product.id==="dashboard"?"Bring the programme to your school":"Start a conversation"} →</Link></div></article>)}</div></section>
+  <section className={s.section}><h2>Have a useful skill?<br/>There could be room for you here.</h2><p>We do not think we have everything figured out. If you understand what we are trying to build and can see where your contribution could help, tell us.</p><Link href="/join">Work with Forge →</Link></section></div>;}

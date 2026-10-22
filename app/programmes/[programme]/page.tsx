@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { programmeDetails, type ProgrammeKey } from '@/components/programmes/programme-details';
 import ProgrammeJourney from '@/components/programmes/ProgrammeJourney';
-import StudentImageNotice from '@/components/StudentImageNotice';
+import SecondaryLearning from '@/components/programmes/SecondaryLearning';
 import s from '@/components/programmes/ProgrammeDetail.module.css';
 export function generateStaticParams(){return Object.keys(programmeDetails).map(programme=>({programme}));}
 function programmeFor(key:string){return Object.hasOwn(programmeDetails,key)?programmeDetails[key as ProgrammeKey]:null;}
@@ -17,7 +17,7 @@ export default async function ProgrammePage({params}:{params:Promise<{programme:
  return <div className={s.page} id="home-content">
   <nav className={s.crumbs} aria-label="Breadcrumb"><Link href="/programmes">School programmes</Link><span aria-hidden="true">/</span><span aria-current="page">{detail.name}</span></nav>
   <section className={s.hero} aria-labelledby="programme-title"><div className={s.heroCopy}>
-   <p className={s.eyebrow}>{detail.name} · {detail.audience}</p><h1 id="programme-title">{detail.question}<span>{detail.answer}</span></h1><p className={s.lead}>{detail.lead}</p>
+   <p className={s.eyebrow}>{detail.name} · {detail.audience}</p><h1 id="programme-title">{detail.question}<span>{detail.answer}</span></h1><p className={s.lead}>{detail.lead}</p><p><strong>A school subject for all students, not a club. 70% practical, 30% theory.</strong> Forge complements the school curriculum with practical digital learning. Digital citizenship begins in P1 and continues through secondary school.</p><p><strong>A school subject for all students, not a club. 70% practical, 30% theory.</strong> Forge complements the school curriculum with practical digital learning. Digital citizenship begins in P1 and continues through secondary school.</p>
    <div className={s.actions}><Link className={s.button} href="/programmes/enquire">Bring {detail.name} to your school <span aria-hidden="true">↗</span></Link><a className={s.textLink} href="#learning">See how learning happens ↓</a></div>
   </div><figure><div className={s.photo}><Image src={`/images/programmes/${detail.image}.webp`} alt={detail.imageAlt} fill priority sizes="(max-width:800px) 100vw,49vw"/></div><figcaption>AI-generated Nigerian learners and instructor · not actual client students</figcaption></figure></section>
   <section className={`${s.section} ${s.conviction}`}><h2>{detail.conviction}</h2><p>{detail.convictionCopy}</p></section>
@@ -26,7 +26,7 @@ export default async function ProgrammePage({params}:{params:Promise<{programme:
   <section className={`${s.section} ${s.dark}`}><p className={s.eyebrow}>The support around the lesson</p><h2>Make room for learning<br/>to keep going.</h2><ProgrammeJourney programme={key} kind="support"/></section>
   <section className={`${s.section} ${s.next}`}><h2>{detail.nextTitle}</h2><div><p>{detail.nextCopy}</p><div className={s.actions}><Link className={s.textLink} href={detail.nextHref}>{detail.nextLink} →</Link>{key==='techup'&&<Link className={s.textLink} href="/endless-possibilities/intern-with-forge">See the post-SSCE pathway →</Link>}</div></div></section>
   <section className={`${s.section} ${s.faq}`}><div><p className={s.eyebrow}>Before we begin</p><h2>Start with the<br/>questions that matter.</h2></div><div>{detail.faqs.map(([question,answer])=><details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</div></section>
-  <StudentImageNotice/>
+  {key==='techup'&&<SecondaryLearning/>}
   <section className={`${s.section} ${s.closing}`}><p className={s.eyebrow}>Your school’s next beginning</p><h2>What could your learners<br/>discover about themselves?</h2><p>Onboarding for next term is open through 31 December 2026. This is a subject for all students. We will work through family preparation, practical arrangements and setup with your school.</p><div className={s.actions}><Link className={s.button} href="/programmes/onboard">Begin school onboarding ↗</Link><Link className={s.textLink} href="/programmes/resources">Get the parent resource kit →</Link><Link className={s.textLink} href="/programmes/enquire">Request the proposal privately →</Link></div></section>
  </div>;
 }
