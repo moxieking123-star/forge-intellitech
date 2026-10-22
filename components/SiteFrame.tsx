@@ -11,8 +11,9 @@ import HomeFooter from "./home/HomeFooter";
 import ForgeJourney from "./story/ForgeJourney";
 import PageMotion from "./PageMotion";
 import ForgeInteractions from "./motion/ForgeInteractions";
+import PreviewFeedback from "./feedback/PreviewFeedback";
 
-export default function SiteFrame({ children }: { children: React.ReactNode }) {
+export default function SiteFrame({ children, previewFeedback = false }: { children: React.ReactNode; previewFeedback?: boolean }) {
   const pathname = usePathname();
   const homepage = !pathname.startsWith("/admin");
   return (
@@ -28,6 +29,7 @@ export default function SiteFrame({ children }: { children: React.ReactNode }) {
       {homepage && <PageMotion />}
       {homepage && <ForgeInteractions />}
       <CookieConsent />
+      {homepage && previewFeedback && <PreviewFeedback />}
     </>
   );
 }

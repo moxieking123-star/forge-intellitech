@@ -236,7 +236,7 @@ export default function RootLayout({
 
       <body className="local-open-sans min-h-screen flex flex-col bg-env-bg-primary">
         <ThemeProvider defaultMode="dark" defaultChapter="forge">
-          <SiteFrame>{children}</SiteFrame>
+          <SiteFrame previewFeedback={process.env.VERCEL_ENV === "preview"}>{children}</SiteFrame>
         </ThemeProvider>
 
         {/* Analytics */}
