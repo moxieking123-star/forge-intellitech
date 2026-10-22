@@ -364,3 +364,5 @@
 
 .page :is(h1,h2,h3,h4,h5,h6){color:inherit;font-family:inherit}
 .page :is(p,span,li,td,th,label){font-family:inherit}
+
+.articleHead .title{max-width:1050px;text-wrap:balance}.byline{border-top:1px solid #b7beb4;padding-top:20px;letter-spacing:.025em}.prose>section:first-child>p:first-of-type{font-size:clamp(20px,2vw,25px);line-height:1.7;color:#173e30}.prose section{scroll-margin-top:110px}.prose>section+section{margin-top:52px}.articleImage img{object-position:center}.articleImage figcaption{max-width:760px}.aside a:focus-visible{outline:2px solid #bd481f;outline-offset:4px}

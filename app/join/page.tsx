@@ -35,8 +35,8 @@ export default function Page() {
       </header>
       <EditorialVisual
         src="/images/editorial/programme-preparation.webp"
-        alt="AI-generated Nigerian adult educators preparing a practical technology lesson"
-        caption="AI-generated illustration of Nigerian educators; not actual Forge staff."
+        alt="Illustrated Nigerian adult educators preparing a practical technology lesson"
+        caption="Illustration of Nigerian educators; not actual Forge staff."
       />
       <section className={s.section}>
         <h2>There is more than one way to join.</h2>

@@ -40,7 +40,7 @@ export default function EarnWithForgePage() {
         <EditorialVisual
           src="/images/editorial/referral-connections.webp"
           alt="Illustrative school model connected to several distinct paths"
-          caption="AI-generated illustration · useful introductions, new beginnings."
+          caption="Useful introductions, new beginnings."
         />
       </div>
       <section
@@ -61,6 +61,7 @@ export default function EarnWithForgePage() {
             <p>
               Use your email to sign in securely. Your account gives you a
               referral number and a place to follow each school introduction.
+              Register your bank details after signing in.
             </p>
           </li>
           <li>
@@ -87,27 +88,48 @@ export default function EarnWithForgePage() {
           <div>
             <p className={s.eyebrow}>Clear terms before you begin</p>
             <h2 id="referral-payment">
-              15% of the approved
+              15% of the net full
               <br />
-              school payment balance.
+              first school contract value.
             </h2>
           </div>
           <div>
             <p>
               Your referral amount is calculated after internet provision,
-              direct school costs and tax are deducted from the approved school
-              payment. Salaries are excluded from these deductions.
+              direct school operation expenses and tax are deducted from the full
+              first school contract value. Salaries are excluded from these deductions.
             </p>
             <p>
-              The referral is earned when Forge teaching starts. Payout is due
-              in the fourth week, subject to confirmed receipts and cost review.
+              Commission is paid once, when Forge receives the school’s first
+              deposit in the fourth week of resumption.
               An introduction alone does not create earnings.
+            </p>
+            <p>
+              Each school has its own agreement. Download it, sign externally
+              and upload the signed PDF. It takes effect once the signed copy is
+              uploaded and the school has signed its contract to commence.
             </p>
             <p>
               Amounts stay marked “Pending cost review” until confirmed.
               Payments require manual approval; the account records progress
               rather than promising an automatic bank transfer.
             </p>
+            <p>
+              Your role is a truthful, authorised introduction. You have no
+              duty or liability for delivery, teaching, collections, support
+              or performance guarantees. Do not commit Forge to unauthorised terms.
+            </p>
+            <p>
+              Request your earnings and actual expense and tax deductions from
+              your account. Forge must disclose them within five working days,
+              excluding weekends and Nigerian public holidays. Full correct
+              payment ends that school’s agreement while preserving accrued
+              claims and other unpaid referrals.
+            </p>
+            <a className={s.textLink} href="/downloads/forge-referral-agreement-draft.pdf" download>
+              Read the agreement draft ↗
+            </a>
+            <p>For a school-specific download and upload record, use your signed-in account.</p>
           </div>
         </div>
       </section>

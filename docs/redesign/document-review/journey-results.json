@@ -1,0 +1,9 @@
+{
+  "result": "passed",
+  "checks": [
+    "Proposal gate: four widths, required consent, private pricing absent, truthful disabled-delivery response",
+    "Homepage journal and NDECA present; five real social icons visibly Coming soon without fake links",
+    "New founder reflection has fictional context and no child-image disclaimer on adult-free cover",
+    "API malformed/cross-origin/oversize guards, feature-disabled services, private proposal 404 and generic draft available"
+  ]
+}

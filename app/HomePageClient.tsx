@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
+import { stories as journalStories } from "@/lib/stories";
 import LivingHero from "../components/home/LivingHero";
 import ProductRow from "../components/home/ProductRow";
 import styles from "../components/home/Editorial.module.css";
@@ -120,6 +121,20 @@ export default function HomePageClient() {
             </article>
           ))}
         </div>
+      </section>
+      <section className={styles.newJournal} aria-labelledby="journal-title">
+        <div className={styles.journalHeading}><p className={styles.eyebrow}>The Forge journal · Ideas worth staying with</p><Link href="/blog" className={styles.textLink}>Explore the journal <ArrowRight size={22} aria-hidden /></Link></div>
+        <div className={styles.journalFeature}>
+          <div className={styles.journalDrawing}>
+            <svg viewBox="0 0 560 480" role="img" aria-labelledby="journal-art-title"><title id="journal-art-title">An open book becomes a doorway to a city of possibilities</title>
+              <circle cx="280" cy="218" r="182" fill="#e1b952"/><path d="M70 377V205h69v172m20 0V155h76v222m24 0V98h66v279m24 0V177h64v200m23 0V231h59v146" fill="#244c3c" stroke="#f5edda" strokeWidth="3"/>
+              <path d="M108 389q86-48 172-5 86-43 172 5v53q-86-42-172-2-86-40-172 2z" fill="#f5edda" stroke="#244c3c" strokeWidth="4"/><path d="M280 384v56M129 404q65-29 128-4m46 0q63-25 128 4M129 420q65-29 128-4m46 0q63-25 128 4" fill="none" stroke="#244c3c" strokeWidth="3"/>
+              <path d="M203 331V251h153v80m-130 0v-56h104v56" fill="#e76331" stroke="#f5edda" strokeWidth="3"/><path d="M280 331V275" stroke="#f5edda" strokeWidth="3"/><path d="M90 153l21-22m331 34 25-12M208 80l8-24" stroke="#244c3c" strokeWidth="3"/><circle cx="388" cy="94" r="9" fill="#e76331"/>
+            </svg><span>A page can open a possibility.</span>
+          </div>
+          <article className={styles.journalLead}><p className={styles.eyebrow}>{journalStories[0].category}</p><h2 id="journal-title"><Link href={`/blog/${journalStories[0].slug}`}>{journalStories[0].title}</Link></h2><p>{journalStories[0].excerpt}</p><p>I want a future that survives ordinary days: a lesson that continues, a device that can be repaired, a useful idea someone here can actually reach. Imagination can open the door. What we do afterwards matters.</p><Link href={`/blog/${journalStories[0].slug}`} className={styles.textLink}>Read the full reflection <ArrowRight size={24} aria-hidden /></Link></article>
+        </div>
+        <div className={styles.journalEssays}>{journalStories.slice(1,4).map((story,index)=><article key={story.slug}><p className={styles.eyebrow}>0{index+2} / {story.category}</p><h3><Link href={`/blog/${story.slug}`}>{story.title}</Link></h3><p>{story.excerpt}</p><Link href={`/blog/${story.slug}`} className={styles.textLink}>Read the essay <ArrowRight size={20} aria-hidden /></Link></article>)}</div>
       </section>
       <section id="ndeca" className={styles.nextChapter} aria-labelledby="ndeca-title">
         <div>

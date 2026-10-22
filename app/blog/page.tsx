@@ -35,7 +35,7 @@ export default function StoriesPage() {
         <section className={s.featured} aria-labelledby="featured-story">
           <figure className={s.editorialFigure}>
             <Image src="/images/editorial/stories/journal-index.webp" alt="An open blank journal, green pencil and terracotta cup on a sunlit wooden desk." width={1440} height={960} priority sizes="(max-width: 760px) 100vw, 50vw" />
-            <figcaption>AI-generated illustration · A place for ideas to begin.</figcaption>
+            <figcaption>A place for ideas to begin.</figcaption>
           </figure>
           <div className={s.featureText}>
             <p className={s.eyebrow}>{featured.category}</p>

@@ -73,7 +73,7 @@ export default function EndlessPossibilitiesPage() {
             />
           </div>
           <figcaption>
-            AI illustration · different beginnings, a shared possibility.
+            Different beginnings, a shared possibility.
           </figcaption>
         </figure>
       </section>

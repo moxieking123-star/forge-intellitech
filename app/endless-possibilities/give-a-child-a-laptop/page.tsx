@@ -273,13 +273,13 @@ export default function EndlessPossibilitiesPage() {
           <div className={styles.learningPicture}>
             <Image
               src="/images/editorial/learning-after-device.webp"
-              alt="AI illustration of Nigerian adult hands testing a simple circuit and robot mechanism"
+              alt="Illustration of Nigerian adult hands testing a simple circuit and robot mechanism"
               fill
               sizes="(max-width: 700px) 100vw, 43vw"
             />
           </div>
           <figcaption>
-            AI illustration of guided practical learning; not a recipient
+            Illustration of guided practical learning; not a recipient
             photograph.
           </figcaption>
         </figure>

@@ -53,12 +53,12 @@ export default function Page() {
           <Image
             className={s.image}
             src="/images/editorial/company-team.webp"
-            alt="AI illustration of Nigerian adults collaborating on an idea in a creative technology studio"
+            alt="Illustration of Nigerian adults collaborating on an idea in a creative technology studio"
             width={1024}
             height={1024}
           />
           <figcaption className={s.caption}>
-            AI illustration of a Nigerian creative team; not a photograph of
+            Illustration of a Nigerian creative team; not a photograph of
             Forge staff.
           </figcaption>
         </figure>

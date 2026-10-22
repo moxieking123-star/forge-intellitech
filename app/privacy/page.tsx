@@ -22,7 +22,7 @@ export default function Page() {
       <EditorialVisual
         src="/images/editorial/privacy-care.webp"
         alt="Illustrative frosted glass sheltering a paper form and a living leaf"
-        caption="AI-generated illustration · care for the people behind the information."
+        caption="Care for the people behind the information."
       />
       <article className={s.legal}>
         <p>

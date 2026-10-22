@@ -27,7 +27,7 @@ export default function Page() {
       <EditorialVisual
         src="/images/editorial/work-systems.webp"
         alt="Illustrative connected prototype objects, circuit components and design cards"
-        caption="AI-generated illustration · ideas taking a useful shape."
+        caption="Ideas taking a useful shape."
       />
       <section className={s.section}>
         <h2>Made of possibility.</h2>

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import LearningStages from "../../components/programmes/LearningStages";
+import ProgrammeOfferVisual from "../../components/programmes/ProgrammeOfferVisual";
 import StudentImageNotice from "../../components/StudentImageNotice";
 import styles from "../../components/programmes/Programmes.module.css";
 
@@ -19,11 +20,11 @@ const offers = [
     level: "Primary schools",
     title: "Small discoveries. A bigger sense of possibility.",
     intro:
-      "For younger learners, confidence comes from having a go. ElyTech introduces technology through guided, age-appropriate exploration, with room to ask questions, make choices and discover how an idea becomes something you can show.",
+      "ElyTech is the technology subject for all P1–P6 pupils. Four connected skills give children practical ways to calculate, type, code and communicate.",
     skills: [
-      "Build practical confidence with digital tools through purposeful activities.",
-      "Explore coding foundations through sequences, patterns and problem-solving.",
-      "Use design and simple projects to express an idea and explain the choices behind it.",
+      "P1–P3 prioritise Chisanbop finger arithmetic and touch typing without looking at the keys.",
+      "P3 is the transition: P3–P6 expand across typing, Chisanbop, Scratch coding logic and Canva design.",
+      "Forge supplies Chisanbop learning aids and practice keyboards for guided practice.",
     ],
     teaching:
       "Teaching starts with clear demonstrations and supported practice. Learners try for themselves, share what they notice and build on each discovery.",
@@ -34,11 +35,11 @@ const offers = [
     level: "Secondary schools",
     title: "Practical skills. Ideas with somewhere to go.",
     intro:
-      "TechUp helps secondary-school students move from using technology to creating with it. Learners connect coding foundations, design and practical digital skills to problems they can recognise, then develop projects that make their thinking visible.",
+      "TechUp is a technology subject for all secondary students, with a shared JSS foundation and three senior pathways to develop different interests.",
     skills: [
-      "Practise digital tools and the logic behind coding.",
-      "Design with a purpose: consider who a project is for and what it should do.",
-      "Break a problem down, build a first version, test it and improve it with feedback.",
+      "JSS1–JSS3: Canva/Figma design, organising data with Excel, Power BI and HTML/CSS coding.",
+      "Cyber citizenship, awareness of Nigerian cybersecurity law, and AI-assisted content writing, planning and digital marketing.",
+      "SS1–SS3 choose Builder, Storyteller or Strategist, supported by Saturday live classes.",
     ],
     teaching:
       "Guided instruction leads into practice and project work. Students learn to explain their decisions as well as demonstrate what they have made.",
@@ -77,7 +78,7 @@ export default function ProgrammesPage() {
           <div className={styles.picture}>
             <Image
               src="/images/editorial/nigerian-student-tech-class.webp"
-              alt="AI-generated scene of Nigerian students exploring technology in a classroom"
+              alt="Fictional Nigerian students exploring technology together in a classroom"
               fill
               priority
               sizes="(max-width: 700px) 100vw, 47vw"
@@ -112,10 +113,11 @@ export default function ProgrammesPage() {
               <p className={styles.eyebrow}>
                 0{index + 1} / {offer.level}
               </p>
-              <h2>{offer.name}</h2>
+              <h2>{offer.name}</h2>{offer.id === "elytech" && <span id="chisanbop" />}
               <p className={styles.tagline}>{offer.title}</p>
             </div>
             <div>
+              <ProgrammeOfferVisual programme={offer.id as "elytech" | "techup"} />
               <p>{offer.intro}</p>
               <ul>
                 {offer.skills.map((skill) => (
@@ -131,49 +133,6 @@ export default function ProgrammesPage() {
             </div>
           </article>
         ))}
-      </section>
-      <section id="chisanbop" className={styles.chisanbop} aria-labelledby="chisanbop-heading">
-        <figure>
-          <div className={styles.chisanbopPicture}>
-            <Image
-              src="/images/editorial/chisanbop-class.webp"
-              alt="AI-generated young Nigerian children in school uniforms practising finger arithmetic with an instructor"
-              fill
-              sizes="(max-width: 700px) 100vw, 52vw"
-            />
-          </div>
-          <figcaption>
-            AI-generated Nigerian children and instructor · not actual client
-            students
-          </figcaption>
-        </figure>
-        <div className={styles.chisanbopCopy}>
-          <p className={styles.eyebrow}>
-            Chisanbop · learning through practice
-          </p>
-          <h2 id="chisanbop-heading">
-            A world of numbers.
-            <br />
-            <span>Already at hand.</span>
-          </h2>
-          <p>
-            Sometimes an idea begins with the simplest tools. Chisanbop is a
-            finger-arithmetic method that represents tens on the left hand and
-            units on the right.
-          </p>
-          <p>
-            With an instructor’s guidance, young learners can explore numbers
-            through demonstration, careful practice and questions. Another
-            invitation to try something, understand it and try again.
-          </p>
-          <a
-            className={styles.textLink}
-            href="https://www.korea.net/NewsFocus/HonoraryReporters/view?articleId=190993"
-          >
-            Read about the method on Korea.net{" "}
-            <ArrowRight size={18} aria-hidden />
-          </a>
-        </div>
       </section>
       <StudentImageNotice />
       <section className={styles.learning}>
@@ -221,9 +180,7 @@ export default function ProgrammesPage() {
             <div>
               <h3>Dashboard integration</h3>
               <p>
-                The programme connects with the Forge dashboard to bring student
-                learning records and project work into the learning journey.
-                Access and the school’s setup are covered during onboarding.
+                The dashboard is in testing pending onboarding activation. It is intended to bring student learning records and project work together. Schools receive access details when setup is ready.
               </p>
             </div>
           </article>
@@ -250,7 +207,7 @@ export default function ProgrammesPage() {
         <div className={styles.portfolioGrid}>
           <p>
             A student’s progress should belong to their story. Downloadable
-            student records and projects help learners leave school with a
+            student records and projects are intended to help learners build a
             portfolio: a way to look back at what they explored, show what they
             made and explain how their thinking developed.
           </p>
@@ -261,8 +218,7 @@ export default function ProgrammesPage() {
               is what I built. Here is what I would improve next.”
             </p>
             <p className={styles.note}>
-              Portfolio downloads and record access are discussed as part of the
-              school’s dashboard setup.
+              The dashboard is in testing. Portfolio downloads and record access depend on onboarding activation and the school’s setup.
             </p>
           </div>
         </div>
@@ -307,10 +263,7 @@ export default function ProgrammesPage() {
           <details>
             <summary>Is laptop support part of school enrolment?</summary>
             <p>
-              The Give a Child a Laptop campaign is a separate initiative within
-              Forge ITs. It supports eligible secondary-school students through
-              verification and matching; a school programme enquiry does not
-              guarantee a device.
+              Learners use their own gadgets; parents arrange laptops from Basic 3 upward. An internet-capable laptop of any specification can support school classes. A learner without a classroom device can later practise guided dashboard activities on a parent’s device when access is activated. Supplier introductions for used laptops below NGN100,000 depend on availability; suppliers may offer instalments under their terms.
             </p>
             <Link
               className={styles.textLink}
@@ -326,7 +279,7 @@ export default function ProgrammesPage() {
           <p className={styles.eyebrow}>Your school’s next step</p>
           <h2 id="school-next-steps">Make the beginning practical.</h2>
           <p>
-            Start your school’s onboarding, request the proposal privately and
+            Onboarding for next term is open through 31 December 2026. Start your school’s onboarding, request the proposal privately and
             prepare a clear introduction for parents. Your school chooses the
             fee it communicates to parents; the agreement with Forge is
             discussed separately.

@@ -2,6 +2,8 @@ export type Story = {
   slug: string;
   title: string;
   category: string;
+  byline?: string;
+  imageCaption?: string;
   excerpt: string;
   image: { src: string; alt: string };
   sections: { title: string; paragraphs: string[] }[];
@@ -25,6 +27,48 @@ const unicef = {
 };
 
 export const stories: Story[] = [
+  {
+    slug: "why-cant-we-build-what-we-imagine",
+    title: "If Disney could imagine Wakanda, why can’t we build what we keep imagining?",
+    category: "A founder’s reflection",
+    byline: "A reflection from the founder of Forge",
+    excerpt: "I keep coming back to a question: what would change if we gave our imagination a responsibility, and started within the capacity we have?",
+    image: { src: "/images/editorial/stories/imagined-library-workshop.png", alt: "An imagined Nigerian public library and workshop opening onto a shaded green courtyard." },
+    imageCaption: "An imagined public library and community workshop. A vision to work towards, not an existing Forge facility.",
+    sections: [
+      { title: "What that imagined place asks of me", paragraphs: [
+        "If Disney could imagine Wakanda, why can’t we build what we keep imagining? I know the question is bigger than its wording. Wakanda belongs to Marvel’s Black Panther: a fictional African nation whose technological advancement is part of its story. A film can make a world convincing without having to keep its lights on on Monday morning. We have to live with Monday morning. Still, I cannot dismiss what that picture opens up in my mind.",
+        "It lets me see African intelligence, beauty and ambition occupying the centre of a future. We should not need a film to believe that is possible. But sometimes a picture reaches a place that another speech cannot. It interrupts the habit of expecting less. My question begins there: after the excitement, what are we prepared to do with the possibility we have seen?",
+        "I am Nigerian. I know how easily a conversation about what could work becomes a list of everything that does not. Much of that frustration is deserved. People are tired, and many are carrying responsibilities that leave little room for another experiment. I do not want to turn hope into another demand on people who are already doing their best. I want to ask what I can take responsibility for myself."
+      ] },
+      { title: "Potential needs an introduction", paragraphs: [
+        "I think about how often we describe someone as having no direction before asking what directions they have ever been shown. If all you have seen of technology is other people using finished products, creating one can look like something reserved for another kind of person. Then someone gives you a small task, explains a tool, and waits while you try. The distance begins to change.",
+        "That does not mean every child must become a programmer. We need people who can design, repair, teach, organise, grow food, understand a customer and keep a promise. A useful education should help a person discover where their abilities meet something the world needs. We lose something when we recognise only the person who can repeat an answer quickly and overlook the one who asks an unusual question.",
+        "Our people do not become talented because somebody finally gives them a laptop. The device can give an existing curiosity somewhere to work. So can a patient teacher, a safe place to practise, an introduction to someone’s trade, or a library that opens when it says it will. Opportunity has many ordinary parts."
+      ] },
+      { title: "AI can help. We still have work to do", paragraphs: [
+        "I am excited by AI because it can help us attempt things that used to feel out of reach. It can help explain unfamiliar code, explore the first shape of an idea or prepare a draft we can improve. For a small team, that can be useful room to move. But an answer that sounds confident still needs checking. A tool cannot decide for us whether the thing we are building is worth someone’s time.",
+        "Technology will not magically remove crime, poverty or the conditions that make people vulnerable. Learning a skill is valuable; it does not guarantee a job or erase the pressures in a household. If we speak as though an app can carry all of that, we stop listening to the people we say we want to help.",
+        "A learner needs electricity, practice time and guidance. A donated device may need a battery, a repair or a secure place to be kept. Someone has to make a lesson understandable. Someone has to answer when a school has a problem. UNESCO’s work on technology in education and ITU’s meaningful-connectivity framework both give us reasons to take those surrounding conditions seriously. The impressive tool is one part of the responsibility."
+      ] },
+      { title: "The future has to survive ordinary days", paragraphs: [
+        "The future I want is not only a beautiful skyline. I want a school where a useful lesson can continue next term. A workshop where a broken tool can be repaired. A small business that can find its records without losing half a day. A public service that respects the person waiting. These things may not look dramatic on a poster. They would change how an ordinary day feels.",
+        "We need institutions that can carry work beyond the enthusiasm of one person. We need teachers, families, businesses and public bodies able to collaborate, with clear responsibilities and the honesty to say what is working. Maintenance belongs in the plan before the launch. So does a way for the person using a service to say that it is failing them.",
+        "I cannot build all of that through Forge. I should not pretend to. But limited capacity is still capacity. Within it, we can teach something carefully, build a useful tool, connect a working laptop to a verified need, or give a promising idea a serious conversation. We can make the part within our reach more dependable."
+      ] },
+      { title: "Let us build something people can use", paragraphs: [
+        "I do not want the title of founder to become the achievement. I want us to make something an ordinary person here can use, understand and afford to keep using. That means asking less comfortable questions. Does this solve their problem? Can they reach it? What happens when it breaks? Have we made a promise we can keep?",
+        "We will get some things wrong. I will get some things wrong. Some ideas I care about will need to change, and some may fail. I would rather admit that possibility now than build a story in which we are always the heroes. People who join us should have room to question us and help us do the work better.",
+        "Wakanda is imagined. The needs around us are real. So are the people who can contribute to meeting them. We do not need to reproduce a fictional country to widen what is possible here. We can begin with one thing that works, learn from the person using it, and build the next thing with others. That is the question I want to keep living with: what can we make useful, together, with what we have today?"
+      ] }
+    ],
+    sources: [
+      { title: "Disney · Discover Wakanda", url: "https://www.disney.co.uk/movies/black-panther/discover-wakanda", note: "Disney describes Wakanda as the fictional technologically advanced African nation in Marvel Studios’ Black Panther. The film is a point of reflection, not evidence of a real technology or an affiliation with Forge." },
+      unesco, itu
+    ],
+    cta: { label: "Bring what you can to the work", href: "/join" }
+  },
+
   {
     slug: "the-future-we-can-start-building",
     image: { src: "/images/editorial/stories/future-building.webp", alt: "Wooden blocks form a rising staircase on a green sheet in warm sunlight." },

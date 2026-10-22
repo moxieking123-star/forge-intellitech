@@ -370,7 +370,7 @@ export default function SchoolOnboarding({
             sizes="(max-width: 1228px) 100vw, 1180px"
             priority
           />
-          <figcaption>{assisted ? "AI-generated scene with fictional adults; not Forge staff or partners." : "AI-generated school scene; not an actual partner institution."}</figcaption>
+          <figcaption>{assisted ? "Illustration with fictional adults; not Forge staff or partners." : "An imagined school scene; not an actual partner institution."}</figcaption>
         </figure>
         <div className={styles.layout}>
           <aside className={styles.aside} aria-label="What happens next">

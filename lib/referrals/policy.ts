@@ -14,7 +14,7 @@ export function schoolKey(name: string, location: string) {
     .digest("hex");
 }
 export function commissionKobo(input: {
-  schoolPaymentKobo: number;
+  fullContractValueKobo: number;
   internetKobo: number;
   directSchoolOperationsKobo: number;
   taxKobo: number;
@@ -23,7 +23,7 @@ export function commissionKobo(input: {
   if (numbers.some((n) => !Number.isSafeInteger(n) || n < 0))
     throw new Error("Use non-negative safe integer amounts in kobo");
   const net =
-    BigInt(input.schoolPaymentKobo) -
+    BigInt(input.fullContractValueKobo) -
     BigInt(input.internetKobo) -
     BigInt(input.directSchoolOperationsKobo) -
     BigInt(input.taxKobo);
@@ -39,7 +39,8 @@ export function payableDate(startsOn: string) {
     date.toISOString().slice(0, 10) !== startsOn
   )
     throw new Error("Invalid start date");
-  date.setUTCDate(date.getUTCDate() + 28);
+  // The fourth week begins 21 calendar days after resumption. Deposit receipt is separately required.
+  date.setUTCDate(date.getUTCDate() + 21);
   return date.toISOString().slice(0, 10);
 }
 export function validateSchool(input: unknown) {

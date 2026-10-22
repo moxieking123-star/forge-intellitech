@@ -1,4 +1,4 @@
-// Supply approved real destinations here. Empty entries are intentionally not rendered.
+// Supply approved real destinations here. Empty entries are displayed as Coming soon without a link.
 export const socialChannels = [
   { label: "Facebook", url: "" },
   { label: "TikTok", url: "" },

@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-22",
+  "method": "Built-in image_gen, separate unique calls. Outputs visually inspected before Sharp WebP conversion quality 86; originals preserved.",
+  "primary": {
+    "prompt": "Use case: photorealistic-natural. Website hero photograph, wide landscape. Fictional Nigerian primary school pupils in green and cream uniforms seen FROM BEHIND, sitting at classroom computers practising proper touch typing, fingers resting on keyboards, teacher in front demonstrating beneath a giant keyboard diagram banner. Warm daylight, authentic Nigerian school classroom, premium editorial photography, believable anatomy. Children face away from camera. No irrigation, electronics projects, logos or text except a small tasteful caption bottom right reading 'AI-generated illustration'.",
+    "output": "public/images/programmes/elytech-touch-typing-v2.webp",
+    "inspection": "Pupils viewed from behind at keyboards, front teacher and giant keyboard banner, embedded AI caption."
+  },
+  "secondary": {
+    "prompt": "Use case: photorealistic-natural. Website hero photograph, wide landscape. Fictional Nigerian secondary school students in smart cream and forest green school uniforms, working together at laptop computers showing HTML and CSS website code and a website preview, discussing a product-production planning chart on a classroom board with simple stages research, design, build, test. Authentic Nigerian school, teacher guiding, warm natural daylight, thoughtful collaborative atmosphere, editorial photographic quality, credible anatomy. No plants, irrigation, electronics, robotics or breadboards. Include only a small tasteful bottom-right caption 'AI-generated illustration'.",
+    "output": "public/images/programmes/techup-web-product-studio-v2.webp",
+    "inspection": "Nigerian uniformed students with teacher, HTML editor and website preview, product-production plan, embedded AI caption; no irrigation/electronics."
+  }
+}

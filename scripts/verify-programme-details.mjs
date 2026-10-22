@@ -17,7 +17,7 @@ for(const programme of ['techup','elytech']){
  b(['click',`button[aria-controls="${programme}-activity-panel"]:nth-child(2)`]);
  assert(ev(`JSON.stringify(document.querySelector('#${programme}-activity-panel').innerText.includes('${programme==='techup'?'Make a first version.':'Try a different step.'}'))`));
  b(['click',`button[aria-controls="${programme}-activity-panel"]:nth-child(3)`]);
- assert(ev(`JSON.stringify(document.querySelector('#${programme}-activity-panel svg').getAttribute('aria-label').includes('${programme==='techup'?'improved':'destination'}'))`));
+ assert(ev(`JSON.stringify(document.querySelector('#${programme}-activity-panel svg').getAttribute('aria-label').includes('${programme==='techup'?'improved':'creation'}'))`));
  for(let index=1;index<=4;index++){
   b(['click',`button[aria-controls="${programme}-support-panel"]:nth-child(${index})`]);
   assert(ev(`JSON.stringify(document.querySelectorAll('button[aria-controls="${programme}-support-panel"][aria-pressed=true]').length===1)`));

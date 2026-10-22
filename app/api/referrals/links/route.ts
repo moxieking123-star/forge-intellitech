@@ -34,6 +34,10 @@ export async function POST(request: Request) {
     const account = await ensureReferrer(service, user.id);
     if (account.status !== "active")
       return response({ error: "This referral account is closed." }, 403);
+    const payout = await service.from("referrer_payout_profiles").select("referrer_id").eq("referrer_id", user.id).maybeSingle();
+    if (payout.error) throw payout.error;
+    if (!payout.data)
+      return response({ error: "Register your payment details before creating a school referral." }, 409);
     const { data, error } = await service.rpc("create_school_referral", {
       p_referrer_id: user.id,
       p_school_name: body.schoolName.trim(),

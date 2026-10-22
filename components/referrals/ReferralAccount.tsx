@@ -11,6 +11,7 @@ import {
 import type { User } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase";
 import s from "./Referrals.module.css";
+import ReferralAgreement, { PayoutProfile } from "./ReferralAgreement";
 
 type ReferralLink = {
   id: string;
@@ -374,6 +375,7 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
               confirmed earnings.
             </p>
           )}
+          <PayoutProfile />
           <h3>Your school introductions</h3>
           {data.links.length === 0 ? (
             <p>
@@ -428,7 +430,7 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
                           </Link>
                         </p>
                       </td>
-                      <td>{stages[link.stage] ?? "Awaiting confirmation"}</td>
+                      <td>{stages[link.stage] ?? "Awaiting confirmation"}<ReferralAgreement referralId={link.id} schoolName={link.schoolName} /></td>
                       <td>
                         {link.earnedKobo === null
                           ? "Pending cost review"

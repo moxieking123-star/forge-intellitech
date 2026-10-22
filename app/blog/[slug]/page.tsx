@@ -47,11 +47,11 @@ export default async function StoryPage({ params }: Props) {
           </p>
           <h1 className={s.title}>{story.title}</h1>
           <p className={s.intro}>{story.excerpt}</p>
-          <p className={s.byline}>Forge editorial · Perspective</p>
+          <p className={s.byline}>{story.byline ?? "Forge editorial · Perspective"}</p>
         </header>
         <figure className={`${s.wrap} ${s.editorialFigure} ${s.articleImage}`}>
           <Image src={story.image.src} alt={story.image.alt} width={1440} height={960} priority sizes="(max-width: 1230px) 100vw, 1180px" />
-          <figcaption>AI-generated illustration · An editorial interpretation, not a record of a Forge programme.</figcaption>
+          <figcaption>{story.imageCaption ?? "An editorial interpretation, not a record of a Forge programme."}</figcaption>
         </figure>
         <div className={`${s.wrap} ${s.articleGrid}`}>
           <aside className={s.aside} aria-label="In this essay">

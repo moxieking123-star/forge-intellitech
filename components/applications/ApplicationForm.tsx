@@ -7,10 +7,10 @@ import { Field, Journey, journeys } from "./journeys";
 import styles from "./Applications.module.css";
 
 const journeyImages: Record<Journey, { file: string; alt: string; caption: string }> = {
-  donor: { file: "donor", alt: "A laptop and its care accessories arranged on a desk.", caption: "AI-generated editorial illustration of device care." },
+  donor: { file: "donor", alt: "A laptop and its care accessories arranged on a desk.", caption: "Editorial illustration of device care." },
   student: { file: "student", alt: "A fictional Nigerian secondary school student learning with a laptop.", caption: "AI-generated scene with a fictional student; not a programme participant." },
-  school: { file: "school-enquiry", alt: "Notebooks and practical project tools on a classroom table.", caption: "AI-generated editorial illustration of practical learning." },
-  talent: { file: "talent", alt: "Creative prototypes, textile swatches and a sketchbook on a worktable.", caption: "AI-generated editorial illustration of creative practice." },
+  school: { file: "school-enquiry", alt: "Notebooks and practical project tools on a classroom table.", caption: "Editorial illustration of practical learning." },
+  talent: { file: "talent", alt: "Creative prototypes, textile swatches and a sketchbook on a worktable.", caption: "Editorial illustration of creative practice." },
 };
 
 const consent: Field = {

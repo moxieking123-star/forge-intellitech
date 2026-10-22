@@ -11,11 +11,11 @@ All routes below are implemented on the redesign branch. This is frontend availa
 | Movement pathways | `/endless-possibilities/launchpad`, `/endless-possibilities/in-school-launchpad`, `/endless-possibilities/intern-with-forge`, `/endless-possibilities/public-school-seminars` |
 | Give a Child a Laptop | `/endless-possibilities/give-a-child-a-laptop`, its `/donate` and `/request-support` pages |
 | Join and referrals | `/join`, `/join/apply`, `/earn-with-forge`, `/earn-with-forge/onboard` |
-| Stories and archive | `/blog`, five editorial story pages and `/gallery` |
+| Stories and archive | `/blog`, six editorial story pages and `/gallery` |
 | Policies | `/privacy`, `/terms` |
 
-31 canonical public pages. Old programme, careers, product and LaunchPad links retain redirects into the relevant new journeys. NDECA is a homepage section; product marks open status dialogs as requested.
+32 canonical public pages. Old programme, careers, product and LaunchPad links retain redirects into the relevant new journeys. NDECA is a homepage section; product marks open status dialogs as requested.
 
 ## Remaining release dependencies
 
-Real account and school submissions stay disabled until the isolated backend integration and secure credentials are ready. Email destinations are implemented; Zoho delivery still needs configuration/testing. Financial automation and automatic account deletion are not active. Commercial proposal approval, YouTube IDs and social URLs are still required. Product-specific logo animation is a separate remaining motion task. All live deployment remains subject to the founder’s final approval.
+Real account and school submissions stay disabled until the isolated backend integration and secure credentials are ready. Email destinations are implemented; Zoho delivery still needs configuration/testing. Financial automation and automatic account deletion are not active. The commercial proposal is drafted; private storage and email activation/testing, YouTube IDs and social URLs are still required. Product-specific logo animation is a separate remaining motion task. All live deployment remains subject to the founder’s final approval.

@@ -1,6 +1,7 @@
 import "server-only";
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
+import { sameOrigin } from "@/lib/request-origin";
 export function response(body: unknown, status = 200) {
   return NextResponse.json(body, {
     status,
@@ -16,8 +17,7 @@ export function referralService() {
   });
 }
 export function validOrigin(request: Request) {
-  const origin = request.headers.get("origin");
-  return !!origin && origin === new URL(request.url).origin;
+  return sameOrigin(request);
 }
 export async function verifiedUser(
   request: Request,

@@ -77,8 +77,8 @@ export const initiatives: Initiative[] = [
       "Sometimes the next useful business starts with a student noticing a problem everyone else has learned to live with. In-school LaunchPad creates a way to take that observation seriously, test the idea and begin building an enterprise alongside the student.",
     image: "/images/editorial/student-enterprise.webp",
     imageAlt:
-      "AI illustration of an early irrigation prototype and market research sketches",
-    caption: "AI illustration · a possible idea, not a real student project.",
+      "Illustration of an early irrigation prototype and market research sketches",
+    caption: "A possible idea, not a real student project.",
     sections: [
       {
         title: "Notice what is already there.",
@@ -111,9 +111,9 @@ export const initiatives: Initiative[] = [
       "What happens to a young person's potential between finishing secondary school and finding their next opportunity? Intern with Forge creates a practical bridge: learn through work, earn an income and receive support towards continuing education.",
     image: "/images/editorial/internship-mentorship.webp",
     imageAlt:
-      "AI illustration of a Nigerian young adult and mentor working on a technology project",
+      "Illustration of a Nigerian young adult and mentor working on a technology project",
     caption:
-      "AI illustration of Nigerian adults at work; not Forge staff or a real intern.",
+      "Illustration of Nigerian adults at work; not Forge staff or a real intern.",
     sections: [
       {
         title: "Learn through doing useful work.",

@@ -173,8 +173,7 @@
       "width": 390,
       "scroll": 390,
       "sources": [
-        "/images/editorial/nigerian-student-tech-class.webp",
-        "/images/editorial/chisanbop-class.webp"
+        "/images/editorial/nigerian-student-tech-class.webp"
       ],
       "bad": []
     },
@@ -183,8 +182,7 @@
       "width": 1440,
       "scroll": 1440,
       "sources": [
-        "/images/editorial/nigerian-student-tech-class.webp",
-        "/images/editorial/chisanbop-class.webp"
+        "/images/editorial/nigerian-student-tech-class.webp"
       ],
       "bad": []
     },
@@ -193,7 +191,7 @@
       "width": 390,
       "scroll": 390,
       "sources": [
-        "/images/programmes/techup-project-studio.webp"
+        "/images/programmes/techup-web-product-studio-v2.webp"
       ],
       "bad": []
     },
@@ -202,7 +200,7 @@
       "width": 1440,
       "scroll": 1440,
       "sources": [
-        "/images/programmes/techup-project-studio.webp"
+        "/images/programmes/techup-web-product-studio-v2.webp"
       ],
       "bad": []
     },
@@ -211,7 +209,7 @@
       "width": 390,
       "scroll": 390,
       "sources": [
-        "/images/programmes/elytech-discovery-studio.webp"
+        "/images/programmes/elytech-touch-typing-v2.webp"
       ],
       "bad": []
     },
@@ -220,7 +218,7 @@
       "width": 1440,
       "scroll": 1440,
       "sources": [
-        "/images/programmes/elytech-discovery-studio.webp"
+        "/images/programmes/elytech-touch-typing-v2.webp"
       ],
       "bad": []
     },
@@ -477,6 +475,24 @@
       "scroll": 1440,
       "sources": [
         "/images/editorial/stories/journal-index.webp"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/blog/why-cant-we-build-what-we-imagine",
+      "width": 390,
+      "scroll": 390,
+      "sources": [
+        "/images/editorial/stories/imagined-library-workshop.png"
+      ],
+      "bad": []
+    },
+    {
+      "route": "/blog/why-cant-we-build-what-we-imagine",
+      "width": 1440,
+      "scroll": 1440,
+      "sources": [
+        "/images/editorial/stories/imagined-library-workshop.png"
       ],
       "bad": []
     },

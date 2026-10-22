@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import SchoolResources from "../../../components/programmes/SchoolResources";
+import ProposalRequestForm from "../../../components/programmes/ProposalRequestForm";
 import styles from "../../../components/programmes/SchoolResources.module.css";
 export const metadata: Metadata = {
   title: "Parent communication resources | Forge school programmes",
@@ -30,10 +31,11 @@ export default function ResourcesPage() {
         </div>
         <figure className={styles.resourceHeroFigure}>
           <div><Image src="/images/editorial/school-resource-kit.webp" alt="Cream stationery, a forest-green folder and an orange pencil arranged as a school communication kit" fill priority sizes="(max-width: 700px) 100vw, 43vw" /></div>
-          <figcaption>AI-generated still life · a clear beginning for the conversation</figcaption>
+          <figcaption>A clear beginning for the conversation</figcaption>
         </figure>
       </header>
       <SchoolResources />
+      <ProposalRequestForm />
       <section className={styles.overview}>
         <div>
           <p className={styles.eyebrow}>A useful starting point</p>
@@ -50,8 +52,8 @@ export default function ResourcesPage() {
         <div>
           <h3>Ready to discuss your school?</h3>
           <p>
-            Request a commercial proposal through school onboarding. Forge will
-            discuss your context and share the proposal privately.
+            Read the proposal with your team, then tell us about your school.
+            We’ll work through the practical details together.
           </p>
           <Link href="/programmes/onboard">Start school onboarding →</Link>
         </div>

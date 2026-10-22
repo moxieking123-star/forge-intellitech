@@ -18,7 +18,7 @@ export default function Page() {
       <EditorialVisual
         src="/images/editorial/terms-shared-ground.webp"
         alt="Illustrative crafted wooden shapes fitting together beside blank paper"
-        caption="AI-generated illustration · clarity and shared understanding."
+        caption="Clarity and shared understanding."
       />
       <article className={s.legal}>
         <h2>Information and enquiries</h2>

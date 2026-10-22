@@ -28,7 +28,7 @@ export default function Page() {
       <EditorialVisual
         src="/images/editorial/contact-conversation.webp"
         alt="Illustrative sculptural forms connected by an open paper bridge"
-        caption="AI-generated illustration · a place to begin a conversation."
+        caption="A place to begin a conversation."
       />
       <section className={s.split}>
         <div>

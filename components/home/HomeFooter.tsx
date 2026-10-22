@@ -1,7 +1,7 @@
 import Link from "next/link";
 import StudentImageNotice from "../StudentImageNotice";
 import CookieSettings from "../CookieSettings";
-import { socialChannels } from "@/lib/public-channels";
+import SocialIcons from "./SocialIcons";
 import Image from "next/image";
 import styles from "./Home.module.css";
 
@@ -31,22 +31,7 @@ export default function HomeFooter() {
           <Link href="/terms">Terms</Link>
           <CookieSettings />
         </nav>
-        {socialChannels.some((channel) => channel.url) && (
-          <nav aria-label="Forge social media">
-            {socialChannels
-              .filter((channel) => /^https:\/\//.test(channel.url))
-              .map((channel) => (
-                <a
-                  key={channel.label}
-                  href={channel.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {channel.label} ↗
-                </a>
-              ))}
-          </nav>
-        )}
+        <SocialIcons />
         <div className={styles.footerIdentity}>
           <p>Forge Intellitech Services Ltd.</p>
           <span>Building technology. People. Possibilities.</span>

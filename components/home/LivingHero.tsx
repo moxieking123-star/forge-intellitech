@@ -34,7 +34,7 @@ export default function LivingHero() {
         <button onClick={()=>{setScene(value=>value==='possibility'?'today':'possibility');setPaused(true);}}>{scene==='possibility'?'See today':'See the possibility'}</button>
         {scene!=='auto' && <button onClick={()=>{setScene('auto');setPaused(false);}}>Let it unfold</button>}
       </div>
-      <p className={styles.disclosure}>AI-created scenes of a Nigerian neighbourhood and an imagined future. A vision to work towards.</p>
+      <p className={styles.disclosure}>An imagined Nigerian neighbourhood and future. A vision to work towards.</p>
     </div>
   </section>;
 }
