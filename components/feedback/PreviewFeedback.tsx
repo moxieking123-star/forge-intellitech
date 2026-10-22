@@ -23,7 +23,7 @@ export default function PreviewFeedback() {
     let closest = "Whole page", distance = Infinity;
     for (const h of headings) {
       if (!h.getClientRects().length) continue;
-      const label = (h.textContent || "").replace(/\s+/g, " ").trim().slice(0, 160);
+      const label = (h.innerText || "").replace(/\s+/g, " ").trim().slice(0, 160);
       if (!label || seen.has(label)) continue;
       seen.add(label); found.push({ value: label, label });
       const block = h.closest("section") || h.parentElement;
