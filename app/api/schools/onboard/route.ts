@@ -1,6 +1,8 @@
 import { resend, FROM_EMAIL } from "@/lib/resend";
 import { notificationMailboxes } from "@/lib/notification-routing";
 import { schoolKey, validateSchool } from "@/lib/referrals/policy";
+import { schoolBackend, schoolBackendEnabled } from "@/lib/server/school-backend";
+import { boundedBody } from "@/lib/referrals/agreement";
 import {
   ensureReferrer,
   referralService,
@@ -11,12 +13,16 @@ import {
 export async function POST(request: Request) {
   if (!validOrigin(request))
     return response({ error: "Invalid request origin." }, 403);
-  const input = validateSchool(await request.json().catch(() => null));
+  let body: unknown;
+  try {body=JSON.parse(new TextDecoder().decode(await boundedBody(request,16384)));}
+  catch {return response({error:"Please shorten the request and try again."},400);}
+  const input = validateSchool(body);
   if (!input)
     return response(
       { error: "Please check the required school details and permissions." },
       400,
     );
+  if(schoolBackendEnabled())return schoolBackend("submit",input,request.headers.get("authorization"));
   const service = referralService();
   if (!service)
     return response(

@@ -1,0 +1,16 @@
+{
+  "phase": "school-backend-foundation",
+  "project": "forge-web",
+  "schema": "forge_redesign_test",
+  "staffAllowlist": "admin@forgeintellitech.com",
+  "nodeTests": {"passed": 23,"failed": 0},
+  "webpackBuild": "passed",
+  "sqlTransactionChecks": ["anonymous and ordinary authenticated access denied","self-intake and durable notification in same transaction","duplicate school denied","unlisted staff denied","allowlisted staff review","audit reason recorded","stale-version conflict","assisted intake attributed through same school queue"],
+  "realEdgeChecks": ["unauthenticated staff denied","forged JWT denied","invalid school rejected","concurrent duplicate prevention","pending mail job persisted","direct anonymous staff RPC denied"],
+  "browserChecks": ["signed-out admin hides queue","SMTP gate disables unconfigured sign-in","320 390 768 1440 layouts","school form through Next and edge to database","saved reference displayed","pending email displayed","unauthenticated staff Next API denied"],
+  "realEmailsSent": 0,
+  "realPayments": 0,
+  "sharedTesterPreviewChanged": false,
+  "productionDeploymentChanged": false,
+  "pending": ["owner-supervised SMTP/auth redirect and staff login test","outbox delivery worker","referral auth agreements statements and earnings workflow","movement and participation intake","final launch review","remove Our work only after backend completion"]
+}

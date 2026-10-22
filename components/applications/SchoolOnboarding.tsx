@@ -104,6 +104,8 @@ export default function SchoolOnboarding({
   const [sending, setSending] = useState(false);
   const [failure, setFailure] = useState("");
   const [saved, setSaved] = useState(false);
+  const [requestReference, setRequestReference] = useState("");
+  const [notificationPending, setNotificationPending] = useState(false);
   const title = useRef<HTMLHeadingElement>(null);
   const shouldFocus = useRef(false);
   const inFlight = useRef(false);
@@ -206,6 +208,7 @@ export default function SchoolOnboarding({
     inFlight.current = true;
     setSending(true);
     setFailure("");
+    let failureMessage = "";
     try {
       const headers: Record<string, string> = {
         "Content-Type": "application/json",
@@ -239,6 +242,7 @@ export default function SchoolOnboarding({
       const response = await fetch("/api/schools/onboard", {
         method: "POST",
         headers,
+        signal: AbortSignal.timeout(15000),
         body: JSON.stringify({
           ...clean,
           learnerCount: Number(answers.learnerCount),
@@ -247,12 +251,18 @@ export default function SchoolOnboarding({
           ...(assisted ? { assisted: true, schoolAuthorised: true } : {}),
         }),
       });
-      if (response.status !== 201) throw new Error("Not saved");
+      const result = await response.json().catch(() => null);
+      if (response.status !== 201 || !result?.success || !result.id) {
+        failureMessage = typeof result?.error === "string" ? result.error : "";
+        throw new Error("Not saved");
+      }
+      setRequestReference(result.id);
+      setNotificationPending(result.notification !== "sent");
       shouldFocus.current = true;
       setSaved(true);
     } catch {
       setFailure(
-        "We could not confirm that your request was saved. Your answers are still here. Please try again, or contact Forge before submitting another request if you are unsure whether it reached us.",
+        failureMessage || "We could not confirm that your request was saved. Your answers are still here. Please try again, or contact Forge before submitting another request if you are unsure whether it reached us.",
       );
     } finally {
       inFlight.current = false;
@@ -430,6 +440,8 @@ export default function SchoolOnboarding({
                 begin. This confirmation does not activate a service or confirm
                 acceptance.
               </p>
+              <p>Request reference: <strong>{requestReference}</strong></p>
+              {notificationPending && <p>Your request is safely in our review queue. Email notification is pending; this screen confirms that the request itself has been saved.</p>}
               {referralCode && (
                 <p>
                   Your referral reference was included for review. Attribution
