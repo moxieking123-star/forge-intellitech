@@ -23,6 +23,8 @@ Uploaded PDFs cannot overwrite prior signed copies. Storage failure compensation
 
 Synthetic accounts, sessions, rows and objects are cleaned separately using the scoped fixture cleanup SQL and Storage API. No real customer, child or bank records were used. No emails were intentionally sent to real recipients and no payments were made.
 
+Cleanup outcome: both synthetic PDF objects were removed through Storage API and zero objects remain. The connector returned `Invalid or expired requestState` for full fixture-row/account deletion, so the two synthetic referral accounts were closed instead; the saved scoped cleanup SQL remains available for retry. These are fictional `.invalid` accounts, not customer records. The temporary nonce-gated fixture storage-cleanup handler was removed by restoring the normal edge function (version 4).
+
 ## Tester feedback location
 
 Owner-only Supabase Table Editor: schema `forge_redesign_test`, table `preview_feedback`. The current website admin page covers school review, not feedback. Add a private feedback view with page/section/reaction/visitor filters and CSV export next; never expose comments through a public report endpoint.
