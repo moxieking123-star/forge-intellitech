@@ -6,6 +6,6 @@
 - Supabase invitation created Auth account admin@forgeintellitech.com. Auth account visible in Users list.
 - Local server started on port 3009 with preview-only school backend and STAFF_EMAIL_LOGIN_ENABLED=true. Config endpoint confirmed enabled; only publishable key exposed.
 - Requested fresh passwordless sign-in from local feedback dashboard. Supabase accepted the request without error. User must open the latest sign-in email on this computer (not the earlier invitation, whose default redirect uses port 3000), or enter its code locally if supplied.
-- Inbox receipt, completed sign-in and real administrator feedback read remain awaiting user interaction. Do not describe end-to-end login as verified yet.
+- Follow-through: owner received the email and signed in by one-time link. In the accessible in-app browser, real admin@forgeintellitech.com session successfully loaded 4 actual feedback responses on 23 October. The private staff backend accepted the verified identity. See feedback-dashboard-results.md for real-data filter checks.
 - No Vercel deployment, production promotion, shared URL/protection changes, Zoho DNS/inbox changes or Git push.
 - Local flag exists only in the running server process. Restart with the same preview-only configuration if needed; SMTP credentials remain in Supabase.
