@@ -8,8 +8,8 @@ import {
   useState,
   type FormEvent,
 } from "react";
-import type { User } from "@supabase/supabase-js";
-import { supabase } from "@/lib/supabase";
+import type { User, SupabaseClient } from "@supabase/supabase-js";
+import { referralAuth } from "@/lib/referrals/client";
 import s from "./Referrals.module.css";
 import ReferralAgreement, { PayoutProfile } from "./ReferralAgreement";
 
@@ -56,6 +56,10 @@ const date = (value: string | null) => {
 };
 
 export default function ReferralAccount({ enabled }: { enabled: boolean }) {
+  const [supabase,setSupabase]=useState<SupabaseClient|null>(null);
+  const [connectionReady,setConnectionReady]=useState(false);
+  const [connectionAttempt,setConnectionAttempt]=useState(0);
+  const [emailLoginEnabled,setEmailLoginEnabled]=useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [authReady, setAuthReady] = useState(false);
   const [authError, setAuthError] = useState("");
@@ -74,6 +78,12 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
   const [origin, setOrigin] = useState("");
   const activeUserId = useRef<string | null>(null);
   activeUserId.current = user?.id ?? null;
+  useEffect(()=>{
+    if(!enabled)return;
+    let active=true;setConnectionReady(false);
+    referralAuth().then(config=>{if(active){setSupabase(config.client);setEmailLoginEnabled(config.emailLoginEnabled);}}).catch(()=>{if(active)setAuthError("Secure account access could not be connected. Please try again.");}).finally(()=>{if(active)setConnectionReady(true);});
+    return()=>{active=false;};
+  },[enabled,connectionAttempt]);
 
   const checkAuth = useCallback(async () => {
     if (!supabase) return;
@@ -89,7 +99,7 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
     } finally {
       setAuthReady(true);
     }
-  }, []);
+  }, [supabase]);
 
   useEffect(() => {
     setOrigin(window.location.origin);
@@ -104,7 +114,7 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
       },
     );
     return () => listener.subscription.unsubscribe();
-  }, [enabled, checkAuth]);
+  }, [enabled, checkAuth, supabase]);
 
   const loadAccount = useCallback(async () => {
     if (!supabase || !user) return;
@@ -134,7 +144,7 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
     } finally {
       if (activeUserId.current === requestedUserId) setLoading(false);
     }
-  }, [user]);
+  }, [user,supabase]);
 
   useEffect(() => {
     if (user) void loadAccount();
@@ -143,7 +153,7 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
 
   async function sendLink(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!supabase || !consent || signingIn) return;
+    if (!supabase || !emailLoginEnabled || !consent || signingIn) return;
     setSigningIn(true);
     setAuthError("");
     setEmailSent(false);
@@ -167,7 +177,8 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
 
   async function signOut() {
     if (!supabase) return;
-    const { error } = await supabase.auth.signOut();
+    activeUserId.current=null;setUser(null);setData(null);
+    const { error } = await supabase.auth.signOut({scope:"local"});
     if (error)
       setAuthError("Sign-out could not be completed. Please try again.");
     else {
@@ -220,6 +231,7 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
     }
   }
 
+  if(enabled&&!connectionReady)return <div className={s.panel} role="status">Connecting secure referral access…</div>;
   if (!enabled || !supabase)
     return (
       <div className={s.panel}>
@@ -233,6 +245,7 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
         <Link className={s.textLink} href="/contact?interest=referral">
           Talk to Forge about a referral →
         </Link>
+        {enabled&&<button className={s.quietButton} onClick={()=>setConnectionAttempt(n=>n+1)}>Retry account connection</button>}
       </div>
     );
   if (!authReady)
@@ -249,6 +262,7 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
           Use the same email each time. We’ll send a secure sign-in link; you do
           not need to create a password.
         </p>
+        {!emailLoginEnabled&&<p className={s.notice}>Email sign-in is awaiting secure mail configuration. Registration emails are not being sent yet.</p>}
         <form className={s.form} onSubmit={sendLink}>
           <label className={s.field}>
             Your email address
@@ -278,7 +292,7 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
             </span>
           </label>
           <div>
-            <button className={s.button} disabled={signingIn}>
+            <button className={s.button} disabled={signingIn||!emailLoginEnabled}>
               {signingIn
                 ? "Sending your link…"
                 : "Email me a secure sign-in link"}

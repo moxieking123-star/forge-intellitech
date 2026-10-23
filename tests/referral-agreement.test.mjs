@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { validatePayoutProfile, maskAccountNumber, validateSignedPdf, fifthWorkingDay, boundedBody } from "../lib/referrals/agreement.ts";
+import { validatePayoutProfile, maskAccountNumber, validateSignedPdf, fifthWorkingDay, boundedBody, MAX_SIGNED_PDF_BYTES } from "../lib/referrals/agreement.ts";
 test("payment profile rejects non-Nigerian-length and nonnumeric accounts",()=>{
  const valid={bankName:"Example Bank",accountName:"Example Referrer",accountNumber:"0123456789"};
  assert.deepEqual(validatePayoutProfile(valid),{bank_name:"Example Bank",account_name:"Example Referrer",account_number:"0123456789"});
@@ -16,6 +16,13 @@ test("plain PDF header, EOF, size and known active-content rejection",()=>{
 });
 test("five working days skips weekends and reviewed public holidays",()=>{
  assert.equal(fifthWorkingDay("2026-10-23",["2026-10-26"],"2026-11-02"),"2026-11-02");
+});
+test("signed PDF limit fits a multipart Vercel request",()=>{
+ assert.equal(MAX_SIGNED_PDF_BYTES,3*1024*1024);
+ const prefix='%PDF-1.7\n',suffix='\n%%EOF';
+ const content=prefix+' '.repeat(MAX_SIGNED_PDF_BYTES-prefix.length-suffix.length)+suffix;
+ assert(validateSignedPdf(new TextEncoder().encode(content)));
+ assert.equal(validateSignedPdf(new TextEncoder().encode(content+' ')),false);
 });
 test("downloaded agreement font streams pass while escaped action names remain rejected",()=>{
  assert(validateSignedPdf(readFileSync(new URL('../public/downloads/forge-referral-agreement-draft.pdf',import.meta.url))));

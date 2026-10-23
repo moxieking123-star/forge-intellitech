@@ -1,7 +1,9 @@
 import { referralAccess } from "@/lib/referrals/access";
+import {referralBackendEnabled,referralBackendFetch} from "@/lib/server/referral-backend";
 import { boundedBody, maskAccountNumber, validatePayoutProfile } from "@/lib/referrals/agreement";
 import { response, validOrigin } from "@/lib/server/referrals";
 export async function GET(request: Request) {
+  if(referralBackendEnabled())return referralBackendFetch(request,"profile");
   try {
     const access = await referralAccess(request); if (access.error) return access.error;
     const {data,error} = await access.service.from("referrer_payout_profiles").select("bank_name,account_name,account_number").eq("referrer_id",access.user.id).maybeSingle();
@@ -11,6 +13,9 @@ export async function GET(request: Request) {
 }
 export async function POST(request: Request) {
   if(!validOrigin(request)) return response({error:"Invalid origin."},403);
+  if(referralBackendEnabled()){
+    try{const input=JSON.parse(new TextDecoder().decode(await boundedBody(request,2048)));if(!validatePayoutProfile(input))return response({error:"Enter valid bank details."},400);return referralBackendFetch(request,"profile_save",input);}catch{return response({error:"Please check your bank details."},400);}
+  }
   if(Number(request.headers.get("content-length"))>2048) return response({error:"Request too large."},413);
   try {
     const access = await referralAccess(request); if(access.error) return access.error;

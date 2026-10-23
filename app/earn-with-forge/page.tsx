@@ -2,6 +2,7 @@ import EditorialVisual from "@/components/site/EditorialVisual";
 import type { Metadata } from "next";
 import Link from "next/link";
 import ReferralAccount from "@/components/referrals/ReferralAccount";
+import {referralBackendEnabled} from "@/lib/server/referral-backend";
 import s from "@/components/referrals/Referrals.module.css";
 
 export const metadata: Metadata = {
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default function EarnWithForgePage() {
-  const enabled = process.env.REFERRALS_ENABLED === "true";
+  const enabled = referralBackendEnabled() || process.env.REFERRALS_ENABLED === "true";
   return (
     <div className={s.page} id="home-content">
       <header className={`${s.wrap} ${s.hero}`}>

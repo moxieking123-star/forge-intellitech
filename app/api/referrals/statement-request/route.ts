@@ -1,7 +1,11 @@
 import { referralAccess } from "@/lib/referrals/access";
+import {referralBackendEnabled,referralBackendFetch} from "@/lib/server/referral-backend";
 import { boundedBody, referralIdPattern } from "@/lib/referrals/agreement";
 import { response, validOrigin } from "@/lib/server/referrals";
 export async function GET(request:Request) {
+  if(referralBackendEnabled()){
+    const id=new URL(request.url).searchParams.get("referralId");if(!id||!referralIdPattern.test(id))return response({error:"Invalid referral."},400);return referralBackendFetch(request,"statement",{referralId:id});
+  }
   try {
     const access=await referralAccess(request); if(access.error) return access.error;
     const id=new URL(request.url).searchParams.get("referralId");
@@ -13,6 +17,9 @@ export async function GET(request:Request) {
 }
 export async function POST(request:Request) {
   if(!validOrigin(request)) return response({error:"Invalid origin."},403);
+  if(referralBackendEnabled()){
+    try{const input=JSON.parse(new TextDecoder().decode(await boundedBody(request,1024)));if(!referralIdPattern.test(input.referralId||""))return response({error:"Invalid referral."},400);return referralBackendFetch(request,"statement_request",{referralId:input.referralId});}catch{return response({error:"Invalid referral."},400);}
+  }
   try {
     const access=await referralAccess(request);if(access.error) return access.error;
     const body=JSON.parse(new TextDecoder().decode(await boundedBody(request,1024)));if(typeof body.referralId!=="string" || !referralIdPattern.test(body.referralId)) return response({error:"Invalid referral."},400);

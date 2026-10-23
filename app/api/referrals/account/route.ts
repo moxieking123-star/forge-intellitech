@@ -1,3 +1,4 @@
+import {referralBackendEnabled,referralBackendFetch} from "@/lib/server/referral-backend";
 import {
   ensureReferrer,
   publicLink,
@@ -6,6 +7,7 @@ import {
   verifiedUser,
 } from "@/lib/server/referrals";
 export async function GET(request: Request) {
+  if(referralBackendEnabled())return referralBackendFetch(request,"account");
   const service = referralService();
   if (!service)
     return response(

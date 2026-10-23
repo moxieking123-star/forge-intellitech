@@ -29,6 +29,10 @@ begin
  if result->>'conflict' is distinct from 'true' then raise exception 'Lost update accepted'; end if;
  select count(*) into n from forge_redesign_test.school_review_audit where school_review_audit.request_id=fixture_id;
  if n<>1 then raise exception 'Audit count wrong'; end if;
+ if to_regprocedure('public.forge_referral_action(uuid,text,jsonb)') is not null then
+  perform public.forge_referral_action('82020202-0202-4202-8202-020202020202','account','{}');
+  perform public.forge_referral_action('82020202-0202-4202-8202-020202020202','profile_save','{"bank_name":"Fixture Bank","account_name":"Fixture Referrer","account_number":"0123456789"}');
+ end if;
  payload:=payload||'{"schoolKey":"school-foundation-fixture-b","schoolName":"Fictional Foundation School B","assisted":true,"schoolAuthorised":true}'::jsonb;
  result:=public.forge_school_intake(payload,'82020202-0202-4202-8202-020202020202');
  fixture_id:=(result->>'id')::uuid;

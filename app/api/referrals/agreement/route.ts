@@ -1,4 +1,6 @@
 import { readFile } from "node:fs/promises";
+import {referralBackendEnabled} from "@/lib/server/referral-backend";
+import {reviewAgreementGet,reviewAgreementPost} from "@/lib/server/referral-agreement";
 import { createHash, randomUUID } from "node:crypto";
 import path from "node:path";
 import { referralAccess } from "@/lib/referrals/access";
@@ -7,6 +9,7 @@ import { response, validOrigin } from "@/lib/server/referrals";
 const bucket="referral-signed-agreements";
 export const runtime="nodejs";
 export async function GET(request:Request) {
+  if(referralBackendEnabled())return reviewAgreementGet(request);
   try {
     const access=await referralAccess(request); if(access.error) return access.error;
     const id=new URL(request.url).searchParams.get("referralId"); if(!id || !referralIdPattern.test(id)) return response({error:"Invalid referral."},400);
@@ -25,14 +28,15 @@ export async function GET(request:Request) {
   } catch {return response({error:"Agreement service unavailable."},503);}
 }
 export async function POST(request:Request) {
+  if(referralBackendEnabled())return reviewAgreementPost(request);
   if(!validOrigin(request)) return response({error:"Invalid origin."},403);
   if(!request.headers.get("content-type")?.startsWith("multipart/form-data")) return response({error:"PDF form required."},415);
-  if(Number(request.headers.get("content-length"))>MAX_SIGNED_PDF_BYTES+16384) return response({error:"Maximum file size is 5 MB."},413);
+  if(Number(request.headers.get("content-length"))>MAX_SIGNED_PDF_BYTES+16384) return response({error:"Maximum file size is 3 MB."},413);
   try {
     const access=await referralAccess(request); if(access.error) return access.error;
     const body=await boundedBody(request,MAX_SIGNED_PDF_BYTES+16384);
     const form=await new Response(body,{headers:{"Content-Type":request.headers.get("content-type")!}}).formData(), id=form.get("referralId"), version=form.get("version"), file=form.get("file");
-    if(typeof id!=="string" || !referralIdPattern.test(id) || version!==AGREEMENT_VERSION || !(file instanceof File) || file.type!=="application/pdf" || file.size>MAX_SIGNED_PDF_BYTES || form.get("signedDeclaration")!=="true") return response({error:"Provide your signed PDF, version and signing declaration (maximum 5 MB)."},400);
+    if(typeof id!=="string" || !referralIdPattern.test(id) || version!==AGREEMENT_VERSION || !(file instanceof File) || file.type!=="application/pdf" || file.size>MAX_SIGNED_PDF_BYTES || form.get("signedDeclaration")!=="true") return response({error:"Provide your signed PDF, version and signing declaration (maximum 3 MB)."},400);
     const bytes=new Uint8Array(await file.arrayBuffer()); if(!validateSignedPdf(bytes)) return response({error:"This PDF cannot be accepted. Export a plain signed PDF without attachments or active content."},400);
     const objectPath=`${access.user.id}/${id}/${randomUUID()}.pdf`;
     // Reservation locks the referral and enforces ownership, recent versioned download and no prior upload.

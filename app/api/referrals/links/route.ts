@@ -1,4 +1,6 @@
 import { schoolKey } from "@/lib/referrals/policy";
+import {boundedBody} from "@/lib/referrals/agreement";
+import {referralBackendEnabled,referralBackendFetch} from "@/lib/server/referral-backend";
 import {
   ensureReferrer,
   publicLink,
@@ -10,7 +12,8 @@ import {
 export async function POST(request: Request) {
   if (!validOrigin(request))
     return response({ error: "Invalid request origin." }, 403);
-  const body = await request.json().catch(() => null);
+  let body;
+  try{body=JSON.parse(new TextDecoder().decode(await boundedBody(request,4096)));}catch{return response({error:"Please check the school details."},400);}
   if (
     !body ||
     typeof body.schoolName !== "string" ||
@@ -21,6 +24,7 @@ export async function POST(request: Request) {
     body.location.length > 200
   )
     return response({ error: "Enter the school name and city/state." }, 400);
+  if(referralBackendEnabled())return referralBackendFetch(request,"link_create",body);
   const service = referralService();
   if (!service)
     return response(

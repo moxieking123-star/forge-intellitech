@@ -3,7 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { supabase } from "@/lib/supabase";
+import {referralAuth} from "@/lib/referrals/client";
+import type {SupabaseClient} from "@supabase/supabase-js";
 import styles from "./SchoolOnboarding.module.css";
 
 type Answers = {
@@ -92,6 +93,7 @@ export default function SchoolOnboarding({
   assisted?: boolean;
 }) {
   const [answers, setAnswers] = useState<Answers>(initialAnswers);
+  const [supabase,setSupabase]=useState<SupabaseClient|null>(null);
   const [step, setStep] = useState(0);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [consent, setConsent] = useState(false);
@@ -112,14 +114,11 @@ export default function SchoolOnboarding({
 
   useEffect(() => {
     if (!assisted) return;
-    const client = supabase;
-    if (!client) {
-      setAuthState("unavailable");
-      return;
-    }
     let active = true;
-    client.auth
-      .getUser()
+    referralAuth().then(async ({client})=>{
+        if(active)setSupabase(client);
+        return client.auth.getUser();
+      })
       .then(({ data, error }) => {
         if (active) setAuthState(!error && data.user ? "ready" : "signedOut");
       })
