@@ -1,7 +1,7 @@
 export const AGREEMENT_VERSION = "draft-2026-10-22-v1";
 export const MAX_SIGNED_PDF_BYTES = 3 * 1024 * 1024;
 export const referralIdPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-export async function boundedBody(request: Request, maximum: number) {
+export async function boundedBody(request: Pick<Request,'body'>, maximum: number) {
   if (!request.body) throw new Error("Missing body");
   const reader = request.body.getReader(), chunks: Uint8Array[] = [];
   let size = 0;

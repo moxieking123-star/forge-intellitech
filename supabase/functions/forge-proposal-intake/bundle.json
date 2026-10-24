@@ -1,0 +1,8 @@
+{
+  "entrypoint": "index.ts",
+  "verifyJwt": true,
+  "sharedSources": {
+    "school-proposal.ts": "lib/school-proposal.ts",
+    "agreement.ts": "lib/referrals/agreement.ts"
+  }
+}

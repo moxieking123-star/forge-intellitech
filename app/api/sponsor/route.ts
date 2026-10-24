@@ -1,13 +1,15 @@
+import {participationBackendEnabled,submitParticipation} from '@/lib/server/participation';
 import { notificationMailboxes } from "@/lib/notification-routing";
 import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 import { resend, FROM_EMAIL } from "@/lib/resend";
 
 export async function POST(request: NextRequest) {
+  if(participationBackendEnabled())return submitParticipation(request,"sponsor");
   try {
     const body = await request.json();
 
-    console.log("📨 Sponsor inquiry:", body);
+
 
     const { companyName, contactName, email, phone, sponsorshipType, message } =
       body;

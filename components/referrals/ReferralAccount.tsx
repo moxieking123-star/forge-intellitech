@@ -12,6 +12,7 @@ import type { User, SupabaseClient } from "@supabase/supabase-js";
 import { referralAuth } from "@/lib/referrals/client";
 import s from "./Referrals.module.css";
 import ReferralAgreement, { PayoutProfile } from "./ReferralAgreement";
+import ReferralStatements from "./ReferralStatements";
 
 type ReferralLink = {
   id: string;
@@ -390,6 +391,7 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
             </p>
           )}
           <PayoutProfile />
+          <ReferralStatements key={user.id} />
           <h3>Your school introductions</h3>
           {data.links.length === 0 ? (
             <p>

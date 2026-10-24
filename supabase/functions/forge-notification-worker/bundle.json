@@ -1,0 +1,8 @@
+{
+  "entrypoint": "index.ts",
+  "verifyJwt": false,
+  "sharedSources": {
+    "notification-delivery.ts": "lib/notification-delivery.ts",
+    "school-proposal.ts": "lib/school-proposal.ts"
+  }
+}

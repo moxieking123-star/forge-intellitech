@@ -1,0 +1,7 @@
+{
+  "entrypoint": "index.ts",
+  "verifyJwt": true,
+  "sharedSources": {
+    "participation.ts": "lib/participation.ts"
+  }
+}
