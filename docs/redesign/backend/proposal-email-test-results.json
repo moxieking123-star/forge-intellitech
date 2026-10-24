@@ -14,5 +14,6 @@
     "workerSecretReady": true
   },
   "testEndpointRetired": true,
-  "inboxDeliveryConfirmed": false
+  "inboxDeliveryConfirmed": true,
+  "inboxConfirmationSource": "Owner confirmed the email arrived and the attachment worked."
 }

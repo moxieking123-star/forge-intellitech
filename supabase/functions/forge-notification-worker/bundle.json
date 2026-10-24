@@ -3,6 +3,8 @@
   "verifyJwt": false,
   "sharedSources": {
     "notification-delivery.ts": "lib/notification-delivery.ts",
-    "school-proposal.ts": "lib/school-proposal.ts"
+    "school-proposal.ts": "lib/school-proposal.ts",
+    "notification-runner.ts": "lib/notification-runner.ts",
+    "referrals/agreement.ts": "lib/referrals/agreement.ts"
   }
 }
