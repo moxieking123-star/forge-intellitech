@@ -1,6 +1,6 @@
-# Notification delivery setup (activation pending)
+# Notification delivery setup (general activation pending)
 
-No transport credentials were read, no database migration was applied, and no email was sent during implementation. Resend activation remains pending an operator-provided API key and verified sending domain. This sends transactional notifications and requested proposal attachments only.
+Current status, 24 October: the owner saved the secrets directly in Supabase and uploaded the proposal. Private storage and the exact document checksum were verified. One fixed-recipient proposal test to programs@forgeintellitech.com was accepted by Resend with the correct attachment. Inbox receipt still needs owner confirmation. Regular delivery remains disabled and the two existing pending school jobs were untouched. No website deployment or shared-link change occurred.
 
 Apply existing school-foundation.sql, participation.sql, then notification-delivery.sql to the isolated forge_redesign_test schema. Run notification-delivery-tests.sql on an empty proposal queue: the fixture transaction rolls back. Before production use validate concurrent SKIP LOCKED claims in two database sessions and provider acceptance followed by a forced database failure. No live database checks have been performed here.
 
@@ -18,3 +18,12 @@ Rollback: disable EMAIL_DELIVERY_ENABLED first, stop scheduler, retain outbox re
 
 
 24 October verification: isolated SQL and Edge handlers installed; rollback delivery and retry tests passed, fictional real-HTTP intake records removed, worker unauthorized trigger rejected, local production build and private workspace browser tests passed. Email transport itself remains inactive and no provider acceptance or inbox delivery was tested.
+
+
+## Controlled proposal test result
+
+The private forge-school-proposals bucket contains forge-school-proposal-2026-10-22-v1.pdf, 5,784,977 bytes. Its downloaded SHA-256 matched the local source. All configured values passed boolean validation without exposing the Resend key or worker secret.
+
+A dedicated expiring proof, fixed recipient, fixed attachment and stable provider idempotency key authorised one test independently of general queue delivery. Resend accepted it; see proposal-email-test-results.json. No outbox was drained and no general delivery setting was changed. The temporary check function was replaced with a 410-only handler and that retirement was verified. Its local proof files were removed. Do not regenerate a test authorisation to retry an ambiguous result: reconcile the prior provider reference first.
+
+Next: confirm the test and its PDF arrived in programs@forgeintellitech.com. Before general activation review the two old pending school jobs, configure a quota-aware scheduler, and verify provider delivery/bounce handling. EMAIL_DELIVERY_ENABLED remains false. Secrets need no re-entry; leave the existing Auth SMTP settings unchanged.
