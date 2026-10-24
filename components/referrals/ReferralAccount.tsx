@@ -10,6 +10,7 @@ import {
 } from "react";
 import type { User, SupabaseClient } from "@supabase/supabase-js";
 import { referralAuth } from "@/lib/referrals/client";
+import { referralSignInFailure } from "@/lib/referrals/signin";
 import s from "./Referrals.module.css";
 import ReferralAgreement, { PayoutProfile } from "./ReferralAgreement";
 import ReferralStatements from "./ReferralStatements";
@@ -64,6 +65,7 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
   const [user, setUser] = useState<User | null>(null);
   const [authReady, setAuthReady] = useState(false);
   const [authError, setAuthError] = useState("");
+  const [linkError, setLinkError] = useState("");
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
   const [signingIn, setSigningIn] = useState(false);
@@ -81,6 +83,8 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
   activeUserId.current = user?.id ?? null;
   useEffect(()=>{
     if(!enabled)return;
+    const failure=referralSignInFailure(window.location.href);
+    if(failure){setLinkError(failure.message);window.history.replaceState(window.history.state,"",failure.cleanUrl);}
     let active=true;setConnectionReady(false);
     referralAuth().then(config=>{if(active){setSupabase(config.client);setEmailLoginEnabled(config.emailLoginEnabled);}}).catch(()=>{if(active)setAuthError("Secure account access could not be connected. Please try again.");}).finally(()=>{if(active)setConnectionReady(true);});
     return()=>{active=false;};
@@ -158,6 +162,7 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
     setSigningIn(true);
     setAuthError("");
     setEmailSent(false);
+    setLinkError("");
     try {
       const { error } = await supabase.auth.signInWithOtp({
         email: email.trim(),
@@ -264,6 +269,7 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
           not need to create a password.
         </p>
         {!emailLoginEnabled&&<p className={s.notice}>Email sign-in is awaiting secure mail configuration. Registration emails are not being sent yet.</p>}
+        {linkError&&<p className={s.error} role="alert">{linkError}</p>}
         <form className={s.form} onSubmit={sendLink}>
           <label className={s.field}>
             Your email address
