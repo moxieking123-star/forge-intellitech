@@ -33,5 +33,7 @@ Production Auth URLs, environment activation and legacy-table permission cutover
 
 ## Continuation verification
 
+The owner subsequently confirmed `EMAIL_DELIVERY_ENABLED=true`. This is an owner-reported setting; it has not yet been independently read or exercised. A further connector attempt still returned unavailable. Do not request the setting again. `supervised-email-status.sql` provides a read-only owner-run fallback without secret values or any send/activation mutation. The new recruitment/training requirements are saved in `../recruitment-training-backlog.md` and explicitly excluded from the launch dependency.
+
 All 72 Node tests passed again; the controlled proposal integration script passes its syntax check and the branch diff passes whitespace validation. No second proposal request was created. The Supabase connector returned unavailable during this continuation, so the saved queued test, current delivery switch, provider result and scheduler state could not be freshly inspected. Last verified recurring scheduler state remains paused; no activation or delivery is claimed. Await connector access and confirmation of the delivery switch before supervised dispatch.
 
