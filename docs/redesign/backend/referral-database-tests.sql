@@ -12,6 +12,11 @@ begin
  req:=forge_redesign_test.submit_school_onboarding(jsonb_build_object('schoolKey','school-one','schoolName','Test School One','location','Test State','consent',true,'referralCode',l.code),null);
  if not exists(select 1 from forge_redesign_test.school_onboarding_requests where id=req and referral_id=l.id and submitted_by_referrer is null) then raise exception 'Self-onboarding attribution failed'; end if;
  insert into forge_test_results values('School link feeds the central onboarding queue',true);
+ blocked:=false;begin perform forge_redesign_test.submit_school_onboarding(jsonb_build_object('schoolKey','no-payment-profile','schoolName','No Payment Profile','location','Test','consent',true,'schoolAuthorised',true),a);exception when raise_exception then blocked:=true;end;
+ if not blocked then raise exception 'Assisted onboarding without payout profile accepted';end if;
+ if exists(select 1 from forge_redesign_test.school_onboarding_requests where school_key='no-payment-profile') then raise exception 'Rejected onboarding left a school request';end if;
+ insert into forge_test_results values('Assisted onboarding requires payment details and rejection leaves no school request',true);
+ perform public.forge_referral_action(a,'profile_save','{"bank_name":"Fictional Test Bank","account_name":"Synthetic Referrer","account_number":"0123456789"}');
  blocked:=false;begin perform forge_redesign_test.submit_school_onboarding(jsonb_build_object('schoolKey','school-one','schoolName','Test School One','location','Test State','consent',true,'referralCode',l.code),null);exception when raise_exception then blocked:=true;end;
  if not blocked then raise exception 'Consumed referral reused';end if;
  insert into forge_test_results values('Consumed school link cannot be reused',true);

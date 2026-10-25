@@ -10,7 +10,7 @@ import {
 } from "react";
 import type { User, SupabaseClient } from "@supabase/supabase-js";
 import { referralAuth } from "@/lib/referrals/client";
-import { referralSignInFailure } from "@/lib/referrals/signin";
+import { referralSignInFailure, referralReturnUrl } from "@/lib/referrals/signin";
 import s from "./Referrals.module.css";
 import ReferralAgreement, { PayoutProfile } from "./ReferralAgreement";
 import ReferralStatements from "./ReferralStatements";
@@ -167,7 +167,7 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
       const { error } = await supabase.auth.signInWithOtp({
         email: email.trim(),
         options: {
-          emailRedirectTo: `${window.location.origin}/earn-with-forge#account`,
+          emailRedirectTo: referralReturnUrl(window.location.origin),
         },
       });
       if (error) throw error;
@@ -248,10 +248,12 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
           You can explore the referral terms here. Contact Forge to discuss an
           introduction while secure account access is being prepared.
         </p>
+        {authError&&<p className={s.error} role="alert">{authError}</p>}
         <Link className={s.textLink} href="/contact?interest=referral">
           Talk to Forge about a referral →
         </Link>
         {enabled&&<button className={s.quietButton} onClick={()=>setConnectionAttempt(n=>n+1)}>Retry account connection</button>}
+        {enabled&&authError&&<button className={s.quietButton} onClick={()=>window.location.reload()}>Start email sign-in again</button>}
       </div>
     );
   if (!authReady)

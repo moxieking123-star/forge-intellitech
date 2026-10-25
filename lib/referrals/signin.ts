@@ -15,3 +15,21 @@ export function referralSignInFailure(href: string) {
     cleanUrl: `${url.pathname}${url.search}#account`,
   };
 }
+
+/** Capture only complete implicit callbacks, before any network request or anchor navigation. */
+export function referralSessionCallback(href: string) {
+  const url = new URL(href);
+  const fragment = new URLSearchParams(url.hash.slice(1));
+  const accessToken = fragment.get("access_token");
+  const refreshToken = fragment.get("refresh_token");
+  if (fragment.has("error") || url.searchParams.has("error") ||
+      !accessToken || !refreshToken || fragment.get("token_type") !== "bearer") return null;
+  return {
+    session: {access_token: accessToken, refresh_token: refreshToken},
+    cleanUrl: `${url.pathname}${url.search}#account`,
+  };
+}
+
+export function referralReturnUrl(origin: string) {
+  return new URL("/earn-with-forge", origin).href;
+}
