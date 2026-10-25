@@ -1,9 +1,10 @@
+import {backendEnvironmentEnabled,backendPublishableKey} from "@/lib/backend-runtime";
 import {sameOrigin} from '@/lib/request-origin';
 import {boundedBody} from '@/lib/referrals/agreement';
 import {response} from '@/lib/server/referrals';
 import {parseNotificationAdmin} from '@/lib/notification-admin';
 export async function POST(request:Request){
- const key=process.env.PREVIEW_FEEDBACK_ANON_KEY?.trim();if(process.env.VERCEL_ENV!=='preview'||process.env.NOTIFICATION_ADMIN_ENABLED!=='true'||!key)return response({error:'Delivery review not connected.'},503);
+ const key=backendPublishableKey();if(!backendEnvironmentEnabled()||process.env.NOTIFICATION_ADMIN_ENABLED!=='true'||!key)return response({error:'Delivery review not connected.'},503);
  if(!sameOrigin(request))return response({error:'Invalid request origin.'},403);
  const token=request.headers.get('authorization');if(!token?.startsWith('Bearer ')||token.length>8192)return response({error:'Staff sign-in required.'},401);
  try{const input=JSON.parse(new TextDecoder().decode(await boundedBody(request,4096))),payload=parseNotificationAdmin(input.action,input.payload);if(!payload)return response({error:'Invalid delivery review.'},400);

@@ -1,11 +1,12 @@
+import {backendEnvironmentEnabled,backendPublishableKey} from "@/lib/backend-runtime";
 import 'server-only';
 import {response} from './referrals';
 import {sameOrigin} from '@/lib/request-origin';
 import {boundedBody} from '@/lib/referrals/agreement';
 import {parseParticipation} from '@/lib/participation';
-export function participationBackendEnabled(){return process.env.VERCEL_ENV==='preview'&&process.env.PARTICIPATION_BACKEND_ENABLED==='true';}
+export function participationBackendEnabled(){return backendEnvironmentEnabled()&&process.env.PARTICIPATION_BACKEND_ENABLED==='true';}
 export async function participationBackend(action:string,payload:unknown,authorization?:string|null,kind?:string){
- const key=process.env.PREVIEW_FEEDBACK_ANON_KEY?.trim();
+ const key=backendPublishableKey();
  if(!participationBackendEnabled()||!key)return response({error:'Enquiry services are temporarily unavailable. Your request has not been sent.'},503);
  if(authorization&&(!authorization.startsWith('Bearer ')||authorization.length>8192))return response({error:'Staff sign-in required.'},401);
  try{const res=await fetch('https://deblssilgleuiccsgdcy.supabase.co/functions/v1/forge-participation',{method:'POST',headers:{'Content-Type':'application/json',apikey:key,Authorization:`Bearer ${key}`,...(authorization?{'x-forge-user-token':authorization.slice(7)}:{})},body:JSON.stringify({action,payload,kind}),cache:'no-store',signal:AbortSignal.timeout(12000)});return response(await res.json(),res.status);}catch{return response({error:'We could not confirm receipt. Please retry the same enquiry.'},503);}

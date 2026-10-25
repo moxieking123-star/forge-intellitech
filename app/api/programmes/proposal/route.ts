@@ -1,3 +1,4 @@
+import {backendEnvironmentEnabled,backendPublishableKey} from "@/lib/backend-runtime";
 import { NextRequest, NextResponse } from "next/server";
 import { queueProposal } from "@/lib/server/proposal-delivery";
 import { parseProposalRequest } from "@/lib/school-proposal";
@@ -17,7 +18,7 @@ export async function POST(request: NextRequest) {
   const details = parseProposalRequest(body);
   if (!details) return reply({error:"Please enter your name, school and a valid email, and agree to receive the proposal."},400);
   const env = process.env;
-  if (env.VERCEL_ENV !== "preview" || env.SCHOOL_PROPOSAL_QUEUE_ENABLED !== "true" || !env.PREVIEW_FEEDBACK_ANON_KEY) return unavailable();
+  if (!backendEnvironmentEnabled(env) || env.SCHOOL_PROPOSAL_QUEUE_ENABLED !== "true" || !backendPublishableKey(env)) return unavailable();
   try {
     // The isolated SQL intake serialises per-recipient and global rate limits.
     const id = await queueProposal(details);

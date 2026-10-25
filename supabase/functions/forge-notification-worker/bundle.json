@@ -2,6 +2,7 @@
   "entrypoint": "index.ts",
   "verifyJwt": false,
   "sharedSources": {
+    "notification-worker-auth.ts": "lib/notification-worker-auth.ts",
     "notification-delivery.ts": "lib/notification-delivery.ts",
     "school-proposal.ts": "lib/school-proposal.ts",
     "notification-runner.ts": "lib/notification-runner.ts",

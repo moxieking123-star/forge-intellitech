@@ -1,3 +1,4 @@
+import {backendEnvironmentEnabled} from "@/lib/backend-runtime";
 // ============================================
 // LAUNCHPAD APPLICATION API ROUTE
 // ============================================
@@ -6,6 +7,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 
 export async function POST(request: NextRequest) {
+  if(backendEnvironmentEnabled())return NextResponse.json({error:"This older endpoint is retired in the redesign. Please use the current website form."},{status:410,headers:{"Cache-Control":"no-store"}});
   try {
 
     // Parse request body
