@@ -18,6 +18,11 @@ export async function runNotificationBatch(env:Record<string,string|undefined>,d
   for(const job of jobs){
    let provider:string|null=null,error:string|null=null,pause=false;
    try{
+    const guard=await rpc('forge_notification_send_guard',{p_queue:queue,p_id:job.id,p_recipient:job.recipient});
+    if(!guard||typeof guard.suppressed!=='boolean'||typeof guard.unresolved!=='boolean')throw Error('Suppression status unavailable.');
+    if(guard.suppressed){error='[permanent] Recipient has a recorded bounce or complaint; review delivery evidence.';}
+    else if(guard.unresolved){error='An earlier message to this recipient has unresolved provider acceptance; reconcile that job first.';pause=true;}
+    else {
     const content=deliveryContent({...job,queue}),attachments:{filename:string;content:string}[]=[];
     if(queue==='proposal'){
      if(env.SCHOOL_PROPOSAL_BUCKET!=='forge-school-proposals')throw Error('attachment');
@@ -29,14 +34,25 @@ export async function runNotificationBatch(env:Record<string,string|undefined>,d
      attachments.push({filename:'Forge-school-programme-proposal.pdf',content:btoa(binary)});
     }
     if(providerRequests)await sleep(650);providerRequests++;
+    const attempt=await rpc('forge_notification_begin_send',{p_queue:queue,p_id:job.id,p_lease:job.lease_token});
+    if(!attempt||typeof attempt.priorUncertain!=='boolean'||typeof attempt.suppressed!=='boolean'||typeof attempt.unresolved!=='boolean')throw Error('Acceptance evidence unavailable.');
+    if(attempt.suppressed){error='[permanent] Recipient has a recorded bounce or complaint; review delivery evidence.';}
+    else if(attempt.unresolved){error='Another message to this recipient has unresolved provider acceptance; reconcile that job first.';pause=true;}
+    else {
     const r=await fetcher('https://api.resend.com/emails',{method:'POST',headers:{Authorization:`Bearer ${env.RESEND_API_KEY}`,'Content-Type':'application/json','Idempotency-Key':idempotencyKey({...job,queue})},body:JSON.stringify({from:`Forge <${env.FROM_EMAIL}>`,to:[job.recipient],reply_to:'programs@forgeintellitech.com',...content,...(attachments.length?{attachments}:{})}),signal:AbortSignal.timeout(25000)});
     if(!r.ok){
+     if([400,401,403,404,413,422,429].includes(r.status)){
+      const rejected=await rpc('forge_notification_send_rejected',{p_queue:queue,p_id:job.id,p_lease:job.lease_token,p_prior_uncertain:attempt.priorUncertain});
+      if(rejected!==true)throw Error('Acceptance evidence unavailable.');
+     }
      let payloadConflict=false;
      if(r.status===409){try{const detail=JSON.parse(new TextDecoder().decode(await boundedBody(r,16384)));payloadConflict=detail.name==='invalid_idempotent_request';}catch{/* Unknown or in-flight conflicts keep the original key and retry later. */}}
      const permanent=[400,404,413,422].includes(r.status)||payloadConflict;
      error=`${permanent?'[permanent] ':''}Provider HTTP ${r.status}; review delivery record.`;
      pause=!permanent;
     }else{const data=await r.json();if(typeof data.id!=='string'||!data.id)throw Error('provider result');provider=data.id;}
+    }
+    }
    }catch{error='Delivery response unavailable; retry the same job receipt.';pause=true;}
    const confirmed=await rpc('forge_notification_finish',{p_queue:queue,p_id:job.id,p_lease:job.lease_token,p_provider_id:provider,p_error:error});
    if(confirmed!==true)throw Error('Delivery receipt could not be confirmed.');

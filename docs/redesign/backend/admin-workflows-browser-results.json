@@ -4,6 +4,7 @@
   "checks": [
     "Finance sends school version, integer full-contract amounts, receipt and explicit review",
     "Private enquiry detail, reviewed update and version submitted",
+    "Verified bounce evidence visible independently of queue state",
     "Delivery retry requires provider check and attestation",
     "Three private workspaces fit mobile, tablet and desktop",
     "Permission denial clears finance rows and sign-out clears workspace"
