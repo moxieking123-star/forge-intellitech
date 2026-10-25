@@ -27,7 +27,7 @@ Passed after the fix:
 - Actual rolled-back database assertions: all ten checks pass, including central queue attribution, payment-profile prerequisite, consumed-link rejection, cross-owner rejection, duplicate-school atomicity, school authority, link cap, service-only access and account isolation. The original test was updated to satisfy and explicitly assert the newer payment-profile requirement.
 - Independent review identified loss of the captured callback on transient failure; fixed and covered by the retry regression. Follow-up review found no remaining actionable issues.
 
-A fresh actual sign-in email was accepted after the fix (HTTP 200), with return URL `http://localhost:3009/earn-with-forge`. Owner confirmation and database verification of account creation are pending. Do not request or copy callback tokens into chat.
+A fresh actual sign-in email was accepted after the fix (HTTP 200), with return URL `http://localhost:3009/earn-with-forge`. A subsequent read-only database check confirmed the owner's real referral account was created and is active, with a referral number. No school referrals or payout profile were created in that real account. This verifies the inbox-to-referral-account backend handoff; the positive onboarding browser checks remain explicitly fictional, supplemented by the actual rolled-back database assertions. No callback credentials were requested, read or copied into chat.
 
 ## Local setup and remaining owner verification
 
