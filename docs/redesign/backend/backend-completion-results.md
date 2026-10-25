@@ -1,5 +1,15 @@
 # Backend completion results — 25 October 2026
 
+## Latest supervised email verification
+
+The signed-in Supabase SQL editor provided a working fallback when the connector remained unavailable. The owner-run result showed exactly the intended proposal test pending, attempts0, no other pending jobs, and scheduler paused. Authenticated dispatch request2 returned HTTP503 `Disabled`, without claiming the job. The displayed digest established that the delivery boolean was saved as `True`, while the explicit worker switch requires lowercase `true`. Corrected only this non-credential boolean through Edge Secrets; its new digest matched lowercase `true`. The sender digest matched the configured `programs@auth.forgeintellitech.com` address; no API/worker/webhook key value was retrieved.
+
+Dispatch request3 returned HTTP200 with accepted1, failed0, pausedfalse. Existing test job `b6c5a83f-aa78-4257-9acc-50e13709d752` is sent after exactly one provider attempt; provider receipt `01a174be-e6bd-7489-8e3e-880019b04d62`. The verified signed delivery summary reports `delivered` at 2026-10-25T20:27:20.727Z (21:27 Lagos). This means recipient-server acceptance, not proof the inbox message was opened. No duplicate proposal job was created.
+
+The empty-queue guard passed before enabling a supervised one-minute scheduler verification at 20:29:57Z. Cron ran successfully at 20:30:00Z. Its actual asynchronous HTTP request4 returned HTTP200 with accepted0, failed0, pausedfalse; four consumed authenticated proofs correspond to the four dispatches so far. This verifies scheduling, Vault/HMAC authentication, nonce consumption and the empty-queue worker together. Restored the normal `*/10 * * * *` interval with active=true, verified at 20:30:56Z. No second internal test was sent. Private screenshot evidence is `private-assets/backend-scheduler-verified.png`.
+
+The isolated backend email activation and verification gates are now complete. Backend implementation and its current isolated operational checks are complete; this does not claim the final website or approved production cutover is complete. The website deployment, shared preview, production feature settings and legacy live tables remain unchanged. Historical paused/blocked notes below describe the earlier stages, superseded by this result.
+
 Branch-only website work. No GitHub push, Vercel/shared-preview update or live website deployment. Frontend work is paused. Its earlier uncommitted draft was saved privately in `private-assets/held-frontend`, and active frontend source restored to the committed baseline. Private assets are excluded from TypeScript compilation.
 
 ## Completed in this phase

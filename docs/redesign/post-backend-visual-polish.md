@@ -1,5 +1,7 @@
 # Visual polish after backend completion
 
+Backend gate update, 25 October 2026: the isolated backend proposal test has a signed delivered receipt, and the scheduled worker has passed an actual HTTP200 run with the empty queue. Delivery is enabled and the normal ten-minute isolated schedule is active. Backend implementation and isolated activation checks are complete; production website/callback/legacy-permission cutover still requires the final website approval. The subsequent visual phase can now begin under the owner's existing branch-only authorisation. Earlier paused status below is historical.
+
 ## Owner update — 25 October 2026
 
 Target launch is now tomorrow, Monday 26 October 2026, superseding the earlier Friday target. Do not deploy the live site or shared preview without the existing explicit approval. The owner requires backend completion to be confirmed before any further frontend implementation. Pause frontend work until remaining backend activation and verification gates have been addressed. The local surface/admin styling draft started on 25 October is uncommitted and not yet browser-verified; preserve it as a held draft, not a completed delivery.

@@ -23,9 +23,9 @@ This SQL is deliberately **not applied** while the existing live site's old anon
 
 ## Release sequence
 
-1. Finish signed delivery and Vault/scheduler verification against the isolated backend; keep cron paused until rollout.
+1. Signed proposal delivery and Vault/scheduler verification against the isolated backend completed on 25 October 2026. Its isolated queue worker is active every ten minutes; confirm queue contents and provider quota again before approved production traffic. This does not enable production website feature settings.
 2. Confirm domain-specific Auth callbacks and all server feature settings on a separately approved deployment configuration.
 3. After full website approval, coordinate deployment of the new service routes with the legacy permission change. Apply the guard marker only inside that approved transaction, then run role-denial and form smoke checks. Keep the previous site/database rollback plan available; do not drop legacy records.
-4. Enable regular email delivery and the tested schedule only after reviewing pending jobs/provider quota. No payments or account deletions become automatic.
+4. Recheck the already-enabled email delivery and tested schedule against the approved production traffic and provider quota. No payments or account deletions become automatic.
 
 The schema name `forge_redesign_test` remains intentionally unchanged to avoid silently moving existing evidence/accounts. Its private tables and reviewed service RPCs are the new site's store. A cosmetic schema rename is not a prerequisite for secure operation.
