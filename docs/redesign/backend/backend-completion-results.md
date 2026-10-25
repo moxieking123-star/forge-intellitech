@@ -23,10 +23,15 @@ Branch-only website work. No GitHub push, Vercel/shared-preview update or live w
 - All 29 new private tables have RLS enabled. Nonce consumption is not executable by anonymous users. Scheduler remains paused. One real signed delivery receipt is present.
 - Independent source review found no concrete defect in production gating, key filtering, fallback prevention, HMAC authentication, atomic nonce consumption or scheduler SQL.
 
-## One secure setup step still pending
+## Vault connection verified
 
-The owner must create Vault secret `forge_notification_worker_secret` with the same private value as Edge secret `NOTIFICATION_WORKER_SECRET`. The application never reads that value into chat/source. If the value is no longer available, rotate it securely in both places.
+The owner created Vault secret `forge_notification_worker_secret`. A real scheduler dispatch returned request1, the worker consumed exactly one authenticated proof and returned HTTP503 `Disabled`, with no timeout or transport error. This establishes that Vault and Edge credentials match, HMAC generation/verification works, nonce consumption works and the disabled-delivery gate is enforced. No secret value was read into chat/source and no mail was sent by that dispatch.
 
-After Vault setup, invoke the scheduler once while `EMAIL_DELIVERY_ENABLED=false` and verify authenticated worker response/consumed proof without draining mail. Then review pending queues and perform supervised mail activation. General sending and recurring activation are not claimed complete before that check.
+Queue review found zero pending jobs before supervised activation. The owner has been asked to set `EMAIL_DELIVERY_ENABLED=true` in Edge secrets. One fixed-recipient internal proposal test and signed delivery confirmation must complete before activating the recurring job. General sending and recurring activation are not yet claimed complete.
 
 Production Auth URLs, environment activation and legacy-table permission cutover belong to final approved deployment. The backend code is implemented and locally verified; the above secure activation and approved production cutover remain explicit boundaries.
+
+## Continuation verification
+
+All 72 Node tests passed again; the controlled proposal integration script passes its syntax check and the branch diff passes whitespace validation. No second proposal request was created. The Supabase connector returned unavailable during this continuation, so the saved queued test, current delivery switch, provider result and scheduler state could not be freshly inspected. Last verified recurring scheduler state remains paused; no activation or delivery is claimed. Await connector access and confirmation of the delivery switch before supervised dispatch.
+
