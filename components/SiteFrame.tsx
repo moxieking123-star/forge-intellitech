@@ -13,7 +13,7 @@ import PageMotion from "./PageMotion";
 import ForgeInteractions from "./motion/ForgeInteractions";
 import PreviewFeedback from "./feedback/PreviewFeedback";
 
-export default function SiteFrame({ children, previewFeedback = false }: { children: React.ReactNode; previewFeedback?: boolean }) {
+export default function SiteFrame({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const homepage = !pathname.startsWith("/admin");
   return (
@@ -29,7 +29,7 @@ export default function SiteFrame({ children, previewFeedback = false }: { child
       {homepage && <PageMotion />}
       {homepage && <ForgeInteractions />}
       <CookieConsent />
-      {homepage && previewFeedback && <PreviewFeedback />}
+      {homepage && <PreviewFeedback />}
     </>
   );
 }
