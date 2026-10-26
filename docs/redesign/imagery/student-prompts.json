@@ -1,0 +1,12 @@
+[
+  {
+    "name": "chisanbop-class",
+    "method": "Built-in image_gen",
+    "prompt": "Photorealistic editorial landscape 3:2 of a Nigerian female primary-school instructor teaching Chisanbop finger arithmetic to four fictional Nigerian children aged 6\u20138 in a bright Lagos classroom. Dark skin and Nigerian features; green uniforms and cream shirts with no school crest. Teacher demonstrates fingertips on a flat mat while children practise. Left hand tens, right hand units. No instructional words or number diagrams, no logos, authentic hands, natural daylight, warm cream and orange materials. Fictional AI illustration, not identifiable real children."
+  },
+  {
+    "name": "nigerian-student-tech-class",
+    "method": "Built-in image_gen",
+    "prompt": "Photorealistic editorial landscape 3:2 practical technology class in a contemporary Lagos secondary school. Five fictional Nigerian girls and boys aged 13\u201316 in green uniforms and cream shirts, no names/badges. Nigerian adult instructor guides collaboration around unbranded laptops and a small robot prototype. Candid engaged expressions, one girl uses keyboard and another tests robot wheel. Cream walls, orange trays, warm daylight, natural hands, no readable text or logos. Fictional AI scene, not actual client students or a real Forge class."
+  }
+]

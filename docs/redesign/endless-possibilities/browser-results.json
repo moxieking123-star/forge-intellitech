@@ -1,0 +1,286 @@
+{
+  "result": "passed",
+  "preview": "http://127.0.0.1:3001/endless-possibilities",
+  "evidence": [
+    {
+      "check": "responsive movement page",
+      "width": 320,
+      "scrollWidth": 320,
+      "h1": 1,
+      "brokenAnchors": []
+    },
+    {
+      "check": "responsive movement page",
+      "width": 390,
+      "scrollWidth": 390,
+      "h1": 1,
+      "brokenAnchors": []
+    },
+    {
+      "check": "responsive movement page",
+      "width": 768,
+      "scrollWidth": 768,
+      "h1": 1,
+      "brokenAnchors": []
+    },
+    {
+      "check": "responsive movement page",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "h1": 1,
+      "brokenAnchors": []
+    },
+    {
+      "check": "hero donation anchor",
+      "passed": true
+    },
+    {
+      "check": "contribution choice",
+      "label": "Volunteer",
+      "interest": "volunteer",
+      "passed": true
+    },
+    {
+      "check": "contribution choice",
+      "label": "Teach a skill",
+      "interest": "educator",
+      "passed": true
+    },
+    {
+      "check": "contribution choice",
+      "label": "Sponsor learning",
+      "interest": "sponsor",
+      "passed": true
+    },
+    {
+      "check": "contribution choice",
+      "label": "Become a patron",
+      "interest": "patron",
+      "passed": true
+    },
+    {
+      "check": "contribution choice",
+      "label": "Partner with us",
+      "interest": "partnership",
+      "passed": true
+    },
+    {
+      "check": "contribution choice",
+      "label": "Give a laptop",
+      "interest": "laptop",
+      "passed": true
+    },
+    {
+      "check": "keyboard contribution choice",
+      "passed": true
+    },
+    {
+      "check": "device FAQ",
+      "passed": true
+    },
+    {
+      "check": "mobile navigation dismissal",
+      "passed": true
+    },
+    {
+      "check": "movement metadata",
+      "title": "Give a Child a Laptop | Endless Possibilities | Forge Intellitech",
+      "description": "Someone else's child. Our shared future. Join Forge ITs to match Windows laptops with verified secondary-school students in Nigeria and support a full year of learning.",
+      "canonical": "https://forgeintellitech.com/endless-possibilities/give-a-child-a-laptop",
+      "ogImage": "https://forgeintellitech.com/images/home/orange-beginning.webp"
+    },
+    {
+      "check": "enquiry handoff without submission",
+      "interest": "student-support",
+      "passed": true
+    },
+    {
+      "check": "enquiry handoff without submission",
+      "interest": "volunteer",
+      "passed": true
+    },
+    {
+      "check": "enquiry handoff without submission",
+      "interest": "educator",
+      "passed": true
+    },
+    {
+      "check": "enquiry handoff without submission",
+      "interest": "sponsor",
+      "passed": true
+    },
+    {
+      "check": "enquiry handoff without submission",
+      "interest": "patron",
+      "passed": true
+    },
+    {
+      "check": "movement hub layout and initiative links",
+      "width": 320,
+      "scrollWidth": 320,
+      "h1": 1,
+      "links": [
+        "/endless-possibilities/launchpad",
+        "/endless-possibilities/give-a-child-a-laptop",
+        "/endless-possibilities/in-school-launchpad",
+        "/endless-possibilities/intern-with-forge",
+        "/endless-possibilities/public-school-seminars"
+      ]
+    },
+    {
+      "check": "movement hub layout and initiative links",
+      "width": 390,
+      "scrollWidth": 390,
+      "h1": 1,
+      "links": [
+        "/endless-possibilities/launchpad",
+        "/endless-possibilities/give-a-child-a-laptop",
+        "/endless-possibilities/in-school-launchpad",
+        "/endless-possibilities/intern-with-forge",
+        "/endless-possibilities/public-school-seminars"
+      ]
+    },
+    {
+      "check": "movement hub layout and initiative links",
+      "width": 768,
+      "scrollWidth": 768,
+      "h1": 1,
+      "links": [
+        "/endless-possibilities/launchpad",
+        "/endless-possibilities/give-a-child-a-laptop",
+        "/endless-possibilities/in-school-launchpad",
+        "/endless-possibilities/intern-with-forge",
+        "/endless-possibilities/public-school-seminars"
+      ]
+    },
+    {
+      "check": "movement hub layout and initiative links",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "h1": 1,
+      "links": [
+        "/endless-possibilities/launchpad",
+        "/endless-possibilities/give-a-child-a-laptop",
+        "/endless-possibilities/in-school-launchpad",
+        "/endless-possibilities/intern-with-forge",
+        "/endless-possibilities/public-school-seminars"
+      ]
+    },
+    {
+      "check": "hub donation choice leads to initiative details",
+      "passed": true
+    },
+    {
+      "check": "hub to initiative journey",
+      "passed": true
+    },
+    {
+      "check": "initiative page, navigation and images",
+      "slug": "launchpad",
+      "width": 390,
+      "scrollWidth": 390,
+      "h1": 1,
+      "canonical": "https://forgeintellitech.com/endless-possibilities/launchpad",
+      "back": "/endless-possibilities"
+    },
+    {
+      "check": "initiative page, navigation and images",
+      "slug": "launchpad",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "h1": 1,
+      "canonical": "https://forgeintellitech.com/endless-possibilities/launchpad",
+      "back": "/endless-possibilities"
+    },
+    {
+      "check": "initiative page, navigation and images",
+      "slug": "in-school-launchpad",
+      "width": 390,
+      "scrollWidth": 390,
+      "h1": 1,
+      "canonical": "https://forgeintellitech.com/endless-possibilities/in-school-launchpad",
+      "back": "/endless-possibilities"
+    },
+    {
+      "check": "initiative page, navigation and images",
+      "slug": "in-school-launchpad",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "h1": 1,
+      "canonical": "https://forgeintellitech.com/endless-possibilities/in-school-launchpad",
+      "back": "/endless-possibilities"
+    },
+    {
+      "check": "initiative page, navigation and images",
+      "slug": "intern-with-forge",
+      "width": 390,
+      "scrollWidth": 390,
+      "h1": 1,
+      "canonical": "https://forgeintellitech.com/endless-possibilities/intern-with-forge",
+      "back": "/endless-possibilities"
+    },
+    {
+      "check": "initiative page, navigation and images",
+      "slug": "intern-with-forge",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "h1": 1,
+      "canonical": "https://forgeintellitech.com/endless-possibilities/intern-with-forge",
+      "back": "/endless-possibilities"
+    },
+    {
+      "check": "initiative page, navigation and images",
+      "slug": "public-school-seminars",
+      "width": 390,
+      "scrollWidth": 390,
+      "h1": 1,
+      "canonical": "https://forgeintellitech.com/endless-possibilities/public-school-seminars",
+      "back": "/endless-possibilities"
+    },
+    {
+      "check": "initiative page, navigation and images",
+      "slug": "public-school-seminars",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "h1": 1,
+      "canonical": "https://forgeintellitech.com/endless-possibilities/public-school-seminars",
+      "back": "/endless-possibilities"
+    },
+    {
+      "check": "initiative enquiry prefill without submission",
+      "interest": "launchpad",
+      "passed": true
+    },
+    {
+      "check": "initiative enquiry prefill without submission",
+      "interest": "in-school-launchpad",
+      "passed": true
+    },
+    {
+      "check": "initiative enquiry prefill without submission",
+      "interest": "internship",
+      "passed": true
+    },
+    {
+      "check": "initiative enquiry prefill without submission",
+      "interest": "seminars",
+      "passed": true
+    }
+  ],
+  "browserErrors": {
+    "errors": [],
+    "lifecycle": {
+      "effectiveLaunch": {
+        "browserLaunched": true,
+        "engine": "chrome",
+        "launchHash": 11677035664275012000
+      },
+      "launched": false,
+      "relaunchedBrowser": false,
+      "restartedBackground": false,
+      "restoreStatus": "not_configured",
+      "reused": true,
+      "saveStatus": "not_attempted"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+# Referral accounts and agreements
+
+Approved scope: connect existing referral UI and agreement draft to isolated backend, on redesign branch only. Do not promote to production or modify the immutable tester preview or its protection/share link.
+
+1. Apply reviewed agreement scaffold to `forge_redesign_test`, with service-only action bridge, private signed-PDF bucket and +21 fourth-week date marker. Preserve one link per referrer per school and first submitted school attribution. Keep bank details write-once and return masked numbers only.
+2. Add JWT-gated edge service that independently validates the actual user's confirmed email, active account and referral ownership. Serve draft only after version/hash/timestamp recording. Reserve upload, write private object, complete hash/receipt atomically with cleanup on failure; no automatic signature approval or payment. Limit uploaded PDFs to 3 MB to fit Vercel request limits.
+3. Route Next referral endpoints through preview feature-gated service, bounded inputs and origin checks. Shared isolated browser auth client supports account and assisted school onboarding; no global legacy Supabase activation. Signup email remains off until SMTP/redirects are configured.
+4. Test SQL cross-owner requests, closed accounts, bank immutability, +21 marker, download history, reserve/complete/cancel races and immutable upload, statement calendar fail-closed behaviour. Test real authenticated flow with synthetic fixture accounts if available, no real emails. Build/type checks and browser journeys.
+5. Save branch and verification record. Remove synthetic records/objects. Note pending staff signature review, official holiday calendar, email delivery and payout ledger; do not claim those are live. Our work removal remains after full backend completion.

@@ -12,7 +12,7 @@ const footerSections = [
     links: [
       { name: "About Us", href: "/about" },
       { name: "Our Products", href: "/products" },
-      { name: "Gallery", href: "/gallery" },
+      { name: "Products", href: "/products" },
       { name: "Blog", href: "/blog" },
       { name: "Contact", href: "/contact" },
     ],

@@ -1,0 +1,98 @@
+{
+  "version": "draft-2026-10-22-v1",
+  "title": "Forge school referral agreement",
+  "status": "DRAFT FOR REVIEW — pending company authorised signatory and final Nigerian counsel review",
+  "fields": [
+    "Referrer name",
+    "Email",
+    "Referral number",
+    "School",
+    "First full school contract value (NGN)",
+    "Internet deduction (NGN)",
+    "Direct school operation expenses (NGN)",
+    "Tax deduction (NGN)",
+    "Commission rate: 15%",
+    "Net commission (NGN)",
+    "Bank",
+    "Account name",
+    "Account number",
+    "Signature date",
+    "Referrer signature",
+    "Forge authorised signatory (pending authorisation)"
+  ],
+  "sections": [
+    {
+      "title": "1. Parties and single referral",
+      "paragraphs": [
+        "This agreement is between Forge Intellitech Services Ltd (Forge), acting through its duly authorised signatory, and the named referrer for the school and referral number recorded above. It applies to this referral alone. Each other school requires its own agreement and independent record."
+      ]
+    },
+    {
+      "title": "2. Signing and commencement",
+      "paragraphs": [
+        "Download this agreement, complete the referral particulars, sign it electronically or digitally using your chosen external signing service, and upload the signed PDF to your authenticated account for this referral. The agreement takes effect when the signed copy has been uploaded and the referred school has signed its contract with Forge to commence. Forge records server timestamps for serving the download and receiving the upload. A served download is not proof that a file was saved on your device. Upload receipt is not cryptographic validation of the signature or confirmation of Forge authorisation."
+      ]
+    },
+    {
+      "title": "3. Commission",
+      "paragraphs": [
+        "Forge must pay the referrer a one-time commission of 15% of the NET FULL SCHOOL CONTRACT VALUE of the referred school's first contract. Calculate the net value by deducting actual internet provision expenses, direct school operation expenses and applicable tax from the full first school contract value. Salaries must not be deducted. The commission basis is the full first contract value, not the school's initial deposit. No commission is promised on renewals or later contracts under this agreement."
+      ]
+    },
+    {
+      "title": "4. Payment",
+      "paragraphs": [
+        "The one-time commission is payable when Forge receives the school's first deposit in the fourth week of school resumption. Record the school's actual resumption and first-deposit receipt; neither an enquiry nor an estimated date confirms payment entitlement. Forge must pay the full correct commission to the bank account supplied by the referrer at registration. The referrer must provide accurate bank particulars.",
+        "If the school pays its first deposit after the fourth week, the unpaid commission obligation remains and becomes due on receipt of that deposit. A late school deposit does not cancel an otherwise valid referral agreement. No second commission arises from later instalments of the same contract."
+      ]
+    },
+    {
+      "title": "5. Earnings disclosure",
+      "paragraphs": [
+        "On the referrer's request, Forge must disclose earnings and the actual expenses and tax deducted before calculating the commission within five working days. Working days exclude Saturdays, Sundays and Nigerian public holidays. The statement must identify the first full school contract value, each actual deduction, the net value, the 15% commission and payments recorded for this referral."
+      ]
+    },
+    {
+      "title": "6. Role and responsibilities",
+      "paragraphs": [
+        "The referrer's role is a truthful, authorised introduction. The referrer must not commit Forge to unauthorised prices, dates or other terms. The referrer has no liability or duty for programme delivery, teaching, payment collection, support, or any guarantee of the school's or Forge's performance. Forge remains responsible for its programme obligations and for paying and explaining the referral commission."
+      ]
+    },
+    {
+      "title": "7. Discharge and preserved rights",
+      "paragraphs": [
+        "This referral agreement is discharged when Forge pays the full correct commission to the referrer's supplied bank account. Discharge does not erase accrued audit, correction or fraud claims, an unpaid balance, or rights under any other unpaid school referral. Payment of one referral does not close the referrer's other agreements."
+      ]
+    },
+    {
+      "title": "8. Evidence and authorisation",
+      "paragraphs": [
+        "Keep a copy of the completed agreement and your external signing evidence. Forge retains the agreement version, file hash, server download and upload records and review outcome as evidence. A hash and timestamp alone do not establish a valid digital signature. No Forge countersignature is represented by this draft. Forge's authorised signatory and final approved wording must be confirmed before this arrangement is launched."
+      ]
+    },
+    {
+      "title": "9. Attribution and no agency",
+      "paragraphs": [
+        "The referral belongs to the person whose school-specific link the school uses and whose introduction is verified by Forge. Assisted onboarding must be authorised by the school and recorded through the referrer account. A duplicate or disputed school attribution requires a documented review; Forge must explain its decision. This agreement creates no employment, partnership or authority to bind Forge. No recruitment fee, purchase or payment collection is required from the referrer."
+      ]
+    },
+    {
+      "title": "10. Cancellation and changes",
+      "paragraphs": [
+        "No commission arises from an enquiry alone or where the school never contracts to commence and never pays its first deposit. Forge must explain a cancellation or adjustment and must not use cancellation to avoid a commission already earned under this agreement. Changes to the rate, permitted deductions or payment obligation for this referral require the agreement of both parties. A disputed amount does not excuse payment of an undisputed balance."
+      ]
+    },
+    {
+      "title": "11. Privacy and records",
+      "paragraphs": [
+        "Forge uses identity, school referral, bank and signing records to administer this agreement, review attribution, make payment and fulfil applicable record obligations. Access must be limited to authorised personnel and service providers. Referrers must not submit learner information or school contact information without authority. Payment discharges the referral obligation; it does not require immediate destruction of financial or agreement evidence. Retention and data rights are explained in Forge’s privacy notice."
+      ]
+    },
+    {
+      "title": "12. Questions and disputes",
+      "paragraphs": [
+        "Raise a discrepancy through the account or info@forgeintellitech.com and identify the referral and amount concerned. Both parties should first try to resolve it using the agreement, statement and payment records. Nigerian law applies; neither this process nor payment discharge removes a party’s lawful right to seek a correction or pursue an unresolved claim in a court with jurisdiction."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,248 @@
+{
+  "result": "passed",
+  "preview": "http://127.0.0.1:3001",
+  "evidence": [
+    {
+      "check": "responsive layout",
+      "viewport": [
+        320,
+        1000
+      ],
+      "documentWidth": 320,
+      "overflow": false,
+      "missingImages": [],
+      "brokenAnchors": [],
+      "h1Count": 1,
+      "menuOpen": false,
+      "menuExpanded": "false",
+      "focusedControl": null,
+      "bodyScrollLocked": false,
+      "hash": "",
+      "scrollY": 0,
+      "openStories": 0,
+      "logo": "/_next/image?url=%2Fimages%2Fbrand%2Fforge-wordmark.png&w=3840&q=75"
+    },
+    {
+      "check": "responsive layout",
+      "viewport": [
+        390,
+        1000
+      ],
+      "documentWidth": 390,
+      "overflow": false,
+      "missingImages": [],
+      "brokenAnchors": [],
+      "h1Count": 1,
+      "menuOpen": false,
+      "menuExpanded": "false",
+      "focusedControl": null,
+      "bodyScrollLocked": false,
+      "hash": "",
+      "scrollY": 0,
+      "openStories": 0,
+      "logo": "/_next/image?url=%2Fimages%2Fbrand%2Fforge-wordmark.png&w=3840&q=75"
+    },
+    {
+      "check": "responsive layout",
+      "viewport": [
+        768,
+        1000
+      ],
+      "documentWidth": 768,
+      "overflow": false,
+      "missingImages": [],
+      "brokenAnchors": [],
+      "h1Count": 1,
+      "menuOpen": false,
+      "menuExpanded": "false",
+      "focusedControl": null,
+      "bodyScrollLocked": false,
+      "hash": "",
+      "scrollY": 0,
+      "openStories": 0,
+      "logo": "/_next/image?url=%2Fimages%2Fbrand%2Fforge-wordmark.png&w=3840&q=75"
+    },
+    {
+      "check": "responsive layout",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "documentWidth": 1440,
+      "overflow": false,
+      "missingImages": [],
+      "brokenAnchors": [],
+      "h1Count": 1,
+      "menuOpen": false,
+      "menuExpanded": "false",
+      "focusedControl": null,
+      "bodyScrollLocked": false,
+      "hash": "",
+      "scrollY": 0,
+      "openStories": 0,
+      "logo": "/_next/image?url=%2Fimages%2Fbrand%2Fforge-wordmark.png&w=3840&q=75"
+    },
+    {
+      "check": "menu Escape and focus restoration",
+      "passed": true
+    },
+    {
+      "check": "mobile movement navigation",
+      "open": false,
+      "path": "/endless-possibilities"
+    },
+    {
+      "check": "movement explanation disclosure",
+      "passed": true
+    },
+    {
+      "check": "case story expansion",
+      "passed": true
+    },
+    {
+      "check": "product status and keyboard dismissal",
+      "name": "BiteBank",
+      "status": "In development",
+      "passed": true
+    },
+    {
+      "check": "product status and keyboard dismissal",
+      "name": "Forge TechUp Dashboard",
+      "status": "Testing",
+      "passed": true
+    },
+    {
+      "check": "product status and keyboard dismissal",
+      "name": "Trego",
+      "status": "In development",
+      "passed": true
+    },
+    {
+      "check": "product status and keyboard dismissal",
+      "name": "Forge All-In",
+      "status": "In development",
+      "passed": true
+    },
+    {
+      "check": "donor handoff without submission",
+      "subject": "Give a Child a Laptop — donor interest",
+      "type": "support"
+    },
+    {
+      "check": "partnership handoff without submission",
+      "passed": true
+    },
+    {
+      "check": "existing destination",
+      "route": "/programmes",
+      "status": 200
+    },
+    {
+      "check": "existing destination",
+      "route": "/techup",
+      "status": 200
+    },
+    {
+      "check": "existing destination",
+      "route": "/join",
+      "status": 200
+    },
+    {
+      "check": "existing destination",
+      "route": "/launchpad",
+      "status": 200
+    },
+    {
+      "check": "school programmes responsive layout",
+      "viewport": [
+        390,
+        1000
+      ],
+      "documentWidth": 390,
+      "overflow": false,
+      "missingImages": [],
+      "brokenAnchors": [],
+      "h1Count": 1,
+      "menuOpen": false,
+      "menuExpanded": "false",
+      "focusedControl": null,
+      "bodyScrollLocked": false,
+      "hash": "",
+      "scrollY": 0,
+      "openStories": 0,
+      "logo": "/_next/image?url=%2Fimages%2Fbrand%2Fforge-wordmark.png&w=3840&q=75"
+    },
+    {
+      "check": "school programmes responsive layout",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "documentWidth": 1440,
+      "overflow": false,
+      "missingImages": [],
+      "brokenAnchors": [],
+      "h1Count": 1,
+      "menuOpen": false,
+      "menuExpanded": "false",
+      "focusedControl": null,
+      "bodyScrollLocked": false,
+      "hash": "",
+      "scrollY": 0,
+      "openStories": 0,
+      "logo": "/_next/image?url=%2Fimages%2Fbrand%2Fforge-wordmark.png&w=3840&q=75"
+    },
+    {
+      "check": "school enquiry prefill without submission",
+      "passed": true
+    },
+    {
+      "check": "rendered homepage SEO",
+      "title": "Forge Intellitech | Technology, Skills & Possibility in Nigeria",
+      "description": "Useful technology. Practical skills. Ideas with a beginning. Meet Forge Intellitech, TechUp, ElyTech and the Endless Possibilities laptop movement in Nigeria.",
+      "canonical": "https://forgeintellitech.com/",
+      "socialImage": "https://forgeintellitech.com/images/home/studio-beginning.webp",
+      "schemas": [
+        "Organization",
+        "WebSite",
+        "ProfessionalService"
+      ]
+    },
+    {
+      "check": "final loaded image set",
+      "viewport": [
+        390,
+        1000
+      ],
+      "documentWidth": 390,
+      "overflow": false,
+      "missingImages": [],
+      "brokenAnchors": [],
+      "h1Count": 1,
+      "menuOpen": false,
+      "menuExpanded": "false",
+      "focusedControl": null,
+      "bodyScrollLocked": false,
+      "hash": "",
+      "scrollY": 0,
+      "openStories": 0,
+      "logo": "/_next/image?url=%2Fimages%2Fbrand%2Fforge-wordmark.png&w=3840&q=75"
+    }
+  ],
+  "browserErrors": {
+    "errors": [],
+    "lifecycle": {
+      "effectiveLaunch": {
+        "browserLaunched": true,
+        "engine": "chrome",
+        "launchHash": 11677035664275012000
+      },
+      "launched": false,
+      "relaunchedBrowser": false,
+      "restartedBackground": false,
+      "restoreStatus": "not_configured",
+      "reused": true,
+      "saveStatus": "not_attempted"
+    }
+  }
+}

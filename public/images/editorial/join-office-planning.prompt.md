@@ -1,0 +1,3 @@
+Generated using the built-in image_gen tool on 22 October 2026. Original fictional adults; not staff or documentary evidence. Inspected before use. Unique usage: /join.
+
+Prompt: Use case: photorealistic-natural. Asset type: Forge join page editorial photograph. Primary request: young adult Nigerians sitting together in an office discussing and planning ideas for their country's future. Four clearly adult colleagues around a table with laptops and notebooks, engaged listening and discussion. Natural Lagos office, warm daylight, candid thoughtful atmosphere, landscape composition. No children, classroom, robot, logos, text or watermarks. Original fictional subjects, not actual Forge staff.

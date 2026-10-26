@@ -1,47 +1,26 @@
-import { NextResponse } from 'next/server';
-
+import { stories } from "@/lib/stories";
+const escapeXml = (value: string) =>
+  value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
 export async function GET() {
-  const siteUrl = 'https://forgeintellitech.com';
-  const siteName = 'Forge Intellitech';
-  const siteDescription = 'Insights, stories, and updates from the Forge Intellitech ecosystem — building technology rooted in African realities.';
-
-  // Static RSS feed (will be dynamic once Supabase is connected)
-  const rssXml = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" 
-  xmlns:atom="http://www.w3.org/2005/Atom" 
-  xmlns:content="http://purl.org/rss/1.0/modules/content/"
-  xmlns:dc="http://purl.org/dc/elements/1.1/"
->
-  <channel>
-    <title>${siteName} Blog</title>
-    <link>${siteUrl}</link>
-    <description>${siteDescription}</description>
-    <language>en</language>
-    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-    <pubDate>${new Date().toUTCString()}</pubDate>
-    <ttl>60</ttl>
-    <atom:link href="${siteUrl}/rss.xml" rel="self" type="application/rss+xml"/>
-    <image>
-      <url>${siteUrl}/images/logo.png</url>
-      <title>${siteName} Blog</title>
-      <link>${siteUrl}</link>
-      <width>144</width>
-      <height>144</height>
-    </image>
-    <copyright>© ${new Date().getFullYear()} Forge Intellitech Services Ltd. All rights reserved.</copyright>
-    <managingEditor>admin@forgeintellitech.com (Forge Intellitech)</managingEditor>
-    <webMaster>admin@forgeintellitech.com (Forge Intellitech)</webMaster>
-    <category>Technology</category>
-    <category>African Tech</category>
-    <category>Startups</category>
-    <category>Education</category>
-  </channel>
-</rss>`;
-
-  return new NextResponse(rssXml.trim(), {
-    headers: {
-      'Content-Type': 'application/xml; charset=utf-8',
-      'Cache-Control': 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
+  const site = "https://forgeintellitech.com";
+  const items = stories
+    .map(
+      (story) =>
+        `<item><title>${escapeXml(story.title)}</title><link>${site}/blog/${story.slug}</link><guid isPermaLink="true">${site}/blog/${story.slug}</guid><description>${escapeXml(story.excerpt)}</description><category>${escapeXml(story.category)}</category></item>`,
+    )
+    .join("");
+  return new Response(
+    `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Forge Stories</title><link>${site}/blog</link><description>Practical learning, useful technology and shared possibility.</description><language>en-NG</language><atom:link href="${site}/rss.xml" rel="self" type="application/rss+xml"/>${items}</channel></rss>`,
+    {
+      headers: {
+        "Content-Type": "application/rss+xml; charset=utf-8",
+        "Cache-Control": "public, max-age=3600",
+      },
     },
-  });
+  );
 }

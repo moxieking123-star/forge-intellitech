@@ -1,0 +1,176 @@
+export type Initiative = {
+  slug: string;
+  name: string;
+  label: string;
+  audience: string;
+  card: string;
+  headline: string;
+  intro: string;
+  image: string;
+  imageAlt: string;
+  caption: string;
+  sections: { title: string; text: string }[];
+  eligibility: string;
+  action: string;
+  interest: string;
+  support: string;
+};
+export const initiatives: Initiative[] = [
+  {
+    slug: "launchpad",
+    name: "Launchpad 2.0",
+    label: "Launchpad 2.0 — Coming soon",
+    audience: "Students who have completed SSCE and are waiting to enter university",
+    card: "A practical beginning after SSCE: develop an idea, learn how a business works and find support to keep building.",
+    headline: "An idea deserves more than ‘maybe one day’.",
+    intro:
+      "The time between SSCE and university can be a beginning. Launchpad helps school leavers take an idea seriously, question it and learn what it takes to build a useful business. Launchpad 2.0 is coming soon. We are bringing together the people and resources needed to support the next edition.",
+    image: "/images/movement/launchpad-2025-group.webp",
+    imageAlt:
+      "Participants and supporters at the original LaunchPad 2025 event",
+    caption: "LaunchPad 2025 · a real beginning, at Ikosi-Isheri.",
+    sections: [
+      {
+        title: "Where the story began.",
+        text: "The first Launchpad took place on 4 July 2025 at the Ikosi-Isheri LCDA Council Hall. Before pitching, participants spent a month learning business development and preparing their presentations, decks and branding. The aim was to help school leavers turn the practical skills they had learned into a business idea they could explain and develop.",
+      },
+      {
+        title: "What the first edition made possible.",
+        text: "Two participants each received a ₦100,000 award. Forge’s follow-up records describe a peer-to-peer tutoring idea developing further, with continued mentoring on raising funding. They also describe an organic farm-market venture continuing as its founder prepared for university, a participant gaining admission to the University of Lagos while developing a brand, and another joining Forge as a paid intern.",
+      },
+      {
+        title: "The work after the applause.",
+        text: "That first edition was a small beginning, carried by limited resources and people willing to help. An award could open a door; it could not provide everything a young business needed. We have stayed engaged as participants move towards school and university. The next challenge is helping them keep building alongside their studies, with practical guidance and support that can continue.",
+      },
+      {
+        title: "Help an idea find its next step.",
+        text: "We want Launchpad 2.0 to give participants more room to test their ideas, understand customers and develop useful businesses. Funding is needed for training, mentorship, devices and support after the event. Sponsors, patrons and experienced people can help us make that possible. Dates and entry details will follow when confirmed.",
+      },
+    ],
+    eligibility:
+      "The main Launchpad is for students who have completed SSCE and are waiting to enter university. Launchpad 2.0 is coming soon; registration is not open. Selection and application arrangements will be announced when confirmed. In-school Launchpad is a separate pathway for SS1–SS3 learners in schools participating in TechUp.",
+    action: "Talk to us about Launchpad 2.0",
+    interest: "launchpad",
+    support: "Mentor, volunteer or support the next edition.",
+  },
+  {
+    slug: "give-a-child-a-laptop",
+    name: "Give a Child a Laptop",
+    label: "Access + a full year of learning",
+    audience: "Public and low-income private secondary-school students",
+    card: "Someone else’s child. Our shared future. Match a device to verified need and help a learner keep building.",
+    headline: "Someone else’s child. Our shared future.",
+    intro: "Give a child a laptop. We will help them learn to build with it.",
+    image: "/images/editorial/laptop-campaign.webp",
+    imageAlt: "A laptop ready for a new beginning",
+    caption: "A device. A year of learning.",
+    sections: [],
+    eligibility: "Verified student need.",
+    action: "Give a laptop",
+    interest: "laptop",
+    support: "A device, learning and practical support.",
+  },
+  {
+    slug: "in-school-launchpad",
+    name: "In-school LaunchPad",
+    label: "From a school idea to an enterprise",
+    audience: "SS1–SS3 learners in schools participating in Forge’s TechUp programme",
+    card: "We identify student ideas and projects, then work alongside the students to help build an enterprise.",
+    headline: "An enterprise can begin before school ends.",
+    intro:
+      "Sometimes the next useful business starts with a student noticing a problem everyone else has learned to live with. In-school LaunchPad creates a way to take that observation seriously, test the idea and begin building an enterprise alongside the student.",
+    image: "/images/editorial/student-enterprise.webp",
+    imageAlt:
+      "Illustration of an early irrigation prototype and market research sketches",
+    caption: "A possible idea, not a real student project.",
+    sections: [
+      {
+        title: "Notice what is already there.",
+        text: "Through our work in schools, we look for promising ideas and projects among students. We encourage them to describe the problem, speak to the people affected and test whether the idea answers a real need. An interesting idea should have the chance to become a useful one.",
+      },
+      {
+        title: "Build alongside the student.",
+        text: "The offer goes beyond asking a student to pitch and walking away. We work with the student to develop the enterprise: understand the market, shape the idea and work through practical next steps. The school and family are involved, and any participation or enterprise arrangements are agreed before proceeding.",
+      },
+      {
+        title: "A small beginning is still a beginning.",
+        text: "Students in SSS 2 are already considering businesses they could build. We have introduced market research before idea development and offered to support the branding of their ideas. The ambition is to help them learn through creating something that meets a real need.",
+      },
+    ],
+    eligibility:
+      "In-school LaunchPad is for SS1–SS3 learners in schools participating in Forge’s TechUp programme. Schools can discuss promising student projects and ideas with Forge. Selection and the support offered are considered with the student and school; participation does not automatically guarantee funding or enterprise formation.",
+    action: "Bring a student idea to Forge",
+    interest: "in-school-launchpad",
+    support:
+      "Help with mentoring, market insight, branding, practical expertise or agreed enterprise support.",
+  },
+  {
+    slug: "intern-with-forge",
+    name: "Intern with Forge",
+    label: "After SSCE · practical experience + education support",
+    audience: "Eligible trained school leavers, matched to available work",
+    card: "Paid practical technology experience after secondary school, with contributions towards the learner’s education.",
+    headline: "Finishing school should open a door.",
+    intro:
+      "What happens to a young person's potential between finishing secondary school and finding their next opportunity? Intern with Forge creates a practical bridge: learn through work, earn an income and receive support towards continuing education.",
+    image: "/images/editorial/internship-mentorship.webp",
+    imageAlt:
+      "Illustration of a Nigerian young adult and mentor working on a technology project",
+    caption:
+      "Illustration of Nigerian adults at work; not Forge staff or a real intern.",
+    sections: [
+      {
+        title: "Learn through doing useful work.",
+        text: "The internship is for students who have just completed SSCE and are ready to develop practical technology skills. Working with Forge gives the learner a chance to build confidence, practise with guidance and understand the responsibility that comes with contributing to real work.",
+      },
+      {
+        title: "Earn while preparing for what comes next.",
+        text: "Interns are paid, and Forge contributes towards their education through an Education Support Fund. Our current recent-school-leaver intern receives monthly education support throughout his internship. The work experience and the educational support are both part of the opportunity.",
+      },
+      {
+        title: "Build a pathway with the school.",
+        text: "This opportunity connects to participating programme schools and public-school learners who have been onboarded and trained by Forge. We consider demonstrated learning and skills against the available placement. The work, duration, pay and education-support arrangements are discussed clearly before an internship begins.",
+      },
+    ],
+    eligibility:
+      "For recent SSCE completers from participating programme schools, or public-school learners onboarded and trained by Forge, whose demonstrated learning and skills fit an available opportunity. Schools and eligible learners can enquire about the pathway. Available placements, selection and individual terms are confirmed through that conversation; no fixed intake is advertised here.",
+    action: "Ask about the internship pathway",
+    interest: "internship",
+    support:
+      "Support the learning, mentorship or education fund behind the pathway.",
+  },
+  {
+    slug: "public-school-seminars",
+    name: "Public-school creativity seminars",
+    label: "Government schools · exposure + possibility",
+    audience: "Students in government secondary schools",
+    card: "Conversations that encourage creativity and help a student see themselves as someone who can solve a problem.",
+    headline: "Before a child builds, let them see that they can.",
+    intro:
+      "A student cannot aspire to an opportunity they have never been shown. Our government-school seminars encourage creativity and introduce young people to another way of looking at themselves: as people whose questions, ideas and abilities can help solve problems.",
+    image: "/images/home/ideas-in-motion.webp",
+    imageAlt:
+      "Illustrative notebook of ideas and practical tools on a workspace",
+    caption: "A question can be the start of something useful.",
+    sections: [
+      {
+        title: "Make room for another kind of intelligence.",
+        text: "A child is more than their ability to reproduce an answer on a board. These seminars encourage students to recognise curiosity, observation, creativity and problem-solving as abilities worth developing. The aim is to open a possibility, not prescribe one definition of success.",
+      },
+      {
+        title: "Start with the world around them.",
+        text: "We invite students to look at the needs in their communities and imagine how knowledge and technology could help. The conversation connects ambition to practical responsibility: what do you notice, what could be different, and what could you begin to learn or create?",
+      },
+      {
+        title: "Let encouragement lead somewhere.",
+        text: "Schools can speak with Forge about a seminar and the relevant next steps for their students. Where appropriate, those conversations may connect learners to our other initiatives, subject to each programme's eligibility and verification. Exposure should make a next step easier to imagine.",
+      },
+    ],
+    eligibility:
+      "This seminar initiative is for government secondary schools. School leaders, educators and partners can enquire about arranging a visit. Dates, format, requirements and support are agreed with the school; each pathway has its own eligibility and selection arrangements.",
+    action: "Discuss a seminar for your school",
+    interest: "seminars",
+    support:
+      "Volunteer your expertise or help bring the conversation to a government school.",
+  },
+];

@@ -1,0 +1,9 @@
+{
+  "result": "passed",
+  "checks": [
+    "techup: four widths, image/disclosure/metadata, activity/support states, keyboard FAQ and reduced motion",
+    "elytech: four widths, image/disclosure/metadata, activity/support states, keyboard FAQ and reduced motion",
+    "Legacy redirects, hub links, sitemap, unknown-route 404 and inactive backend guard"
+  ],
+  "realSubmissions": 0
+}

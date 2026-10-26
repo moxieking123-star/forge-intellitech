@@ -23,6 +23,8 @@
    ============================================ */
 
 :root {
+  --font-poppins: "Poppins", sans-serif;
+  --font-opensans: "Open Sans", sans-serif;
   /* ----------------------------------------
      BRAND COLORS (Light Mode Defaults)
      ---------------------------------------- */
@@ -95,6 +97,8 @@
   --cursor-glow-size: 400px;
   --cursor-glow-opacity: 0.12;
 }
+
+.local-open-sans { font-family: "Open Sans", sans-serif; }
 
 /* ============================================
    LIGHT MODE

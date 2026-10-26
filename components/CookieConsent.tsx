@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 interface CookiePreferences {
   necessary: boolean;
@@ -20,7 +20,7 @@ export default function CookieConsent() {
 
   useEffect(() => {
     // Check if user has already made a choice
-    const consent = localStorage.getItem('forge-cookie-consent');
+    const consent = localStorage.getItem("forge-cookie-consent");
     if (!consent) {
       // Show banner after a short delay
       const timer = setTimeout(() => setShowBanner(true), 2000);
@@ -37,27 +37,37 @@ export default function CookieConsent() {
     }
   }, []);
 
+  useEffect(() => {
+    const open = () => {
+      setShowBanner(true);
+      setShowPreferences(true);
+    };
+    window.addEventListener("forge-cookie-settings", open);
+    return () => window.removeEventListener("forge-cookie-settings", open);
+  }, []);
+
   const applyConsent = (prefs: CookiePreferences) => {
     // Apply analytics consent (Google Analytics)
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('consent', 'update', {
-        analytics_storage: prefs.analytics ? 'granted' : 'denied',
-        ad_storage: prefs.marketing ? 'granted' : 'denied',
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("consent", "update", {
+        analytics_storage: prefs.analytics ? "granted" : "denied",
+        ad_storage: prefs.marketing ? "granted" : "denied",
       });
     }
 
     // You can add more tracking services here
     if (prefs.analytics) {
-      console.log('✅ Analytics cookies enabled');
+      console.log("✅ Analytics cookies enabled");
     }
     if (prefs.marketing) {
-      console.log('✅ Marketing cookies enabled');
+      console.log("✅ Marketing cookies enabled");
     }
   };
 
   const saveConsent = (prefs: CookiePreferences) => {
-    localStorage.setItem('forge-cookie-consent', JSON.stringify(prefs));
-    localStorage.setItem('forge-cookie-consent-date', new Date().toISOString());
+    localStorage.setItem("forge-cookie-consent", JSON.stringify(prefs));
+    localStorage.setItem("forge-cookie-consent-date", new Date().toISOString());
+    window.dispatchEvent(new Event("forge-consent-change"));
     applyConsent(prefs);
   };
 
@@ -75,15 +85,19 @@ export default function CookieConsent() {
   };
 
   const rejectAll = () => {
-    const minimalConsent = { necessary: true, analytics: false, marketing: false };
+    const minimalConsent = {
+      necessary: true,
+      analytics: false,
+      marketing: false,
+    };
     setPreferences(minimalConsent);
     saveConsent(minimalConsent);
     setShowBanner(false);
   };
 
   const togglePreference = (key: keyof CookiePreferences) => {
-    if (key === 'necessary') return; // Can't disable necessary cookies
-    setPreferences(prev => ({ ...prev, [key]: !prev[key] }));
+    if (key === "necessary") return; // Can't disable necessary cookies
+    setPreferences((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
   return (
@@ -91,26 +105,29 @@ export default function CookieConsent() {
       {showBanner && (
         <div
           className={`fixed bottom-0 left-0 right-0 z-[9999] p-4 md:p-6 transition-all duration-300 ease-out ${
-            isAnimating ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+            isAnimating
+              ? "translate-y-0 opacity-100"
+              : "translate-y-full opacity-0"
           }`}
         >
           <div className="max-w-4xl mx-auto bg-[var(--env-surface)] rounded-2xl shadow-2xl border border-[var(--env-border)] overflow-hidden">
-            
             {/* Main Banner View */}
             {!showPreferences ? (
               <div className="p-6 md:p-8">
                 <div className="flex items-start gap-4">
                   {/* Cookie Icon */}
                   <div className="text-4xl hidden sm:block">🍪</div>
-                  
+
                   <div className="flex-1">
                     <h3 className="font-heading font-bold text-lg md:text-xl text-[var(--env-text-primary)] mb-2">
                       We value your privacy
                     </h3>
                     <p className="text-sm md:text-base text-[var(--env-text-secondary)] leading-relaxed">
-                      We use cookies to enhance your browsing experience, analyze site traffic, 
-                      and personalize content. By clicking "Accept All", you consent to our use 
-                      of cookies. You can customize your preferences or reject non-essential cookies.
+                      We use cookies to enhance your browsing experience,
+                      analyze site traffic, and personalize content. By clicking
+                      "Accept All", you consent to our use of cookies. You can
+                      customize your preferences or reject non-essential
+                      cookies.
                     </p>
                   </div>
                 </div>
@@ -166,8 +183,18 @@ export default function CookieConsent() {
                     className="w-8 h-8 rounded-full flex items-center justify-center text-[var(--env-text-secondary)] hover:text-[var(--env-text-primary)] hover:bg-[var(--env-border)] transition-colors"
                     aria-label="Close preferences"
                   >
-                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
                     </svg>
                   </button>
                 </div>
@@ -180,12 +207,11 @@ export default function CookieConsent() {
                         Necessary Cookies
                       </h4>
                       <p className="text-sm text-[var(--env-text-tertiary)] mt-1">
-                        Required for the website to function properly. Cannot be disabled.
+                        Required for the website to function properly. Cannot be
+                        disabled.
                       </p>
                     </div>
-                    <div 
-                      className="w-12 h-7 rounded-full relative bg-[var(--chapter-accent)] cursor-not-allowed opacity-80"
-                    >
+                    <div className="w-12 h-7 rounded-full relative bg-[var(--chapter-accent)] cursor-not-allowed opacity-80">
                       <div className="absolute right-1 top-1 w-5 h-5 bg-white rounded-full shadow-sm" />
                     </div>
                   </div>
@@ -197,24 +223,26 @@ export default function CookieConsent() {
                         Analytics Cookies
                       </h4>
                       <p className="text-sm text-[var(--env-text-tertiary)] mt-1">
-                        Help us understand how visitors interact with our website.
+                        Help us understand how visitors interact with our
+                        website.
                       </p>
                     </div>
                     <button
-                      onClick={() => togglePreference('analytics')}
+                      onClick={() => togglePreference("analytics")}
                       className={`
                         w-12 h-7 rounded-full relative transition-colors duration-300
-                        ${preferences.analytics 
-                          ? 'bg-[var(--chapter-accent)]' 
-                          : 'bg-[var(--env-border)]'
+                        ${
+                          preferences.analytics
+                            ? "bg-[var(--chapter-accent)]"
+                            : "bg-[var(--env-border)]"
                         }
                       `}
                       aria-label="Toggle analytics cookies"
                     >
-                      <div 
+                      <div
                         className={`
                           absolute top-1 w-5 h-5 bg-white rounded-full shadow-sm transition-all duration-300
-                          ${preferences.analytics ? 'right-1' : 'left-1'}
+                          ${preferences.analytics ? "right-1" : "left-1"}
                         `}
                       />
                     </button>
@@ -227,24 +255,26 @@ export default function CookieConsent() {
                         Marketing Cookies
                       </h4>
                       <p className="text-sm text-[var(--env-text-tertiary)] mt-1">
-                        Used to deliver personalized advertisements and measure their effectiveness.
+                        No advertising cookies are currently configured on this
+                        site.
                       </p>
                     </div>
                     <button
-                      onClick={() => togglePreference('marketing')}
+                      onClick={() => togglePreference("marketing")}
                       className={`
                         w-12 h-7 rounded-full relative transition-colors duration-300
-                        ${preferences.marketing 
-                          ? 'bg-[var(--chapter-accent)]' 
-                          : 'bg-[var(--env-border)]'
+                        ${
+                          preferences.marketing
+                            ? "bg-[var(--chapter-accent)]"
+                            : "bg-[var(--env-border)]"
                         }
                       `}
                       aria-label="Toggle marketing cookies"
                     >
-                      <div 
+                      <div
                         className={`
                           absolute top-1 w-5 h-5 bg-white rounded-full shadow-sm transition-all duration-300
-                          ${preferences.marketing ? 'right-1' : 'left-1'}
+                          ${preferences.marketing ? "right-1" : "left-1"}
                         `}
                       />
                     </button>

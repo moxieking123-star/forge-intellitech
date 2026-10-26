@@ -1,0 +1,72 @@
+.hero { --cycle:36s; position:relative; isolation:isolate; overflow:hidden; background:#112820; color:#fff; min-height:800px; min-height:max(800px,calc(100svh - 100px)); display:flex; flex-direction:column; justify-content:space-between; font-family:"Manrope Variable",sans-serif; }
+.landscape,.shade { position:absolute; inset:0; z-index:-1; }
+.landscape img { object-fit:cover; object-position:60% 50%; animation:drift var(--cycle) ease-in-out infinite; }
+.landscape .possibility { animation:reveal var(--cycle) ease-in-out infinite,drift var(--cycle) ease-in-out infinite; clip-path:inset(0 100% 0 0); }
+.shade { background:linear-gradient(90deg,#061c17ee 0%,#071e17c9 28%,#071e1766 58%,#071e170c 100%),linear-gradient(0deg,#071b17e8 0%,transparent 32%,#071b1730 100%); }
+.copy { padding:58px max(28px,5.55vw) 32px; max-width:1000px; }
+.hero .eyebrow { font-size:10px; letter-spacing:.21em; text-transform:uppercase; display:flex; align-items:center; gap:10px; color:#d7e7db; margin-bottom:28px; }
+.eyebrow span { width:6px; height:6px; background:#ff8245; border-radius:50%; box-shadow:0 0 16px #ff8245; }
+.hero h1 { color:#fff; font-size:clamp(40px,5.1vw,78px); line-height:1.02; letter-spacing:-.06em; font-weight:650; max-width:800px; }
+.hero .answer { font-size:clamp(49px,6.4vw,96px); color:#fff; line-height:.99; letter-spacing:-.065em; font-weight:800; margin-top:16px; }
+.answer em { font-style:normal; color:#ff844a; }
+.hero .lead { max-width:500px; color:#e4ece4; font-size:17px; line-height:1.6; margin-top:28px; }
+.actions { display:flex; align-items:center; gap:22px 28px; flex-wrap:wrap; margin-top:30px; }
+.primary,.secondary { min-height:48px; font-size:14px; font-weight:750; display:inline-flex; align-items:center; justify-content:space-between; gap:20px; }
+.primary { border-radius:7px; background:#f47738; color:#11251c!important; padding:16px 21px; transition:background .2s,transform .2s; }
+.primary:hover { background:#ff9c67; transform:translateY(-2px); }
+.secondary { color:#fff!important; border-bottom:1px solid #c4d1c2; }
+.ndeca { display:inline-flex; gap:16px; margin-top:24px; font-size:11px; color:#dce7dc!important; padding:8px 0; }
+.bottom { padding:10px max(28px,5.55vw) 24px; display:grid; grid-template-columns:1fr; gap:12px 30px; }
+.timeline { display:flex; align-items:center; gap:14px; max-width:450px; font-size:10px; text-transform:uppercase; letter-spacing:.12em; color:#e2ece1; }
+.timeline i { position:relative; height:1px; background:#ffffff50; flex:1; overflow:hidden; min-width:30px; }
+.timeline i::after { content:""; position:absolute; inset:0; background:#ff925b; transform:scaleX(0); transform-origin:left; animation:progress var(--cycle) ease-in-out infinite; }
+.controls { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.controls button { border:1px solid #d8e4d05c; background:#10251e88; color:#f5f7f0; border-radius:20px; min-height:36px; padding:8px 12px; font:600 10px "Manrope Variable",sans-serif; cursor:pointer; }
+.hero .disclosure { grid-column:1/-1; font-size:9px; color:#c8d5c6; max-width:600px; line-height:1.5; }
+.mobileBreak { display:none; }
+.sunlight { position:absolute; width:40%; height:80%; top:-20%; right:3%; background:radial-gradient(ellipse,#ffde9b24,transparent 65%); animation:light var(--cycle) ease-in-out infinite; pointer-events:none; }
+.birds { position:absolute; width:130px; top:21%; right:15%; color:#193d32; animation:flight 26s linear infinite; opacity:.7; }
+.hero[data-paused=true] .landscape *, .hero[data-paused=true] .timeline i::after { animation-play-state:paused!important; }
+.hero[data-scene=today] .landscape img, .hero[data-scene=possibility] .landscape img { animation:none; transform:scale(1.03); }
+.hero[data-scene=today] .possibility { animation:none; clip-path:inset(0 100% 0 0); }
+.hero[data-scene=possibility] .possibility { animation:none; clip-path:inset(0); }
+.hero[data-scene=possibility] .timeline i::after { animation:none; transform:scaleX(1); }
+.hero[data-scene=today] .timeline i::after { animation:none; transform:scaleX(0); }
+@media(prefers-reduced-motion:no-preference) {
+ .copy .eyebrow { animation:words .75s .1s both; }
+ .copy h1 { animation:words .9s .3s both; }
+ .copy .answer { animation:words 1.1s 2.8s both; }
+ .copy .lead { animation:words .8s .8s both; }
+ .copy .actions, .copy .ndeca { animation:words .8s 1s both; }
+}
+@keyframes words { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+@keyframes drift { 0%,100%{transform:scale(1.03) translateX(0)} 50%{transform:scale(1.08) translateX(-.6%)} }
+@keyframes reveal { 0%,10%,100%{clip-path:inset(0 100% 0 0)} 46%,77%{clip-path:inset(0)} }
+@keyframes progress { 0%,10%,100%{transform:scaleX(0)} 46%,77%{transform:scaleX(1)} }
+@keyframes light { 0%,100%{opacity:.4} 55%{opacity:1} }
+@keyframes flight { from{transform:translateX(200px) translateY(15px)} to{transform:translateX(-420px) translateY(-30px)} }
+@media(max-width:700px) {
+ .hero { min-height:880px; min-height:max(880px,calc(100svh - 80px)); }
+ .copy { padding:42px 24px 26px; }
+ .hero .eyebrow { font-size:8px; letter-spacing:.16em; margin-bottom:27px; }
+ .hero h1 { font-size:clamp(37px,9.5vw,60px); line-height:1.06; }
+ .hero .answer { font-size:clamp(48px,12.2vw,76px); margin-top:22px; }
+ .hero .lead { font-size:15px; max-width:380px; margin-top:26px; }
+ .desktopBreak { display:none; } .mobileBreak { display:initial; }
+ .shade { background:linear-gradient(90deg,#061c17e8,#071e1780),linear-gradient(0deg,#071b17f5 0%,transparent 58%); }
+ .landscape img { object-position:68% 50%; }
+ .actions { gap:13px; flex-direction:column; align-items:flex-start; margin-top:26px; }
+ .primary,.secondary { font-size:13px; }
+ .bottom { padding:0 24px 120px; grid-template-columns:1fr; gap:15px; }
+ .timeline { max-width:100%; font-size:8px; }
+ .controls { max-width:155px; flex-direction:column; align-items:flex-start; }
+ .hero .disclosure { max-width:235px; }
+ .birds { top:11%; right:-10%; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .hero *, .hero *::after { animation:none!important; transition:none!important; }
+ .landscape .possibility { clip-path:inset(0); }
+ .hero[data-scene=today] .possibility { clip-path:inset(0 100% 0 0); }
+ .timeline i::after { transform:scaleX(1); }
+ .birds { display:none; }
+}

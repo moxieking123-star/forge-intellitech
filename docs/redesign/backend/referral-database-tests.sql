@@ -1,0 +1,53 @@
+-- Integration assertions use synthetic users and an isolated schema; ALL test data is rolled back.
+begin;
+create temporary table forge_test_results(name text,passed boolean);
+select set_config('forge.test_first_id',gen_random_uuid()::text,true);
+select set_config('forge.test_second_id',gen_random_uuid()::text,true);
+insert into auth.users(id,email) values(current_setting('forge.test_first_id')::uuid,'forge-redesign-one@example.invalid'),(current_setting('forge.test_second_id')::uuid,'forge-redesign-two@example.invalid');
+insert into forge_redesign_test.referrer_accounts(id) values(current_setting('forge.test_first_id')::uuid),(current_setting('forge.test_second_id')::uuid);
+do $$
+declare a uuid:=current_setting('forge.test_first_id')::uuid; b uuid:=current_setting('forge.test_second_id')::uuid; l forge_redesign_test.school_referrals; other forge_redesign_test.school_referrals; req uuid; n integer; blocked boolean;
+begin
+ select * into l from forge_redesign_test.create_school_referral(a,'Test School One','Test State','school-one');
+ req:=forge_redesign_test.submit_school_onboarding(jsonb_build_object('schoolKey','school-one','schoolName','Test School One','location','Test State','consent',true,'referralCode',l.code),null);
+ if not exists(select 1 from forge_redesign_test.school_onboarding_requests where id=req and referral_id=l.id and submitted_by_referrer is null) then raise exception 'Self-onboarding attribution failed'; end if;
+ insert into forge_test_results values('School link feeds the central onboarding queue',true);
+ blocked:=false;begin perform forge_redesign_test.submit_school_onboarding(jsonb_build_object('schoolKey','school-one','schoolName','Test School One','location','Test State','consent',true,'referralCode',l.code),null);exception when raise_exception then blocked:=true;end;
+ if not blocked then raise exception 'Consumed referral reused';end if;
+ insert into forge_test_results values('Consumed school link cannot be reused',true);
+ select * into other from forge_redesign_test.create_school_referral(b,'Test School Two','Test State','school-two');
+ blocked:=false;begin perform forge_redesign_test.submit_school_onboarding(jsonb_build_object('schoolKey','school-two','schoolName','Test School Two','location','Test State','consent',true,'schoolAuthorised',true,'referralCode',other.code),a);exception when raise_exception then blocked:=true;end;
+ if not blocked then raise exception 'Cross-account referral accepted';end if;
+ insert into forge_test_results values('Assisted submission rejects another referrer link',true);
+ req:=forge_redesign_test.submit_school_onboarding(jsonb_build_object('schoolKey','school-three','schoolName','Test School Three','location','Test State','consent',true,'schoolAuthorised',true),a);
+ if not exists(select 1 from forge_redesign_test.school_onboarding_requests r join forge_redesign_test.school_referrals sr on sr.id=r.referral_id where r.id=req and r.submitted_by_referrer=a and sr.referrer_id=a and sr.stage='school_requested') then raise exception 'Assisted attribution failed';end if;
+ insert into forge_test_results values('Authorised assisted onboarding automatically records the owner in the same queue',true);
+ select * into other from forge_redesign_test.create_school_referral(b,'Test School One','Test State','school-one');
+ blocked:=false;begin perform forge_redesign_test.submit_school_onboarding(jsonb_build_object('schoolKey','school-one','schoolName','Test School One','location','Test State','consent',true,'referralCode',other.code),null);exception when unique_violation then blocked:=true;end;
+ if not blocked then raise exception 'Duplicate school attributed twice';end if;
+ if not exists(select 1 from forge_redesign_test.school_referrals where id=other.id and stage='link_created') then raise exception 'Failed claim changed the link';end if;
+ insert into forge_test_results values('Duplicate school cannot be attributed twice; failed claim is atomic',true);
+ blocked:=false;begin perform forge_redesign_test.submit_school_onboarding(jsonb_build_object('schoolKey','no-authority','schoolName','No Authority','location','Test','consent',true),a);exception when raise_exception then blocked:=true;end;
+ if not blocked then raise exception 'Missing school authority accepted';end if;
+ insert into forge_test_results values('School authority is required for assisted requests',true);
+ select count(*) into n from forge_redesign_test.school_referrals where referrer_id=a;
+ for i in n+1..30 loop perform forge_redesign_test.create_school_referral(a,'Cap Test '||i,'Test','cap-'||i);end loop;
+ blocked:=false;begin perform forge_redesign_test.create_school_referral(a,'Over Cap','Test','over-cap');exception when raise_exception then blocked:=true;end;
+ if not blocked then raise exception 'Link cap failed';end if;
+ blocked:=false;begin perform forge_redesign_test.submit_school_onboarding(jsonb_build_object('schoolKey','assisted-over-cap','schoolName','Assisted Over Cap','location','Test','consent',true,'schoolAuthorised',true),a);exception when raise_exception then blocked:=true;end;
+ if not blocked then raise exception 'Assisted cap failed';end if;
+ insert into forge_test_results values('Link cap applies to both standalone and assisted creation',true);
+ if has_function_privilege('anon','forge_redesign_test.submit_school_onboarding(jsonb,uuid)','execute') or has_function_privilege('authenticated','forge_redesign_test.submit_school_onboarding(jsonb,uuid)','execute') then raise exception 'Public may call privileged operation';end if;
+ if has_table_privilege('anon','forge_redesign_test.school_onboarding_requests','select') or has_table_privilege('authenticated','forge_redesign_test.school_onboarding_requests','select') then raise exception 'Private school records readable';end if;
+ insert into forge_test_results values('Public roles cannot call service operations or read school contact payloads',true);
+end $$;
+select set_config('request.jwt.claims',json_build_object('sub',current_setting('forge.test_first_id'),'role','authenticated')::text,true);
+set local role authenticated;
+do $$begin
+ if (select count(*) from forge_redesign_test.referrer_accounts)<>1 then raise exception 'RLS account isolation failed';end if;
+ if exists(select 1 from forge_redesign_test.school_referrals where referrer_id<>(select auth.uid())) then raise exception 'Cross-account links visible';end if;
+end $$;
+reset role;
+insert into forge_test_results values('Authenticated row policies hide all other accounts and school links',true);
+select * from forge_test_results;
+rollback;

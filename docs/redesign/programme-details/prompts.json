@@ -1,0 +1,16 @@
+[
+  {
+    "programme": "techup",
+    "method": "Built-in image_gen",
+    "prompt": "Original editorial landscape photograph, 16:9, for a Nigerian secondary-school practical technology programme. Fictional Nigerian teenagers age 15-17 in neat forest-green and cream school uniforms working with a Nigerian adult instructor on a small low-voltage cardboard automated irrigation prototype with a plant, sensor wires and laptop, bright dignified school project room. Focus on hands, thoughtful collaboration and the joy of making a first prototype. Composition: project and two students on right half, warm cream wall and natural window light left. Realistic, culturally Nigerian, candid documentary-style illustration, warm terracotta details and green foliage, premium editorial photography. No logos, readable text, prize claims, identifiable real people, charts, stock watermarks or futuristic robots. This is fictional AI imagery, not an actual Forge event.",
+    "file": "public/images/programmes/techup-project-studio.webp",
+    "source": "C:/Users/Forge/.codex/generated_images/01a159da-0d99-7c33-9e71-14a813428102/exec-3a9757ef-54c3-4300-95b0-813d48d760c6.png"
+  },
+  {
+    "programme": "elytech",
+    "method": "Built-in image_gen",
+    "prompt": "Original editorial landscape photograph, 16:9, for a Nigerian primary-school discovery programme. Fictional Nigerian children age 8-10 in cream shirts with forest-green uniform details, two children working with a Nigerian adult female instructor at a colourful tactile sequencing activity: wooden arrow tiles, simple maze, building blocks and a tablet on a classroom desk. Different composition and characters from all other images: close side view, one child pointing at the next step while another arranges tiles, instructor warmly attentive. Sunlit Nigerian primary classroom, cream plaster, tactile materials, warm orange and forest-green accents, joyful concentration rather than posed smiles, dignified premium editorial realism. No real identifiable children, logos, readable text, awards or stock watermark. Illustrative fictional AI scene, not a real client school.",
+    "file": "public/images/programmes/elytech-discovery-studio.webp",
+    "source": "C:/Users/Forge/.codex/generated_images/01a159da-0d99-7c33-9e71-14a813428102/exec-ded10463-39a4-4849-936b-5107a18b17e9.png"
+  }
+]
