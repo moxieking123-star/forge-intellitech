@@ -200,3 +200,12 @@
 .editorial figcaption { margin-top: 8px; color: #526157; font-size: 11px; line-height: 1.5; }
 
 .editorial img { object-position: center 35%; }
+
+/* Layered surfaces, shared with the Forge editorial system. */
+.panel{border-radius:18px;border:1px solid var(--forge-surface-edge);box-shadow:var(--forge-surface-shadow);background-image:linear-gradient(130deg,rgba(255,255,255,.1),transparent 58%);}
+
+/* Comfortable, tactile controls; keep native choices and validation intact. */
+.page form input:not([type=checkbox]):not([type=radio]):not([type=hidden]),.page form select,.page form textarea{min-height:54px;border-radius:12px;border:1px solid #a4b1a3;background:#fffefb;padding:14px 16px;font-size:16px;box-shadow:inset 0 2px 5px #102b220a,0 1px 0 #fff}
+.page form textarea{min-height:145px;resize:vertical}.page form input[type=checkbox],.page form input[type=radio]{accent-color:#174332}
+.page form :is(input,select,textarea):focus-visible{outline:3px solid #bd481f;outline-offset:3px;box-shadow:0 0 0 6px #ed762f18}
+.page form button{min-height:48px;border-radius:12px;box-shadow:inset 0 1px 0 #ffffff30,0 3px 0 #0c241b,0 12px 20px -13px #102b2270}

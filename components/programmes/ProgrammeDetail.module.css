@@ -65,3 +65,6 @@
 @media(max-width:800px) { .hero { grid-template-columns:1fr; } .heroCopy { padding:38px 24px; } .hero h1 { font-size:clamp(42px,8.5vw,70px); } .photo { min-height:360px; } .section { padding:44px 24px; } .conviction,.panel,.next,.faq { grid-template-columns:1fr; gap:28px; } .skills { grid-template-columns:1fr 1fr; gap:28px 20px; } .skills h3 { font-size:23px; } .panel { padding:24px 18px; } .choices { display:grid; grid-template-columns:1fr 1fr; } .choices button { gap:9px; font-size:12px; padding:12px; } .choices button span:last-child { display:none; } .lead,.sectionLead { font-size:17px; } }
 @media(prefers-reduced-motion:reduce) { .page *, .page *::after { animation:none!important; transition:none!important; } }
 @media(max-width:480px) { .skills { grid-template-columns:1fr; } }
+
+/* Layered surfaces, shared with the Forge editorial system. */
+.panel{border-radius:18px;border:1px solid var(--forge-surface-edge);box-shadow:var(--forge-surface-shadow);background-image:linear-gradient(130deg,rgba(255,255,255,.1),transparent 58%);}

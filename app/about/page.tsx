@@ -85,8 +85,8 @@ export default function Page() {
             {
               title: "Forge Intellitech",
               body: "The company builds technology and practical learning programmes. Our ambition is to turn an understanding of real problems into things people can actually use.",
-              href: "/work",
-              link: "Explore our work",
+              href: "/products",
+              link: "Explore what we’re building",
             },
             {
               title: "Forge ITs",

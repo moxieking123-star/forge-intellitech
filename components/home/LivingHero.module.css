@@ -70,3 +70,14 @@
  .timeline i::after { transform:scaleX(1); }
  .birds { display:none; }
 }
+
+/* Depth follows an ordinary mouse visit; touch and reduced motion stay still. */
+.landscape { inset:-12px; transform:translate3d(var(--depth-x,0px),var(--depth-y,0px),0); transition:transform .5s ease-out; }
+.answer em { display:inline-block; color:#ffab76; text-shadow:0 1px 0 #ffdcbb,0 3px 0 #b84c24,0 6px 0 #70351e,0 12px 24px #0008,0 0 35px #ff844a55; }
+.primary { border:1px solid #ffbf8b; background:linear-gradient(155deg,#ffa25d,#f47738 70%); box-shadow:inset 0 1px 0 #ffe7c4a0,0 5px 0 #854421,0 12px 26px #0005; }
+.primary:active { transform:translateY(3px); box-shadow:inset 0 1px 0 #ffe7c4a0,0 2px 0 #854421,0 6px 14px #0005; }
+.controls button:focus-visible,.primary:focus-visible,.secondary:focus-visible,.ndeca:focus-visible { outline:3px solid #ffd4ac; outline-offset:5px; }
+@media(prefers-reduced-motion:reduce) {
+ .landscape { transform:none; }
+ .answer em { text-shadow:0 2px 0 #8b4224,0 5px 15px #0006; }
+}

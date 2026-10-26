@@ -366,3 +366,6 @@
 .page :is(p,span,li,td,th,label){font-family:inherit}
 
 .articleHead .title{max-width:1050px;text-wrap:balance}.byline{border-top:1px solid #b7beb4;padding-top:20px;letter-spacing:.025em}.prose>section:first-child>p:first-of-type{font-size:clamp(20px,2vw,25px);line-height:1.7;color:#173e30}.prose section{scroll-margin-top:110px}.prose>section+section{margin-top:52px}.articleImage img{object-position:center}.articleImage figcaption{max-width:760px}.aside a:focus-visible{outline:2px solid #bd481f;outline-offset:4px}
+
+/* Layered surfaces, shared with the Forge editorial system. */
+.card{border-radius:18px;border:1px solid var(--forge-surface-edge);box-shadow:var(--forge-surface-shadow);background-image:linear-gradient(130deg,rgba(255,255,255,.1),transparent 58%);}

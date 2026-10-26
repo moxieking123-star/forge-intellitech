@@ -1247,6 +1247,8 @@
   }
 }
 /* Editorial reference: quiet cream masthead and outlined donor action. */
+.button{border-radius:12px;box-shadow:inset 0 1px 0 #ffffff50,0 3px 0 #a83712,0 14px 28px -16px #451e1480}
+.workRow{padding:26px clamp(20px,3vw,32px);margin:14px 0;border:1px solid var(--forge-surface-edge);border-radius:18px;background:linear-gradient(130deg,#fffdf7,#ede9df);box-shadow:var(--forge-surface-shadow)}
 .header {
   border-bottom: 0;
   background: #f4f1e9;

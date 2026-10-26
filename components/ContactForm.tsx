@@ -203,12 +203,6 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={isLoading}
-        style={{
-          background: "#10211d",
-          color: "#fff",
-          padding: "15px 24px",
-          borderRadius: 5,
-        }}
       >
         {isLoading ? "Sending…" : "Send enquiry →"}
       </button>
