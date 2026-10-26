@@ -42,7 +42,7 @@ const values = [
 // Team members
 const team = [
   { name: "Jehovah God", role: "Founder", bio: "The timeless Creator and supreme founder, the source of wisdom and purpose guiding Forge Intellitech's mission to build Africa's future with clarity.", image: "/images/team/god.jpg", color: "#FF8C42" },
-  { name: "Moxie Adeniyi", role: "Chief Executive Officer", bio: "Visionary in driving African innovation through human capacity development, building scalable systems that empower youth, and position the continent globally.", image: "/images/team/founder.jpg", color: "#14B8B8" },
+  { name: "Moxie Adeniyi", role: "Chief Executive Officer", bio: "Visionary in driving African innovation through human capacity development, building scalable systems that empower youth, and position the continent globally.", image: "/images/team/founder.jpg", color: "#14B8B8", linkedin: "https://ng.linkedin.com/in/moxie-adeniyi-167460116" },
   { name: "Adeola Oyewole", role: "Chairman", bio: "A leader committed to strengthening African EdTech institutions and empowering the next generation through strategic partnerships, sustainable growth and lasting impact.", image: "/images/team/chairman.jpg", color: "#52B788" },
 ];
 
@@ -590,6 +590,7 @@ export default function AboutPageClient() {
                     <p className="text-env-secondary leading-relaxed text-sm">
                       {member.bio}
                     </p>
+                    {"linkedin" in member && member.linkedin && <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex text-sm font-medium text-[#14B8B8] hover:underline" aria-label={`View ${member.name} on LinkedIn`}>LinkedIn ↗</a>}
                   </div>
                 </div>
               </AnimatedSection>

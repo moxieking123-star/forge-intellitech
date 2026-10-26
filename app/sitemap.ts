@@ -14,12 +14,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "programmes/onboard",
     "programmes/resources",
     "earn-with-forge",
+    "careers",
+    "launchpad",
     "blog",
     "privacy",
     "terms",
     "endless-possibilities",
     ...[
-      "launchpad",
       "give-a-child-a-laptop",
       "in-school-launchpad",
       "intern-with-forge",
@@ -27,7 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ].map((s) => `endless-possibilities/${s}`),
     ...stories.map((s) => `blog/${s.slug}`),
   ];
-  return routes.map((route) => ({
+  return [...new Set(routes)].map((route) => ({
     url: `https://forgeintellitech.com/${route}`,
     changeFrequency: "monthly",
     priority: route ? 0.7 : 1,

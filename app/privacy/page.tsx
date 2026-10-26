@@ -50,9 +50,20 @@ export default function Page() {
           sponsor’s interest does not give them access to a student’s private
           contact details.
         </p>
+        <h2>Website feedback</h2>
+        <p>
+          The “Help us forge this” feedback form is available on the website.
+          You may send a reaction, an optional comment and an optional visitor
+          category. The form also records the page and section you chose, the
+          site version and a temporary tab identifier to help prevent duplicate
+          submissions and abuse. It does not ask for your name or email. Forge
+          uses feedback to review and improve the website. Please do not include
+          sensitive personal information. You can contact us at the email above
+          with questions or a request about feedback you submitted.
+        </p>
         <h2>Storage and access</h2>
         <p>
-          Website submissions are currently disabled while the redesigned frontend is being prepared. Completing a form on this preview does not save or send an enquiry. When a submission service is connected, this notice will be updated to explain its providers and storage. Access is for
+          Website submissions are processed by Forge’s website services and stored in its hosted database. Feedback is stored separately from enquiries. Access is for
           authorised people handling the request and the service providers
           needed to operate it. These providers may process information outside
           Nigeria. We do not publish applications or sell enquiry information.

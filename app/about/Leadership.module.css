@@ -10,3 +10,4 @@
 .gratitudeMessage p{font-size:clamp(17px,1.45vw,20px);line-height:1.85;margin:0;max-width:52ch}
 .gratitudeSignature{display:block;margin-top:24px;padding-top:18px;border-top:1px solid #ffffff24;font-size:12px;line-height:1.6;color:#f7d58f}
 @media(max-width:750px){.gratitude{grid-template-columns:1fr;margin-bottom:42px;border-radius:22px}.gratitudeMessage{border-left:0;border-top:1px solid #f6d38a45;padding:26px 0 0}.gratitude h2 span{font-size:clamp(48px,13vw,76px)}}
+.profileLink{display:inline-flex;align-items:center;gap:5px;margin-top:12px;color:#147c76;font-size:.875rem;font-weight:600;text-underline-offset:3px}.profileLink:hover{text-decoration:underline}.profileLink:focus-visible{outline:2px solid currentColor;outline-offset:3px}.profileLink svg{flex:none}

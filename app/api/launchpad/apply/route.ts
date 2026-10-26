@@ -1,7 +1,7 @@
 import {backendEnvironmentEnabled} from "@/lib/backend-runtime";
 import { notificationMailboxes } from "@/lib/notification-routing";
 import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin as supabase } from "@/lib/supabase-admin";
 import { resend, FROM_EMAIL } from "@/lib/resend";
 
 export async function POST(request: NextRequest) {

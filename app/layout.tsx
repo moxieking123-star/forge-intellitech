@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "We build technology solutions rooted in African realities. From education to fintech, we create products that understand and serve our continent. Based in Lagos, Nigeria.",
+    "Forge Intellitech builds technology products and practical digital learning programmes shaped by needs in Nigeria and across Africa.",
 
   // Enhanced Keywords
   keywords: [
@@ -52,11 +52,9 @@ export const metadata: Metadata = {
     "African tech company",
     "Lagos tech startup",
     "education technology Africa",
-    "fintech Nigeria",
     "TechUp digital skills",
     "LaunchPad startup incubator",
     "digital skills training Nigeria",
-    "coding bootcamp Lagos",
     "African software developers",
     "technology for Africa",
     "Nigerian tech innovation",
@@ -89,7 +87,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Forge Intellitech | Technology Built for Africa",
     description:
-      "We build technology solutions rooted in African realities. From education to fintech, we create products that understand and serve our continent.",
+      "Forge Intellitech builds technology products and practical digital learning programmes shaped by needs in Nigeria and across Africa.",
     url: "https://forgeintellitech.com",
     siteName: "Forge Intellitech",
     locale: "en_US",
@@ -110,7 +108,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Forge Intellitech | Technology Built for Africa",
     description:
-      "We build technology solutions rooted in African realities. From education to fintech, we create products that understand and serve our continent.",
+      "Forge Intellitech builds technology products and practical digital learning programmes shaped by needs in Nigeria and across Africa.",
 
     images: ["/images/og-image.png"],
   },
@@ -236,7 +234,7 @@ export default function RootLayout({
 
       <body className="local-open-sans min-h-screen flex flex-col bg-env-bg-primary">
         <ThemeProvider defaultMode="dark" defaultChapter="forge">
-          <SiteFrame previewFeedback={process.env.VERCEL_ENV === "preview"}>{children}</SiteFrame>
+          <SiteFrame>{children}</SiteFrame>
         </ThemeProvider>
 
         {/* Analytics */}

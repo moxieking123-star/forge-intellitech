@@ -4,7 +4,7 @@ import {backendEnvironmentEnabled} from "@/lib/backend-runtime";
 // ============================================
 
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { supabaseAdmin as supabase } from '@/lib/supabase-admin';
 
 export async function POST(request: NextRequest) {
   if(backendEnvironmentEnabled())return NextResponse.json({error:"This older endpoint is retired in the redesign. Please use the current website form."},{status:410,headers:{"Cache-Control":"no-store"}});

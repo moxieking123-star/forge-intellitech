@@ -64,7 +64,7 @@ export default function PreviewFeedback() {
     <button ref={trigger} className={s.trigger} onClick={open} aria-haspopup="dialog">Help us forge this <span aria-hidden="true">↗</span></button>
     <dialog ref={dialog} className={s.dialog} aria-labelledby="feedback-title" onCancel={close} onClose={() => trigger.current?.focus()}>
       <button type="button" className={s.close} onClick={close} aria-label="Close feedback">×</button>
-      <span className={s.eyebrow}>Preview · Your honest eyes help</span>
+      <span className={s.eyebrow}>Your voice helps shape Forge</span>
       <h2 id="feedback-title">Help us forge this.</h2>
       {status === "sent" ? <div role="status" className={s.success}><h3>We’ve saved your feedback.</h3><p>Thank you for taking the time. This is how we make it better, together.</p><button className={s.send} onClick={close}>Keep exploring →</button></div> : <form onSubmit={submit}>
         <p className={s.intro}>What makes you curious? What isn’t working? Tell us as yourself.</p>
@@ -78,7 +78,7 @@ export default function PreviewFeedback() {
         <textarea id="feedback-comment" rows={3} maxLength={1200} value={comment} disabled={status === "sending"} onChange={e => setComment(e.target.value)} placeholder="I expected… / I couldn’t find… / This made me think…" />
         <label className={s.label} htmlFor="feedback-visitor">I’m visiting as… <span>(optional)</span></label>
         <select id="feedback-visitor" value={visitorType} disabled={status === "sending"} onChange={e => setVisitorType(e.target.value)}><option value="">Prefer not to say</option>{visitorTypes.map(v => <option key={v}>{v}</option>)}</select>
-        <p className={s.privacy}>No name or email needed. We save only what you send, this page and section, the preview version and a temporary tab ID. Please leave out personal details. Feedback is used to improve this preview.</p>
+        <p className={s.privacy}>No name or email is required. We save your feedback, the page and section, the site version and a temporary tab ID so the team can review it. Please leave out sensitive personal details.</p>
         {error && <p role="alert" className={s.error}>{error}</p>}
         <button className={s.send} type="submit" disabled={status === "sending" || (!reaction && !comment.trim())}>{status === "sending" ? "Saving your feedback…" : "Send honest feedback →"}</button>
         <p role="status" aria-live="polite" className={s.sr}>{status === "sending" ? "Saving your feedback" : ""}</p>

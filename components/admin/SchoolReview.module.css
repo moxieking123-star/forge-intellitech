@@ -14,3 +14,4 @@
 @media(prefers-reduced-motion:reduce){.careOrbit svg{animation:none}.root button{transition:none}}
 .root input:not([type=checkbox]):not([type=radio]):not([type=hidden]),.root textarea,.root select{min-height:54px;border-radius:12px;padding:14px 16px;border-color:#a4b1a3;background:#fffefb;font-size:16px;box-shadow:inset 0 2px 5px #102b220a}
 .root button{border-radius:12px;box-shadow:inset 0 1px 0 #ffffff25,0 2px 0 #0a271c}
+.login form button{min-width:190px;cursor:pointer}.login form button:disabled{opacity:.48;cursor:not-allowed;box-shadow:none}.login form[aria-busy=true] button{cursor:wait}.login form button:not(:disabled):active{transform:translateY(2px)}.login form :is(.message,.error){margin-top:18px;padding:16px;border-radius:12px;line-height:1.65}
