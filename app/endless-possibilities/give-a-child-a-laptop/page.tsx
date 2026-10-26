@@ -183,6 +183,11 @@ export default function EndlessPossibilitiesPage() {
         </div>
       </section>
 
+      <figure className={styles.learningPortrait}>
+        <Image src="/images/editorial/laptop-class-beginning.webp" alt="AI-created Nigerian secondary-school students practising a coding project together with a teacher nearby" width={1672} height={941} sizes="(max-width:700px) 100vw, 90vw" />
+        <figcaption>AI-created students. A picture of the opportunity we are working to provide: a device, guidance and room to practise.</figcaption>
+      </figure>
+
       <section className={styles.process} aria-labelledby="process-title">
         <div className={styles.sectionHeading}>
           <p className={styles.eyebrow}>

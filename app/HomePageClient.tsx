@@ -67,13 +67,6 @@ export default function HomePageClient() {
         className={styles.movement}
         aria-labelledby="movement-title"
       >
-        <Image
-          src="/images/home/orange-beginning.webp"
-          alt=""
-          fill
-          sizes="100vw"
-          className={styles.movementImage}
-        />
         <div className={styles.movementCopy}>
           <p className={styles.eyebrow}>
             Endless Possibilities — a Forge ITs movement
@@ -99,6 +92,10 @@ export default function HomePageClient() {
             </Link>
           </div>
         </div>
+        <figure className={styles.studentFigure}>
+          <Image src="/images/home/student-possibilities.webp" alt="AI illustration of Nigerian secondary-school students sharing an idea on a laptop" width={1200} height={800} sizes="(max-width:850px) 100vw, 48vw" />
+          <figcaption>AI-created students, illustrating the opportunity we want to make possible.</figcaption>
+        </figure>
       </section>
       <section
         id="stories"

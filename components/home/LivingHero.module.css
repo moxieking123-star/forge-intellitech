@@ -81,3 +81,9 @@
  .landscape { transform:none; }
  .answer em { text-shadow:0 2px 0 #8b4224,0 5px 15px #0006; }
 }
+
+.hero{--cycle:20s}
+.chapters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.chapters button{display:inline-flex;align-items:center;gap:8px;padding:10px 13px;min-height:42px;border:1px solid #ffffff4a;border-radius:12px;background:#0b231edb;color:#fff;font:650 11px/1.4 "Manrope Variable",sans-serif;text-align:start;cursor:pointer;box-shadow:inset 0 1px 0 #ffffff12}
+.chapters button span{color:#ffc86a;font-size:9px}.chapters button[aria-pressed=true]{border-color:#ffc86a;background:#174939}.chapters button:focus-visible{outline:3px solid #ffc86a;outline-offset:3px}
+@media(max-width:700px){.chapters{display:grid;grid-template-columns:1fr 1fr}.chapters button{padding:9px 10px;font-size:10px}.bottom{padding-bottom:135px}}

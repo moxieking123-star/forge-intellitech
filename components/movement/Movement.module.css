@@ -1116,3 +1116,7 @@
 
 /* Layered surfaces, shared with the Forge editorial system. */
 .roleDetail, .heroNote, .eligibility{border-radius:18px;border:1px solid var(--forge-surface-edge);box-shadow:var(--forge-surface-shadow);background-image:linear-gradient(130deg,rgba(255,255,255,.1),transparent 58%);}
+
+.initiativeRow>*{min-width:0}.initiativeRow>p{text-align:start}.initiativeRow h3{line-height:1.18}.eligibility{padding:clamp(22px,3vw,36px)}
+.initiativeNumber{color:var(--forge-brand-blue)}
+.learningPortrait{width:min(1280px,calc(100% - 48px));margin:0 auto 64px;border-radius:24px;overflow:hidden;border:1px solid #d6ad81;background:#e9d5bb;box-shadow:var(--forge-surface-shadow)}.learningPortrait img{width:100%;height:auto;display:block}.learningPortrait figcaption{padding:16px 22px;font-size:12px;line-height:1.6;color:#163f32;background:#f5eee0}

@@ -31,10 +31,15 @@ export default function Page() {
           <Link href="/contact?interest=partnership">Build with us →</Link>
         </div>
       </header>
-      <section className={s.section}>
-        <p className={s.eyebrow}>Where this began</p>
-        <h2>With gratitude to Jehovah.</h2>
-        <p>Forge was founded through inspiration from Jehovah. We are grateful that he gave us this beginning, and we hope that what we build, how we work and the care we show people will bring glory to him.</p>
+      <section className={leadership.gratitude} aria-labelledby="gratitude-title">
+        <div>
+          <p className={leadership.gratitudeKicker}>Where this began</p>
+          <h2 id="gratitude-title">With gratitude to <span>Jehovah.</span></h2>
+        </div>
+        <div className={leadership.gratitudeMessage}>
+          <p>Forge was founded through inspiration from Jehovah. We are grateful that he gave us this beginning, and we hope that what we build, how we work and the care we show people will bring glory to him.</p>
+          <span className={leadership.gratitudeSignature}>A beginning we do not take for granted.</span>
+        </div>
       </section>
       <section className={s.section}>
         <p className={s.eyebrow}>The people carrying the work forward</p>
@@ -66,7 +71,7 @@ export default function Page() {
         <figure>
           <Image
             className={s.image}
-            src="/images/editorial/company-team.webp"
+            src="/images/editorial/forge-shared-ideas.webp"
             alt="Illustration of Nigerian adults collaborating on an idea in a creative technology studio"
             width={1024}
             height={1024}

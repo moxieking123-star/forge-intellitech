@@ -635,3 +635,5 @@
 
 /* Layered surfaces, shared with the Forge editorial system. */
 .stageExplorer, .note{border-radius:18px;border:1px solid var(--forge-surface-edge);box-shadow:var(--forge-surface-shadow);background-image:linear-gradient(130deg,rgba(255,255,255,.1),transparent 58%);}
+
+.secondaryColumns>*{min-width:0}.secondaryColumns :is(p,dd){text-align:start}.stageExplorer{border-top:3px solid var(--forge-brand-blue)}.note{border-top:3px solid var(--forge-brand-green)}

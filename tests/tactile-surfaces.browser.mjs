@@ -12,7 +12,7 @@ try{
  const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));
  // This visual check must never submit a real application, email or other mutation.
  await page.route('**/api/**',async route=>route.request().method()==='GET'?route.continue():route.fulfill({status:503,json:{error:'Visual verification: no real submissions.'}}));
- for(const route of ['/','/about','/contact','/programmes','/programmes/resources','/programmes/onboard','/join/apply?purpose=volunteer','/earn-with-forge','/endless-possibilities','/products','/blog','/admin']){
+ for(const route of ['/','/about','/contact','/programmes','/programmes/techup','/programmes/elytech','/programmes/resources','/programmes/onboard','/join/apply?purpose=volunteer','/earn-with-forge','/endless-possibilities','/endless-possibilities/give-a-child-a-laptop','/products','/blog','/admin']){
   await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:120000});
   await page.locator('main h1').first().waitFor();
   for(const width of [320,390,768,1440]){
@@ -22,6 +22,24 @@ try{
    assert.equal(overflow,false,route+' overflow at '+width);
   }
   assert.equal(await page.locator('a[href="/work"]').count(),0,route+' obsolete navigation');
+  if(route==='/about'){
+   const gratitude=page.locator('section[aria-labelledby="gratitude-title"]');
+   const word=gratitude.locator('h2 span');
+   assert.equal(await word.innerText(),'Jehovah.');
+   const metrics=await word.evaluate(el=>({size:parseFloat(getComputedStyle(el).fontSize),parentSize:parseFloat(getComputedStyle(el.parentElement).fontSize),color:getComputedStyle(el).color}));
+   assert(metrics.size>metrics.parentSize*1.5);
+   assert.equal(metrics.color,'rgb(255, 213, 130)');
+   await gratitude.screenshot({path:dir+'/gratitude-desktop.png'});
+   await page.setViewportSize({width:390,height:844});
+   await gratitude.screenshot({path:dir+'/gratitude-mobile.png'});
+  }
+  if(route==='/blog'){
+   const cards=page.locator('main article');
+   for(const card of await cards.all()){
+    const padding=await card.evaluate(el=>parseFloat(getComputedStyle(el).paddingLeft));
+    assert(padding>=22,'Story card has a comfortable reading inset');
+   }
+  }
   if(route==='/contact'){
    const input=page.locator('main input[type=email]').first();await input.focus();
    const style=await input.evaluate(el=>({height:el.getBoundingClientRect().height,radius:parseFloat(getComputedStyle(el).borderRadius),outline:getComputedStyle(el).outlineStyle}));
