@@ -40,7 +40,7 @@ export default function Page() {
         <p className={s.eyebrow}>The people carrying the work forward</p>
         <h2>Leadership, with a responsibility to build.</h2>
         <div className={leadership.people}>
-          <figure className={leadership.person}><Image src="/images/team/founder.jpg" alt="Moxie Adeniyi" width={400} height={400} /><figcaption><span>01 / Chief Executive Officer</span><h3>Moxie Adeniyi</h3></figcaption></figure>
+          <figure className={leadership.person}><Image src="/images/team/founder.jpg" alt="Moxie Adeniyi" width={400} height={400} /><figcaption><span>01 / Chief Executive Officer</span><h3>Moxie Adeniyi</h3><a className={leadership.profileLink} href="https://ng.linkedin.com/in/moxie-adeniyi-167460116" target="_blank" rel="noopener noreferrer" aria-label="View Moxie Adeniyi's LinkedIn profile">LinkedIn ↗</a></figcaption></figure>
           <figure className={leadership.person}><Image src="/images/team/chairman.jpg" alt="Adeola Oyewole" width={400} height={400} /><figcaption><span>02 / Chairman</span><h3>Adeola Oyewole</h3></figcaption></figure>
         </div>
       </section>
