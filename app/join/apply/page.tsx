@@ -5,6 +5,7 @@ import s from '@/components/site/Site.module.css';
 export const metadata: Metadata = {
   title: 'Work with Forge — experience in development',
   description: 'Forge is preparing a better way for people to share their skills and journey with us.',
+  robots: { index: false, follow: false },
   alternates: { canonical: '/join/apply' },
 };
 
