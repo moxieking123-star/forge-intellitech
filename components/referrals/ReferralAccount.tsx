@@ -10,8 +10,10 @@ import {
 } from "react";
 import type { User, SupabaseClient } from "@supabase/supabase-js";
 import { referralAuth } from "@/lib/referrals/client";
+import { referralSignInFailure, referralReturnUrl } from "@/lib/referrals/signin";
 import s from "./Referrals.module.css";
 import ReferralAgreement, { PayoutProfile } from "./ReferralAgreement";
+import ReferralStatements from "./ReferralStatements";
 
 type ReferralLink = {
   id: string;
@@ -63,6 +65,7 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
   const [user, setUser] = useState<User | null>(null);
   const [authReady, setAuthReady] = useState(false);
   const [authError, setAuthError] = useState("");
+  const [linkError, setLinkError] = useState("");
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
   const [signingIn, setSigningIn] = useState(false);
@@ -80,6 +83,8 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
   activeUserId.current = user?.id ?? null;
   useEffect(()=>{
     if(!enabled)return;
+    const failure=referralSignInFailure(window.location.href);
+    if(failure){setLinkError(failure.message);window.history.replaceState(window.history.state,"",failure.cleanUrl);}
     let active=true;setConnectionReady(false);
     referralAuth().then(config=>{if(active){setSupabase(config.client);setEmailLoginEnabled(config.emailLoginEnabled);}}).catch(()=>{if(active)setAuthError("Secure account access could not be connected. Please try again.");}).finally(()=>{if(active)setConnectionReady(true);});
     return()=>{active=false;};
@@ -157,11 +162,12 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
     setSigningIn(true);
     setAuthError("");
     setEmailSent(false);
+    setLinkError("");
     try {
       const { error } = await supabase.auth.signInWithOtp({
         email: email.trim(),
         options: {
-          emailRedirectTo: `${window.location.origin}/earn-with-forge#account`,
+          emailRedirectTo: referralReturnUrl(window.location.origin),
         },
       });
       if (error) throw error;
@@ -242,10 +248,12 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
           You can explore the referral terms here. Contact Forge to discuss an
           introduction while secure account access is being prepared.
         </p>
+        {authError&&<p className={s.error} role="alert">{authError}</p>}
         <Link className={s.textLink} href="/contact?interest=referral">
           Talk to Forge about a referral →
         </Link>
         {enabled&&<button className={s.quietButton} onClick={()=>setConnectionAttempt(n=>n+1)}>Retry account connection</button>}
+        {enabled&&authError&&<button className={s.quietButton} onClick={()=>window.location.reload()}>Start email sign-in again</button>}
       </div>
     );
   if (!authReady)
@@ -263,6 +271,7 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
           not need to create a password.
         </p>
         {!emailLoginEnabled&&<p className={s.notice}>Email sign-in is awaiting secure mail configuration. Registration emails are not being sent yet.</p>}
+        {linkError&&<p className={s.error} role="alert">{linkError}</p>}
         <form className={s.form} onSubmit={sendLink}>
           <label className={s.field}>
             Your email address
@@ -390,6 +399,7 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
             </p>
           )}
           <PayoutProfile />
+          <ReferralStatements key={user.id} />
           <h3>Your school introductions</h3>
           {data.links.length === 0 ? (
             <p>

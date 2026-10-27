@@ -1,3 +1,4 @@
+import {backendEnvironmentEnabled} from "@/lib/backend-runtime";
 import "server-only";
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
@@ -9,6 +10,7 @@ export function response(body: unknown, status = 200) {
   });
 }
 export function referralService() {
+  if(backendEnvironmentEnabled())return null; // Never fall back to legacy public-schema referrals in redesign mode.
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL,
     key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (process.env.REFERRALS_ENABLED !== "true" || !url || !key) return null;

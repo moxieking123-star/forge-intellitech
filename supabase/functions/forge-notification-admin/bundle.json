@@ -1,0 +1,8 @@
+{
+  "entrypoint": "index.ts",
+  "verifyJwt": true,
+  "sharedSources": {
+    "notification-admin.ts": "lib/notification-admin.ts",
+    "agreement.ts": "lib/referrals/agreement.ts"
+  }
+}

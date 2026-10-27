@@ -1,0 +1,19 @@
+{
+  "runId": "f6c430db-3d52-4f27-999c-0e1f2dabc1f1",
+  "status": 200,
+  "accepted": true,
+  "providerId": "01a1701a-c7a1-755b-b812-adce41057881",
+  "recipient": "programs@forgeintellitech.com",
+  "attachmentBytes": 5784977,
+  "attachmentHash": "15b345116d88d38c3ab29e812ea3775ecce7e90cd59d61a0050bb1d3f5a7e14f",
+  "configuration": {
+    "apiKey": true,
+    "sender": true,
+    "bucket": true,
+    "regularDeliveryDisabled": true,
+    "workerSecretReady": true
+  },
+  "testEndpointRetired": true,
+  "inboxDeliveryConfirmed": true,
+  "inboxConfirmationSource": "Owner confirmed the email arrived and the attachment worked."
+}

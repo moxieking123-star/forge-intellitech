@@ -18,7 +18,7 @@ export default function ProposalRequestForm() {
       });
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || "Please try again.");
-      setMessage("Your proposal is on its way. Look for a message from the Forge programmes team, and check your spam folder too.");
+      setMessage(result.queued ? "Your proposal request is saved. We’ll email your copy once delivery is confirmed. Please check your inbox and spam folder." : "Your proposal is on its way. Look for a message from the Forge programmes team, and check your spam folder too.");
       form.reset();
     } catch (error) { setMessage(error instanceof Error ? error.message : "We could not send the proposal. Please try again."); }
     finally { setBusy(false); }

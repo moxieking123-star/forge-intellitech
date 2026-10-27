@@ -1,0 +1,10 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+const auth=JSON.parse(readFileSync('private-assets/proposal-delivery-check-auth.json','utf8'));
+const key=readFileSync('private-assets/feedback-anon.txt','utf8').trim();
+if(Date.now()>auth.expires)throw Error('Test authorization expired. Do not create a fresh test to retry an ambiguous send.');
+const response=await fetch('https://deblssilgleuiccsgdcy.supabase.co/functions/v1/forge-proposal-delivery-check',{method:'POST',headers:{apikey:key,Authorization:`Bearer ${key}`,'x-forge-test-proof':auth.nonce},signal:AbortSignal.timeout(75000)});
+const data=await response.json();
+const result={runId:auth.runId,status:response.status,...data};
+writeFileSync('docs/redesign/backend/proposal-email-test-results.json',JSON.stringify(result,null,2));
+console.log(JSON.stringify(result,null,2));
+if(!response.ok||!data.accepted)process.exitCode=1;

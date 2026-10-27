@@ -1,9 +1,11 @@
+import {backendEnvironmentEnabled} from "@/lib/backend-runtime";
 import { notificationMailboxes } from "@/lib/notification-routing";
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin as supabase } from "@/lib/supabase-admin";
 import { resend, FROM_EMAIL } from "@/lib/resend";
 
 export async function POST(request: NextRequest) {
+  if(backendEnvironmentEnabled())return NextResponse.json({error:"This older endpoint is retired in the redesign. Please use the current website form."},{status:410,headers:{"Cache-Control":"no-store"}});
   try {
     const body = await request.json();
 

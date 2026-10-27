@@ -1,8 +1,9 @@
+import {backendEnvironmentEnabled,backendPublishableKey} from "@/lib/backend-runtime";
 import "server-only";
 import {response} from "./referrals";
-export function referralBackendEnabled(){return process.env.VERCEL_ENV==="preview"&&process.env.REFERRAL_BACKEND_ENABLED==="true";}
+export function referralBackendEnabled(){return backendEnvironmentEnabled()&&process.env.REFERRAL_BACKEND_ENABLED==="true";}
 export async function referralBackendFetch(request:Request,action:string,payload:unknown={},bytes?:Uint8Array){
- const key=process.env.PREVIEW_FEEDBACK_ANON_KEY?.trim(),auth=request.headers.get("authorization");
+ const key=backendPublishableKey(),auth=request.headers.get("authorization");
  if(!referralBackendEnabled()||!key)return response({error:"Referral services are being connected."},503);
  if(!auth?.startsWith("Bearer ")||auth.length>8192)return response({error:"Please sign in with a confirmed email."},401);
  try{

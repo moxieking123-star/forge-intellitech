@@ -1,9 +1,9 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
-import { GlowCursor } from "./GlowCursor";
+import Link from "next/link";
+import Image from "next/image";
+import adminFrame from "./admin/AdminFrame.module.css";
 import CookieConsent from "./CookieConsent";
 import WatchForge from "./WatchForge";
 import HomeHeader from "./home/HomeHeader";
@@ -18,13 +18,12 @@ export default function SiteFrame({ children }: { children: React.ReactNode }) {
   const homepage = !pathname.startsWith("/admin");
   return (
     <>
-      {!homepage && <GlowCursor />}
-      {homepage ? <HomeHeader /> : <Navbar />}
+      {homepage ? <HomeHeader /> : <header className={adminFrame.header}><Link href="/" className={adminFrame.brand} aria-label="Forge home"><Image src="/images/brand/forge-wordmark.png" alt="Forge" width={2045} height={769} sizes="120px"/><span>Private workspace</span></Link><Link href="/" className={adminFrame.back}>Back to the website ↗</Link></header>}
       <main id="main-content" tabIndex={-1} className="flex-grow">
         {children}
       </main>
       {homepage && <WatchForge />}
-      {homepage ? <HomeFooter /> : <Footer />}
+      {homepage ? <HomeFooter /> : <footer className={adminFrame.footer}>Forge Intellitech Services Ltd. · Private staff workspace</footer>}
       {homepage && <ForgeJourney />}
       {homepage && <PageMotion />}
       {homepage && <ForgeInteractions />}

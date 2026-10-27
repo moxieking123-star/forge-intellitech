@@ -250,3 +250,8 @@
   min-width: 0;
 }
 .intro{display:grid;grid-template-columns:1.1fr 1fr;gap:45px;align-items:center}.resourceHeroCopy h1{font-size:clamp(44px,5.3vw,74px)}.resourceHeroCopy>p:not(.eyebrow){font-size:18px;max-width:570px;margin-bottom:25px}.resourceHeroCopy>a{font-size:13px}.resourceHeroFigure{margin:0;min-width:0}.resourceHeroFigure>div{position:relative;height:310px}.resourceHeroFigure img{object-fit:cover}.resourceHeroFigure figcaption{font-size:9px;letter-spacing:.08em;text-transform:uppercase;line-height:1.6;padding-top:12px}@media(max-width:1050px){.intro{gap:28px}.resourceHeroFigure>div{height:300px}}@media(max-width:700px){.intro{grid-template-columns:1fr;gap:28px}.resourceHeroCopy h1{font-size:48px}.resourceHeroFigure>div{height:250px}.resourceHeroCopy>p:not(.eyebrow){font-size:17px}.resourceHeroFigure figcaption{font-size:8px}}
+
+/* Layered surfaces, shared with the Forge editorial system. */
+.builder, .preview{border-radius:18px;border:1px solid var(--forge-surface-edge);box-shadow:var(--forge-surface-shadow);background-image:linear-gradient(130deg,rgba(255,255,255,.1),transparent 58%);}
+.form input:not([type=checkbox]):not([type=radio]),.form select,.form textarea{min-height:54px;border-radius:12px;border-color:#a4b1a3;padding:14px 16px;background:#fffefb;font-size:16px;box-shadow:inset 0 2px 5px #102b220a}
+.form :is(input,textarea,select):focus-visible{outline:3px solid #bd481f;outline-offset:3px}.actions button,.message{border-radius:12px;box-shadow:var(--forge-surface-shadow)}

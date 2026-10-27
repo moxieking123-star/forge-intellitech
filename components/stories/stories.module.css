@@ -366,3 +366,12 @@
 .page :is(p,span,li,td,th,label){font-family:inherit}
 
 .articleHead .title{max-width:1050px;text-wrap:balance}.byline{border-top:1px solid #b7beb4;padding-top:20px;letter-spacing:.025em}.prose>section:first-child>p:first-of-type{font-size:clamp(20px,2vw,25px);line-height:1.7;color:#173e30}.prose section{scroll-margin-top:110px}.prose>section+section{margin-top:52px}.articleImage img{object-position:center}.articleImage figcaption{max-width:760px}.aside a:focus-visible{outline:2px solid #bd481f;outline-offset:4px}
+
+/* Layered surfaces, shared with the Forge editorial system. */
+.card{border-radius:18px;border:1px solid var(--forge-surface-edge);box-shadow:var(--forge-surface-shadow);background-image:linear-gradient(130deg,rgba(255,255,255,.1),transparent 58%);}
+
+/* Keep copy inset from every raised card edge, with an orderly reading rhythm. */
+.card{padding:28px clamp(22px,3vw,32px) 32px;border-top:3px solid var(--forge-brand-blue)}
+.card:nth-child(3n+2){border-top-color:var(--forge-brand-green)}
+.card:nth-child(3n){border-top-color:var(--forge-brand-gold)}
+.card>*{min-width:0}.card :is(h2,p){text-align:start;overflow-wrap:break-word}.card p{max-width:65ch}.grid{gap:28px}.featured>*{min-width:0}.eyebrow,.sectionLabel{color:var(--forge-brand-blue)}

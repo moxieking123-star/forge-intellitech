@@ -1,0 +1,77 @@
+import {chromium} from 'file:///C:/Users/Forge/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs';
+import assert from 'node:assert/strict';
+import {writeFileSync} from 'node:fs';
+const base=process.env.TEST_BASE_URL||'http://localhost:3011';
+const errors=[];
+const checks=[];
+const browser=await chromium.launch({channel:'chrome',headless:true});
+try {
+ const page=await browser.newPage({viewport:{width:1440,height:1000}});
+ page.on('pageerror',e=>{errors.push(e.message);console.log('PAGEERROR',e.message);});
+ page.on('console',m=>{if(m.type()==='error')console.log('CONSOLE',m.text().slice(0,250));});
+ await page.goto(base,{waitUntil:'domcontentloaded',timeout:120000});
+ await page.locator('[data-forge-journey]').waitFor({timeout:60000});
+ await page.waitForFunction(()=>document.querySelector('[data-forge-journey]')?.hasAttribute('data-direction'),{},{timeout:60000});
+ await page.getByRole('button',{name:'Pause the Forge story',exact:true}).click();
+ await page.getByRole('button',{name:'Resume the Forge story',exact:true}).waitFor({timeout:60000});
+ await page.getByRole('button',{name:'Resume the Forge story',exact:true}).click();
+ const moving=page.locator('[data-forge-journey] svg > g').first();
+ const firstTransform=await moving.evaluate(el=>getComputedStyle(el).transform);
+ await page.waitForTimeout(300);
+ assert.notEqual(await moving.evaluate(el=>getComputedStyle(el).transform),firstTransform,'Chase visibly animates');
+ checks.push('Actual CSS chase animation changes over time');
+ for(let i=0;i<8;i++){
+  await page.evaluate(i=>scrollTo({top:(document.documentElement.scrollHeight-innerHeight)*(i+.25)/8,behavior:"instant"}),i);
+  await page.waitForTimeout(500);
+  assert.equal(await page.locator('[data-forge-journey]').getAttribute('data-chapter'),String(i));
+ }
+ checks.push('All eight chapters follow real full-page scrolling');
+ await page.screenshot({path:'docs/redesign/story/cartoon-homepage-desktop.png',fullPage:true});
+ await page.getByRole('button',{name:/Join the Forge story/}).click();
+ for(const name of ['Invite Doggy to help','Share the load','Build the fence together','Celebrate what we forged'])await page.getByRole('button',{name,exact:false}).click();
+ assert.match(await page.locator('dialog [role=status]').textContent(),/We forged it/);
+ await page.screenshot({path:'docs/redesign/story/cartoon-finale.png'});
+ await page.keyboard.press('Escape');
+ assert.equal(await page.locator('dialog[open]').count(),0);
+ assert.match(await page.evaluate(()=>document.activeElement?.getAttribute('aria-label')),/Join the Forge story/);
+ checks.push('Fence activity finishes; Escape closes it and restores focus');
+ for(const width of [320,390,768,1440]){
+  await page.setViewportSize({width,height:1000});
+  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`overflow ${width}`);
+ }
+ checks.push('Full page fits 320, 390, 768 and 1440px screens');
+ await page.setViewportSize({width:390,height:844});
+ await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));
+ await page.waitForTimeout(250);
+ await page.screenshot({path:'docs/redesign/story/cartoon-homepage-mobile.png'});
+ await page.emulateMedia({reducedMotion:'reduce'});
+ await page.waitForTimeout(100);
+ assert.equal(await page.locator('[data-forge-journey]').getAttribute('data-paused'),'true');
+ assert(await page.locator('[data-forge-journey] svg g').evaluateAll(gs=>gs.every(g=>getComputedStyle(g).animationName==='none')));
+ checks.push('Reduced motion disables animation on the actual page');
+ await page.getByRole('button',{name:'Hide the Forge story',exact:true}).click();
+ assert.equal(await page.locator('[data-forge-journey]').count(),0);
+ await page.getByRole('button',{name:'Show the Forge story',exact:true}).click();
+ assert.equal(await page.locator('[data-forge-journey]').count(),1);
+ checks.push('Hide and restore work');
+ await page.emulateMedia({reducedMotion:'no-preference'});
+ await page.goto(base+'/programmes',{waitUntil:'domcontentloaded',timeout:60000});
+ await page.waitForFunction(()=>document.querySelector('[data-forge-journey]')?.hasAttribute('data-direction'),{},{timeout:60000});
+ assert.equal(await page.locator('[data-forge-journey]').getAttribute('data-chapter'),'2');
+ await page.getByRole('button',{name:'Pause the Forge story',exact:true}).click();
+ await page.evaluate(()=>scrollTo({top:document.documentElement.scrollHeight,behavior:'instant'}));
+ await page.waitForTimeout(200);
+ assert.equal(await page.locator('[data-forge-journey]').getAttribute('data-chapter'),'2');
+ await page.getByRole('button',{name:'Resume the Forge story',exact:true}).click();
+ await page.waitForFunction(()=>document.querySelector('[data-forge-journey]')?.getAttribute('data-chapter')==='7');
+ checks.push('Programme page starts in its chapter; pause holds and resume catches up');
+ await page.goto(base+'/contact',{waitUntil:'domcontentloaded',timeout:60000});
+ await page.waitForFunction(()=>document.querySelector('[data-forge-journey]')?.hasAttribute('data-direction'),{},{timeout:60000});
+ await page.locator('main input').first().focus();
+ await page.waitForFunction(()=>document.querySelector('[data-forge-journey]')?.getAttribute('data-focus')==='true');
+ assert.equal(await page.locator('[data-forge-journey]').evaluate(el=>getComputedStyle(el).visibility),'hidden');
+ checks.push('Story moves out of the way when a contact field receives focus; no submission');
+ assert.deepEqual(errors,[]);
+ writeFileSync('docs/redesign/story/cartoon-browser-results.json',JSON.stringify({result:'passed',base,checks,pageErrors:errors,realSubmissions:0},null,2));
+ console.log(JSON.stringify({result:'passed',checks,pageErrors:errors},null,2));
+} finally {await browser.close();}

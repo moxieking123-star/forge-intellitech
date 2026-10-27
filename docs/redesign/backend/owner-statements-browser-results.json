@@ -1,0 +1,13 @@
+{
+  "result": "passed",
+  "mocked": true,
+  "checks": [
+    "full contract and deduction breakdown",
+    "fulfillment visibility",
+    "bank masking",
+    "390px fit",
+    "denial clears records"
+  ],
+  "realEmails": 0,
+  "realPayments": 0
+}
