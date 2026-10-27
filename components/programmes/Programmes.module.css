@@ -637,3 +637,13 @@
 .stageExplorer, .note{border-radius:18px;border:1px solid var(--forge-surface-edge);box-shadow:var(--forge-surface-shadow);background-image:linear-gradient(130deg,rgba(255,255,255,.1),transparent 58%);}
 
 .secondaryColumns>*{min-width:0}.secondaryColumns :is(p,dd){text-align:start}.stageExplorer{border-top:3px solid var(--forge-brand-blue)}.note{border-top:3px solid var(--forge-brand-green)}
+
+/* Raised learning panels need real internal space, not just a painted edge. */
+.stageExplorer{padding:clamp(18px,3vw,32px)}
+.stageDetail{grid-template-columns:minmax(0,1fr) minmax(0,.7fr)}
+.stageDetail>*,.hero>*,.programme>*,.support>*,.portfolioGrid>*,.questions>*{min-width:0}
+.stageButtons{grid-template-columns:repeat(3,minmax(0,1fr))}
+.stageButtons button{min-width:0;flex-wrap:wrap}
+.page :is(h1,h2,h3,p,li,a){overflow-wrap:anywhere}
+.portfolioGrid .note{padding:18px 20px;max-width:100%}
+@media(max-width:700px){.stageDetail{grid-template-columns:minmax(0,1fr);min-height:0}.stagePrompt{max-width:100%}.stageButtons button{padding:12px 8px;font-size:13px;gap:5px}}

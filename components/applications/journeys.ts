@@ -1,4 +1,4 @@
-export type Journey = "donor" | "student" | "school" | "talent";
+export type Journey = "donor" | "student" | "school" | "talent" | "space";
 export type Field = {
   id: string;
   label: string;
@@ -22,6 +22,30 @@ const contact: Field[] = [
   { id: "phone", label: "Contact phone", type: "tel" },
 ];
 export const journeys: Record<Journey, JourneyConfig> = {
+  space: {
+    title: "A place to gather. A chance to build.",
+    intro: "Sometimes the contribution a child needs is somewhere to go, a seat and power to keep learning. Offer a weekend learning space, electricity, a generator or fuel. Forge provides the teaching; we will review the location and practical arrangements with you before anything begins.",
+    subject: "Endless Possibilities — weekend learning space and power offer",
+    inquiryType: "support",
+    confirmation: "Your offer has been received. Thank you for making room for a beginning. Forge will contact you to discuss suitability, safeguarding, power and supervision before agreeing any session. Please do not invite students or make purchases on our behalf yet.",
+    steps: [
+      { title: "You and the location", fields: [
+        ...contact,
+        { id: "organisation", label: "Organisation or community (optional)", optional: true },
+        { id: "location", label: "Town or city, area and state", hint: "Help us understand where students could gather. No private home address needed at this stage." },
+        { id: "spaceType", label: "What would you like to offer?", options: ["A space with power", "A space — power support needed", "Power or a generator for an existing space", "Fuel or power costs", "Another contribution — let’s discuss"] },
+        { id: "authority", label: "Your relationship to the space or contribution", hint: "For example: owner, authorised manager, community representative or power sponsor." },
+      ] },
+      { title: "The space and its power", fields: [
+        { id: "capacity", label: "How many students could sit and learn comfortably?", hint: "An estimate is fine. If offering power only, write “Power support only”." },
+        { id: "availability", label: "Which weekend days and hours could you support?", type: "textarea" },
+        { id: "facilities", label: "What is available at the space?", type: "textarea", hint: "Tell us about seating, tables, ventilation, toilets, access, sockets, internet and any limitations. If offering power only, describe what you can provide." },
+        { id: "power", label: "How could you help with power?", options: ["Provide the space and cover electricity", "Provide a generator and fuel", "Provide a generator — fuel support needed", "Cover fuel or electricity costs", "Space only — Forge should discuss power with me", "Another arrangement — explain below"] },
+        { id: "powerDetails", label: "Tell us about the power arrangement and any conditions", type: "textarea", hint: "Include generator capacity if known, who would operate it, the cost or fuel you can cover, and how long you could commit. “To be discussed” is fine." },
+        { id: "permission", label: "I am authorised to make this offer, or I have explained whose permission is still needed. I understand that Forge must review safety and agree arrangements before students use the space.", type: "checkbox" },
+      ] },
+    ],
+  },
   donor: {
     title: "A laptop can open a door.",
     intro:

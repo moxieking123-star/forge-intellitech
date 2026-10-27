@@ -8,6 +8,7 @@ import { Field, Journey, journeys } from "./journeys";
 import styles from "./Applications.module.css";
 
 const journeyImages: Record<Journey, { file: string; alt: string; caption: string }> = {
+  space: { file: "weekend-space", alt: "An original illustration of an open community learning room with desks, power sockets and sunlight.", caption: "Illustration of a place to learn together; not an approved learning location." },
   donor: { file: "donor", alt: "A laptop and its care accessories arranged on a desk.", caption: "Editorial illustration of device care." },
   student: { file: "student", alt: "A fictional Nigerian secondary school student learning with a laptop.", caption: "AI-generated scene with a fictional student; not a programme participant." },
   school: { file: "school-enquiry", alt: "Notebooks and practical project tools on a classroom table.", caption: "Editorial illustration of practical learning." },
@@ -135,7 +136,7 @@ function ExistingApplicationForm({ journey }: { journey: Journey }) {
                   : "careers"
               : config.inquiryType,
           submissionSource:
-            journey === "donor" || journey === "student"
+            journey === "donor" || journey === "student" || journey === "space"
               ? "endless-possibilities"
               : journey === "school"
                 ? "programmes"
@@ -252,6 +253,8 @@ function ExistingApplicationForm({ journey }: { journey: Journey }) {
           href={
             journey === "donor" || journey === "student"
               ? "/endless-possibilities/give-a-child-a-laptop"
+              : journey === "space"
+                ? "/endless-possibilities#join-movement"
               : journey === "school"
                 ? "/programmes"
                 : "/join"
@@ -260,19 +263,21 @@ function ExistingApplicationForm({ journey }: { journey: Journey }) {
           ← Back to{" "}
           {journey === "school"
             ? "programmes"
+            : journey === "space"
+              ? "Endless Possibilities"
             : journey === "talent"
               ? "Join Forge"
               : "the campaign"}
         </Link>
         <p className={styles.eyebrow}>
-          {journey === "donor" || journey === "student"
+          {journey === "donor" || journey === "student" || journey === "space"
             ? "Endless Possibilities · Forge ITs"
             : "Forge Intellitech Services Ltd"}
         </p>
         <h1>{config.title}</h1>
         <p className={styles.intro}>{config.intro}</p>
         <figure className={styles.editorial}>
-          <Image src={`/images/editorial/applications/${image.file}.webp`} alt={image.alt} width={1440} height={960} sizes="(max-width: 948px) 100vw, 900px" priority />
+          <Image src={`/images/editorial/applications/${image.file}.${journey === "space" ? "svg" : "webp"}`} alt={image.alt} width={1440} height={960} sizes="(max-width: 948px) 100vw, 900px" priority />
           <figcaption>{image.caption}</figcaption>
         </figure>
         {success ? (

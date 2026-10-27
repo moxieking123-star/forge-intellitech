@@ -69,3 +69,5 @@
 /* Layered surfaces, shared with the Forge editorial system. */
 .panel{border-radius:18px;border:1px solid var(--forge-surface-edge);box-shadow:var(--forge-surface-shadow);background-image:linear-gradient(130deg,rgba(255,255,255,.1),transparent 58%);}
 .panel>*{min-width:0}.panelCopy :is(p,h3){text-align:start;overflow-wrap:break-word}.skills article{border-top:3px solid var(--forge-brand-blue)}.skills article:nth-child(3n+2){border-top-color:var(--forge-brand-green)}.skills article:nth-child(3n){border-top-color:var(--forge-brand-gold)}
+.panel{grid-template-columns:repeat(2,minmax(0,1fr))}.visual{min-width:0}.page :is(h1,h2,h3,p,li,a){overflow-wrap:anywhere}.choices button{min-width:0;max-width:100%;text-align:start}.hero>*,.skills>*,.conviction>*,.next>*,.faq>*{min-width:0}
+@media(max-width:800px){.panel{grid-template-columns:minmax(0,1fr)}}

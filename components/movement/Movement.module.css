@@ -1120,3 +1120,5 @@
 .initiativeRow>*{min-width:0}.initiativeRow>p{text-align:start}.initiativeRow h3{line-height:1.18}.eligibility{padding:clamp(22px,3vw,36px)}
 .initiativeNumber{color:var(--forge-brand-blue)}
 .learningPortrait{width:min(1280px,calc(100% - 48px));margin:0 auto 64px;border-radius:24px;overflow:hidden;border:1px solid #d6ad81;background:#e9d5bb;box-shadow:var(--forge-surface-shadow)}.learningPortrait img{width:100%;height:auto;display:block}.learningPortrait figcaption{padding:16px 22px;font-size:12px;line-height:1.6;color:#163f32;background:#f5eee0}
+.roleDetail{padding:clamp(22px,3vw,36px);grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)}.roleDetail>*,.hero>*{min-width:0}.heroNote{padding:18px 20px}.page :is(h1,h2,h3,p,li,a){overflow-wrap:anywhere}
+@media(max-width:700px){.roleDetail{grid-template-columns:minmax(0,1fr)}}
