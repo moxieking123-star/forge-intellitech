@@ -1,10 +1,11 @@
 // Supply approved real destinations here. Empty entries are displayed as Coming soon without a link.
 export const socialChannels = [
-  { label: "Facebook", url: "" },
-  { label: "TikTok", url: "" },
-  { label: "Instagram", url: "" },
-  { label: "LinkedIn", url: "" },
-  { label: "X", url: "" },
+  { label: "Facebook", url: "https://www.facebook.com/profile.php?id=61576776552817" },
+  { label: "TikTok", url: "https://www.tiktok.com/@forge.its" },
+  { label: "Instagram", url: "https://www.instagram.com/forge_its/" },
+  { label: "LinkedIn", url: "https://www.linkedin.com/company/104318888/" },
+  { label: "X", url: "https://x.com/forgeit_service" },
+  { label: "YouTube", url: "https://www.youtube.com/@TheForgeJournal-h7b" },
 ];
 export const pageVideos: Record<string, { id: string; title: string }> = {
   // "/about": {id: "APPROVED_ID", title: "Meet Forge"},

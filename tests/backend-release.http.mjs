@@ -18,7 +18,9 @@ if(enabled){
  assert.equal((await fetch(base+'/api/referrals/account')).status,401);
  assert.equal((await fetch(base+'/api/staff/notifications',{method:'POST',headers:{Origin:base,'Content-Type':'application/json'},body:'{"action":"list","payload":{"queue":"school"}}'})).status,401);
 }
-if(process.env.EXPECT_PRODUCTION==='true')assert.equal((await fetch(base+'/api/preview-feedback',{method:'POST',headers:{Origin:base,'Content-Type':'application/json'},body:'{}'})).status,404);
+// Live feedback is intentionally available after the release merge. Empty
+// input must be rejected without creating a review, rather than hiding the API.
+if(process.env.EXPECT_PRODUCTION==='true')assert.equal((await fetch(base+'/api/preview-feedback',{method:'POST',headers:{Origin:base,'Content-Type':'application/json'},body:'{}'})).status,400);
 if(process.env.EXPECT_FEATURES_DISABLED==='true'){
  for(const path of ['/api/contact','/api/sponsor'])assert.equal((await fetch(base+path,{method:'POST',headers:{Origin:base,'Content-Type':'application/json'},body:'{}'})).status,503,path+' must not fall back to legacy tables');
  assert.equal((await fetch(base+'/api/referrals/account')).status,503,'old referral fallback must remain disconnected');
