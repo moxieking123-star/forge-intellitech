@@ -188,7 +188,7 @@ export default function EndlessPossibilitiesPage() {
         <p>
           Volunteers, educators, sponsors, patrons, schools, government,
           companies and international organisations: bring your time, your
-          skill, your reach or your resources. Choose an initiative. Help us
+          skill, your reach, a weekend learning space, power or your resources. Choose an initiative. Help us
           turn what we believe is possible into something a young person can
           actually use.
         </p>

@@ -72,12 +72,12 @@ export const metadata: Metadata = {
   // Favicon & Icons
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "32x32", type: "image/x-icon" },
-      { url: "/icon.png", sizes: "192x192", type: "image/png" },
-      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+      { url: "/favicon.ico?v=forge-o-20261027", sizes: "16x16 32x32 48x48 64x64", type: "image/x-icon" },
+      { url: "/icon.png?v=forge-o-20261027", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png?v=forge-o-20261027", sizes: "512x512", type: "image/png" },
     ],
-    shortcut: "/favicon.ico",
-    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: "/favicon.ico?v=forge-o-20261027",
+    apple: [{ url: "/apple-icon.png?v=forge-o-20261027", sizes: "180x180", type: "image/png" }],
   },
 
   // Manifest

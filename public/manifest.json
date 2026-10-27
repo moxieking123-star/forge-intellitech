@@ -8,8 +8,13 @@
   "theme_color": "#FF8C42",
   "icons": [
     {
-      "src": "/icon.png",
+      "src": "/icon.png?v=forge-o-20261027",
       "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png?v=forge-o-20261027",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]

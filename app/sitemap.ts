@@ -6,6 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "about",
     "products",
     "partner",
+    "partner/contribute",
     "join",
     "contact",
     "programmes",
@@ -20,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "privacy",
     "terms",
     "endless-possibilities",
+    "endless-possibilities/offer-a-space",
     ...[
       "give-a-child-a-laptop",
       "in-school-launchpad",

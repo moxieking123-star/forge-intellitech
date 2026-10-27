@@ -6,6 +6,7 @@ import { ArrowRight } from "@phosphor-icons/react";
 import styles from "./Movement.module.css";
 
 const roles = [
+  // Keep existing role order stable; the space contribution is appended below.
   {
     id: "laptop",
     label: "Give a laptop",
@@ -48,6 +49,13 @@ const roles = [
     text: "Government, companies, schools, community groups and international organisations can help more young people get a real opportunity to create. Bring devices, expertise, resources or access. We will work through the practical contribution and the student need together.",
     action: "Start a partnership conversation",
   },
+  {
+    id: "space",
+    label: "Offer space or power",
+    title: "You may already have the place where a beginning can happen.",
+    text: "A room students can use at weekends. Tables, seats and power to keep their laptops on. That can be your contribution. Forge provides the teaching. Tell us where you are, how many learners the space could hold, and whether you can cover electricity, provide a generator or help with fuel. We will work through safety, supervision and the practical arrangements together before students attend.",
+    action: "Offer a weekend learning space or power",
+  },
 ];
 
 export default function JoinMovement({
@@ -61,7 +69,7 @@ export default function JoinMovement({
   const choices =
     focus === "laptop"
       ? roles
-      : [roles[1], roles[2], roles[3], roles[4], roles[5], roles[0]].map(
+      : [roles[1], roles[2], roles[3], roles[4], roles[5], roles[6], roles[0]].map(
           (role) =>
             role.id === "sponsor"
               ? {
@@ -120,6 +128,8 @@ export default function JoinMovement({
             href={
               focus === "movement" && selected.id === "laptop"
                 ? "/endless-possibilities/give-a-child-a-laptop"
+                : selected.id === "space"
+                  ? "/endless-possibilities/offer-a-space"
                 : selected.id === "laptop"
                   ? "/endless-possibilities/give-a-child-a-laptop/donate"
                   : selected.id === "sponsor" || selected.id === "patron"
