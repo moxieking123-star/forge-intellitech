@@ -15,6 +15,14 @@ export function createRecruitmentService(deps:Dependencies){
   return {id:u.id,email:u.email,emailConfirmedAt:u.emailConfirmedAt};
  }
  return {
+  async state(token:string){
+   const owner=await identity(token);
+   return deps.rpc('forge_recruitment_state',{p_owner:owner.id});
+  },
+  async abandon(token:string,attemptId:unknown){
+   const owner=await identity(token);if(!uuid(attemptId))throw Error('Invalid attempt');
+   return deps.rpc('forge_recruitment_abandon',{p_owner:owner.id,p_attempt:attemptId});
+  },
   async save(token:string,input:unknown){
    const owner=await identity(token),application=parseInstructorApplication(input);
    if(!application)throw Error('Invalid application');

@@ -16,7 +16,7 @@
 ## Next deliverables
 
 1. Private recruitment schema and service adapter: completed 28 October; public routes/UI and pilot still pending. Keep production release switches off.
-2. Verified-email application UI and assessment screen connected to that adapter in a test environment.
+2. Applicant API/UI implemented and checked locally with fictional browser responses; real email/auth round-trip and full pilot still pending.
 3. Ten reviewed, comparable question forms (minimum300questions); keep marking keys private.
 4. Signed Apps Script trainee provisioning, restricted session/action handlers and reliable invitation queue.
 5. Programme selection and the co-developed two-week training content, submissions and daily feedback.
@@ -34,3 +34,18 @@ Broader dashboard/student/name/Seyi/task/attendance changes remain recorded and 
 - Security advisor reports intentional RLS-without-policy INFO notices for service-only tables. The existing project-wide leaked-password protection warning remains (current sign-in uses email links); no new security warnings from this schema.
 - No website deployment, shared-link change, applicant emails, Google Sheet writes or Apps Script edits. The SQL regression test must always be invoked inside BEGIN/ROLLBACK.
 - Next: applicant API/UI, explicit abandonment and audited staff reset, private reviewed bank publishing, then reliable invitation/provisioning and trainee-only Apps Script integration. The complete recruitment journey is not yet enabled or complete.
+
+## 28 October 2026 — applicant screens and request handlers
+
+- Added feature-gated `/api/recruitment` and `/api/recruitment/config`. Mutations require same-origin requests, bearer identity and exact bounded JSON shapes; private responses are never cached. Known failures map to helpful messages, and unexpected backend errors stay private.
+- Added a separate session-storage recruitment Auth client, email-link/code screen, minimised introduction form, explicit test readiness/consent, and a thirty-question assessment UI with navigator, selected-answer status, saved/unsaved indicators, retry-save handling, monotonic countdown and timeout submission. No live flag or email flag was enabled.
+- Applied `recruitment_applicant_state`: owner-scoped state, idempotent abandonment and fresh server time in start responses. Candidate projections now strip private fields even from individual option objects. State/abandon remain service-only; anon/authenticated cannot call either.
+- Refresh recovery records only an attempt UUID under an identity-scoped session key, closes that interrupted attempt before fetching state on return, and retains every consumed attempt. If browser storage/unload signals fail, the earlier-attempt screen gives an explicit close action rather than silently starting an extra chance. Brief visibility/focus changes do not forfeit attempts. Staff reset remains to be built.
+- Verified the SQL regression suite against the installed schema as service_role inside BEGIN/ROLLBACK, including own-state isolation and idempotent abandonment. No real recruitment records were retained.
+- Browser tests use mocked Auth/API responses and explicitly fictional questions, not a real applicant account or approved assessment bank. Passed sign-in gate, form/start, failed-save/retry, navigation, pass/nonpass, remaining attempts, three-attempt contact screen, interrupted return, timeout submission, refresh recovery and viewport fit at 1440/768/390. Real local HTTP checks denied cross-origin and anonymous requests.
+- RED/GREEN: seven request-handler tests, three screen-rule tests and two extra service tests; full regression suite now 106 passing. Fixed an inherited-property error-map bug, pale inherited heading colours and the refresh/keepalive race exposed during checks. Read-only introduction fields after the first attempt match the database's frozen-introduction behaviour.
+- Local captures: ignored `private-assets/recruitment-application-mobile.png` and `recruitment-assessment-desktop.png`. The timed page omits floating mascots/video/feedback widgets. The header skip link is hidden by clipping until focus, so reduced-motion mode does not expose it in the middle of the page.
+- Production recruitment stays on its holding page. No website/shared-preview deployment, email invitation, Sheets write or Apps Script edit. Local server feature flags are process-only and do not alter hosted settings.
+- Next: a private reviewed bank with at least ten comparable forms, audited staff follow-up/reset, then transactional pass-event delivery, signed trainee provisioning, invitations and training. Real email callback testing also requires the `/join/apply` return URL and secure local server configuration; no credentials should be put in chat or Git.
+- Production build passed: compiled, TypeScript passed, 81 static outputs generated and both new API routes remain dynamic. The initial restricted build worker stalled; retry with normal local process permissions completed. No build artifacts were deployed.
+- Verified the built site on local port 3013 with no recruitment flag: `/join/apply` renders the existing hold, `/api/recruitment` returns 503 and `/api/recruitment/config` returns 503. No applicant data or publishable configuration is exposed by those disabled endpoints.

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import s from '@/components/site/Site.module.css';
+import Application from '@/components/recruitment/Application';
+export const dynamic='force-dynamic';
 
 export const metadata: Metadata = {
   title: 'Work with Forge — experience in development',
@@ -10,6 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
+  if(process.env.RECRUITMENT_BACKEND_ENABLED==='true')return <Application />;
   return (
     <div className={s.page} id="home-content">
       <header className={s.hero}>

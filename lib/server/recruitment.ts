@@ -15,7 +15,8 @@ export const recruitmentService=createRecruitmentService({
   if(!supabaseAdmin)throw Error('Recruitment unavailable');
   const {data,error}=await supabaseAdmin.rpc(name,args);
   // Keep internal errors, credentials and question-bank details out of responses.
-  if(error)throw Error('Recruitment request could not be completed');
+  const expected=new Set(['Assessment bank not ready','Attempt already active','Staff review required','Assessment already passed','Attempt closed','Attempt unavailable','Application unavailable']);
+  if(error)throw Error(error.code==='P0001'&&expected.has(error.message)?error.message:'Recruitment request could not be completed');
   return data;
  }
 });

@@ -20,9 +20,13 @@ begin
  insert into forge_recruitment.forms(id,questions,reviewed) values('fixture-'||owner_id||'-'||n,questions,true);
  end loop;
  result:=public.forge_recruitment_start(owner_id,request_id); attempt_id:=(result->>'id')::uuid;
+ replay:=public.forge_recruitment_state(other_id);
+ if replay->'application'<>'null'::jsonb or jsonb_array_length(replay->'attempts')<>0 then raise exception 'State ownership leaked'; end if;
+ replay:=public.forge_recruitment_state(owner_id);
+ if replay::text like '%correctOptionId%' or replay->'attempts'->0->>'id'<>attempt_id::text then raise exception 'Unsafe applicant state'; end if;
  if result::text like '%correctOptionId%' then raise exception 'Answer key leaked'; end if;
  replay:=public.forge_recruitment_start(owner_id,request_id);
- if result<>replay then raise exception 'Request replay created a fresh attempt'; end if;
+ if result-'serverNow'<>replay-'serverNow' then raise exception 'Request replay created a fresh attempt'; end if;
  begin
  perform public.forge_recruitment_start(owner_id,gen_random_uuid());
  raise exception 'Concurrent attempt allowed';
@@ -43,6 +47,10 @@ begin
  for k in 1..22 loop perform public.forge_recruitment_answer(other_id,(result->>'id')::uuid,'q'||k,'a'); end loop;
  replay:=public.forge_recruitment_submit(other_id,(result->>'id')::uuid);
  if replay->>'status'<>'not_passed' or (replay->>'correct')::int<>22 then raise exception 'Fail boundary incorrect'; end if;
+ elsif n=2 then
+ replay:=public.forge_recruitment_abandon(other_id,(result->>'id')::uuid);
+ if replay->>'status'<>'abandoned' then raise exception 'Abandon failed'; end if;
+ if replay<>public.forge_recruitment_abandon(other_id,(result->>'id')::uuid) then raise exception 'Abandon not idempotent'; end if;
  else
  update forge_recruitment.attempts set started_at=now()-interval '6 minutes',deadline_at=now()-interval '1 minute' where id=(result->>'id')::uuid;
  begin
