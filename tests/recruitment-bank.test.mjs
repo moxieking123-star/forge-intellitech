@@ -1,0 +1,8 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {validateRecruitmentBank} from '../lib/recruitment/bank.ts';
+import {topicCounts} from '../lib/recruitment/assessment.ts';
+const fixture=()=>({version:'fictional-v1',forms:Array.from({length:10},(_,form)=>({id:'fictional-'+form,questions:Object.entries(topicCounts).flatMap(([topic,count])=>Array.from({length:count},(_,i)=>({id:`f${form}-${topic}-${i}`,topic,prompt:`Fictional form ${form}, ${topic}, item ${i}: which example matches?`,options:['a','b','c','d'].map(id=>({id,text:'Fictional '+id})),correctOptionId:['a','b','c','d'][i%4],rationale:'Fictional review explanation.',source:'https://example.invalid/reference'})))}))});
+test('requires ten complete forms and 300 distinct item ids and stems',()=>{assert.equal(validateRecruitmentBank(fixture()).valid,true);const short=fixture();short.forms.pop();assert.equal(validateRecruitmentBank(short).valid,false);const duplicated=fixture();duplicated.forms[1].questions[0].prompt=duplicated.forms[0].questions[0].prompt;assert.equal(validateRecruitmentBank(duplicated).valid,false);});
+test('rejects incorrect blueprints, missing sources and unsafe answer identifiers',()=>{for(const mutate of [b=>b.forms[0].questions.pop(),b=>b.forms[0].questions[0].source='',b=>b.forms[0].questions[0].id='bad space',b=>b.forms[0].questions[0].correctOptionId='wrong']){const b=fixture();mutate(b);assert.equal(validateRecruitmentBank(b).valid,false);}});
+test('reports metadata only, never actual questions or answer keys',()=>{const report=validateRecruitmentBank(fixture());assert.equal(report.questionCount,300);assert.doesNotMatch(JSON.stringify(report),/correctOptionId|Fictional form|Fictional review/);});

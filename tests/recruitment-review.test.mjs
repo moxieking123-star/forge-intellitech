@@ -1,0 +1,6 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {parseRecruitmentReview} from '../lib/recruitment/review.ts';
+test('review filters and pagination are bounded',()=>{assert.deepEqual(parseRecruitmentReview({action:'list',filters:{status:'abandoned',search:'  Lagos ',offset:25}}),{action:'list',payload:{status:'abandoned',search:'Lagos',offset:25}});for(const filters of [{status:'admin'},{offset:-1},{offset:1.5},{search:'x'.repeat(101)},{owner:'other'}])assert.equal(parseRecruitmentReview({action:'list',filters}),null);});
+test('reset requires an application, fresh version, idempotency key and explained reason',()=>{const input={action:'reset',id:'00000000-0000-4000-8000-000000000001',version:1,requestId:'00000000-0000-4000-8000-000000000002',reason:'Applicant reported a verified connectivity interruption.'};assert.equal(parseRecruitmentReview(input)?.action,'reset');for(const patch of [{reason:'yes'},{version:0},{requestId:'x'},{role:'admin'},{allowance:30}])assert.equal(parseRecruitmentReview({...input,...patch}),null);});
+test('only list and reset actions are available',()=>{for(const action of ['activate_employee','approve_salary','pass_applicant','delete_attempts'])assert.equal(parseRecruitmentReview({action}),null);});
