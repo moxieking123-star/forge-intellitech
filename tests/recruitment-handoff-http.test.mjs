@@ -1,0 +1,7 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {handleTrainingHandoff} from '../lib/recruitment/handoff-http.ts';
+const url='http://localhost:3009/api/recruitment/handoff';
+function request(body='{}',headers={}){return new Request(url,{method:'POST',headers:{origin:'http://localhost:3009','content-type':'application/json',authorization:'Bearer verified',...headers},body});}
+test('private handoff accepts only an authenticated same-origin empty request',async()=>{let called=0;const deps={enabled:true,exchange:async token=>{assert.equal(token,'verified');called++;return {token:'private'};}};const response=await handleTrainingHandoff(request(),deps);assert.equal(response.status,200);assert.match(response.headers.get('cache-control'),/no-store/);assert.equal(called,1);for(const bad of [request('{"role":"admin"}'),request('{}',{origin:'https://evil.invalid'}),request('{}',{authorization:''})])assert.notEqual((await handleTrainingHandoff(bad,deps)).status,200);assert.equal(called,1);});
+test('closed switch and backend failures never disclose secrets',async()=>{const closed=await handleTrainingHandoff(request(),{enabled:false,exchange:async()=>{throw Error('must not run');}});assert.equal(closed.status,503);const failed=await handleTrainingHandoff(request(),{enabled:true,exchange:async()=>{throw Error('secret');}});assert.equal(failed.status,503);assert.ok(!(await failed.text()).includes('secret'));});

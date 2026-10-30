@@ -41,3 +41,28 @@ invitation claim/send/settle with provider idempotency; isolated end-to-end pilo
 question editorial approval; training-path selection and reviewed two-week content.
 Then resume the recorded dashboard/student work, followed by deferred school
 grading, exports and parent views. These later requirements remain unimplemented.
+
+### Verified handoff checkpoint
+
+`lib/recruitment/handoff.ts` now orchestrates verified identity lookup, confirmed
+provisioning lookup, random token generation and a signed `trainee.session`
+exchange. The matching `TrainingSession.gs` validates the signature, time window,
+one-use nonce and exact stored trainee identity before creating a session.
+`forgeTrainingGetMyEntry_` exposes only the current trainee's restricted entry
+state; it does not call operational user refresh or accept a browser role.
+
+These are tested building blocks, not a deployed login screen. The website now
+has a disabled `/api/recruitment/handoff` POST endpoint and server adapter that
+uses Auth.getUser, the private provisioning lookup and the signed exchange. The
+lookup SQL in `training-identity.pending.sql` is NOT applied or database-tested.
+It is intentionally outside the migrations directory to avoid accidental release.
+The dashboard frontend entry, private token transport/session lifecycle UI and
+Google test installation remain to be connected. No Google HTTP dispatcher or
+email worker invokes these handlers yet. Keep invitations disabled until the full
+destination works. `TRAINING_SIGN_IN_ENABLED` must remain unset.
+
+Handoff tokens must travel only in private no-store responses and authenticated
+POST bodies or a suitably configured secure session cookie; never email them,
+append them to a URL, log them or put them in analytics. The server must obtain
+identity through Auth.getUser and provisioning from private storage. An injection
+interface in a unit test is not a substitute for those production adapters.
