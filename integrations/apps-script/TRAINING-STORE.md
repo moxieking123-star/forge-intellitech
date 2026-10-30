@@ -54,8 +54,10 @@ state; it does not call operational user refresh or accept a browser role.
 These are tested building blocks, not a deployed login screen. The website now
 has a disabled `/api/recruitment/handoff` POST endpoint and server adapter that
 uses Auth.getUser, the private provisioning lookup and the signed exchange. The
-lookup SQL in `training-identity.pending.sql` is NOT applied or database-tested.
-It is intentionally outside the migrations directory to avoid accidental release.
+lookup SQL was subsequently applied as migration
+`20261030064706_recruitment_training_identity_lookup.sql` and tested using
+fictional records inside BEGIN/ROLLBACK. Anonymous/authenticated execution was
+denied and service-role execution confirmed. All fixtures were rolled back.
 The dashboard frontend entry, private token transport/session lifecycle UI and
 Google test installation remain to be connected. No Google HTTP dispatcher or
 email worker invokes these handlers yet. Keep invitations disabled until the full
@@ -89,3 +91,31 @@ Verification: local browser fixture with fictional Auth and handoff responses at
 1440/768/390 pixels, no horizontal overflow, no trainee bearer in web storage,
 correct local sign-out and disabled unconfigured email login. This is not a real
 Supabase/Google/Resend end-to-end sign-in. Test workbook writes remain disabled.
+
+### Connection checkpoint — 30 October 2026
+
+Created standalone Google project **Forge Instructor Training TEST Bridge**,
+script ID `12ugqlxLyi-OUFfZmMEERTammdX7pROaOZNqkQfGbOZAZ5_EXQ4kEaGD8`.
+The four tested GS modules and manifest have been uploaded through clasp. The
+operational script project was not edited. The test project's Script Properties
+are not yet configured; no sheet writes, session creation or email has occurred.
+The local test signing key is stored only under ignored private-assets and must
+never be committed, printed, pasted into chat or embedded in Apps Script source.
+
+Before the first real test: owner adds the test workbook ID and signing key through
+the Google test project's Script Properties, runs `forgeTrainingConnectionCheck`
+and approves Google's spreadsheet-access consent. That check only reads the test
+schema. Configure the local server with the same signing key and test endpoint,
+keep hosted website feature flags off, then enable writes on the isolated test
+workbook for a fictional provisioning/session pilot. The local server still needs
+its Supabase server credentials through secure configuration; no production env
+file was downloaded or secret exposed by this checkpoint.
+
+Test deployment v1 endpoint:
+`https://script.google.com/macros/s/AKfycbw6bkEa7310aSRravvVz8eN8_2jKvNatPvW0RHpeBWYZ5W8wCwIdPja7U6GF55KOA/exec`.
+Unsigned probe currently receives Google's 403 authorization page, with no trainee
+data. This is not yet proof of application-level rejection or successful signed
+execution: owner consent/configuration is pending. Local `.env.local` contains
+the matching test key and endpoint, with all recruitment/training switches false;
+existing local configuration is never overwritten by setup. This file is ignored.
+No production server environment or domain was changed.

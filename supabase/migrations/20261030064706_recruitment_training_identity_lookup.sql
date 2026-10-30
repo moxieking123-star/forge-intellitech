@@ -1,4 +1,4 @@
--- Pending branch SQL, NOT applied. Review/test in isolation before enabling sign-in.
+-- Applied to the private recruitment backend; public sign-in remains disabled.
 -- Auth.getUser must run first; p_owner comes from the verified server identity.
 create function public.forge_recruitment_training_identity(p_owner uuid)
 returns jsonb language sql stable security invoker set search_path='' as $$
@@ -12,3 +12,4 @@ returns jsonb language sql stable security invoker set search_path='' as $$
 $$;
 revoke all on function public.forge_recruitment_training_identity(uuid) from public,anon,authenticated;
 grant execute on function public.forge_recruitment_training_identity(uuid) to service_role;
+
