@@ -142,3 +142,12 @@ owner approval for retrieving only the required service-role credential (or owne
 entry through secure local configuration). Do not work around that rejection by
 fetching every secret separately. The Resend sender and real email receipts still
 require their own verified integration; SMTP acceptance alone is not delivery.
+
+Owner subsequently confirmed the local training return URL was saved. Supabase
+accepted one `shouldCreateUser:false` sign-in email request for the existing owner
+mailbox with return URL `http://localhost:3009/join/training`. Local test server
+was started on port3009. Await mailbox delivery and signed-in UI confirmation;
+no welcome invitation was sent. Private service-role credential approval is still
+pending, so the profile handoff from that real account is not yet verified. The
+test bridge pilot above used a fictional identity and cannot substitute for it.
+Latest branch checks:162 unit tests and TypeScript passed.
