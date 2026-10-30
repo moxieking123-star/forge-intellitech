@@ -151,3 +151,38 @@ no welcome invitation was sent. Private service-role credential approval is stil
 pending, so the profile handoff from that real account is not yet verified. The
 test bridge pilot above used a fictional identity and cannot substitute for it.
 Latest branch checks:162 unit tests and TypeScript passed.
+
+### Real owner sign-in pilot completed
+
+The owner explicitly approved retrieving only `SUPABASE_SERVICE_ROLE_KEY` from
+the connected Vercel project. Retrieved that single variable, checked its
+forge-web/service-role claims, and saved it in ignored local `.env.local` without
+printing it. Did not retrieve Resend credentials or download the environment.
+
+Used the existing verified owner mailbox with one clearly labelled test-only
+application/attempt (payload `testOnly=true`), not a genuine assessment decision.
+Application ID `82d34efe-5f22-4dbf-9524-c7fe2b48ecf5`; event ID
+`c4c5eb15-36eb-4a65-83ff-99e18bafe27c`; Google trainee ID
+`TRN-480ca9d7-4f2e-4116-838c-8fd7c3e91523`. No staff grant or new Auth user.
+Keep this fixture identifiable and remove/archive it during pilot cleanup rather
+than treating it as a successful real applicant.
+
+The sign-in email reached the mailbox: the owner followed it, and browser UI
+showed the verified email signed in. The real browser POST then verified Auth,
+read the private provisioned identity, established a signed Google session and
+displayed **Trainee entry confirmed** with both pathway cards. The route returned
+HTTP200. Screenshot saved privately as `recruitment-training-real-signin.png`.
+
+Found a real timing issue: Google completed a profile write after the previous
+12s transport deadline. Safe retry reused the profile, then acknowledged the
+queue. Raised the single shared redirect budget to30s (still bounded); successful
+real handoff took23.7s. Added regression coverage and a60s route execution cap.
+Further performance tuning is still needed before public release.
+
+The test invitation was queued only after provisioning, then moved to attention
+so it cannot be picked up as a real welcome. No welcome email was sent. Real
+SMTP magic-link delivery/return and restricted entry are verified; the automated
+welcome sender/provider receipts are NOT. Next work: programme enrolment,
+reviewed training content, invitation sender/receipts, final assessment editorial
+review and controlled pilot cleanup. Subsequent student/dashboard/results scope
+remains in project-completion-scope.md. Hosted flags/links/deployments unchanged.

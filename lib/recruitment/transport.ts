@@ -3,7 +3,9 @@ import {boundedBody} from '../referrals/agreement.ts';
 export async function sendProvisionEnvelope(destination:string,envelope:unknown,fetcher:typeof fetch=fetch){
  const target=trainingBridgeDestination(destination);if(!target)throw Error('Invalid training destination');
  let url=target,method='POST';let body:string|undefined=JSON.stringify(envelope);
- const signal=AbortSignal.timeout(12000);
+ // Google may finish a sheet write after the caller's previous 12s deadline.
+ // Share one bounded cold-start budget across all redirects; never reset it.
+ const signal=AbortSignal.timeout(30000);
  for(let redirects=0;redirects<=3;redirects++){
   const response=await fetcher(url,{method,headers:method==='POST'?{'Content-Type':'application/json'}:{},body,redirect:'manual',cache:'no-store',signal});
   if([301,302,303,307,308].includes(response.status)){
