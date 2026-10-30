@@ -32,3 +32,22 @@ This is persistent project memory. The owner has expanded completion beyond the 
 - Upload_Invites already stores a Code_Hash and expiry/status fields. Determine its intended school-upload use before considering any reuse for trainees.
 
 No production sheet rows, accounts, attendance entries, grants or deployments have been changed by this memory update.
+
+## Owner addition — seminar learners and lesson design, 29 October 2026
+
+- Add a separate student entry/sign-in route for learners met at Forge seminars. A learner supplies their own email and uses a PIN already issued by Forge; after verification they can receive the appropriate student sign-in code. This must not become unrestricted self-enrolment, expose reusable PINs, or bypass the existing student identity/safeguarding rules. Exact PIN/code lifecycle will be designed against the existing student portal before implementation.
+- Their student dashboard should follow the SS2 experience, with different learning tracks based on the learner's interests. Track selection must map to approved learning content and appropriate age/level support; it must not give instructor or other students' access.
+- Redesign lesson notes around understanding, guided practice and enjoyment. Explain JavaScript, HTML, CSS, Python, project management and the other approved topics using familiar everyday experiences the children recognise, practical demonstrations and small games. Use a clear loop: a relatable example, a short explanation, a worked example, a guided try, an independent challenge, feedback and reflection.
+- The owner also said “dif”; retain that wording as an unresolved topic name. Do not silently expand it into an invented curriculum topic. Resolve its meaning when the student-content phase reaches that topic.
+- Preserve the earlier requirements for easier lesson discovery, clear assignment/submission steps, meaningful task states, verified supporting videos, name correction, Seyi's scoped student/code tools and demo-only attendance examples. Do not lose these while delivering instructor onboarding.
+- Current work order is unchanged: continue the employee/instructor onboarding journey first. These student additions are recorded for the subsequent dashboard/lesson work, not a request to switch tasks now.
+
+## Owner addition — results and parent visibility, 30 October 2026
+
+Deferred until the previously requested instructor journey and dashboard/lesson work are complete. Record these requirements now; do not implement them ahead of the existing work.
+
+- Instructors can enter assessment/test and examination scores. Support school-specific weightings, such as 40% continuous assessment and 60% examination, rather than assuming one scheme fits every school. Validate totals and score limits; preserve raw marks and the scheme used for each published result. Record who changed a scheme, when and why; prevent silent changes to already published results.
+- Generate a school/class Excel results compilation and downloadable individual child reports when requested by the school. Include marks, participation and relevant learning evidence/questions. Restrict exports to authorised school/class scope and protect downloads containing children's information.
+- Parents can see their own child's learning questions and the answers given. Define this as a parent-safe learning record, distinguishing student questions, instructor replies and assessment responses; do not expose other children, private safeguarding notes or unreleased assessment answer keys. Verify the parent–child link before access.
+- Additional proposed improvements to review in that phase: draft/review/publish result states; missing-mark warnings that distinguish absent, exempt and not yet assessed from zero; a score preview before publication; an audited correction history; learner progress and practical next-step suggestions; accessible mobile parent reports; and export column/weighting labels that make calculations understandable. These are proposals, not already built features.
+- In progress/final updates, keep reminding the owner of the remaining phases and their order. Never describe deferred results features as complete.
