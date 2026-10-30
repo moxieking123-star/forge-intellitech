@@ -119,3 +119,26 @@ execution: owner consent/configuration is pending. Local `.env.local` contains
 the matching test key and endpoint, with all recruitment/training switches false;
 existing local configuration is never overwritten by setup. This file is ignored.
 No production server environment or domain was changed.
+
+### Real Google pilot verified
+
+After owner consent, an unsigned probe returned the application's generic JSON
+rejection (HTTP200), rather than Google's authorization page. Enabled writes only
+on the isolated training workbook and ran a labelled fictional profile through
+the signed Google endpoint: provisioning acknowledged, reused nonce rejected,
+fresh signed retry returned the same trainee ID, changed email rejected, and a
+restricted session was created. Pilot metadata/report stays in ignored
+private-assets; its identity source is explicitly fictional, not Supabase Auth.
+
+Local training sign-in is enabled with the correct public forge-web key; public
+application/assessment and hosted feature switches remain off/unchanged. The auth
+configuration route now supports training independently of public recruitment.
+No actual sign-in/welcome email has been sent in this pilot yet. Still waiting
+for the localhost training return URL and local private backend credential.
+
+Automatic approval rejected a full development-environment download because it
+could extract unrelated secrets. No environment download occurred. Requested
+owner approval for retrieving only the required service-role credential (or owner
+entry through secure local configuration). Do not work around that rejection by
+fetching every secret separately. The Resend sender and real email receipts still
+require their own verified integration; SMTP acceptance alone is not delivery.
