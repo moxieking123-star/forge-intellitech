@@ -1,0 +1,28 @@
+import {chromium} from 'file:///C:/Users/Forge/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs';
+import assert from 'node:assert/strict';
+const browser=await chromium.launch({channel:'chrome',headless:true});
+const base=process.env.TEST_BASE_URL||'http://localhost:3018';
+try{
+ const context=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'});
+ const user={id:'00000000-0000-4000-8000-000000000001',email:'fictional@example.invalid',aud:'authenticated',role:'authenticated',app_metadata:{},user_metadata:{},created_at:new Date().toISOString(),email_confirmed_at:new Date().toISOString()};
+ await context.addInitScript(user=>sessionStorage.setItem('forge-recruitment',JSON.stringify({access_token:'fixture-access-token',refresh_token:'fixture-refresh-token',expires_at:Math.floor(Date.now()/1000)+3600,expires_in:3600,token_type:'bearer',user})),user);
+ const page=await context.newPage();page.setDefaultTimeout(15000);
+ await page.route('**/api/recruitment/config',r=>r.fulfill({json:{url:'https://deblssilgleuiccsgdcy.supabase.co',key:'fixture-anon',emailLoginEnabled:false}}));
+ await page.route('**/auth/v1/user*',r=>r.fulfill({json:user}));
+ await page.route('**/auth/v1/logout*',r=>r.fulfill({status:204}));
+ let calls=0;
+ await page.route('**/api/recruitment/handoff',async r=>{calls++;assert.equal(r.request().headers().authorization,'Bearer fixture-access-token');assert.deepEqual(r.request().postDataJSON(),{});return r.fulfill({json:{token:'x'.repeat(43),traineeId:'TRN-fixture',access:'trainee',expiresAt:Date.now()+3600000}});});
+ await page.goto(base+'/join/training',{waitUntil:'domcontentloaded',timeout:120000});
+ await page.getByRole('button',{name:'Open my training entry'}).click();
+ await page.getByRole('heading',{name:'A beginning worth building on.'}).waitFor();
+ assert.equal(await page.getByRole('button',{name:/Help us forge this/}).count(),0);
+ assert.equal(calls,1);assert.ok(!(await page.evaluate(()=>JSON.stringify({...localStorage,...sessionStorage}))).includes('x'.repeat(43)));
+ for(const width of [1440,768,390]){await page.setViewportSize({width,height:1000});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));}
+ await page.screenshot({path:'private-assets/recruitment-training-mobile.png',fullPage:true});
+ await page.getByRole('button',{name:'Sign out'}).click();
+ await page.getByRole('heading',{name:'Your next chapter starts with learning.'}).waitFor();
+ assert.equal(await page.getByRole('button',{name:'Email my sign-in link'}).isDisabled(),true);
+ assert.equal(await page.getByRole('button',{name:'Open my training entry'}).count(),0);
+ assert.equal(calls,1);
+ await context.close();console.log('Training entry browser fixture passed; mocked identity and bridge, no real login or email.');
+}finally{await browser.close();}

@@ -66,3 +66,26 @@ POST bodies or a suitably configured secure session cookie; never email them,
 append them to a URL, log them or put them in analytics. The server must obtain
 identity through Auth.getUser and provisioning from private storage. An injection
 interface in a unit test is not a substitute for those production adapters.
+
+### Local entry and invitation checkpoint
+
+`/join/training` now has a gated entry screen: existing applicant email sign-in,
+explicit profile confirmation, in-memory-only trainee credential, session expiry
+and local sign-out. ElyTech/TechUp pathway explanations are visible after a valid
+handoff. Programme selection and lessons are clearly marked as not yet connected;
+no unsaved selection is presented as enrolment. Floating feedback/video/mascot
+overlays are excluded from this private entry. It uses the existing website auth
+client; it is not yet mounted at app.forgeintellitech.com. The welcome template
+must not be sent while that destination lacks the trainee route.
+
+`invitation-delivery.ts` now prepares validated queue jobs, stable provider keys
+and receipt settlement with bounded error codes. It refuses even to claim jobs
+when disabled or the training destination is unready. A database lease/settlement
+adapter, provider sender/receipts and bounded retry policy are still required;
+there is no running invitation sender or cron. A stable key alone does not prove
+provider deduplication outside the provider's retention window.
+
+Verification: local browser fixture with fictional Auth and handoff responses at
+1440/768/390 pixels, no horizontal overflow, no trainee bearer in web storage,
+correct local sign-out and disabled unconfigured email login. This is not a real
+Supabase/Google/Resend end-to-end sign-in. Test workbook writes remain disabled.

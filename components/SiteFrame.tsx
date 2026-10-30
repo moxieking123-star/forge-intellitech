@@ -16,7 +16,7 @@ import PreviewFeedback from "./feedback/PreviewFeedback";
 export default function SiteFrame({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const homepage = !pathname.startsWith("/admin");
-  const playful = homepage && pathname !== '/join/apply';
+  const playful = homepage && !['/join/apply','/join/training'].includes(pathname);
   return (
     <>
       {homepage ? <HomeHeader /> : <header className={adminFrame.header}><Link href="/" className={adminFrame.brand} aria-label="Forge home"><Image src="/images/brand/forge-wordmark.png" alt="Forge" width={2045} height={769} sizes="120px"/><span>Private workspace</span></Link><Link href="/" className={adminFrame.back}>Back to the website ↗</Link></header>}
