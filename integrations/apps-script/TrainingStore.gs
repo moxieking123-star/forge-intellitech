@@ -80,6 +80,32 @@ function forgeTrainingCreateStore_(config) {
       write('Training_Events',found.index,[id,binding,'complete',traineeId,found.row[4],new Date()]);
     },
     findTrainee:function(id) { var found=find('Trainees',1,id); return found ? profile(found.row) : null; },
+    // Called only after a separate server-side verified-identity exchange.
+    // Tokens must be generated with a cryptographic RNG, never Utilities.getUuid.
+    createSession:function(traineeId,token,expiresAt) {
+      requireLock(); var now=Date.now(), owner=find('Trainees',0,traineeId);
+      if (typeof token !== 'string' || !/^[A-Za-z0-9_-]{43}$/.test(token) || !Number.isSafeInteger(expiresAt) || expiresAt < now+60000 || expiresAt > now+7200000 || !owner || owner.row[5] !== 'trainee' || owner.row[6] !== 'training') throw new Error('Invalid training session');
+      var digest=hash(token);
+      if (find('Training_Sessions',0,digest)) throw new Error('Training session conflict');
+      append('Training_Sessions',[digest,traineeId,new Date(expiresAt),new Date(),'']);
+    },
+    getSession:function(token) {
+      validate();
+      if (typeof token !== 'string' || !/^[A-Za-z0-9_-]{43}$/.test(token)) return null;
+      var session=find('Training_Sessions',0,hash(token));
+      if (!session || session.row[4] || !Number.isFinite(new Date(session.row[2]).getTime()) || new Date(session.row[2]).getTime() <= Date.now()) return null;
+      var owner=find('Trainees',0,session.row[1]);
+      if (!owner || owner.row[5] !== 'trainee' || owner.row[6] !== 'training') return null;
+      // Never return email, applicant records or staff roles from session lookup.
+      return {traineeId:owner.row[0],access:'trainee',expiresAt:new Date(session.row[2]).getTime()};
+    },
+    revokeSession:function(token) {
+      requireLock();
+      if (typeof token !== 'string' || !/^[A-Za-z0-9_-]{43}$/.test(token)) throw new Error('Invalid training session');
+      var session=find('Training_Sessions',0,hash(token));
+      if (!session || session.row[4]) return;
+      var values=session.row.slice(); values[4]=new Date(); write('Training_Sessions',session.index,values);
+    },
     createTrainee:function(p) {
       requireLock();
       if (!p || p.access !== 'trainee' || typeof p.applicantId !== 'string' || !p.applicantId || typeof p.assessmentReceiptId !== 'string' || !p.assessmentReceiptId || typeof p.verifiedEmail !== 'string' || !/^[^\s<>@]+@[^\s<>@]+\.[^\s<>@]+$/.test(p.verifiedEmail) || p.verifiedEmail !== p.verifiedEmail.trim().toLowerCase() || typeof p.displayName !== 'string' || !p.displayName.trim() || p.displayName.length > 120 || /[\x00-\x1f]/.test(p.displayName) || find('Trainees',1,p.applicantId)) throw new Error('Invalid training profile');

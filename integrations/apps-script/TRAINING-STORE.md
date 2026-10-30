@@ -16,8 +16,10 @@ is encoded when necessary to prevent formula evaluation, then decoded on read.
 
 The adapter deliberately stops at 10,000 rows per tab rather than scanning an
 unbounded sheet. Nonce retention/cleanup and capacity monitoring must be added
-before a production pilot. Sessions and audit tabs are reserved schema only:
-trainee session issuance, revocation and audit writers are not implemented yet.
+before a production pilot. Session storage supports hashed tokens, a maximum
+two-hour lifetime, explicit revocation and active-trainee checks. The token issuer
+and verified-identity exchange are still pending; never call session creation from
+an unverified browser request. Audit writers are not implemented yet.
 
 Verification: `node --test tests/recruitment-store.test.mjs` uses a fake Sheets
 service and exercises configuration guards, locks, persistence, duplicate/conflict
@@ -25,3 +27,17 @@ checks and literal text. It does not prove installation or live Google execution
 Next: verified-identity trainee sign-in, invitation delivery, restricted dashboard
 routes, and complete isolated pass-to-training integration tests. No operational
 staff account or employment role should be created from an assessment pass.
+
+## Branch checkpoint — 30 October 2026
+
+Session creation/revocation and lookup are covered by fake-Sheets tests, including
+expired and suspended identities. `lib/recruitment/invitation.ts` prepares a
+plain-text training welcome for a validated recipient and fixed dashboard URL;
+it neither sends mail nor creates a login. The invitation outbox sender must
+remain disabled until that destination supports verified trainee sign-in.
+
+Still required, in order: verified-identity exchange and restricted trainee view;
+invitation claim/send/settle with provider idempotency; isolated end-to-end pilot;
+question editorial approval; training-path selection and reviewed two-week content.
+Then resume the recorded dashboard/student work, followed by deferred school
+grading, exports and parent views. These later requirements remain unimplemented.
