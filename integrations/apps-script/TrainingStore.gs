@@ -7,7 +7,8 @@ function forgeTrainingCreateStore_(config) {
     Training_Events:['Event_ID','Payload_Hash','Status','Trainee_ID','Created_At','Updated_At'],
     Training_Nonces:['Nonce_Hash','Expires_At'],
     Training_Sessions:['Session_Hash','Trainee_ID','Expires_At','Created_At','Revoked_At'],
-    Training_Audit:['Audit_ID','Trainee_ID','Action','Actor_ID','Created_At','Note']
+    Training_Audit:['Audit_ID','Trainee_ID','Action','Actor_ID','Created_At','Note'],
+    Training_Work:['Request_ID','Trainee_ID','Programme','Lesson_ID','Operation','Text','Payload_Hash','Created_At']
   };
   var book = SpreadsheetApp.openById(config.spreadsheetId), sheets = {}, locked = false, validated = false, validating = false;
   function rows(name) {
@@ -97,7 +98,7 @@ function forgeTrainingCreateStore_(config) {
       append('Training_Sessions',[digest,traineeId,new Date(expiresAt),new Date(),'']);
     },
     getSession:function(token) {
-      validate();
+      if (!locked) validate();
       if (typeof token !== 'string' || !/^[A-Za-z0-9_-]{43}$/.test(token)) return null;
       var session=find('Training_Sessions',0,hash(token));
       if (!session || session.row[4] || !Number.isFinite(new Date(session.row[2]).getTime()) || new Date(session.row[2]).getTime() <= Date.now()) return null;
@@ -105,6 +106,29 @@ function forgeTrainingCreateStore_(config) {
       if (!owner || owner.row[5] !== 'trainee' || owner.row[6] !== 'training') return null;
       // Never return email, applicant records or staff roles from session lookup.
       return {traineeId:owner.row[0],access:'trainee',expiresAt:new Date(session.row[2]).getTime()};
+    },
+    workspace:function(traineeId,p) {
+      requireLock();
+      var owner=find('Trainees',0,traineeId);if(!owner||owner.row[5]!=='trainee'||owner.row[6]!=='training')throw Error('Training sign-in required');
+      var all=rows('Training_Work'), own=all.filter(function(row){return row[1]===traineeId;}), programme=owner.row[9]||null;
+      if(programme!==null&&['elytech','techup'].indexOf(programme)<0)throw Error('Invalid programme');
+      if(p.operation!=='read'){
+        if(['select','complete','submit'].indexOf(p.operation)<0||['elytech','techup'].indexOf(p.programme)<0||typeof p.requestId!=='string'||!/^[a-f0-9-]{36}$/.test(p.requestId)||typeof p.text!=='string'||p.text.length>1200||(p.operation==='select'?(p.lessonId!==''||p.text!==''):(p.lessonId!=='day-1'||(p.operation==='complete'?p.text!=='':p.text.trim().length<30))))throw Error('Invalid training work');
+        var binding=hash(JSON.stringify([p.operation,p.programme,p.lessonId,p.text])), prior=find('Training_Work',0,p.requestId);
+        if(prior&&(prior.row[1]!==traineeId||prior.row[6]!==binding))throw Error('Training request conflict');
+        if(!prior){
+          if(own.length>=200)throw Error('Training work capacity reached');
+          if(p.operation!=='select'&&programme!==p.programme)throw Error('Select programme first');
+          append('Training_Work',[p.requestId,traineeId,p.programme,p.lessonId,p.operation,p.text,binding,new Date()]);
+        }
+        // Reconstruct selection from the durable log, repairing interrupted profile writes.
+        own=rows('Training_Work').filter(function(row){return row[1]===traineeId;});
+      }
+      var selections=own.filter(function(row){return row[4]==='select';});
+      if(selections.length){programme=selections[selections.length-1][2];if(owner.row[9]!==programme){var values=owner.row.slice();values[9]=programme;values[8]=new Date();write('Trainees',owner.index,values);}}
+      var scoped=own.filter(function(row){return row[2]===programme;}),completed=scoped.some(function(row){return row[4]==='complete'&&row[3]==='day-1';})?['day-1']:[];
+      var submissions=scoped.filter(function(row){return row[4]==='submit'&&row[3]==='day-1';}), latest=submissions[submissions.length-1];
+      return {programme:programme,completed:completed,submission:latest?{id:latest[0],text:decode(latest[5]),submittedAt:new Date(latest[7]).toISOString()}:null};
     },
     revokeSession:function(token) {
       requireLock();

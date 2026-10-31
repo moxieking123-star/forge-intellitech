@@ -11,15 +11,17 @@ try{
  await page.route('**/auth/v1/user*',r=>r.fulfill({json:user}));
  await page.route('**/auth/v1/logout*',r=>r.fulfill({status:204}));
  let calls=0;
+ let state={programme:null,completed:[],submission:null},failSave=true,failedId;
+ await page.route('**/api/recruitment/workspace',async r=>{assert.equal(r.request().headers().authorization,'Bearer '+'x'.repeat(43));const p=r.request().postDataJSON();assert.ok(!('traineeId' in p));if(p.operation==='select'){state={programme:p.programme,completed:[],submission:null};}if(p.operation==='complete')state.completed=['day-1'];if(p.operation==='submit'){if(failSave){failSave=false;failedId=p.requestId;return r.fulfill({status:503,json:{error:'Temporary fixture save failure. Keep your draft and retry.'}});}assert.equal(p.requestId,failedId,'Retry must reuse the submission request ID');state.submission={id:p.requestId,text:p.text,submittedAt:new Date().toISOString()};}return r.fulfill({json:state});});
  await page.route('**/api/recruitment/handoff',async r=>{calls++;assert.equal(r.request().headers().authorization,'Bearer fixture-access-token');assert.deepEqual(r.request().postDataJSON(),{});return r.fulfill({json:{token:'x'.repeat(43),traineeId:'TRN-fixture',access:'trainee',expiresAt:Date.now()+3600000}});});
  await page.goto(base+'/join/training',{waitUntil:'domcontentloaded',timeout:120000});
  await page.getByRole('button',{name:'Open my training entry'}).click();
  await page.getByRole('heading',{name:'A beginning worth building on.'}).waitFor();
  assert.equal(await page.getByRole('button',{name:/Help us forge this/}).count(),0);
  assert.equal(calls,1);assert.ok(!(await page.evaluate(()=>JSON.stringify({...localStorage,...sessionStorage}))).includes('x'.repeat(43)));
- await page.getByRole('button',{name:'Explore ElyTech preparation'}).click();
+ await page.getByRole('button',{name:'Choose ElyTech preparation'}).click();
  await page.getByRole('heading',{name:'ElyTech: learn it. Explain it. Help someone build.'}).waitFor();
- await page.getByText('Your programme choice, answers and progress are not saved yet.',{exact:false}).waitFor();
+ await page.getByText('Your programme selection is saved.',{exact:false}).waitFor();
  assert.equal(await page.getByRole('button',{name:'Check my understanding'}).isDisabled(),true);
  await page.getByRole('radio',{name:'Finish the exercise for them.'}).check();
  await page.getByRole('button',{name:'Check my understanding'}).click();
@@ -27,20 +29,34 @@ try{
  await page.getByRole('radio',{name:'Slow down, practise a small group of keys and give specific feedback.'}).check();
  await page.getByRole('button',{name:'Check my understanding'}).click();
  await page.getByText('That’s right.',{exact:false}).waitFor();
+ await page.getByRole('button',{name:'Mark Day 1 as practised'}).click();
+ await page.getByText('Day 1 - Practised',{exact:true}).waitFor();
+ const draft='A fictional lesson plan: demonstrate home keys, guide short practice, then check understanding.';
+ await page.getByLabel('Your Day 1 assignment',{exact:true}).fill(draft);
+ await page.getByRole('button',{name:'Submit assignment',exact:true}).click();
+ await page.getByRole('alert').filter({hasText:'Temporary fixture save failure.'}).waitFor();
+ assert.equal(await page.getByLabel('Your Day 1 assignment',{exact:true}).inputValue(),draft);
+ await page.getByRole('button',{name:'Submit assignment',exact:true}).click();
+ await page.getByText('Assignment received. It has not been reviewed yet.',{exact:true}).waitFor();
+ await page.reload({waitUntil:'domcontentloaded'});
+ await page.getByRole('button',{name:'Open my training entry'}).click();
+ await page.getByRole('heading',{name:'ElyTech: learn it. Explain it. Help someone build.'}).waitFor();
+ await page.getByText('Day 1 - Practised',{exact:true}).waitFor();
+ assert.equal(await page.getByLabel('Your Day 1 assignment',{exact:true}).inputValue(),draft);
  await page.getByRole('button',{name:'Compare programmes'}).click();
- await page.getByRole('button',{name:'Explore TechUp preparation'}).click();
+ await page.getByRole('button',{name:'Choose TechUp preparation'}).click();
  await page.getByRole('heading',{name:'TechUp: learn it. Explain it. Help someone build.'}).waitFor();
  assert.equal(await page.getByRole('button',{name:'Check my understanding'}).isDisabled(),true);
  await page.getByRole('radio',{name:'JavaScript, responding to the click.'}).check();
  await page.getByRole('button',{name:'Check my understanding'}).click();
  await page.getByText('That’s right.',{exact:false}).waitFor();
- assert.equal(calls,1,'Exploring public preparation content must not provision another account');
+ assert.equal(calls,2,'Only reopening the entry after reload may exchange a new session');
  for(const width of [1440,768,390]){await page.setViewportSize({width,height:1000});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));}
  await page.screenshot({path:'private-assets/recruitment-training-mobile.png',fullPage:true});
  await page.getByRole('button',{name:'Sign out'}).click();
  await page.getByRole('heading',{name:'Your next chapter starts with learning.'}).waitFor();
  assert.equal(await page.getByRole('button',{name:'Email my sign-in link'}).isDisabled(),true);
  assert.equal(await page.getByRole('button',{name:'Open my training entry'}).count(),0);
- assert.equal(calls,1);
+ assert.equal(calls,2);
  await context.close();console.log('Training entry browser fixture passed; mocked identity and bridge, no real login or email.');
-}finally{await browser.close();}
+}catch(error){console.log((await browser.contexts()[0]?.pages()[0]?.locator('main').innerText())?.slice(-5000));throw error;}finally{await browser.close();}

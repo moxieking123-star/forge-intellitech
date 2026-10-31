@@ -2,11 +2,59 @@
   "version": "FORGE_TRAINING_V1",
   "environment": "test",
   "sheets": {
-    "Training_Config": ["Key", "Value"],
-    "Trainees": ["Trainee_ID", "Applicant_ID", "Verified_Email", "Display_Name", "Assessment_Receipt_ID", "Access", "Status", "Created_At", "Updated_At", "Programme", "Support_Needs"],
-    "Training_Events": ["Event_ID", "Payload_Hash", "Status", "Trainee_ID", "Created_At", "Updated_At"],
-    "Training_Nonces": ["Nonce_Hash", "Expires_At"],
-    "Training_Sessions": ["Session_Hash", "Trainee_ID", "Expires_At", "Created_At", "Revoked_At"],
-    "Training_Audit": ["Audit_ID", "Trainee_ID", "Action", "Actor_ID", "Created_At", "Note"]
+    "Training_Config": [
+      "Key",
+      "Value"
+    ],
+    "Trainees": [
+      "Trainee_ID",
+      "Applicant_ID",
+      "Verified_Email",
+      "Display_Name",
+      "Assessment_Receipt_ID",
+      "Access",
+      "Status",
+      "Created_At",
+      "Updated_At",
+      "Programme",
+      "Support_Needs"
+    ],
+    "Training_Events": [
+      "Event_ID",
+      "Payload_Hash",
+      "Status",
+      "Trainee_ID",
+      "Created_At",
+      "Updated_At"
+    ],
+    "Training_Nonces": [
+      "Nonce_Hash",
+      "Expires_At"
+    ],
+    "Training_Sessions": [
+      "Session_Hash",
+      "Trainee_ID",
+      "Expires_At",
+      "Created_At",
+      "Revoked_At"
+    ],
+    "Training_Audit": [
+      "Audit_ID",
+      "Trainee_ID",
+      "Action",
+      "Actor_ID",
+      "Created_At",
+      "Note"
+    ],
+    "Training_Work": [
+      "Request_ID",
+      "Trainee_ID",
+      "Programme",
+      "Lesson_ID",
+      "Operation",
+      "Text",
+      "Payload_Hash",
+      "Created_At"
+    ]
   }
 }

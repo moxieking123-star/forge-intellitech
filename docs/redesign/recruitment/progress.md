@@ -69,3 +69,9 @@ Broader dashboard/student/name/Seyi/task/attendance changes remain recorded and 
 - Saved the exact wire representation, authority boundaries, receiver-storage interface and remaining rollout work in handoff-contract.md. No current Apps Script source/deployment or operational workbook was edited.
 - Full regression suite: 133 passing tests. SQL delivery tests passed inside BEGIN/ROLLBACK as service_role, including lease expiration and the eight-claim budget. Security advisors show only intentional service-only RLS-without-policy INFO notices and the previously known project-wide leaked-password-protection warning; no new recruitment warning.
 - Production build passed compilation, TypeScript and all 81 static outputs. Recruitment/admin request handlers are dynamic. Confirmed zero real applications, provisioning events or invitations and zero approved question forms after all rollback tests. No delivery was attempted against Google and no email was sent.
+
+## 31 October 2026 - persisted local training work
+
+- Programme selection, Day 1 practice completion and text assignment submissions now use a session-scoped signed bridge and the isolated test workbook's Training_Work log. Existing programme histories and assignment revisions are retained; request IDs prevent duplicate retries.
+- Real fictional Google persistence and signed-in owner pilot submission passed. 173 unit tests, TypeScript and the expanded browser save/reload/retry/mobile test pass. See saved-training-work.md for scope and limitations.
+- Operational dashboard, production site and shared tester deployment are unchanged. Remaining instructor work: staff marking/feedback, full lesson content, automated welcome delivery and the dashboard-host integration; public assessment forms still require approval. Student dashboard, seminar entry and result/report requirements remain deferred as previously recorded.
