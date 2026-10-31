@@ -12,9 +12,11 @@ import ForgeJourney from "./story/ForgeJourney";
 import PageMotion from "./PageMotion";
 import ForgeInteractions from "./motion/ForgeInteractions";
 import PreviewFeedback from "./feedback/PreviewFeedback";
+import {trainingBasePath,trainingPath} from '@/lib/recruitment/paths';
 
 export default function SiteFrame({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  if(trainingBasePath())return <><header className={adminFrame.header}><a href="https://www.forgeintellitech.com" className={adminFrame.brand}><img src={trainingPath('/images/brand/forge-wordmark.png')} alt="Forge" width={120} height={45}/><span>Instructor preparation</span></a><a href="https://app.forgeintellitech.com" className={adminFrame.back}>Operations dashboard</a></header><main id="main-content" tabIndex={-1}>{children}</main><footer className={adminFrame.footer}>Forge Intellitech Services Ltd. · Instructor preparation</footer></>;
   const homepage = !pathname.startsWith("/admin");
   const playful = homepage && !['/join/apply','/join/training'].includes(pathname);
   return (

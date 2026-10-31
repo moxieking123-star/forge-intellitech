@@ -1,4 +1,5 @@
 'use client';
+import {trainingPath} from '@/lib/recruitment/paths';
 import {useEffect,useRef,useState,type FormEvent} from 'react';
 import type {SupabaseClient,Session} from '@supabase/supabase-js';
 import {recruitmentAuth} from './client';
@@ -21,7 +22,7 @@ export default function TrainingEntry(){
  },[]);
  useEffect(()=>{if(!entry)return;const timer=setTimeout(()=>{credential.current=null;setEntry(null);setNotice('Your training session has ended. Open your entry again to continue.');},Math.max(0,entry.expiresAt-Date.now()));return()=>clearTimeout(timer);},[entry]);
  async function signIn(event:FormEvent){event.preventDefault();if(!client||!emailEnabled||busy)return;setBusy(true);setError('');setNotice('');
-  try{const {error:failure}=await client.auth.signInWithOtp({email:email.trim(),options:{shouldCreateUser:false,emailRedirectTo:window.location.origin+'/join/training'}});if(failure)throw failure;setNotice('If this email has an applicant account, a secure sign-in link is on its way. Use your application email.');}catch{setError('We could not send the sign-in email. Please try again later.');}finally{if(mounted.current)setBusy(false);}
+  try{const {error:failure}=await client.auth.signInWithOtp({email:email.trim(),options:{shouldCreateUser:false,emailRedirectTo:window.location.origin+trainingPath('/join/training')}});if(failure)throw failure;setNotice('If this email has an applicant account, a secure sign-in link is on its way. Use your application email.');}catch{setError('We could not send the sign-in email. Please try again later.');}finally{if(mounted.current)setBusy(false);}
  }
  async function open(){if(!client||busy)return;setBusy(true);setError('');setNotice('');
   const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),30000);
@@ -29,7 +30,7 @@ export default function TrainingEntry(){
   // Auth state already supplies the token; the server verifies it authoritatively.
   // A second getSession here can wait on the refresh lock before fetch even starts.
   try{if(!session)throw Error('Please sign in again with a fresh email link.');const owner=session.user.id;
-   const response=await Promise.race([fetch('/api/recruitment/handoff',{method:'POST',cache:'no-store',signal:controller.signal,headers:{'Content-Type':'application/json',Authorization:'Bearer '+session.access_token},body:'{}'}),expired]);const value=await Promise.race([response.json(),expired]);
+   const response=await Promise.race([fetch(trainingPath('/api/recruitment/handoff'),{method:'POST',cache:'no-store',signal:controller.signal,headers:{'Content-Type':'application/json',Authorization:'Bearer '+session.access_token},body:'{}'}),expired]);const value=await Promise.race([response.json(),expired]);
    if(!mounted.current||identity.current!==owner)return;
    if(!response.ok)throw Error(value.error||'Training access is being prepared.');
    if(!value||value.access!=='trainee'||typeof value.traineeId!=='string'||!/^TRN-[A-Za-z0-9_-]{1,90}$/.test(value.traineeId)||typeof value.token!=='string'||!/^[A-Za-z0-9_-]{43}$/.test(value.token)||!Number.isSafeInteger(value.expiresAt)||value.expiresAt<=Date.now()||value.expiresAt>Date.now()+7200000)throw Error();

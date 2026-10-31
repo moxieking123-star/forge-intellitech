@@ -1,4 +1,5 @@
 'use client';
+import {trainingPath} from '@/lib/recruitment/paths';
 import {useEffect,useRef,useState,type FormEvent} from 'react';
 import s from './SchoolReview.module.css';
 type Row={id:string;traineeId:string;name:string;programme:string;lessonId:string;submittedAt:string;status:string};
@@ -9,7 +10,7 @@ export default function TrainingReviews({token}:{token:string}){
  const [detail,setDetail]=useState<Detail|null>(null),[status,setStatus]=useState('needs_changes'),[feedback,setFeedback]=useState(''),[busy,setBusy]=useState(false),[saving,setSaving]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState('');
  const pending=useRef<{key:string;id:string}|null>(null),active=useRef(true);
  async function call(operation:string,extra:Record<string,unknown>={},signal?:AbortSignal){const base={operation,submissionId:'',expectedReviewId:'',status:'',feedback:'',offset:0,filter:'all',...extra},key=JSON.stringify(base);let requestId=crypto.randomUUID();if(operation==='review'){if(pending.current?.key!==key)pending.current={key,id:requestId};requestId=pending.current.id;}
-  const res=await fetch('/api/staff/training',{method:'POST',cache:'no-store',signal:signal?AbortSignal.any([signal,AbortSignal.timeout(30000)]):AbortSignal.timeout(30000),headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({...base,requestId})}),value=await res.json();if(!res.ok)throw Error(value.error||'Training review could not connect.');return value;
+  const res=await fetch(trainingPath('/api/staff/training'),{method:'POST',cache:'no-store',signal:signal?AbortSignal.any([signal,AbortSignal.timeout(30000)]):AbortSignal.timeout(30000),headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({...base,requestId})}),value=await res.json();if(!res.ok)throw Error(value.error||'Training review could not connect.');return value;
  }
  useEffect(()=>{active.current=true;return()=>{active.current=false;};},[]);
  useEffect(()=>{const controller=new AbortController();setBusy(true);setError('');setItems([]);setDetail(null);call('list',{filter,offset},controller.signal).then(value=>{if(!controller.signal.aborted){setItems(value.items);setTotal(value.total);}}).catch(failure=>{if(!controller.signal.aborted)setError(failure.message||'Training review could not connect.');}).finally(()=>{if(!controller.signal.aborted)setBusy(false);});return()=>controller.abort();},[token,filter,offset,refresh]);

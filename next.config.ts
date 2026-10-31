@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
+import {trainingBasePath} from './lib/recruitment/paths';
 
 const nextConfig: NextConfig = {
+  basePath:trainingBasePath(),
+  distDir:process.env.FORGE_TRAINING_BUILD==='true'?'.next-training':'.next',
+  async redirects(){return trainingBasePath()?[{source:'/',destination:'/join/training',permanent:false}]:[];},
   reactStrictMode: true,
   trailingSlash: false, 
   

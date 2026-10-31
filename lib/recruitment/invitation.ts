@@ -1,5 +1,6 @@
+import {trainingDashboardUrl} from './paths.ts';
 type TrainingRecipient={verifiedEmail:string;displayName:string;traineeId:string};
-/** Draft content only. Invoke after confirmed provisioning; never creates access. */
+/** Version 1 content. Keep stable for retries; the queue pins this template version. */
 export function trainingInvitation(value:TrainingRecipient){
  if(!value||typeof value!=='object'||Object.keys(value).sort().join(',')!=='displayName,traineeId,verifiedEmail'||
   typeof value.verifiedEmail!=='string'||value.verifiedEmail.length>254||value.verifiedEmail!==value.verifiedEmail.trim().toLowerCase()||
@@ -15,7 +16,7 @@ You have passed Forge’s first assessment, and your training profile is ready.
 
 We believe that helping a child discover what they can create begins with people who are willing to keep learning themselves. Thank you for taking that first step with us.
 
-Your next step is to sign in at https://app.forgeintellitech.com using this same email address. Your training space will guide you through choosing a teaching pathway and preparing for the work ahead. If a skill is new to you, that is something we can work on together.
+Your next step is to sign in at ${trainingDashboardUrl} using this same email address. Your training space will guide you through choosing a teaching pathway and preparing for the work ahead. If a skill is new to you, that is something we can work on together.
 
 This is an invitation to instructor preparation, not an offer of employment. School placement and teaching access require Forge’s review after training.
 

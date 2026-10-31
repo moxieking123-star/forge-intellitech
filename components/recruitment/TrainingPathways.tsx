@@ -1,4 +1,5 @@
 'use client';
+import {trainingPath} from '@/lib/recruitment/paths';
 import {useEffect,useRef,useState} from 'react';
 import {workspaceState,type WorkspaceState,type WorkspaceCommand} from '../../lib/recruitment/workspace-client';
 import s from './Recruitment.module.css';
@@ -15,7 +16,7 @@ export default function TrainingPathways({token}:{token:string}){
  async function call(operation:WorkspaceCommand['operation'],choice:Programme|null=null,text=''){
   const base={operation,programme:choice||'' as const,lessonId:operation==='complete'||operation==='submit'?'day-1' as const:'' as const,text};
   const key=JSON.stringify(base);if(pending.current?.key!==key)pending.current={key,id:crypto.randomUUID()};
-  const response=await fetch('/api/recruitment/workspace',{method:'POST',cache:'no-store',signal:AbortSignal.timeout(30000),headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({...base,requestId:pending.current.id})});
+  const response=await fetch(trainingPath('/api/recruitment/workspace'),{method:'POST',cache:'no-store',signal:AbortSignal.timeout(30000),headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({...base,requestId:pending.current.id})});
   const value=await response.json();if(!response.ok)throw Error(value.error||'The save could not be confirmed. Keep your draft and retry.');const state=workspaceState(value);if(!state)throw Error('The save could not be confirmed. Keep your draft and retry.');pending.current=null;return state;
  }
  async function load(){setBusy(true);setError('');try{const state=await call('read');if(active.current){setSaved(state);setProgramme(state.programme);setDraft(state.submission?.text||'');}}catch{if(active.current)setError('Your saved preparation could not load. Open your training entry again if the session has expired, or retry.');}finally{if(active.current)setBusy(false);}}

@@ -47,6 +47,7 @@ try{
  await page.getByRole('button',{name:'Refresh feedback',exact:true}).click();
  await page.getByRole('heading',{name:'A next step from Forge.',exact:true}).waitFor();
  await page.getByText(state.submission.review.feedback,{exact:true}).waitFor();
+ if(base.includes('/instructor-training'))await page.screenshot({path:'private-assets/training-app-prefix.png',fullPage:false});
  await page.getByRole('button',{name:'Compare programmes'}).click();
  await page.getByRole('button',{name:'Choose TechUp preparation'}).click();
  await page.getByRole('heading',{name:'TechUp: learn it. Explain it. Help someone build.'}).waitFor();

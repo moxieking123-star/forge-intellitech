@@ -1,6 +1,8 @@
 /** Isolated TEST storage adapter. No active-workbook fallback; not installed live. */
 function forgeTrainingCreateStore_(config) {
   if (!config || config.enabled !== true || !/^[\w-]{20,120}$/.test(config.spreadsheetId || '')) throw new Error('Training storage disabled');
+  var environment=config.environment===undefined?'test':config.environment;
+  if(['test','production'].indexOf(environment)<0)throw new Error('Invalid training environment');
   var headers = {
     Training_Config:['Key','Value'],
     Trainees:['Trainee_ID','Applicant_ID','Verified_Email','Display_Name','Assessment_Receipt_ID','Access','Status','Created_At','Updated_At','Programme','Support_Needs'],
@@ -31,7 +33,7 @@ function forgeTrainingCreateStore_(config) {
       if (Object.prototype.hasOwnProperty.call(settings,row[0])) throw new Error('Duplicate training setting');
       settings[row[0]] = row[1];
     });
-    if (settings.SchemaVersion !== 'FORGE_TRAINING_V1' || settings.Environment !== 'test' || settings.WriteEnabled !== true) throw new Error('Training storage disabled');
+    if (settings.SchemaVersion !== 'FORGE_TRAINING_V1' || settings.Environment !== environment || settings.WriteEnabled !== true) throw new Error('Training storage disabled');
     validated=true;
     } finally { validating=false; }
   }

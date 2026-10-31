@@ -19,7 +19,9 @@ function doPost(e) {
     // Reject unauthenticated traffic before any spreadsheet reads.
     var now=Math.floor(Date.now()/1000);
     if (!(action === 'trainee.provision' ? forgeTrainingVerify_(envelope,config.secret,now) : action === 'trainee.session' ? forgeTrainingVerifySession_(envelope,config.secret,now) : action === 'trainee.workspace' ? forgeTrainingVerifyWorkspace_(envelope,config.secret,now) : forgeTrainingVerifyReview_(envelope,config.secret,now))) throw new Error('Unavailable');
-    var store=forgeTrainingCreateStore_({enabled:true,spreadsheetId:props.TRAINING_SPREADSHEET_ID,deferValidation:true});
+    var environment=props.TRAINING_ENVIRONMENT||'test';
+    if(['test','production'].indexOf(environment)<0||(environment==='production'&&props.TRAINING_SPREADSHEET_ID==='1o6P25drEjtvG1dizKwhshA1csv02wf0sC40fqAbEn5s'))throw new Error('Unavailable');
+    var store=forgeTrainingCreateStore_({enabled:true,spreadsheetId:props.TRAINING_SPREADSHEET_ID,environment:environment,deferValidation:true});
     result=action === 'trainee.provision' ? forgeTrainingHandleProvision_(envelope,config,store,now) : action === 'trainee.session' ? forgeTrainingHandleSession_(envelope,config,store,now) : action === 'trainee.workspace' ? forgeTrainingHandleWorkspace_(envelope,config,store,now) : forgeTrainingHandleReview_(envelope,config,store,now);
   } catch (_) {result={error:'Training request unavailable'};}
   return ContentService.createTextOutput(JSON.stringify(result)).setMimeType(ContentService.MimeType.JSON);

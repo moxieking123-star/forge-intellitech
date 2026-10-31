@@ -12,6 +12,7 @@ import FeedbackReviews from "./FeedbackReviews";
 import AgreementReviews from "./AgreementReviews";
 import StaffWelcome from "./StaffWelcome";
 import TrainingReviews from './TrainingReviews';
+import {trainingPath,trainingBasePath} from '@/lib/recruitment/paths';
 import RecruitmentReviews from "./RecruitmentReviews";
 type Row={id:string;school_name:string;status:string;version:number;created_at:string;payload:Record<string,string|number|boolean|null>;notification_status:string;referral_id:string|null;submitted_by_referrer:string|null;history:{previousStatus:string;nextStatus:string;note:string;createdAt:string}[]};
 export default function SchoolReview({feedback=false,agreements=false,finance=false,enquiries=false,notifications=false,recruitment=false,training=false}:{training?:boolean;recruitment?:boolean;feedback?:boolean;agreements?:boolean;finance?:boolean;enquiries?:boolean;notifications?:boolean}){
@@ -28,7 +29,7 @@ export default function SchoolReview({feedback=false,agreements=false,finance=fa
  useEffect(()=>{
   let active=true,unsubscribe=()=>{};
   (async()=>{try{
-   const res=await fetch(training?'/api/recruitment/config':'/api/staff/config',{cache:'no-store'}),config=await res.json();if(!res.ok)throw new Error(config.error);
+   const res=await fetch(trainingPath(training?'/api/recruitment/config':'/api/staff/config'),{cache:'no-store'}),config=await res.json();if(!res.ok)throw new Error(config.error);
    if(!active)return;
    const auth=createClient(config.url,config.key,{auth:{storage:window.sessionStorage,storageKey:'forge-staff-preview',detectSessionInUrl:true}});
    setClient(auth);setEmailEnabled(config.emailLoginEnabled);
@@ -48,7 +49,7 @@ export default function SchoolReview({feedback=false,agreements=false,finance=fa
   return()=>controller.abort();
  },[session,offset,refresh,feedback,agreements,finance,enquiries,notifications,recruitment,training]);
  async function login(e:React.FormEvent){e.preventDefault();if(!client||!emailEnabled||busy)return;setBusy(true);setError('');setMessage('');
-  try{if(!code)localStorage.setItem("forge-staff-return",JSON.stringify({path:destination,expires:Date.now()+15*60*1000}));const result=code?await client.auth.verifyOtp({email:email.trim(),token:code.trim(),type:'email'}):await client.auth.signInWithOtp({email:email.trim(),options:{shouldCreateUser:false,emailRedirectTo:window.location.origin+'/admin/feedback'}});if(result.error)throw result.error;setMessage(code?'Signed in.':'If this is a provisioned staff account, check your email for your sign-in link or code.');}
+  try{if(!code)localStorage.setItem("forge-staff-return",JSON.stringify({path:destination,expires:Date.now()+15*60*1000}));const result=code?await client.auth.verifyOtp({email:email.trim(),token:code.trim(),type:'email'}):await client.auth.signInWithOtp({email:email.trim(),options:{shouldCreateUser:false,emailRedirectTo:window.location.origin+trainingPath(training&&trainingBasePath()?'/admin/training':'/admin/feedback')}});if(result.error)throw result.error;setMessage(code?'Signed in.':'If this is a provisioned staff account, check your email for your sign-in link or code.');}
   catch{setError('Unable to sign in. Check your details or ask the administrator to verify email setup.');}finally{setBusy(false);}
  }
  async function update(e:React.FormEvent){e.preventDefault();const row=items.find(r=>r.id===selected);if(!session||!row||busy)return;setBusy(true);setError('');setMessage('');
