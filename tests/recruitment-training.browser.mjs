@@ -17,6 +17,24 @@ try{
  await page.getByRole('heading',{name:'A beginning worth building on.'}).waitFor();
  assert.equal(await page.getByRole('button',{name:/Help us forge this/}).count(),0);
  assert.equal(calls,1);assert.ok(!(await page.evaluate(()=>JSON.stringify({...localStorage,...sessionStorage}))).includes('x'.repeat(43)));
+ await page.getByRole('button',{name:'Explore ElyTech preparation'}).click();
+ await page.getByRole('heading',{name:'ElyTech: learn it. Explain it. Help someone build.'}).waitFor();
+ await page.getByText('Your programme choice, answers and progress are not saved yet.',{exact:false}).waitFor();
+ assert.equal(await page.getByRole('button',{name:'Check my understanding'}).isDisabled(),true);
+ await page.getByRole('radio',{name:'Finish the exercise for them.'}).check();
+ await page.getByRole('button',{name:'Check my understanding'}).click();
+ await page.getByText('Take another look.',{exact:false}).waitFor();
+ await page.getByRole('radio',{name:'Slow down, practise a small group of keys and give specific feedback.'}).check();
+ await page.getByRole('button',{name:'Check my understanding'}).click();
+ await page.getByText('That’s right.',{exact:false}).waitFor();
+ await page.getByRole('button',{name:'Compare programmes'}).click();
+ await page.getByRole('button',{name:'Explore TechUp preparation'}).click();
+ await page.getByRole('heading',{name:'TechUp: learn it. Explain it. Help someone build.'}).waitFor();
+ assert.equal(await page.getByRole('button',{name:'Check my understanding'}).isDisabled(),true);
+ await page.getByRole('radio',{name:'JavaScript, responding to the click.'}).check();
+ await page.getByRole('button',{name:'Check my understanding'}).click();
+ await page.getByText('That’s right.',{exact:false}).waitFor();
+ assert.equal(calls,1,'Exploring public preparation content must not provision another account');
  for(const width of [1440,768,390]){await page.setViewportSize({width,height:1000});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));}
  await page.screenshot({path:'private-assets/recruitment-training-mobile.png',fullPage:true});
  await page.getByRole('button',{name:'Sign out'}).click();
