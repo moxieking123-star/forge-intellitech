@@ -19,7 +19,7 @@ function doPost(e) {
     // Reject unauthenticated traffic before any spreadsheet reads.
     var now=Math.floor(Date.now()/1000);
     if (!(action === 'trainee.provision' ? forgeTrainingVerify_(envelope,config.secret,now) : forgeTrainingVerifySession_(envelope,config.secret,now))) throw new Error('Unavailable');
-    var store=forgeTrainingCreateStore_({enabled:true,spreadsheetId:props.TRAINING_SPREADSHEET_ID});
+    var store=forgeTrainingCreateStore_({enabled:true,spreadsheetId:props.TRAINING_SPREADSHEET_ID,deferValidation:true});
     result=action === 'trainee.provision' ? forgeTrainingHandleProvision_(envelope,config,store,now) : forgeTrainingHandleSession_(envelope,config,store,now);
   } catch (_) {result={error:'Training request unavailable'};}
   return ContentService.createTextOutput(JSON.stringify(result)).setMimeType(ContentService.MimeType.JSON);

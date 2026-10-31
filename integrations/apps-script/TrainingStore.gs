@@ -9,13 +9,16 @@ function forgeTrainingCreateStore_(config) {
     Training_Sessions:['Session_Hash','Trainee_ID','Expires_At','Created_At','Revoked_At'],
     Training_Audit:['Audit_ID','Trainee_ID','Action','Actor_ID','Created_At','Note']
   };
-  var book = SpreadsheetApp.openById(config.spreadsheetId), sheets = {}, locked = false;
+  var book = SpreadsheetApp.openById(config.spreadsheetId), sheets = {}, locked = false, validated = false, validating = false;
   function rows(name) {
+    if (!validated && !validating) throw new Error('Training storage not validated');
     var sheet = sheets[name], count = sheet.getLastRow();
     if (count > 10000) throw new Error('Training storage capacity reached');
     return count > 1 ? sheet.getRange(2,1,count-1,headers[name].length).getValues() : [];
   }
   function validate() {
+    validated=false; validating=true;
+    try {
     Object.keys(headers).forEach(function(name) {
       var sheet = book.getSheetByName(name);
       if (!sheet || JSON.stringify(sheet.getRange(1,1,1,headers[name].length).getValues()[0]) !== JSON.stringify(headers[name])) throw new Error('Invalid training schema');
@@ -27,6 +30,8 @@ function forgeTrainingCreateStore_(config) {
       settings[row[0]] = row[1];
     });
     if (settings.SchemaVersion !== 'FORGE_TRAINING_V1' || settings.Environment !== 'test' || settings.WriteEnabled !== true) throw new Error('Training storage disabled');
+    validated=true;
+    } finally { validating=false; }
   }
   function requireLock() { if (!locked) throw new Error('Training lock required'); }
   function find(name,key,value) {
@@ -45,7 +50,9 @@ function forgeTrainingCreateStore_(config) {
   function append(name,values) { write(name,sheets[name].getLastRow()+1,values); }
   function hash(value) { return Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256,value).map(function(b){return ('0'+((b+256)%256).toString(16)).slice(-2);}).join(''); }
   function profile(row) { return {traineeId:row[0],applicantId:row[1],verifiedEmail:decode(row[2]),displayName:decode(row[3]),assessmentReceiptId:row[4],access:row[5],status:row[6]}; }
-  validate();
+  // Signed web requests enter withLock immediately. Validate once there rather
+  // than repeating all remote header reads both before and inside the lock.
+  if (config.deferValidation !== true) validate();
   return {
     withLock:function(callback) {
       if (locked) throw new Error('Nested training lock');
