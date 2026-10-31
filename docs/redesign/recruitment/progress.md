@@ -75,3 +75,10 @@ Broader dashboard/student/name/Seyi/task/attendance changes remain recorded and 
 - Programme selection, Day 1 practice completion and text assignment submissions now use a session-scoped signed bridge and the isolated test workbook's Training_Work log. Existing programme histories and assignment revisions are retained; request IDs prevent duplicate retries.
 - Real fictional Google persistence and signed-in owner pilot submission passed. 173 unit tests, TypeScript and the expanded browser save/reload/retry/mobile test pass. See saved-training-work.md for scope and limitations.
 - Operational dashboard, production site and shared tester deployment are unchanged. Remaining instructor work: staff marking/feedback, full lesson content, automated welcome delivery and the dashboard-host integration; public assessment forms still require approval. Student dashboard, seminar entry and result/report requirements remain deferred as previously recorded.
+
+## 31 October 2026 - staff assignment feedback
+
+- Added /admin/training: latest-submission queue, status filters, assignment details, written feedback, reviewed/request-changes outcomes and recent review history. Trainees can refresh their own feedback; revisions start awaiting review.
+- Existing verified recruitment-admin authority is required before signing any Google staff request. No new staff grant or operational workbook change. Review saves are append-only, idempotent and reject stale submissions or review versions.
+- 177 automated tests pass. Real fictional Google review/trainee-visibility pilot and existing admin/non-admin guard checks pass. Browser fixtures cover staff save retries/conflicts/filters/mobile and trainee feedback refresh. See staff-training-review.md for details.
+- Owner explicitly deferred daily lesson content recreation. Remaining delivery/dashboard-host/assessment approval and later student dashboard requirements are unchanged. Website remains branch-only; shared preview and production were not deployed.

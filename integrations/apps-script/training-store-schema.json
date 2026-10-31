@@ -55,6 +55,16 @@
       "Text",
       "Payload_Hash",
       "Created_At"
+    ],
+    "Training_Reviews": [
+      "Review_ID",
+      "Submission_ID",
+      "Trainee_ID",
+      "Status",
+      "Feedback",
+      "Actor_ID",
+      "Payload_Hash",
+      "Created_At"
     ]
   }
 }

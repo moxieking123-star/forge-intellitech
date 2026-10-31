@@ -8,7 +8,8 @@ function forgeTrainingCreateStore_(config) {
     Training_Nonces:['Nonce_Hash','Expires_At'],
     Training_Sessions:['Session_Hash','Trainee_ID','Expires_At','Created_At','Revoked_At'],
     Training_Audit:['Audit_ID','Trainee_ID','Action','Actor_ID','Created_At','Note'],
-    Training_Work:['Request_ID','Trainee_ID','Programme','Lesson_ID','Operation','Text','Payload_Hash','Created_At']
+    Training_Work:['Request_ID','Trainee_ID','Programme','Lesson_ID','Operation','Text','Payload_Hash','Created_At'],
+    Training_Reviews:['Review_ID','Submission_ID','Trainee_ID','Status','Feedback','Actor_ID','Payload_Hash','Created_At']
   };
   var book = SpreadsheetApp.openById(config.spreadsheetId), sheets = {}, locked = false, validated = false, validating = false;
   function rows(name) {
@@ -51,6 +52,7 @@ function forgeTrainingCreateStore_(config) {
   function append(name,values) { write(name,sheets[name].getLastRow()+1,values); }
   function hash(value) { return Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256,value).map(function(b){return ('0'+((b+256)%256).toString(16)).slice(-2);}).join(''); }
   function profile(row) { return {traineeId:row[0],applicantId:row[1],verifiedEmail:decode(row[2]),displayName:decode(row[3]),assessmentReceiptId:row[4],access:row[5],status:row[6]}; }
+  function reviewValue(row) {return row?{id:row[0],status:row[3],feedback:decode(row[4]),reviewedAt:new Date(row[7]).toISOString()}:null;}
   // Signed web requests enter withLock immediately. Validate once there rather
   // than repeating all remote header reads both before and inside the lock.
   if (config.deferValidation !== true) validate();
@@ -128,7 +130,29 @@ function forgeTrainingCreateStore_(config) {
       if(selections.length){programme=selections[selections.length-1][2];if(owner.row[9]!==programme){var values=owner.row.slice();values[9]=programme;values[8]=new Date();write('Trainees',owner.index,values);}}
       var scoped=own.filter(function(row){return row[2]===programme;}),completed=scoped.some(function(row){return row[4]==='complete'&&row[3]==='day-1';})?['day-1']:[];
       var submissions=scoped.filter(function(row){return row[4]==='submit'&&row[3]==='day-1';}), latest=submissions[submissions.length-1];
-      return {programme:programme,completed:completed,submission:latest?{id:latest[0],text:decode(latest[5]),submittedAt:new Date(latest[7]).toISOString()}:null};
+      var feedback=latest?rows('Training_Reviews').filter(function(row){return row[1]===latest[0]&&row[2]===traineeId;}):[];
+      return {programme:programme,completed:completed,submission:latest?{id:latest[0],text:decode(latest[5]),submittedAt:new Date(latest[7]).toISOString(),review:reviewValue(feedback[feedback.length-1])}:null};
+    },
+    reviewWorkspace:function(p) {
+      requireLock();
+      var submissions=rows('Training_Work').filter(function(row){return row[4]==='submit';}), reviews=rows('Training_Reviews'), latestByKey={};
+      submissions.forEach(function(row){latestByKey[JSON.stringify([row[1],row[2],row[3]])]=row;});
+      function latestReview(id){var matches=reviews.filter(function(row){return row[1]===id;});return matches[matches.length-1]||null;}
+      function currentSubmission(row){return latestByKey[JSON.stringify([row[1],row[2],row[3]])]===row;}
+      function detail(row){var owner=find('Trainees',0,row[1]),history=reviews.filter(function(r){return r[1]===row[0];}).slice(-5).reverse();return {id:row[0],traineeId:row[1],name:owner?decode(owner.row[3]):row[1],programme:row[2],lessonId:row[3],text:decode(row[5]),submittedAt:new Date(row[7]).toISOString(),review:reviewValue(latestReview(row[0])),history:history.map(function(r){return {id:r[0],status:r[3],reviewedAt:new Date(r[7]).toISOString()};}),current:currentSubmission(row)};}
+      if(p.operation==='list'){
+        var items=submissions.filter(currentSubmission).filter(function(row){var r=latestReview(row[0]);return p.filter==='all'||(r?r[3]:'awaiting_review')===p.filter;}).reverse();
+        return {total:items.length,offset:p.offset,items:items.slice(p.offset,p.offset+10).map(function(row){var d=detail(row);return {id:d.id,traineeId:d.traineeId,name:d.name,programme:d.programme,lessonId:d.lessonId,submittedAt:d.submittedAt,status:d.review?d.review.status:'awaiting_review'};})};
+      }
+      var found=submissions.filter(function(row){return row[0]===p.submissionId;});if(found.length!==1)return {missing:true};var work=found[0];
+      if(p.operation==='detail')return {assignment:detail(work)};
+      if(p.operation!=='review'||['needs_changes','reviewed'].indexOf(p.status)<0||typeof p.feedback!=='string'||p.feedback.trim().length<20||p.feedback.length>1200||!forgeTrainingUuid_(p.actorId)||!forgeTrainingUuid_(p.requestId))throw Error('Invalid review');
+      var binding=hash(JSON.stringify([p.actorId,p.submissionId,p.expectedReviewId,p.status,p.feedback])),prior=find('Training_Reviews',0,p.requestId),last=latestReview(work[0]);
+      if(prior){if(prior.row[6]!==binding||prior.row[2]!==work[1])throw Error('Review request conflict');return {assignment:detail(work)};}
+      if(!currentSubmission(work)||(last?last[0]:'')!==p.expectedReviewId)return {conflict:true};
+      if(reviews.filter(function(row){return row[1]===work[0];}).length>=50)throw Error('Review capacity reached');
+      append('Training_Reviews',[p.requestId,work[0],work[1],p.status,p.feedback,p.actorId,binding,new Date()]);
+      reviews=rows('Training_Reviews');return {assignment:detail(work)};
     },
     revokeSession:function(token) {
       requireLock();

@@ -12,7 +12,7 @@ try{
  await page.route('**/auth/v1/logout*',r=>r.fulfill({status:204}));
  let calls=0;
  let state={programme:null,completed:[],submission:null},failSave=true,failedId;
- await page.route('**/api/recruitment/workspace',async r=>{assert.equal(r.request().headers().authorization,'Bearer '+'x'.repeat(43));const p=r.request().postDataJSON();assert.ok(!('traineeId' in p));if(p.operation==='select'){state={programme:p.programme,completed:[],submission:null};}if(p.operation==='complete')state.completed=['day-1'];if(p.operation==='submit'){if(failSave){failSave=false;failedId=p.requestId;return r.fulfill({status:503,json:{error:'Temporary fixture save failure. Keep your draft and retry.'}});}assert.equal(p.requestId,failedId,'Retry must reuse the submission request ID');state.submission={id:p.requestId,text:p.text,submittedAt:new Date().toISOString()};}return r.fulfill({json:state});});
+ await page.route('**/api/recruitment/workspace',async r=>{assert.equal(r.request().headers().authorization,'Bearer '+'x'.repeat(43));const p=r.request().postDataJSON();assert.ok(!('traineeId' in p));if(p.operation==='select'){state={programme:p.programme,completed:[],submission:null};}if(p.operation==='complete')state.completed=['day-1'];if(p.operation==='submit'){if(failSave){failSave=false;failedId=p.requestId;return r.fulfill({status:503,json:{error:'Temporary fixture save failure. Keep your draft and retry.'}});}assert.equal(p.requestId,failedId,'Retry must reuse the submission request ID');state.submission={id:p.requestId,text:p.text,submittedAt:new Date().toISOString(),review:null};}return r.fulfill({json:state});});
  await page.route('**/api/recruitment/handoff',async r=>{calls++;assert.equal(r.request().headers().authorization,'Bearer fixture-access-token');assert.deepEqual(r.request().postDataJSON(),{});return r.fulfill({json:{token:'x'.repeat(43),traineeId:'TRN-fixture',access:'trainee',expiresAt:Date.now()+3600000}});});
  await page.goto(base+'/join/training',{waitUntil:'domcontentloaded',timeout:120000});
  await page.getByRole('button',{name:'Open my training entry'}).click();
@@ -43,6 +43,10 @@ try{
  await page.getByRole('heading',{name:'ElyTech: learn it. Explain it. Help someone build.'}).waitFor();
  await page.getByText('Day 1 - Practised',{exact:true}).waitFor();
  assert.equal(await page.getByLabel('Your Day 1 assignment',{exact:true}).inputValue(),draft);
+ state.submission.review={id:'00000000-0000-4000-8000-000000000099',status:'needs_changes',feedback:'Include a concrete demonstration and explain how the learner will practise independently.',reviewedAt:new Date().toISOString()};
+ await page.getByRole('button',{name:'Refresh feedback',exact:true}).click();
+ await page.getByRole('heading',{name:'A next step from Forge.',exact:true}).waitFor();
+ await page.getByText(state.submission.review.feedback,{exact:true}).waitFor();
  await page.getByRole('button',{name:'Compare programmes'}).click();
  await page.getByRole('button',{name:'Choose TechUp preparation'}).click();
  await page.getByRole('heading',{name:'TechUp: learn it. Explain it. Help someone build.'}).waitFor();

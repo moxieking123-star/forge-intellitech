@@ -15,12 +15,12 @@ function doPost(e) {
     if (props.TRAINING_BRIDGE_ENABLED !== 'true' || !e || !e.postData || e.postData.type !== 'application/json' || typeof e.postData.contents !== 'string' || e.postData.contents.length>16384) throw new Error('Unavailable');
     var envelope=JSON.parse(e.postData.contents),action=envelope && envelope.action;
     var config={enabled:true,secret:props.TRAINING_BRIDGE_SIGNING_KEY};
-    if (action !== 'trainee.provision' && action !== 'trainee.session' && action !== 'trainee.workspace') throw new Error('Unavailable');
+    if (['trainee.provision','trainee.session','trainee.workspace','staff.training'].indexOf(action)<0) throw new Error('Unavailable');
     // Reject unauthenticated traffic before any spreadsheet reads.
     var now=Math.floor(Date.now()/1000);
-    if (!(action === 'trainee.provision' ? forgeTrainingVerify_(envelope,config.secret,now) : action === 'trainee.session' ? forgeTrainingVerifySession_(envelope,config.secret,now) : forgeTrainingVerifyWorkspace_(envelope,config.secret,now))) throw new Error('Unavailable');
+    if (!(action === 'trainee.provision' ? forgeTrainingVerify_(envelope,config.secret,now) : action === 'trainee.session' ? forgeTrainingVerifySession_(envelope,config.secret,now) : action === 'trainee.workspace' ? forgeTrainingVerifyWorkspace_(envelope,config.secret,now) : forgeTrainingVerifyReview_(envelope,config.secret,now))) throw new Error('Unavailable');
     var store=forgeTrainingCreateStore_({enabled:true,spreadsheetId:props.TRAINING_SPREADSHEET_ID,deferValidation:true});
-    result=action === 'trainee.provision' ? forgeTrainingHandleProvision_(envelope,config,store,now) : action === 'trainee.session' ? forgeTrainingHandleSession_(envelope,config,store,now) : forgeTrainingHandleWorkspace_(envelope,config,store,now);
+    result=action === 'trainee.provision' ? forgeTrainingHandleProvision_(envelope,config,store,now) : action === 'trainee.session' ? forgeTrainingHandleSession_(envelope,config,store,now) : action === 'trainee.workspace' ? forgeTrainingHandleWorkspace_(envelope,config,store,now) : forgeTrainingHandleReview_(envelope,config,store,now);
   } catch (_) {result={error:'Training request unavailable'};}
   return ContentService.createTextOutput(JSON.stringify(result)).setMimeType(ContentService.MimeType.JSON);
 }
