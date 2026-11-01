@@ -104,3 +104,7 @@ Broader dashboard/student/name/Seyi/task/attendance changes remain recorded and 
 - Verified all six release/delivery gates remain false, and the production workbook has Environment=production and boolean WriteEnabled=false.
 - Still requires owner-run forgeTrainingReportReadiness output to verify script properties and key shape. Secret presence does not prove validity or that the bridge signing keys match.
 - Remaining release work: reviewed queue migration; approved production bridge and app namespace deployments; exact Auth return URLs; controlled real sign-in/email pilot; then scheduler activation. No public or shared deployment changed.
+
+## 1 November 2026 - owner-confirmed production readiness
+
+Owner ran forgeTrainingReportReadiness and reported connected=true, environment=production, writeEnabled=false, bridgeEnabled=false, signingKeyReady=true. This establishes the script owner can read the configured production workbook and the script key has the required format. It does not establish equality with the Vercel signing key, public routing, email validity or delivery. No release switch or deployment was changed. Next is review of the queued invitation migration before a separately approved activation and controlled sign-in/email pilot.
