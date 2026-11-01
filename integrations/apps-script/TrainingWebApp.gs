@@ -1,13 +1,15 @@
-/** Install only in the standalone training TEST project, never the operations app. */
-/** Run once from the test editor to authorise Google spreadsheet access.
- * Reads the isolated test schema only; no credentials or personal rows returned. */
+/** Install only in a standalone training project, never the operations app. */
+/** Read-only owner check. No credentials or personal rows are returned. */
 function forgeTrainingConnectionCheck() {
   var props=PropertiesService.getScriptProperties().getProperties();
-  if (props.TRAINING_SPREADSHEET_ID !== '1o6P25drEjtvG1dizKwhshA1csv02wf0sC40fqAbEn5s' || !/^[a-f0-9]{64}$/i.test(props.TRAINING_BRIDGE_SIGNING_KEY || '')) throw new Error('Configure the isolated test workbook and signing key in Script Properties first.');
+  var environment=props.TRAINING_ENVIRONMENT||'test';
+  if (['test','production'].indexOf(environment)<0||!/^[\w-]{20,120}$/.test(props.TRAINING_SPREADSHEET_ID||'')||(environment==='production'&&props.TRAINING_SPREADSHEET_ID==='1o6P25drEjtvG1dizKwhshA1csv02wf0sC40fqAbEn5s'))throw new Error('Configure the separate training workbook and matching environment first.');
   var sheet=SpreadsheetApp.openById(props.TRAINING_SPREADSHEET_ID).getSheetByName('Training_Config');
-  if (!sheet || sheet.getRange(2,2).getValue() !== 'FORGE_TRAINING_V1' || sheet.getRange(3,2).getValue() !== 'test') throw new Error('Invalid test workbook');
-  return {connected:true,environment:'test',writeEnabled:sheet.getRange(4,2).getValue() === true};
+  if (!sheet || sheet.getRange(2,2).getValue() !== 'FORGE_TRAINING_V1' || sheet.getRange(3,2).getValue() !== environment) throw new Error('Invalid training workbook');
+  return {connected:true,environment:environment,writeEnabled:sheet.getRange(4,2).getValue() === true,bridgeEnabled:props.TRAINING_BRIDGE_ENABLED==='true',signingKeyReady:/^[a-f0-9]{64}$/i.test(props.TRAINING_BRIDGE_SIGNING_KEY||'')};
 }
+/** Owner-run setup aid. Logs only booleans and the environment, never secrets. */
+function forgeTrainingReportReadiness(){var result=forgeTrainingConnectionCheck();console.log(JSON.stringify(result));return result;}
 function doPost(e) {
   var result;
   try {

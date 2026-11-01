@@ -90,3 +90,10 @@ Broader dashboard/student/name/Seyi/task/attendance changes remain recorded and 
 - 183 automated tests and local PostgreSQL migration integration passed. The namespaced trainee browser flow passed; the separate production build compiled and generated all routes successfully. Added release-only migration/scheduler files and a secure environment checklist in welcome-and-app-host.md.
 - Public activation still requires approval: deploy the reviewed training build, merge only its app namespace, allow exact auth return URLs, securely configure the email/worker secrets, apply the reviewed migration, verify an owner pilot, then enable automation. Shared preview and live site are unchanged. Lesson content remains explicitly deferred.
 - Final safeguards: production training requires an explicit matching production workbook, and the queue refuses applications labelled testOnly. Queue-to-provider integration persisted one mocked acceptance and confirmed no duplicate on the next run. No actual email or production workbook was created. Full compiled namespaced browser flow passed.
+
+## 1 November 2026 - production resources prepared, not activated
+
+- Created a fresh private production training workbook with eight exact-schema tabs, Lagos timezone, no records and WriteEnabled=false. Resource IDs are retained in ignored private-assets/production-training-setup/resources.json.
+- Created a separate standalone production Apps Script project and uploaded source without any web deployment. Added an owner-run readiness reporter that exposes only status flags; two focused tests pass.
+- Created forge-instructor-training in the existing Vercel team via its CLI fallback. It has no Git connection or deployments. Twelve non-secret Production configuration values were saved, including all automation/delivery readiness flags set false. No existing private key was retrieved or copied.
+- Owner must add four script properties and five Vercel credential values through secure settings. TRAINING_BRIDGE_URL, Auth return URLs, migration activation and scheduler remain deferred until deployment approval. Shared preview and live site unchanged.
