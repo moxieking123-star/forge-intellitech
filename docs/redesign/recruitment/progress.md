@@ -97,3 +97,10 @@ Broader dashboard/student/name/Seyi/task/attendance changes remain recorded and 
 - Created a separate standalone production Apps Script project and uploaded source without any web deployment. Added an owner-run readiness reporter that exposes only status flags; two focused tests pass.
 - Created forge-instructor-training in the existing Vercel team via its CLI fallback. It has no Git connection or deployments. Twelve non-secret Production configuration values were saved, including all automation/delivery readiness flags set false. No existing private key was retrieved or copied.
 - Owner must add four script properties and five Vercel credential values through secure settings. TRAINING_BRIDGE_URL, Auth return URLs, migration activation and scheduler remain deferred until deployment approval. Shared preview and live site unchanged.
+
+## 1 November 2026 - secure setting presence check
+
+- Verified by environment metadata that all five requested credentials exist in the new training project's Production environment as sensitive/Secret entries. No private value was decrypted, printed or tested against a provider.
+- Verified all six release/delivery gates remain false, and the production workbook has Environment=production and boolean WriteEnabled=false.
+- Still requires owner-run forgeTrainingReportReadiness output to verify script properties and key shape. Secret presence does not prove validity or that the bridge signing keys match.
+- Remaining release work: reviewed queue migration; approved production bridge and app namespace deployments; exact Auth return URLs; controlled real sign-in/email pilot; then scheduler activation. No public or shared deployment changed.
