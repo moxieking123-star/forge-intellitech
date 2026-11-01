@@ -112,3 +112,11 @@ Owner ran forgeTrainingReportReadiness and reported connected=true, environment=
 ## 1 November 2026 - welcome migration installed by owner
 
 Owner executed the welcome queue migration. Read-only database checks confirm both functions exist, anon/authenticated execution is denied on the checked worker functions, and service_role execution is allowed. The only invitation remains in attention; no invitation was claimed, requeued or emailed. Next remote integration verification needs an explicitly approved deployment of the separate training bridge/build. Keep workbook writes, bridge, invitations, destination readiness and automation disabled until that controlled pilot; no public/shared deployment is authorised by this checkpoint.
+
+## 1 November 2026 - protected staging preparation authorised
+
+Owner authorised a separate protected staging preview and instructor sign-in/welcome test, excluding the shared tester link and live site. A clean committed-source copy is staged under ignored private-assets/training-staging-source, linked only to forge-instructor-training. Preview settings use the existing isolated Google pilot workbook/bridge, not the production workbook. All automation and queue sending flags stay false.
+
+Added a preview-only, worker-secret-protected email pilot endpoint with one fixed recipient admin@forgeintellitech.com, a labelled test message, deployment-local training link and stable request idempotency key. It never claims the real queue or marks the held owner fixture as a real pass. Two focused tests and TypeScript passed; commit 167ca5e.
+
+Metadata check confirms the owner's RESEND_API_KEY entry targets Production only. Requested a separate Preview entry without deleting/revoking the Production key. Await Preview key confirmation before deployment to avoid building against missing configuration. No staging deployment or actual email test has occurred at this checkpoint.
