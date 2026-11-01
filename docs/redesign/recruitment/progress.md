@@ -108,3 +108,7 @@ Broader dashboard/student/name/Seyi/task/attendance changes remain recorded and 
 ## 1 November 2026 - owner-confirmed production readiness
 
 Owner ran forgeTrainingReportReadiness and reported connected=true, environment=production, writeEnabled=false, bridgeEnabled=false, signingKeyReady=true. This establishes the script owner can read the configured production workbook and the script key has the required format. It does not establish equality with the Vercel signing key, public routing, email validity or delivery. No release switch or deployment was changed. Next is review of the queued invitation migration before a separately approved activation and controlled sign-in/email pilot.
+
+## 1 November 2026 - welcome migration installed by owner
+
+Owner executed the welcome queue migration. Read-only database checks confirm both functions exist, anon/authenticated execution is denied on the checked worker functions, and service_role execution is allowed. The only invitation remains in attention; no invitation was claimed, requeued or emailed. Next remote integration verification needs an explicitly approved deployment of the separate training bridge/build. Keep workbook writes, bridge, invitations, destination readiness and automation disabled until that controlled pilot; no public/shared deployment is authorised by this checkpoint.
