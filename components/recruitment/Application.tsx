@@ -17,7 +17,7 @@ export default function Application(){
  const requestId=useRef<string|null>(null),mounted=useRef(true),activeIdentity=useRef<string|null>(null);
  useEffect(()=>{mounted.current=true;let active=true,unsubscribe=()=>{};setReady(false);setError('');
   recruitmentAuth().then(async auth=>{
-   if(!active)return;setClient(auth.client);setEmailEnabled(auth.emailLoginEnabled);
+   if(!active)return;setClient(auth.client);setEmailEnabled(auth.emailLoginEnabled);if(auth.signInError)setError(auth.signInError);
    const {data}=auth.client.auth.onAuthStateChange((_event,next)=>{if(!active)return;const changed=activeIdentity.current!==next?.user.id;activeIdentity.current=next?.user.id??null;setSession(next);if(changed){setState(null);setAttempt(null);requestId.current=null;}setReady(true);});unsubscribe=()=>data.subscription.unsubscribe();
    const result=await auth.client.auth.getSession();if(active){activeIdentity.current=result.data.session?.user.id??null;setSession(result.data.session);setReady(true);}
   }).catch(err=>{if(active){setError(err instanceof Error?err.message:'Secure sign-in could not be connected.');setReady(true);}});

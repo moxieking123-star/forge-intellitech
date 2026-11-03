@@ -13,7 +13,7 @@ export default function TrainingEntry(){
  // A separate trainee bearer is kept in memory only; never URL or web storage.
  const credential=useRef<Entry|null>(null),identity=useRef<string|null>(null),mounted=useRef(true);
  useEffect(()=>{let active=true,unsubscribe=()=>{};mounted.current=true;
-  recruitmentAuth().then(async auth=>{if(!active)return;setClient(auth.client);setEmailEnabled(auth.emailLoginEnabled);
+  recruitmentAuth().then(async auth=>{if(!active)return;setClient(auth.client);setEmailEnabled(auth.emailLoginEnabled);if(auth.signInError)setError(auth.signInError);
    const {data}=auth.client.auth.onAuthStateChange((_event,next)=>{if(!active)return;credential.current=null;setEntry(null);identity.current=next?.user.id??null;setSession(next);setReady(true);});unsubscribe=()=>data.subscription.unsubscribe();
    const {data:current,error:failure}=await auth.client.auth.getSession();if(failure)throw failure;
    if(active){identity.current=current.session?.user.id??null;setSession(current.session);setReady(true);}
