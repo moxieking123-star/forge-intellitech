@@ -1,0 +1,173 @@
+[
+  {
+    "id": "child",
+    "title": "The Psychology of the Child",
+    "author": "Jean Piaget and Bärbel Inhelder",
+    "rights": "Owner-supplied reference; not redistributed",
+    "assigned": "Chapter I: sensorimotor intelligence and learning through action. Selected chapter III: symbols, play and drawing; chapter IV: concrete operations and interpersonal relations.",
+    "note": "Chapter I describes infancy. We use it to reflect on active learning, not to label schoolchildren. Observe the individual learner; this historical theory is not a diagnosis."
+  },
+  {
+    "id": "chisanbop",
+    "title": "Chisanbop: supplied practice extract",
+    "author": "Owner-supplied extract; edition/author not established from this excerpt",
+    "rights": "Private reference; not redistributed",
+    "assigned": "PDF pages 1–5: finger values and simultaneous representation; pages 6 onward: introductory addition.",
+    "note": "The extract starts partway through a book. Rehearse against the diagrams; do not invent the missing advanced material."
+  },
+  {
+    "id": "scratch-book",
+    "title": "Learn to Program with Scratch",
+    "author": "Majed Marji, No Starch Press, 2014",
+    "rights": "Owner-supplied copyrighted reference; not redistributed",
+    "assigned": "Opening programming concepts: scripts, sequence, events, repetition and decisions.",
+    "note": "This edition uses Scratch 2. Use current Scratch tutorials for the interface; concepts transfer, screenshots may not."
+  },
+  {
+    "id": "scratch",
+    "title": "Scratch ideas and tutorials",
+    "author": "Scratch Foundation",
+    "url": "https://scratch.mit.edu/ideas",
+    "rights": "Official free learning resource; link to publisher",
+    "assigned": "Animate a name/story and create a simple game; choose only the tutorial needed today."
+  },
+  {
+    "id": "canva",
+    "title": "Canva teacher resources and Design School",
+    "author": "Canva",
+    "url": "https://public.canva.site/teacherresources",
+    "rights": "Official learning resource; link to publisher",
+    "assigned": "Beginner editor, text, elements, pages, sharing and export. Use free features; do not require a paid subscription.",
+    "note": "Canva for Education eligibility and school account arrangements must be checked; a trainee does not automatically qualify."
+  },
+  {
+    "id": "design",
+    "title": "Graphic Design and Print Production Fundamentals",
+    "author": "Graphic Communications Open Textbook Collective / BCcampus, 2015",
+    "url": "https://opentextbc.ca/graphicdesign/",
+    "rights": "CC BY 4.0, except where noted",
+    "assigned": "Chapter 2: define a brief and develop concepts; chapter 3: visual elements, hierarchy, contrast and organisation. Skip industrial print production for this induction."
+  },
+  {
+    "id": "figma",
+    "title": "Design basics",
+    "author": "Figma",
+    "url": "https://www.figma.com/resource-library/design-basics/",
+    "rights": "Official free articles; link to publisher",
+    "assigned": "UI/UX, product design, wireframes and prototypes; do not attempt the entire resource library."
+  },
+  {
+    "id": "web",
+    "title": "Learn web development",
+    "author": "Mozilla / MDN contributors",
+    "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development",
+    "rights": "Official documentation; link to publisher",
+    "assigned": "Getting started; semantic HTML; CSS fundamentals; JavaScript events and decisions. Follow the current examples."
+  },
+  {
+    "id": "python",
+    "title": "Introduction to Python Programming",
+    "author": "OpenStax",
+    "url": "https://openstax.org/details/books/introduction-python-programming",
+    "rights": "Publisher-authorised free web/PDF edition; retain original notices",
+    "assigned": "Variables, expressions, conditionals and loops only; practise a tiny input-to-output program."
+  },
+  {
+    "id": "excel",
+    "title": "Beginning Excel 2019",
+    "author": "Noreen Brown, Barbara Lave, Hallie Puncochar, Julie Romey, Mary Schatz, Art Schneider and Diane Shingledecker",
+    "url": "https://openoregon.pressbooks.pub/beginningexcel19/",
+    "rights": "CC BY 4.0 in the publisher edition, except where noted",
+    "assigned": "Sections 1.2–1.3, 2.1–2.2, 4.1 and 5.1: clean records, formulas, charts and tables.",
+    "note": "The interface is older; verify commands in the Excel version available. Do not teach an ordinary spreadsheet as if it were a relational database."
+  },
+  {
+    "id": "powerbi",
+    "title": "Get started building with Power BI",
+    "author": "Microsoft Learn",
+    "url": "https://learn.microsoft.com/en-us/training/modules/introduction-power-bi/",
+    "rights": "Official free training; link to publisher",
+    "assigned": "Reports, data import and one clear visual. Use fictional data; a simple spreadsheet chart is the low-device fallback."
+  },
+  {
+    "id": "systems",
+    "title": "Introduction to Information Systems Management",
+    "author": "Roy Wood, 2024",
+    "url": "https://pressbooks.openlearnok.org/informationsystems/",
+    "rights": "CC BY 4.0, except where noted",
+    "assigned": "Chapters 2–3: networks and service choices; 4: data; 8: cybersecurity; 12–13: project management. Select short sections, not whole chapters."
+  },
+  {
+    "id": "network-book",
+    "title": "An Introduction to Computer Networks",
+    "author": "Peter L. Dordal, Loyola University Chicago",
+    "url": "https://intronetworks.cs.luc.edu/index.html",
+    "rights": "Author-provided free reference; CC BY-NC-ND with preface conditions; external reading only",
+    "assigned": "Opening overview of LANs and internetworking. This is a substantial reference book, not a required full induction reading."
+  },
+  {
+    "id": "cloud",
+    "title": "The NIST Definition of Cloud Computing — SP 800-145",
+    "author": "Peter Mell and Timothy Grance, NIST, 2011",
+    "url": "https://csrc.nist.gov/pubs/sp/800/145/final",
+    "rights": "Official NIST publication; external reference",
+    "assigned": "Section 2: compare SaaS, PaaS and IaaS using one familiar service. This is a concise reference, not a practical cloud-provider certification course."
+  },
+  {
+    "id": "scrum",
+    "title": "The Scrum Guide, November 2020",
+    "author": "Ken Schwaber and Jeff Sutherland",
+    "url": "https://scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-US.pdf",
+    "rights": "CC BY-SA 4.0",
+    "assigned": "Purpose, accountabilities, goals, backlog and review. Our classroom task board is a learning adaptation, not a claim to implement full Scrum."
+  },
+  {
+    "id": "law2015",
+    "title": "Cybercrimes (Prohibition, Prevention, etc.) Act, 2015",
+    "author": "Federal Republic of Nigeria; WIPO Lex reference NG058",
+    "url": "https://www.wipo.int/wipolex/en/legislation/details/22696",
+    "rights": "Official legislative reference; consult current amended text",
+    "assigned": "Teacher-guided orientation to unauthorised access, misuse, identity and responsible reporting; read alongside the 2024 amendment.",
+    "note": "The WIPO entry states that the original text is amended and is not a consolidated current text. Do not memorise penalties from the original as current law."
+  },
+  {
+    "id": "law2024",
+    "title": "Cybercrimes (Prohibition, Prevention, etc.) (Amendment) Act, 2024",
+    "author": "Federal Republic of Nigeria; WIPO Lex reference NG061",
+    "url": "https://www.wipo.int/wipolex/en/legislation/details/22699",
+    "rights": "Official legislative reference; read with the 2015 Act",
+    "assigned": "Locate the provisions that amend the original; distinguish an amendment from a complete replacement."
+  },
+  {
+    "id": "law-combined",
+    "title": "Cybercrimes Act 2015 with Amendment Act 2024 — official PDF",
+    "author": "Office of the National Security Adviser; hosted by NCC",
+    "url": "https://www.ncc.gov.ng/media/1085/view",
+    "rights": "Official public legislative publication; preserve unmodified; not to be sold",
+    "assigned": "Use this 56-page official publication to consult the original Act and amendment together. The cover and publication identity were visually checked on 3 November 2026."
+  },
+  {
+    "id": "safety",
+    "title": "Cybersecurity resources",
+    "author": "Nigeria Computer Emergency Response Team (ngCERT)",
+    "url": "https://cert.gov.ng/index.php/resources",
+    "rights": "Official public resources; link to publisher",
+    "assigned": "Safe browsing, online behaviour and reporting. Teach prevention and escalation, not intrusion exercises on live systems."
+  },
+  {
+    "id": "marketing",
+    "title": "Principles of Marketing",
+    "author": "OpenStax",
+    "url": "https://openstax.org/details/books/principles-marketing",
+    "rights": "Free publisher web edition; external reference only",
+    "assigned": "Audience needs, value, research and chapter 16 digital channels. Read selectively; do not copy or redistribute this text inside paid training."
+  },
+  {
+    "id": "ai",
+    "title": "Generative AI for educators",
+    "author": "Google",
+    "url": "https://grow.google/ai-for-educators/",
+    "rights": "Official learning resource; external reference",
+    "assigned": "Prompting, checking outputs, bias and responsible classroom use; use invented examples and protect learner information."
+  }
+]

@@ -1,0 +1,36 @@
+import {chromium} from 'file:///C:/Users/Forge/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs';
+import assert from 'node:assert/strict';import fs from 'node:fs/promises';
+const base='http://localhost:3013/instructor-training';
+const browser=await chromium.launch({channel:'chrome',headless:true});
+try{
+ const context=await browser.newContext({viewport:{width:1440,height:1100},acceptDownloads:true,reducedMotion:'reduce'});
+ const user={id:'00000000-0000-4000-8000-000000000001',email:'fictional@example.invalid',aud:'authenticated',role:'authenticated',app_metadata:{},user_metadata:{},created_at:new Date().toISOString(),email_confirmed_at:new Date().toISOString()};
+ await context.addInitScript(user=>sessionStorage.setItem('forge-recruitment',JSON.stringify({access_token:'fixture-access-token',refresh_token:'fixture-refresh-token',expires_at:Math.floor(Date.now()/1000)+3600,expires_in:3600,token_type:'bearer',user})),user);
+ const page=await context.newPage();page.setDefaultTimeout(30000);
+ await page.route('**/api/recruitment/config',r=>r.fulfill({json:{url:'https://deblssilgleuiccsgdcy.supabase.co',key:'fixture-anon',emailLoginEnabled:true}}));
+ await page.route('**/auth/v1/user*',r=>r.fulfill({json:user}));
+ await page.route('**/api/recruitment/handoff',r=>r.fulfill({json:{token:'x'.repeat(43),traineeId:'TRN-fixture',access:'trainee',expiresAt:Date.now()+3600000}}));
+ let state={programme:null,completed:[],submission:null};
+ await page.route('**/api/recruitment/workspace',r=>{const p=r.request().postDataJSON();if(p.operation==='select')state={programme:p.programme,completed:[],submission:null};return r.fulfill({json:state});});
+ await page.goto(base+'/join/training',{waitUntil:'domcontentloaded',timeout:120000});await page.getByRole('button',{name:'Open my training entry'}).click();
+ await page.getByRole('button',{name:'Choose ElyTech preparation'}).click();
+ let studio=page.getByRole('region',{name:'ElyTech two-week preparation'});await studio.getByRole('heading',{name:'See the learner before the screen',exact:true}).waitFor();
+ assert.equal(await studio.getByRole('navigation',{name:'Preparation days'}).getByRole('button').count(),14);
+ await studio.getByRole('button',{name:/02Your hands|02 Your hands/}).click();
+ const hands=studio.getByRole('region',{name:'Chisanbop number playground'});await hands.getByRole('group',{name:'Your right hand · units'}).getByRole('button',{name:/^Thumb\s*5$/}).click();
+ await hands.getByRole('group',{name:'Your right hand · units'}).getByRole('button',{name:/^Index finger\s*1$/}).click();await hands.getByRole('group',{name:'Your right hand · units'}).getByRole('button',{name:/^Middle finger\s*1$/}).click();await hands.getByRole('button',{name:'Check this number'}).click();await hands.getByRole('status').filter({hasText:'That is it'}).waitFor();
+ await hands.getByRole('button',{name:'Clear both hands'}).click();assert((await hands.innerText()).includes('Your hands show: 0'));
+ await studio.getByRole('button',{name:/08Canva: make the message clear|08 Canva: make the message clear/}).click();
+ await studio.getByRole('radio',{name:'Add more decoration.',exact:true}).check();await studio.getByRole('button',{name:'Try my answer'}).click();await studio.getByRole('status').filter({hasText:'think again'}).waitFor();
+ await studio.getByRole('radio',{name:'Give the date a clear place in the hierarchy and remove distractions.',exact:true}).check();await studio.getByRole('button',{name:'Try my answer'}).click();await studio.getByRole('status').filter({hasText:'You spotted it'}).waitFor();
+ await studio.getByRole('textbox',{name:'Your personal practice notes'}).fill('I made a fictional learning card and tested its heading at phone width.');
+ const downloadPromise=page.waitForEvent('download');await studio.getByRole('button',{name:'Download Day 8 practice journal'}).click();const download=await downloadPromise;assert.equal(download.suggestedFilename(),'forge-elytech-day-8-practice.txt');const journal=await fs.readFile(await download.path(),'utf8');assert(journal.includes('fictional learning card'));assert(journal.includes('not a staff-reviewed assignment'));
+ await studio.getByText('Your short reading shelf',{exact:true}).click();assert.equal(await studio.getByRole('link').filter({hasText:'Graphic Design'}).getAttribute('href'),'https://opentextbc.ca/graphicdesign/');
+ await fs.mkdir('output/training',{recursive:true});await studio.screenshot({path:'output/training/elytech-preparation-desktop.png'});
+ await page.setViewportSize({width:390,height:844});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1));
+ await page.getByRole('button',{name:'Compare programmes'}).click();await page.getByRole('button',{name:'Choose TechUp preparation'}).click();
+ studio=page.getByRole('region',{name:'TechUp two-week preparation'});await studio.getByRole('button',{name:/08Follow a message|08 Follow a message/}).click();await studio.getByRole('heading',{name:'Follow a message through a network',exact:true}).waitFor();
+ await studio.getByRole('button',{name:'Next day →'}).click();await studio.getByRole('heading',{name:'Technology needs trust',exact:true}).waitFor();await studio.getByText('Your short reading shelf',{exact:true}).click();assert.equal(await studio.getByRole('link').filter({hasText:'Cybercrimes'}).count(),3);
+ assert(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1));await studio.screenshot({path:'output/training/techup-preparation-mobile.png'});
+ console.log('Both preparation courses: fourteen-day navigation, feedback, private journal download, official sources and mobile containment passed. No real email, trainee or workbook writes.');
+}finally{await browser.close();}
