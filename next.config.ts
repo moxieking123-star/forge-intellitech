@@ -2,8 +2,12 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  trailingSlash: false, 
-  
+  images: {
+    deviceSizes: [360, 640, 768, 1024, 1280, 1600, 1920],
+    qualities: [75],
+  },
+  trailingSlash: false,
+
   async headers() {
     return [
       {
