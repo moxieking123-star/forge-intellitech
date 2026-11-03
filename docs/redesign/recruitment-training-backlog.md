@@ -1,5 +1,7 @@
 # Recruitment assessment and training dashboard — deferred owner requirements
 
+**Updated implementation reference, 27 October 2026:** The owner approved starting. Current rules are 30 questions, five minutes, at least 75% (23/30), and three attempts followed by a staff-only reset. The destination is app.forgeintellitech.com. These replace the earlier counts/threshold/timing proposals below. See [current design](../superpowers/specs/2026-10-27-instructor-pipeline.md), [implementation plan](../superpowers/plans/2026-10-27-instructor-pipeline.md) and [execution ledger](recruitment/progress.md). First domain validation/assessment modules and16tests are implemented locally; persistent services, public screens and trainee provisioning are not complete or deployed. Historical deferred requirements below are retained as context, not the current implementation status.
+
 Recorded 25 October 2026. This is project memory for the separate Forge dashboard phase. The owner explicitly excluded it from the website launch dependency and instructed us not to implement the dashboard now. Continue the existing website/backend completion first.
 
 ## Intended journey

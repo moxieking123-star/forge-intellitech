@@ -1,0 +1,7 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createRecruitmentStaffService} from '../lib/recruitment/staff-service.ts';
+const identity={id:'00000000-0000-4000-8000-000000000001',email:'ADMIN@example.invalid',emailConfirmedAt:'2026-10-28T10:00:00Z',user_metadata:{role:'admin'}};
+test('staff operations require a confirmed server identity',async()=>{let called=false;for(const user of [null,{...identity,emailConfirmedAt:null}]){const service=createRecruitmentStaffService({enabled:true,verify:async()=>user,rpc:async()=>{called=true;}});await assert.rejects(()=>service('token',{action:'list',payload:{}}),/identity/i);}assert.equal(called,false);});
+test('the database receives verified actor fields, never user-editable roles',async()=>{let args;const service=createRecruitmentStaffService({enabled:true,verify:async()=>identity,rpc:async values=>{args=values;return {forbidden:true};}});assert.deepEqual(await service('token',{action:'list',payload:{}}),{forbidden:true});assert.equal(args.p_actor,identity.id);assert.equal(args.p_email,'admin@example.invalid');assert.equal(args.role,undefined);});
+test('closed recruitment review does not authenticate or query',async()=>{const service=createRecruitmentStaffService({enabled:false,verify:async()=>{throw Error('must not authenticate');},rpc:async()=>{throw Error('must not query');}});await assert.rejects(()=>service('token',{action:'list',payload:{}}),/closed/i);});

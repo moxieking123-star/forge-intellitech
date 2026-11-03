@@ -1,0 +1,14 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {handleRecruitmentRequest} from '../lib/recruitment/http.ts';
+const base='http://localhost:3012';
+const make=(body,headers={},method='POST')=>new Request(base+'/api/recruitment',{method,headers:{origin:base,'content-type':'application/json',authorization:'Bearer test-token',...headers},...(method==='GET'?{}:{body:JSON.stringify(body)})});
+const calls=[];
+const service=Object.fromEntries(['save','start','answer','submit','state','abandon'].map(name=>[name,async(...args)=>{calls.push([name,...args]);return {saved:true};}]));
+test('closed gate prevents all recruitment operations',async()=>{calls.length=0;const res=await handleRecruitmentRequest(make({action:'start',requestId:'x'}),{enabled:false,service});assert.equal(res.status,503);assert.equal(calls.length,0);});
+test('requires same-origin mutations and bearer identity',async()=>{for(const [headers,status] of [[{origin:'https://evil.invalid'},403],[{authorization:''},401]]){const res=await handleRecruitmentRequest(make({action:'submit'},headers),{enabled:true,service});assert.equal(res.status,status);}});
+test('routes exact payloads only; rejects roles, scores and oversized bodies',async()=>{calls.length=0;for(const body of [{action:'submit',attemptId:'id',score:30},{action:'start',requestId:'id',owner:'other'},{action:'save',application:{},role:'admin'},{action:'unknown'},{action:'save',application:'x'.repeat(17000)}]){const res=await handleRecruitmentRequest(make(body),{enabled:true,service});assert.equal(res.status,400);}assert.equal(calls.length,0);});
+test('known actions delegate token but never return cacheable applicant data',async()=>{const res=await handleRecruitmentRequest(make({action:'answer',attemptId:'id',answer:{questionId:'q1',optionId:'a'}}),{enabled:true,service});assert.equal(res.status,200);assert.match(res.headers.get('cache-control'),/no-store/);assert.deepEqual(calls.at(-1),['answer','test-token','id',{questionId:'q1',optionId:'a'}]);});
+test('GET state requires identity and never caches',async()=>{const res=await handleRecruitmentRequest(make(null,{},'GET'),{enabled:true,service});assert.equal(res.status,200);assert.equal(calls.at(-1)[0],'state');});
+test('unexpected backend errors cannot expose internals',async()=>{const broken={...service,submit:async()=>{throw Error('service_role super-secret question correctOptionId');}};const res=await handleRecruitmentRequest(make({action:'submit',attemptId:'id'}),{enabled:true,service:broken});assert.equal(res.status,503);assert.doesNotMatch(await res.text(),/super-secret|correctOptionId/);});
+test('error names cannot select inherited object properties',async()=>{const broken={...service,submit:async()=>{throw Error('__proto__');}};const res=await handleRecruitmentRequest(make({action:'submit',attemptId:'id'}),{enabled:true,service:broken});assert.equal(res.status,503);});

@@ -158,9 +158,11 @@
   background: #f4f1e9;
   color: #111b27;
   z-index: 100;
+  clip-path: inset(50%);
 }
 .skipLink:focus {
   transform: translateY(0);
+  clip-path: inset(0);
 }
 .menuDialog {
   border: 0;
