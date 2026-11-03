@@ -1,3 +1,5 @@
+> Historical implementation log. Current approved scope and release rule: [2026-11-03-release-integration.md](2026-11-03-release-integration.md). GitHub integration is authorised; production release remains deferred.
+
 # Forge frontend journey — 1 November 2026
 
 ## Current objective

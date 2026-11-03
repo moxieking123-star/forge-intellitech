@@ -1,6 +1,6 @@
 .page {
-  background: #f4f1e9;
-  color: #10211d;
+  background: #f8f5ed;
+  color: #142c25;
   font-family: "Manrope Variable", Arial, sans-serif;
   outline: none;
 }
@@ -36,7 +36,7 @@
 .page select:focus-visible,
 .page textarea:focus-visible,
 .message:focus-visible {
-  outline: 3px solid #1684b6;
+  outline: 3px solid #54735b;
   outline-offset: 4px;
 }
 .eyebrow {
@@ -53,7 +53,7 @@
   margin: 28px 0;
 }
 .intro h1 span {
-  color: #c33e12;
+  color: #be542a;
 }
 .intro > p:not(.eyebrow) {
   font-size: 20px;
@@ -68,7 +68,7 @@
   grid-template-columns: 1fr 1.1fr;
   gap: 65px;
   padding: 45px max(24px, 5.55vw) 60px;
-  background: #e9e6db;
+  background: #e7ddcb;
 }
 .builder h2 {
   font-size: 35px;
@@ -91,7 +91,7 @@
   border: 1px solid #8a9985;
   border-radius: 4px;
   background: #fbf9f3;
-  color: #10211d;
+  color: #142c25;
   padding: 12px;
   font-size: 15px;
   box-sizing: border-box;
@@ -115,7 +115,7 @@
   cursor: pointer;
 }
 .checkbox input {
-  accent-color: #10211d;
+  accent-color: #142c25;
   width: 19px;
   height: 19px;
   flex-shrink: 0;
@@ -125,7 +125,7 @@
   white-space: pre-wrap;
   overflow-wrap: anywhere;
   background: #fbf9f3;
-  border-top: 4px solid #c33e12;
+  border-top: 4px solid #be542a;
   padding: 25px;
   margin-top: 24px;
   font-size: 15px;
@@ -140,10 +140,10 @@
   margin-top: 18px;
 }
 .actions button {
-  border: 1px solid #10211d;
+  border: 1px solid #142c25;
   border-radius: 5px;
-  background: #10211d;
-  color: #f4f1e9;
+  background: #142c25;
+  color: #f8f5ed;
   font-size: 12px;
   font-weight: 750;
   min-height: 47px;
@@ -155,9 +155,9 @@
 }
 .templateButton {
   border: 0;
-  border-bottom: 1px solid #10211d;
+  border-bottom: 1px solid #142c25;
   background: transparent;
-  color: #10211d;
+  color: #142c25;
   font-size: 13px !important;
   font-weight: 750 !important;
   padding: 0 0 6px;
@@ -179,8 +179,8 @@
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 80px;
-  background: #10211d;
-  color: #f4f1e9;
+  background: #142c25;
+  color: #f8f5ed;
 }
 .overview h2 {
   margin: 22px 0;
@@ -254,4 +254,4 @@
 /* Layered surfaces, shared with the Forge editorial system. */
 .builder, .preview{border-radius:18px;border:1px solid var(--forge-surface-edge);box-shadow:var(--forge-surface-shadow);background-image:linear-gradient(130deg,rgba(255,255,255,.1),transparent 58%);}
 .form input:not([type=checkbox]):not([type=radio]),.form select,.form textarea{min-height:54px;border-radius:12px;border-color:#a4b1a3;padding:14px 16px;background:#fffefb;font-size:16px;box-shadow:inset 0 2px 5px #102b220a}
-.form :is(input,textarea,select):focus-visible{outline:3px solid #bd481f;outline-offset:3px}.actions button,.message{border-radius:12px;box-shadow:var(--forge-surface-shadow)}
+.form :is(input,textarea,select):focus-visible{outline:3px solid #be542a;outline-offset:3px}.actions button,.message{border-radius:12px;box-shadow:var(--forge-surface-shadow)}

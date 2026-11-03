@@ -76,7 +76,7 @@ export function LaptopApplication() {
   const role = values.role;
   const set = (name:string,value:string) => setValues(previous=>({...previous,[name]:value}));
   function move(next:number) {setStep(next);requestAnimationFrame(()=>heading.current?.focus());}
-  function input(name:string,label:string,placeholder:string,type="text",required=true) {return <label key={name}>{label}{!required && <span className="fg-optional"> (optional)</span>}<input name={name} type={type} value={values[name] || ""} onChange={e=>set(name,e.target.value)} placeholder={placeholder} required={required} maxLength={type === "email" ? 254 : 160}/></label>;}
+  function input(name:string,label:string,placeholder:string,type="text",required=true) {return <label key={name}>{label}{!required && <span className="fg-optional"> (optional)</span>}<input name={name} type={type} value={values[name] || ""} onChange={e=>set(name,e.target.value)} placeholder={placeholder} required={required} maxLength={type === "email" ? 254 : type === "tel" ? 80 : name === "applicantName" ? 120 : 160}/></label>;}
   async function submit(event:FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (step < 3) return move(step+1);

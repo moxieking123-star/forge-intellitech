@@ -5,6 +5,7 @@ const root=path.resolve(__dirname,"..");
 const resolve=Module._resolveFilename;
 Module._resolveFilename=function(request,parent,...rest){return resolve.call(this,request.startsWith("@/")?path.join(root,request.slice(2)):request,parent,...rest);};
 for(const extension of [".ts",".tsx"])require.extensions[extension]=(module,file)=>module._compile(ts.transpileModule(fs.readFileSync(file,"utf8"),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,esModuleInterop:true,target:ts.ScriptTarget.ES2022}}).outputText,file);
+require.extensions[".css"]=(module)=>{module.exports={};};
 async function main(){
  process.env.NEXT_PUBLIC_FORGE_PREVIEW="true";
  const names=["ArrowRight","ArrowLeft","CheckCircle","CaretDown","List","X","WhatsappLogo","Feather","EnvelopeSimple","PaintBrush","Code","ChartBar","Cpu","Laptop","UsersThree","GraduationCap"];

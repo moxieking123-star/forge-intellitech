@@ -17,6 +17,7 @@ for (const extension of [".ts", ".tsx"]) {
     module._compile(ts.transpileModule(source, {compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,esModuleInterop:true,target:ts.ScriptTarget.ES2022}}).outputText, filename);
   };
 }
+require.extensions[".css"]=(module)=>{module.exports={};};
 async function main() {
 // Phosphor's published require target is .cjs.js inside a type:module package.
 // Import its real ESM exports for this standalone Node harness; Next uses ESM.
