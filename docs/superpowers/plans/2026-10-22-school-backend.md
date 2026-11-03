@@ -10,4 +10,6 @@ Approved in chat: implement database, staff permissions, school intake and admin
 6. Later phases: referral account/auth and agreements, movement intake/matching, email workers and delivery monitoring, private documents, earnings and payout controls, end-to-end launch checks.
 7. **After backend completion:** remove `/work` (Our work) and update navigation, inbound links, sitemap and redirects. Do not remove it before the backend is complete.
 
+8. **After backend completion:** carry out the owner's dimensional text panels, shared-Drive image selection/replacement, orange campaign image blending, and interactive admin experience. Full queued scope: [post-backend visual polish](../../redesign/post-backend-visual-polish.md). Keep this separate from completing and verifying the backend.
+
 The existing private referral fixture's generated payable date still uses +28 days. Correct and verify to the confirmed fourth-week marker (+21) during referral ledger activation; do not activate financial calculations from this fixture.

@@ -1,0 +1,11 @@
+{
+  "result": "passed",
+  "checks": [
+    "staff identity denial",
+    "real enquiry atomic save and dedupe",
+    "real proposal queue and dedupe",
+    "worker trigger denied"
+  ],
+  "emailsSent": 0,
+  "fixturesAwaitCleanup": false
+}

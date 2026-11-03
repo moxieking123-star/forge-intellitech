@@ -1,10 +1,11 @@
+import {backendEnvironmentEnabled,backendPublishableKey} from "@/lib/backend-runtime";
 import "server-only";
 import { response } from "./referrals";
 export function schoolBackendEnabled() {
-  return process.env.VERCEL_ENV === "preview" && process.env.SCHOOL_BACKEND_ENABLED === "true";
+  return backendEnvironmentEnabled() && process.env.SCHOOL_BACKEND_ENABLED === "true";
 }
 export async function schoolBackend(action: string, payload: unknown, authorization?: string | null) {
-  const key = process.env.PREVIEW_FEEDBACK_ANON_KEY?.trim();
+  const key = backendPublishableKey();
   if (!schoolBackendEnabled() || !key) return response({error:"School services are being connected. Your request has not been sent."},503);
   if (authorization && (!authorization.startsWith("Bearer ") || authorization.length>8192)) return response({error:"Please sign in again."},401);
   try {

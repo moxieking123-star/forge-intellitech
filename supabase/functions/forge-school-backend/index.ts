@@ -1,4 +1,5 @@
 import {validateSchool,schoolKey} from "./policy.ts";
+import {parseReviewFilters} from "./feedback-review.ts";
 import {parseSchoolReview} from "./school-review.ts";
 Deno.serve(async(request: Request)=>{
  const reply=(data:object,status=200)=>Response.json(data,{status,headers:{"Cache-Control":"private, no-store"}});
@@ -28,6 +29,9 @@ Deno.serve(async(request: Request)=>{
    if(input.action==="update"){payload=parseSchoolReview(input.payload);if(!payload)return reply({error:"Choose a review status and give a reason."},400);}
    else {const offset=input.payload?.offset??0;if(!Number.isSafeInteger(offset)||offset<0||offset>10000)return reply({error:"Invalid page."},400);payload={offset};}
    rpc="forge_school_staff_action";args={p_user_id:user!.id,p_verified_email:user!.email,p_action:input.action,p_payload:payload};
+  }else if(input.action==="feedback_list"||input.action==="feedback_export"){
+   const payload=parseReviewFilters(input.payload);if(!payload)return reply({error:"Invalid feedback filters."},400);
+   rpc="forge_staff_feedback";args={p_user_id:user!.id,p_verified_email:user!.email,p_filters:payload,p_export:input.action==="feedback_export"};
   }else return reply({error:"Unknown request."},400);
   const res=await fetch(`${url}/rest/v1/rpc/${rpc}`,{method:"POST",headers:{"Content-Type":"application/json",apikey:key,Authorization:`Bearer ${key}`},body:JSON.stringify(args),signal:AbortSignal.timeout(8000)});
   const result=await res.json();

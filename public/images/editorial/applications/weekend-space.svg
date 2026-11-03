@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="960" viewBox="0 0 1440 960" role="img" aria-label="A community room ready for weekend learning">
+<defs><linearGradient id="wall" x2="1" y2="1"><stop stop-color="#fff3d9"/><stop offset="1" stop-color="#ddcbb0"/></linearGradient><linearGradient id="floor" y2="1"><stop stop-color="#bf9975"/><stop offset="1" stop-color="#694b36"/></linearGradient></defs>
+<path fill="url(#wall)" d="M0 0h1440v960H0z"/><path fill="url(#floor)" d="M0 700h1440v260H0z"/>
+<path fill="#204c3b" d="M150 145h460v400H150z"/><path fill="#a8d3cf" d="M170 165h420v360H170z"/><path fill="#e7d7af" d="M370 165h20v360h-20zM170 335h420v18H170z"/>
+<path fill="#f4d982" opacity=".35" d="m190 525 750 435H0z"/>
+<rect x="750" y="155" width="510" height="310" rx="16" fill="#173f31"/><path stroke="#cddcc5" stroke-width="13" stroke-linecap="round" d="M810 225h330M810 270h230M810 315h300"/><path stroke="#ec9d42" stroke-width="12" stroke-linecap="round" d="m1030 370 27 25 65-66"/>
+<g fill="#d5ae74" stroke="#5d4936" stroke-width="12"><path d="m235 620 335 0 75 95H175zM790 620h335l75 95H730zM340 790h450l60 90H285z"/></g>
+<g stroke="#254b3b" stroke-width="18"><path d="M210 715v145m390-145v145m165-145v145m395-145v145M320 880v80m480-80v80"/></g>
+<g fill="#163f31"><rect x="320" y="550" width="160" height="98" rx="8"/><rect x="880" y="550" width="160" height="98" rx="8"/><rect x="475" y="710" width="170" height="105" rx="8"/></g>
+<g fill="#a9d3c4"><path d="M332 562h136v72H332zM892 562h136v72H892zM487 722h146v78H487z"/></g>
+<rect x="1250" y="550" width="78" height="45" rx="7" fill="#fff8e9"/><g fill="#244b3b"><circle cx="1275" cy="570" r="5"/><circle cx="1305" cy="570" r="5"/></g><path d="M1290 595v75h-80" fill="none" stroke="#346d50" stroke-width="8"/>
+<path d="M40 700h85l-12-120H52z" fill="#b25b31"/><g fill="#387647"><ellipse cx="80" cy="495" rx="27" ry="95" transform="rotate(-25 80 495)"/><ellipse cx="110" cy="495" rx="25" ry="90" transform="rotate(30 110 495)"/></g>
+</svg>

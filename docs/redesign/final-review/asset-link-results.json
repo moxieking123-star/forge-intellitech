@@ -1,0 +1,82 @@
+{
+  "pages": 30,
+  "assets": 41,
+  "broken": [],
+  "externalResults": [
+    {
+      "url": "https://ng.linkedin.com/in/moxie-adeniyi-167460116",
+      "status": 405,
+      "manualCheckRequired": true
+    },
+    {
+      "url": "https://www.instagram.com/forge_its/",
+      "status": 200,
+      "manualCheckRequired": false
+    },
+    {
+      "url": "https://www.tiktok.com/@forge.its",
+      "status": 200,
+      "manualCheckRequired": false
+    },
+    {
+      "url": "https://www.facebook.com/profile.php?id=61576776552817",
+      "status": 200,
+      "manualCheckRequired": false
+    },
+    {
+      "url": "https://x.com/forgeit_service",
+      "status": 200,
+      "manualCheckRequired": false
+    },
+    {
+      "url": "https://www.wipo.int/wipolex/en/legislation/details/22696",
+      "status": 200,
+      "manualCheckRequired": false
+    },
+    {
+      "url": "https://www.linkedin.com/company/104318888/",
+      "status": 403,
+      "manualCheckRequired": true
+    },
+    {
+      "url": "https://www.youtube.com/@TheForgeJournal-h7b",
+      "status": 200,
+      "manualCheckRequired": false
+    },
+    {
+      "url": "https://www.wipo.int/wipolex/en/legislation/details/22699",
+      "status": 200,
+      "manualCheckRequired": false
+    },
+    {
+      "url": "https://www.unesco.org/gem-report/en/publication/technology",
+      "status": 200,
+      "manualCheckRequired": false
+    },
+    {
+      "url": "https://www.unicef.org/nigeria/stories/smart-schools-smarter-learning-enugu-teachers-gain-digital-skills-transform-classrooms",
+      "status": 200,
+      "manualCheckRequired": false
+    },
+    {
+      "url": "https://ndpc.gov.ng/",
+      "status": 200,
+      "manualCheckRequired": false
+    },
+    {
+      "url": "https://www.disney.co.uk/movies/black-panther/discover-wakanda",
+      "status": 200,
+      "manualCheckRequired": false
+    },
+    {
+      "url": "https://impact.disney.com/app/uploads/2022/01/Black-Panther-Activity-Packet-Final.pdf",
+      "status": 200,
+      "manualCheckRequired": false
+    },
+    {
+      "url": "https://www.itu.int/itu-d/sites/projectumc/aboutumc/",
+      "status": 200,
+      "manualCheckRequired": false
+    }
+  ]
+}

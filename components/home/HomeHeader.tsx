@@ -13,7 +13,7 @@ const links = [
   { label: "Products", href: "/products" },
   { label: "Stories", href: "/blog" },
 ];
-const moreLinks=[{label:"The Forge ITs movement",href:"/endless-possibilities"},{label:"Launchpad",href:"/endless-possibilities/launchpad"},{label:"Work with Forge",href:"/join"},{label:"Invest, sponsor or contribute",href:"/partner"},{label:"Earn with Forge",href:"/earn-with-forge"},{label:"School resources",href:"/programmes/resources"},{label:"Our work",href:"/work"},{label:"Get in touch",href:"/contact"}];
+const moreLinks=[{label:"The Forge ITs movement",href:"/endless-possibilities"},{label:"Launchpad",href:"/endless-possibilities/launchpad"},{label:"Work with Forge",href:"/join"},{label:"Invest, sponsor or contribute",href:"/partner"},{label:"Earn with Forge",href:"/earn-with-forge"},{label:"School resources",href:"/programmes/resources"},{label:"Get in touch",href:"/contact"}];
 
 export default function HomeHeader() {
   const dialog = useRef<HTMLDialogElement>(null);

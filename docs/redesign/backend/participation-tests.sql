@@ -1,0 +1,20 @@
+begin;
+insert into auth.users(id,email,email_confirmed_at) values ('db010101-0101-4101-8101-010101010101','intake-admin@invalid.example',now()),('db020202-0202-4202-8202-020202020202','intake-outsider@invalid.example',now());
+insert into forge_redesign_test.staff_members(email,user_id,role) values ('intake-admin@invalid.example','db010101-0101-4101-8101-010101010101','admin');
+set local role service_role;
+do $$ declare p jsonb:='{"name":"Rollback adult test","email":"intake@invalid.example","message":"Fictional multiline donor details","submissionSource":"endless-possibilities"}';a jsonb;b jsonb;sid uuid;blocked boolean;begin
+ a:=public.forge_participation_intake(p,'contact',repeat('d',64));sid:=(a->>'id')::uuid;
+ if sid is null or not exists(select 1 from forge_redesign_test.notification_outbox where submission_id=sid and recipient='admin@forgeintellitech.com' and status='pending') then raise exception 'Intake and correct notification not atomic';end if;
+ b:=public.forge_participation_intake(p,'contact',repeat('d',64));if b->>'id'<>sid::text or (select count(*) from forge_redesign_test.notification_outbox where submission_id=sid)<>1 then raise exception 'Duplicate intake created mail';end if;
+ b:=public.forge_participation_staff_action('db020202-0202-4202-8202-020202020202','intake-outsider@invalid.example','list','{}');if b->>'forbidden' is distinct from 'true' then raise exception 'Outsider allowed';end if;
+ b:=public.forge_participation_staff_action('db020202-0202-4202-8202-020202020202','intake-admin@invalid.example','list','{}');if b->>'forbidden' is distinct from 'true' then raise exception 'Spoofed identity allowed';end if;
+ b:=public.forge_participation_staff_action('db010101-0101-4101-8101-010101010101','intake-admin@invalid.example','update',jsonb_build_object('id',sid,'version',1,'status','reviewing','note','Rollback review'));
+ if b->>'saved' is distinct from 'true' or not exists(select 1 from forge_redesign_test.participation_review_audit where submission_id=sid) then raise exception 'Audit missing';end if;
+ b:=public.forge_participation_staff_action('db010101-0101-4101-8101-010101010101','intake-admin@invalid.example','update',jsonb_build_object('id',sid,'version',1,'status','closed','note','Stale review'));
+ if b->>'conflict' is distinct from 'true' then raise exception 'Stale review accepted';end if;
+ blocked:=false;begin perform public.forge_participation_intake(p||'{"recipient":"arbitrary@invalid.example"}','contact',repeat('e',64));exception when others then blocked:=true;end;if not blocked then raise exception 'Arbitrary recipient injection accepted';end if;
+ if has_table_privilege('anon','forge_redesign_test.participation_submissions','SELECT') or has_function_privilege('authenticated','public.forge_participation_staff_action(uuid,text,text,jsonb)','EXECUTE') then raise exception 'Public private data access';end if;
+end $$;
+reset role;
+select 'PASS: intake/outbox atomicity, fixed mailbox, dedupe, private access, versioned review and audit; fixtures rolled back' as outcome;
+rollback;

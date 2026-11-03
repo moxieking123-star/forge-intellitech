@@ -1,0 +1,5 @@
+.header{display:flex;justify-content:space-between;align-items:center;gap:20px;width:min(1180px,calc(100% - 32px));margin:0 auto;padding:18px 22px;background:#f4f1e8;border-radius:0 0 18px 18px;font:650 13px/1.5 "Manrope Variable",sans-serif;color:#173b2d}
+.brand{display:inline-flex;align-items:center;gap:16px}.brand img{width:120px;height:auto}.brand span{border-left:1px solid #c9cfc0;padding-left:16px;font-size:10px;text-transform:uppercase;letter-spacing:.12em}.back{padding:10px 14px;border:1px solid #b5c1b0;border-radius:12px;background:#fffdf6;box-shadow:var(--forge-surface-shadow)}
+.header a:focus-visible{outline:3px solid #bd481f;outline-offset:4px}
+.footer{width:min(1180px,calc(100% - 32px));margin:0 auto 24px;padding:16px 24px;border-radius:14px;background:#f4f1e8;font:400 12px/1.6 "Manrope Variable",sans-serif;color:#4c6354;text-align:center}
+@media(max-width:600px){.header{padding:18px 20px 0}.brand img{width:100px}.brand span{display:none}.back{font-size:12px}}

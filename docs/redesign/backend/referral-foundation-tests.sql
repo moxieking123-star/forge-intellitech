@@ -51,6 +51,8 @@ begin
  if result->>'completed' is distinct from 'true' then raise exception 'Committed receipt cannot be recovered'; end if;
  update forge_redesign_test.school_referrals set starts_on='2026-10-01' where id=ref;
  if (select payable_on from forge_redesign_test.school_referrals where id=ref)<>'2026-10-22'::date then raise exception 'Wrong fourth-week marker'; end if;
+ -- Keep this refusal assertion independent of the owner's real reviewed calendar.
+ update forge_redesign_test.referral_holiday_calendar set covered_from=covered_through where id=true;
  blocked:=false;begin perform public.forge_referral_action(owner_a,'statement_request',jsonb_build_object('referralId',ref));exception when sqlstate 'P0001' then blocked:=true;end;
  if not blocked then raise exception 'Unreviewed holiday deadline supplied'; end if;
  update forge_redesign_test.referrer_accounts set status='closed' where id=owner_b;

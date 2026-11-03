@@ -4,7 +4,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
     "about",
-    "work",
     "products",
     "products/all-in",
     "products/dashboard",
@@ -12,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "products/trego",
     "policy",
     "partner",
+    "partner/contribute",
     "join",
     "contact",
     "programmes",
@@ -26,6 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "privacy",
     "terms",
     "endless-possibilities",
+    "endless-possibilities/offer-a-space",
     ...[
       "give-a-child-a-laptop",
       "in-school-launchpad",

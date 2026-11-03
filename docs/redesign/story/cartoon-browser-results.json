@@ -1,0 +1,16 @@
+{
+  "result": "passed",
+  "base": "http://localhost:3011",
+  "checks": [
+    "Actual CSS chase animation changes over time",
+    "All eight chapters follow real full-page scrolling",
+    "Fence activity finishes; Escape closes it and restores focus",
+    "Full page fits 320, 390, 768 and 1440px screens",
+    "Reduced motion disables animation on the actual page",
+    "Hide and restore work",
+    "Programme page starts in its chapter; pause holds and resume catches up",
+    "Story moves out of the way when a contact field receives focus; no submission"
+  ],
+  "pageErrors": [],
+  "realSubmissions": 0
+}

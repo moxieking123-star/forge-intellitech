@@ -5,6 +5,9 @@ import ReferralAccount from "@/components/referrals/ReferralAccount";
 import {referralBackendEnabled} from "@/lib/server/referral-backend";
 import s from "@/components/referrals/Referrals.module.css";
 
+// Account availability follows the reviewed runtime configuration, not build-time flags.
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Earn with Forge | Introduce a school",
   description:

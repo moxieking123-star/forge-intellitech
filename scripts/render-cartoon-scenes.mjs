@@ -1,0 +1,12 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createRequire} from 'node:module';
+const require=createRequire(import.meta.url),ts=require('typescript'),React=require('react'),{renderToStaticMarkup}=require('react-dom/server');
+const source=readFileSync('components/story/CartoonScene.tsx','utf8');
+const js=ts.transpileModule(source,{compilerOptions:{jsx:ts.JsxEmit.ReactJSX,module:ts.ModuleKind.CommonJS}}).outputText;
+const mod={exports:{}};
+new Function('require','module','exports',js)(id=>id.endsWith('.css')?new Proxy({},{get:(_,key)=>key}):require(id),mod,mod.exports);
+const Scene=mod.exports.default;
+const css=readFileSync('components/story/ForgeJourney.module.css','utf8').replaceAll('.scene {','.scene { max-width:360px;');
+const html='<html><style>'+css+'body{background:#f4f1e9;font:16px sans-serif}.grid{display:grid;grid-template-columns:repeat(2,360px);gap:20px}article{padding:10px;border:1px solid #aaa;border-radius:20px}</style><h1>Tom, Jerry & Doggy — a shared beginning</h1><div class="grid">'+Array.from({length:8},(_,chapter)=>'<article><p>Chapter '+(chapter+1)+'</p>'+renderToStaticMarkup(React.createElement(Scene,{chapter}))+'</article>').join('')+'</div></html>';
+writeFileSync('docs/redesign/story/cartoon-scenes.html',html);
+console.log('Rendered all eight SVG scenes successfully.');

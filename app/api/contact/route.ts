@@ -1,3 +1,5 @@
+import {backendEnvironmentEnabled} from "@/lib/backend-runtime";
+import {participationBackendEnabled,submitParticipation} from '@/lib/server/participation';
 import {
   isSubmissionSource,
   notificationRecipient,
@@ -8,6 +10,8 @@ import { resend, FROM_EMAIL } from "@/lib/resend";
 import { contactNotificationEmail } from "@/lib/email-templates";
 
 export async function POST(request: NextRequest) {
+  if(participationBackendEnabled())return submitParticipation(request,"contact");
+  if(backendEnvironmentEnabled())return NextResponse.json({error:"Enquiry services are not enabled. Your details have not been submitted."},{status:503,headers:{"Cache-Control":"no-store"}});
   try {
     const body = await request.json().catch(() => null);
     if (!body || typeof body !== "object" || Array.isArray(body))

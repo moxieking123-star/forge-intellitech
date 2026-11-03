@@ -58,3 +58,15 @@
 @keyframes home { 0%,10%{transform:translateX(-130px)} 65%,100%{transform:translateX(65px)} }
 @media(max-width:700px) { .journey { width:210px; right:10px; bottom:10px; } .caption { font-size:9px; } .topline { opacity:1; } .topline span { display:none; } .dialog { padding:42px 22px 24px; } }
 @media(prefers-reduced-motion:reduce) { .journey *, .dialog * { animation:none!important; transition:none!important; } .eyes { transform:none; } .topline { opacity:1; } }
+
+.cartoonIdle { animation:cartoon-breathe 3s ease-in-out infinite; transform-origin:0 -10px; }
+.cartoonWork { animation:cartoon-work 1.4s ease-in-out infinite; transform-origin:0 0; }
+.cartoonChase { animation:cartoon-chase 5s ease-in-out infinite; }
+.fence { animation:build .8s ease-out both; transform-origin:190px 109px; }
+.loosePlank { animation:plank-set 2s ease-out both; transform-box:fill-box; transform-origin:50% 100%; }
+.hammer { animation:hammer .8s ease-in-out infinite alternate; transform-origin:86px 65px; }
+@keyframes cartoon-breathe { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-1px)} }
+@keyframes cartoon-work { 0%,100%{transform:rotate(-3deg)} 50%{transform:rotate(3deg)} }
+@keyframes cartoon-chase { 0%,100%{transform:translateX(-12px)} 45%{transform:translateX(24px)} 65%{transform:translateX(24px) rotate(-1deg)} }
+@keyframes plank-set { from{opacity:0;transform:translateY(-24px) rotate(12deg)} to{opacity:1;transform:translateY(0) rotate(0)} }
+@keyframes hammer { from{transform:rotate(-25deg)} to{transform:rotate(20deg)} }

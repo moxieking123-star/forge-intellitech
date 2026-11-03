@@ -1,0 +1,26 @@
+begin;
+do $$ declare jobs jsonb;first_id uuid;token uuid;job2 uuid;first_at timestamptz;sub_id uuid;begin
+ if has_table_privilege('anon','forge_redesign_test.notification_delivery_policy','SELECT') or has_table_privilege('service_role','forge_redesign_test.notification_delivery_policy','UPDATE') then raise exception 'Budget permissions exposed';end if;
+ if exists(select 1 from forge_redesign_test.school_notification_outbox where id in ('71f55bb2-5a8d-4c55-993f-cfe4ae4e039f','a82fd7b9-0ed1-439a-82cb-95362ae22c18') and status<>'cancelled') then raise exception 'Synthetic jobs not quarantined';end if;
+ if public.forge_notification_retry('school','71f55bb2-5a8d-4c55-993f-cfe4ae4e039f') then raise exception 'Cancelled test job retried';end if;
+ update forge_redesign_test.notification_delivery_policy set new_jobs_per_24h=1 where id=true;
+ first_id:=public.forge_proposal_submit('{"name":"Rollback budget A","school":"Fictional budget school","email":"budget-a@invalid.example"}');
+ job2:=public.forge_proposal_submit('{"name":"Rollback budget B","school":"Fictional budget school","email":"budget-b@invalid.example"}');
+ insert into forge_redesign_test.participation_submissions(kind,recipient,payload,fingerprint) values('contact','info@forgeintellitech.com','{"name":"Rollback cross-queue budget","email":"cross-queue@invalid.example","message":"Fictional test only"}',repeat('f',64)) returning id into sub_id;
+ insert into forge_redesign_test.notification_outbox(submission_id,recipient,status,attempts,first_attempt_at,provider_id,sent_at) values(sub_id,'info@forgeintellitech.com','sent',1,now(),'rollback-provider-only',now());
+ if jsonb_array_length(public.forge_notification_claim('proposal',10))<>0 then raise exception 'Another queue did not consume the shared budget';end if;
+ update forge_redesign_test.notification_delivery_policy set new_jobs_per_24h=2 where id=true;
+ jobs:=public.forge_notification_claim('proposal',10);if jsonb_array_length(jobs)<>1 then raise exception 'Shared budget exceeded';end if;
+ first_id:=(jobs->0->>'id')::uuid;token:=(jobs->0->>'lease_token')::uuid;first_at:=(jobs->0->>'first_attempt_at')::timestamptz;
+ if jsonb_array_length(public.forge_notification_claim('proposal',10))<>0 then raise exception 'In-flight reservation ignored';end if;
+ if not public.forge_notification_finish('proposal',first_id,token,null,'Provider HTTP 429; retry pending') then raise exception 'Transient failure not recorded';end if;
+ if (select status from forge_redesign_test.proposal_notification_outbox where id=first_id)<>'pending' then raise exception 'Transient failure became terminal';end if;
+ update forge_redesign_test.proposal_notification_outbox set next_attempt_at=now() where id=first_id;
+ jobs:=public.forge_notification_claim('proposal',10);if jsonb_array_length(jobs)<>1 or jobs->0->>'id'<>first_id::text or (jobs->0->>'first_attempt_at')::timestamptz<>first_at then raise exception 'Safe retry lost its reservation or idempotency window';end if;
+ if public.forge_notification_finish('proposal',first_id,token,'stale-provider-id',null) then raise exception 'Stale receipt accepted';end if;
+ token:=(jobs->0->>'lease_token')::uuid;
+ if not public.forge_notification_finish('proposal',first_id,token,null,'[permanent] Provider HTTP 422; review') then raise exception 'Permanent failure not recorded';end if;
+ if (select status from forge_redesign_test.proposal_notification_outbox where id=first_id)<>'failed' then raise exception 'Permanent failure automatically retried';end if;
+end $$;
+select 'PASS: synthetic quarantine, shared budget, in-flight reservation, retry stability, stale receipt and permanent/transient handling; rolled back' as outcome;
+rollback;

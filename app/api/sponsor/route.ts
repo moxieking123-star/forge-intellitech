@@ -1,13 +1,17 @@
+import {backendEnvironmentEnabled} from "@/lib/backend-runtime";
+import {participationBackendEnabled,submitParticipation} from '@/lib/server/participation';
 import { notificationMailboxes } from "@/lib/notification-routing";
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin as supabase } from "@/lib/supabase-admin";
 import { resend, FROM_EMAIL } from "@/lib/resend";
 
 export async function POST(request: NextRequest) {
+  if(participationBackendEnabled())return submitParticipation(request,"sponsor");
+  if(backendEnvironmentEnabled())return NextResponse.json({error:"Enquiry services are not enabled. Your details have not been submitted."},{status:503,headers:{"Cache-Control":"no-store"}});
   try {
     const body = await request.json();
 
-    console.log("📨 Sponsor inquiry:", body);
+
 
     const { companyName, contactName, email, phone, sponsorshipType, message } =
       body;

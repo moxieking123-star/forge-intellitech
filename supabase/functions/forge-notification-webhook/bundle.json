@@ -1,0 +1,8 @@
+{
+ "entrypoint":"index.ts",
+ "verifyJwt":false,
+ "sharedSources":{
+  "notification-webhook.ts":"lib/notification-webhook.ts",
+  "referrals/agreement.ts":"lib/referrals/agreement.ts"
+ }
+}

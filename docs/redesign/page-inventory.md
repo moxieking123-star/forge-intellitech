@@ -4,7 +4,7 @@ All routes below are implemented on the redesign branch. This is frontend availa
 
 | Area | Routes |
 | --- | --- |
-| Company | `/`, `/about`, `/work`, `/contact` |
+| Company | `/`, `/about`, `/contact`; retired `/work` redirects permanently to `/products` |
 | School programmes | `/programmes`, `/programmes/techup`, `/programmes/elytech` |
 | School tools | `/programmes/enquire`, `/programmes/onboard`, `/programmes/resources` |
 | Endless Possibilities | `/endless-possibilities` |

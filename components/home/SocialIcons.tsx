@@ -1,7 +1,7 @@
-import { FacebookLogo, InstagramLogo, TiktokLogo, LinkedinLogo, XLogo } from "@phosphor-icons/react/dist/ssr";
+import { FacebookLogo, InstagramLogo, TiktokLogo, LinkedinLogo, XLogo, YoutubeLogo } from "@phosphor-icons/react/dist/ssr";
 import { socialChannels } from "@/lib/public-channels";
 import styles from "./SocialIcons.module.css";
-const icons = { Facebook: FacebookLogo, Instagram: InstagramLogo, TikTok: TiktokLogo, LinkedIn: LinkedinLogo, X: XLogo };
+const icons = { Facebook: FacebookLogo, Instagram: InstagramLogo, TikTok: TiktokLogo, LinkedIn: LinkedinLogo, X: XLogo, YouTube: YoutubeLogo };
 export default function SocialIcons() {
   return <div className={styles.social}><p>Find us on social</p><ul aria-label="Forge social media">{socialChannels.map(channel => {
     const Icon = icons[channel.label as keyof typeof icons];
