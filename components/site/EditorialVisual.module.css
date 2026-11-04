@@ -7,7 +7,7 @@
   width: 100%;
   aspect-ratio: 16/7;
   overflow: hidden;
-  background: #e9e4d7;
+  background: #e7ddcb;
 }
 .figure img {
   object-fit: cover;

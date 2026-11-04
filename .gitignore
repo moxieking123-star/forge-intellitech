@@ -7,7 +7,6 @@ node_modules
 
 # next.js
 .next
-.next-training
 out
 
 # misc
@@ -15,4 +14,10 @@ out
 .vercel
 private-assets/
 *.tsbuildinfo
+
+preview/
+*.bundle
+.next-release/
+.next-training/
 supabase/.temp/
+

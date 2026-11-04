@@ -5,7 +5,7 @@ import { reactions, visitorTypes } from "@/lib/preview-feedback";
 import s from "./PreviewFeedback.module.css";
 
 type Section = { value: string; label: string };
-export default function PreviewFeedback() {
+export default function PreviewFeedback({inline=false}:{inline?:boolean}={}) {
   const pathname = usePathname();
   const dialog = useRef<HTMLDialogElement>(null), trigger = useRef<HTMLButtonElement>(null);
   const requestId = useRef("");
@@ -61,7 +61,7 @@ export default function PreviewFeedback() {
 
   if (/^\/(?:admin|auth|account|referrer|api)(?:\/|$)/.test(pathname)) return null;
   return <>
-    <button ref={trigger} className={s.trigger} onClick={open} aria-haspopup="dialog">Help us forge this <span aria-hidden="true">↗</span></button>
+    <button ref={trigger} className={inline?s.inline:s.trigger} onClick={open} aria-haspopup="dialog">Help us forge this <span aria-hidden="true">↗</span></button>
     <dialog ref={dialog} className={s.dialog} aria-labelledby="feedback-title" onCancel={close} onClose={() => trigger.current?.focus()}>
       <button type="button" className={s.close} onClick={close} aria-label="Close feedback">×</button>
       <span className={s.eyebrow}>Your voice helps shape Forge</span>

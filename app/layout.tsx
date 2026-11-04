@@ -13,6 +13,8 @@ import "@fontsource/open-sans/600.css";
 import "@fontsource/open-sans/700.css";
 import "@fontsource-variable/manrope";
 import "./globals.css";
+import "../components/forge/forge.css";
+import "../components/forge/public-pages.css";
 import SiteFrame from "../components/SiteFrame";
 import { ThemeProvider } from "../components/ThemeProvider";
 
