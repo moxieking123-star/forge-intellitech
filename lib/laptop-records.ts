@@ -33,6 +33,11 @@ export function summariseLaptopRecords(rows:LaptopRecord[]) {
  const unique=new Map<string,NonNullable<ReturnType<typeof laptopRecord>>>();
  for(const entry of parsed)if(!unique.has(entry.dedupeKey))unique.set(entry.dedupeKey,entry);
  const records=[...unique.values()];
+ const reviewedOtherRequests:Record<string,string>={'8bd33849-eba2-49b3-b32a-9a290d2491f9':'South Africa','596c7a0c-e763-423f-90d4-5a1a3e15bee8':'Oyo'};
+ const studentEmails=new Set(records.filter(r=>r.kind==='student').map(r=>r.email));
+ const otherRecords=rows.filter(row=>reviewedOtherRequests[row.id]).filter(row=>!studentEmails.has((row.payload?.email || row.email || '').toLowerCase()));
+ const otherLocations=Object.entries(otherRecords.reduce<Record<string,number>>((result,row)=>{const location=reviewedOtherRequests[row.id];result[location]=(result[location]||0)+1;return result;},{})).map(([state,count])=>({state,count}));
  function groups(kind:string){const result:Record<string,number>={};for(const entry of records.filter(r=>r.kind===kind))result[entry.state]=(result[entry.state]||0)+1;return Object.entries(result).map(([state,count])=>({state,count})).sort((a,b)=>b.count-a.count || a.state.localeCompare(b.state));}
- return {records,publicCounts:{requests:records.filter(r=>r.kind==='student').length,donorOffers:records.filter(r=>r.kind==='donor').length,requestLocations:groups('student'),donorLocations:groups('donor'),delivered:3,deliveredByState:[{state:'Lagos',count:2},{state:'Ogun',count:1}]},rawRequests:parsed.filter(r=>r.kind==='student').length,duplicates:parsed.length-records.length};
+ const requests=records.filter(r=>r.kind==='student').length;
+ return {records,otherRecords,publicCounts:{requests,totalRequests:requests+otherRecords.length,otherLaptopEnquiries:otherRecords.length,otherRequestLocations:otherLocations,donorOffers:records.filter(r=>r.kind==='donor').length,requestLocations:groups('student'),donorLocations:groups('donor'),delivered:3,deliveredByState:[{state:'Lagos',count:2},{state:'Ogun',count:1}]},rawRequests:parsed.filter(r=>r.kind==='student').length,duplicates:parsed.length-records.length};
 }

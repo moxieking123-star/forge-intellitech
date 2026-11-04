@@ -13,6 +13,11 @@ test('a shared parent email can represent two distinct children',()=>{
  const summary=summariseLaptopRecords([make('one'),make('two',{message:'Student name: Another Child\n\nSchool name: Sample School\n\nSchool town or city and state: Lagos'})]);
  assert.equal(summary.publicCounts.requests,2);
 });
+test('reviewed requests from other forms remain separate from student applications',()=>{
+ const summary=summariseLaptopRecords([make('one'),{id:'596c7a0c-e763-423f-90d4-5a1a3e15bee8',payload:{email:'other@example.invalid',subject:'In-school LaunchPad',message:'Laptop enquiry'}}]);
+ assert.equal(summary.publicCounts.requests,1);assert.equal(summary.publicCounts.otherLaptopEnquiries,1);assert.equal(summary.publicCounts.totalRequests,2);
+ assert.deepEqual(summary.publicCounts.otherRequestLocations,[{state:'Oyo',count:1}]);
+});
 test('structured and old form requests reconcile without exposing details',()=>{
  const summary=summariseLaptopRecords([make('one'),make('two',{message:JSON.stringify({initiative:'give-a-child-a-laptop',version:1,kind:'student',values:{studentName:'Fictional Child',school:'Sample School',location:'Ilorin South'}})})]);
  assert.equal(summary.publicCounts.requests,1);

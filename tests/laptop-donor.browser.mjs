@@ -22,7 +22,7 @@ try {
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false);
   await form.getByRole('button',{name:'Register donor interest'}).click();await page.getByText('Your enquiry is received.',{exact:true}).waitFor();
   await page.goto(base+'/endless-possibilities/give-a-child-a-laptop',{waitUntil:'networkidle'});
-  await page.getByRole('heading',{name:'Student requests received'}).waitFor();
+  await page.getByRole('heading',{name:'Laptop requests received'}).waitFor();
   await page.locator('.fg-laptop-impact').screenshot({path:`docs/redesign/forest-review/laptop-impact-${width}.png`});
  }
  assert.equal(submissions,2);console.log('PASS: donor forms at desktop/mobile validate against server rules; live counter renders; test submissions intercepted.');
