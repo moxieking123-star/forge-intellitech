@@ -1,0 +1,12 @@
+.git
+.env*
+private-assets/
+output/
+.next/
+.next-release/
+.next-training/
+node_modules/
+*.tsbuildinfo
+preview/
+docs/
+tests/
