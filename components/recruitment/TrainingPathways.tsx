@@ -40,7 +40,7 @@ export default function TrainingPathways({token}:{token:string}){
   <div className={s.account}><p className={s.kicker}>Instructor preparation · {course.name}</p><button className={s.secondary} disabled={busy} onClick={()=>{setError('');setNotice('');setProgramme(null);}}>Compare programmes</button></div>
   <h2 id="pathway-heading" ref={heading} tabIndex={-1}>{course.name}: learn it. Explain it. Help someone build.</h2>
   <p className={s.notice}>Your programme selection is saved. Explore your two-week preparation below. Choose a day, practise and send its assignment for staff feedback. Keep a copy of your draft until the save is confirmed.</p>{messages}
-  <PreparationLibrary key={programme} programme={programme} onDayChange={chooseDay} busy={busy}/>
+  <PreparationLibrary key={programme} programme={programme} onDayChange={chooseDay} busy={busy} workspace={saved}/>
   <div className={s.introGrid}>
    <article className={s.card} aria-label="Daily assignment"><p className={s.kicker}>Your work · Day {day}</p><h3>{preparationCourses[programme].days[day-1].title}</h3><p>{preparationCourses[programme].days[day-1].output}</p><p>{preparationCourses[programme].days[day-1].teachBack}</p>
     {!multiDayReady&&day>1&&<p role="alert" className={s.notice}>The training service needs its multi-day update. Keep your draft and download your journal; this day cannot be submitted yet.</p>}

@@ -3,17 +3,21 @@ import {useEffect,useRef,useState} from 'react';
 import {dailyRhythm,preparationCourses,preparationResources,preparationJournal,type PreparationProgramme} from '@/lib/recruitment/preparation-curriculum';
 import s from './PreparationLibrary.module.css';
 import NumberHands from './NumberHands';
+import {trainingDayStatus,trainingProgress} from '@/lib/recruitment/training-progress';
+import type {WorkspaceState,LessonId} from '@/lib/recruitment/workspace-client';
 import {trainingPath} from '@/lib/recruitment/paths';
-export default function PreparationLibrary({programme,onDayChange,busy=false}:{programme:PreparationProgramme;onDayChange?:(day:number)=>void;busy?:boolean}){
+export default function PreparationLibrary({programme,onDayChange,busy=false,workspace}:{programme:PreparationProgramme;onDayChange?:(day:number)=>void;busy?:boolean;workspace?:WorkspaceState}){
  const [day,setDay]=useState(1),[answer,setAnswer]=useState<number|null>(null),[checked,setChecked]=useState(false),[notes,setNotes]=useState<Record<number,string>>({});
  const heading=useRef<HTMLHeadingElement>(null),initial=useRef(true),course=preparationCourses[programme],lesson=course.days[day-1];
  useEffect(()=>{if(initial.current){initial.current=false;return;}heading.current?.focus();},[day]);
  function choose(value:number){onDayChange?.(value);setDay(value);setAnswer(null);setChecked(false);}
  function download(){const blob=new Blob([preparationJournal(programme,day,notes[day]||'')],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`forge-${programme}-day-${day}-practice.txt`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+ const progress=workspace?trainingProgress(workspace):null;
  return <section className={s.library} aria-label={`${course.title} two-week preparation`}>
   <header className={s.intro}><p className={s.eyebrow}>Your preparation studio · 14 days</p><h2>Make something. Explain it. Help someone try.</h2><p>{course.promise}</p><p>{course.outcome}</p><details><summary>A three-hour day, with room to breathe</summary><ul className={s.rhythm}>{dailyRhythm.map(item=><li key={item.label}><strong>{item.minutes} min</strong><span>{item.label}</span></li>)}</ul><p>Use two short breaks. Spend the learning time on the assigned section, not the whole book. If you finish early, improve the artefact and rehearse a clearer explanation.</p></details></header>
+  {progress&&<section className={s.progress} aria-label="Your preparation progress"><h3>Your work is taking shape.</h3><p><strong>{progress.practised}/14</strong> days practised · <strong>{progress.submitted}/14</strong> assignments sent · <strong>{progress.reviewed}/14</strong> reviewed</p>{progress.needsChanges>0&&<p>{progress.needsChanges} {progress.needsChanges===1?'assignment has':'assignments have'} feedback to work on. Open the marked day, read the feedback and send your revision.</p>}<p>Practised means you recorded your practice. Reviewed means Forge has responded; it does not grant teaching placement.</p></section>}
   <div className={s.layout}>
-   <nav className={s.navigation} aria-label="Preparation days">{[0,1].map(week=><div key={week}><h3>Week {week+1} · {week===0?'Discover and build':'Explain and improve'}</h3>{course.days.slice(week*7,week*7+7).map(item=><button key={item.day} type="button" disabled={busy} aria-current={day===item.day?'step':undefined} onClick={()=>choose(item.day)}><span>{String(item.day).padStart(2,'0')}</span>{item.title}</button>)}</div>)}</nav>
+   <nav className={s.navigation} aria-label="Preparation days">{[0,1].map(week=><div key={week}><h3>Week {week+1} · {week===0?'Discover and build':'Explain and improve'}</h3>{course.days.slice(week*7,week*7+7).map(item=><button key={item.day} type="button" disabled={busy} aria-current={day===item.day?'step':undefined} onClick={()=>choose(item.day)}><span>{String(item.day).padStart(2,'0')}</span><span className={s.dayLabel}>{item.title}{workspace&&<small className={s.dayStatus}>{trainingDayStatus(workspace,`day-${item.day}` as LessonId)}</small>}</span></button>)}</div>)}</nav>
    <article className={s.lesson}>
     <p className={s.eyebrow}>Day {day} · About 3 hours</p><h3 ref={heading} tabIndex={-1} className={s.title}>{lesson.title}</h3><p className={s.goal}>{lesson.goal}</p>
     <h4>Start with something real.</h4><p>{lesson.explain}</p>
