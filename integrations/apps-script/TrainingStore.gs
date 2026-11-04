@@ -117,7 +117,7 @@ function forgeTrainingCreateStore_(config) {
       var all=rows('Training_Work'), own=all.filter(function(row){return row[1]===traineeId;}), programme=owner.row[9]||null;
       if(programme!==null&&['elytech','techup'].indexOf(programme)<0)throw Error('Invalid programme');
       if(p.operation!=='read'){
-        if(['select','complete','submit'].indexOf(p.operation)<0||['elytech','techup'].indexOf(p.programme)<0||typeof p.requestId!=='string'||!/^[a-f0-9-]{36}$/.test(p.requestId)||typeof p.text!=='string'||p.text.length>1200||(p.operation==='select'?(p.lessonId!==''||p.text!==''):(p.lessonId!=='day-1'||(p.operation==='complete'?p.text!=='':p.text.trim().length<30))))throw Error('Invalid training work');
+        if(['select','complete','submit'].indexOf(p.operation)<0||['elytech','techup'].indexOf(p.programme)<0||typeof p.requestId!=='string'||!/^[a-f0-9-]{36}$/.test(p.requestId)||typeof p.text!=='string'||p.text.length>1200||(p.operation==='select'?(p.lessonId!==''||p.text!==''):((typeof p.lessonId!=='string'||!/^day-([1-9]|1[0-4])$/.test(p.lessonId))||(p.operation==='complete'?p.text!=='':p.text.trim().length<30))))throw Error('Invalid training work');
         var binding=hash(JSON.stringify([p.operation,p.programme,p.lessonId,p.text])), prior=find('Training_Work',0,p.requestId);
         if(prior&&(prior.row[1]!==traineeId||prior.row[6]!==binding))throw Error('Training request conflict');
         if(!prior){
@@ -130,10 +130,14 @@ function forgeTrainingCreateStore_(config) {
       }
       var selections=own.filter(function(row){return row[4]==='select';});
       if(selections.length){programme=selections[selections.length-1][2];if(owner.row[9]!==programme){var values=owner.row.slice();values[9]=programme;values[8]=new Date();write('Trainees',owner.index,values);}}
-      var scoped=own.filter(function(row){return row[2]===programme;}),completed=scoped.some(function(row){return row[4]==='complete'&&row[3]==='day-1';})?['day-1']:[];
-      var submissions=scoped.filter(function(row){return row[4]==='submit'&&row[3]==='day-1';}), latest=submissions[submissions.length-1];
-      var feedback=latest?rows('Training_Reviews').filter(function(row){return row[1]===latest[0]&&row[2]===traineeId;}):[];
-      return {programme:programme,completed:completed,submission:latest?{id:latest[0],text:decode(latest[5]),submittedAt:new Date(latest[7]).toISOString(),review:reviewValue(feedback[feedback.length-1])}:null};
+      var scoped=own.filter(function(row){return row[2]===programme;}),completed=[];
+      scoped.forEach(function(row){if(row[4]==='complete'&&/^day-([1-9]|1[0-4])$/.test(row[3])&&completed.indexOf(row[3])<0)completed.push(row[3]);});
+      completed.sort(function(a,b){return Number(a.slice(4))-Number(b.slice(4));});
+      var latestByDay={},reviews=rows('Training_Reviews');
+      scoped.forEach(function(row){if(row[4]==='submit'&&/^day-([1-9]|1[0-4])$/.test(row[3]))latestByDay[row[3]]=row;});
+      function submissionValue(row){var feedback=reviews.filter(function(r){return r[1]===row[0]&&r[2]===traineeId;});return {id:row[0],text:decode(row[5]),submittedAt:new Date(row[7]).toISOString(),review:reviewValue(feedback[feedback.length-1])};}
+      var submissions=Object.keys(latestByDay).sort(function(a,b){return Number(a.slice(4))-Number(b.slice(4));}).map(function(day){var value=submissionValue(latestByDay[day]);value.lessonId=day;return value;});
+      return {programme:programme,completed:completed,submission:latestByDay['day-1']?submissionValue(latestByDay['day-1']):null,submissions:submissions};
     },
     reviewWorkspace:function(p) {
       requireLock();

@@ -5,7 +5,7 @@ function forgeTrainingVerifyWorkspace_(e,secret,now){
   var p=e.payload;
   if(!forgeTrainingExact_(p,['token','operation','requestId','programme','lessonId','text'])||typeof p.token!=='string'||!/^[A-Za-z0-9_-]{43}$/.test(p.token)||typeof p.requestId!=='string'||!/^[a-f0-9-]{36}$/.test(p.requestId)||typeof p.text!=='string'||p.text.length>1200||/[\x00-\x08\x0b\x0c\x0e-\x1f]/.test(p.text))return false;
   if(p.operation==='read'){if(p.programme!==''||p.lessonId!==''||p.text!=='')return false;}
-  else{if(['elytech','techup'].indexOf(p.programme)<0)return false;if(p.operation==='select'){if(p.lessonId!==''||p.text!=='')return false;}else if(p.lessonId!=='day-1'||(p.operation==='complete'?p.text!=='':p.operation!=='submit'||p.text.trim().length<30))return false;}
+  else{if(['elytech','techup'].indexOf(p.programme)<0)return false;if(p.operation==='select'){if(p.lessonId!==''||p.text!=='')return false;}else if((typeof p.lessonId!=='string'||!/^day-([1-9]|1[0-4])$/.test(p.lessonId))||(p.operation==='complete'?p.text!=='':p.operation!=='submit'||p.text.trim().length<30))return false;}
   var canonical=JSON.stringify([e.version,e.action,e.timestamp,e.nonce,p.token,p.operation,p.requestId,p.programme,p.lessonId,p.text]);
   var key=secret.match(/../g).map(function(hex){var b=parseInt(hex,16);return b>127?b-256:b;});
   var signature=forgeTrainingHex_(Utilities.computeHmacSha256Signature(Utilities.newBlob(canonical).getBytes(),key)),difference=0;

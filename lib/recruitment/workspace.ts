@@ -2,7 +2,7 @@ import {createHmac,randomBytes} from 'node:crypto';
 import {provisionSigningKeyReady} from './bridge.ts';
 import {sameOrigin} from '../request-origin.ts';
 import {boundedBody} from '../referrals/agreement.ts';
-import {workspaceState,type WorkspaceCommand} from './workspace-client.ts';
+import {workspaceState,validLessonId,type WorkspaceCommand} from './workspace-client.ts';
 export {workspaceState} from './workspace-client.ts';
 export type {WorkspaceCommand,WorkspaceState} from './workspace-client.ts';
 export function workspaceCommand(value:unknown):WorkspaceCommand|null{
@@ -11,7 +11,7 @@ export function workspaceCommand(value:unknown):WorkspaceCommand|null{
  if(p.operation==='read')return p.programme===''&&p.lessonId===''&&p.text===''?p as WorkspaceCommand:null;
  if(!['elytech','techup'].includes(String(p.programme)))return null;
  if(p.operation==='select')return p.lessonId===''&&p.text===''?p as WorkspaceCommand:null;
- if(p.lessonId!=='day-1')return null;
+ if(!validLessonId(p.lessonId))return null;
  if(p.operation==='complete')return p.text===''?p as WorkspaceCommand:null;
  return p.operation==='submit'&&p.text.trim().length>=30?p as WorkspaceCommand:null;
 }

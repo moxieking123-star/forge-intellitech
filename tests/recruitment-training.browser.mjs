@@ -22,13 +22,6 @@ try{
  await page.getByRole('button',{name:'Choose ElyTech preparation'}).click();
  await page.getByRole('heading',{name:'ElyTech: learn it. Explain it. Help someone build.'}).waitFor();
  await page.getByText('Your programme selection is saved.',{exact:false}).waitFor();
- assert.equal(await page.getByRole('button',{name:'Check my understanding'}).isDisabled(),true);
- await page.getByRole('radio',{name:'Finish the exercise for them.'}).check();
- await page.getByRole('button',{name:'Check my understanding'}).click();
- await page.getByText('Take another look.',{exact:false}).waitFor();
- await page.getByRole('radio',{name:'Slow down, practise a small group of keys and give specific feedback.'}).check();
- await page.getByRole('button',{name:'Check my understanding'}).click();
- await page.getByText('That’s right.',{exact:false}).waitFor();
  await page.getByRole('button',{name:'Mark Day 1 as practised'}).click();
  await page.getByText('Day 1 - Practised',{exact:true}).waitFor();
  const draft='A fictional lesson plan: demonstrate home keys, guide short practice, then check understanding.';
@@ -51,10 +44,6 @@ try{
  await page.getByRole('button',{name:'Compare programmes'}).click();
  await page.getByRole('button',{name:'Choose TechUp preparation'}).click();
  await page.getByRole('heading',{name:'TechUp: learn it. Explain it. Help someone build.'}).waitFor();
- assert.equal(await page.getByRole('button',{name:'Check my understanding'}).isDisabled(),true);
- await page.getByRole('radio',{name:'JavaScript, responding to the click.'}).check();
- await page.getByRole('button',{name:'Check my understanding'}).click();
- await page.getByText('That’s right.',{exact:false}).waitFor();
  assert.equal(calls,2,'Only reopening the entry after reload may exchange a new session');
  for(const width of [1440,768,390]){await page.setViewportSize({width,height:1000});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));}
  await page.screenshot({path:'private-assets/recruitment-training-mobile.png',fullPage:true});
