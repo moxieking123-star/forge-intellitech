@@ -1,7 +1,7 @@
 import {trainingBridgeDestination} from './bridge-config.ts';
 import {boundedBody} from '../referrals/agreement.ts';
 export async function sendProvisionEnvelope(destination:string,envelope:unknown,fetcher:typeof fetch=fetch,parentSignal?:AbortSignal,responseLimit=4096){
- if(!Number.isInteger(responseLimit)||responseLimit<1||responseLimit>16384)throw Error('Invalid training response limit');
+ if(!Number.isInteger(responseLimit)||responseLimit<1||responseLimit>196608)throw Error('Invalid training response limit');
  const target=trainingBridgeDestination(destination);if(!target)throw Error('Invalid training destination');
  let url=target,method='POST';let body:string|undefined=JSON.stringify(envelope);
  // Google may finish a sheet write after the caller's previous 12s deadline.

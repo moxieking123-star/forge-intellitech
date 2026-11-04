@@ -6,3 +6,10 @@ test('allows a bounded Google cold-start budget shared across redirects',async t
 test('follows the expected Google content redirect without forwarding a service key',async()=>{const calls=[];const result=await sendProvisionEnvelope(target,{eventId:'fictional'},async(url,options)=>{calls.push({url,options});return calls.length===1?new Response(null,{status:302,headers:{location:'https://script.googleusercontent.com/macros/echo?fixture=1'}}):Response.json({ok:true});});assert.equal(result.ok,true);assert.equal(calls[0].options.redirect,'manual');assert.equal(calls[1].options.method,'GET');assert.equal(calls[1].options.body,undefined);assert.equal(calls[0].options.headers.Authorization,undefined);});
 test('rejects an untrusted redirect before making a second request',async()=>{let calls=0;await assert.rejects(()=>sendProvisionEnvelope(target,{},async()=>{calls++;return new Response(null,{status:302,headers:{location:'https://evil.invalid/private'}});}));assert.equal(calls,1);});
 test('bounds redirects and receipt body length',async()=>{let count=0;await assert.rejects(()=>sendProvisionEnvelope(target,{},async()=>{count++;return new Response(null,{status:302,headers:{location:'https://script.googleusercontent.com/macros/loop'}});}));assert.equal(count,4);await assert.rejects(()=>sendProvisionEnvelope(target,{},async()=>new Response('x'.repeat(4097))));});
+
+test('full fourteen-day unicode work fits an explicitly bounded workspace receipt',async()=>{
+ const body={submissions:Array.from({length:14},(_,i)=>({lessonId:`day-${i+1}`,text:'😀'.repeat(600),review:{feedback:'😀'.repeat(600)}}))};
+ const result=await sendProvisionEnvelope(target,{},async()=>Response.json(body),undefined,196608);assert.equal(result.submissions.length,14);
+ await assert.rejects(()=>sendProvisionEnvelope(target,{},async()=>new Response('x'.repeat(196609)),undefined,196608));
+ await assert.rejects(()=>sendProvisionEnvelope(target,{},async()=>Response.json({}),undefined,196609));
+});
