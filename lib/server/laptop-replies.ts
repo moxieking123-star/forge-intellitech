@@ -14,7 +14,7 @@ export async function deliverNextLaptopReply() {
  const {data:job,error}=await supabaseAdmin.rpc('forge_laptop_reply_claim');
  if(error)throw Error('Acknowledgment queue could not be read.');
  if(!job)return {empty:true};
- if(!['student','adult','donor'].includes(job.kind))throw Error('Invalid acknowledgment template.');
+ if(!['student','adult','donor','enquiry'].includes(job.kind))throw Error('Invalid acknowledgment template.');
  let providerId:string|null=null;
  let failure:string|null=null;
  try {

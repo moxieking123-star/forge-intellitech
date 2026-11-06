@@ -1,6 +1,10 @@
 export type LaptopRecord={id:string;name?:string;email?:string;subject?:string;message?:string;created_at?:string;payload?:Record<string,string>};
 const excludedTestIds=new Set(['5e19a83e-b10c-4fed-bfdd-4f206fec18b8']);
 const normalise=(value:string)=>value.trim().toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim();
+export function isOtherLaptopRequest(row:LaptopRecord) {
+ const p=row.payload || row;
+ return !excludedTestIds.has(row.id) && !/INTERNAL TEST/i.test(p.subject || '') && /\b(?:need|request|ask(?:ing)?)\b[\s\S]{0,220}\blaptop\b/i.test(p.message || '');
+}
 function field(message:string,label:string) {return message.split(/\r?\n/).find(line=>line.startsWith(label+':'))?.slice(label.length+1).trim() || '';}
 export function laptopRecord(row:LaptopRecord) {
  if(excludedTestIds.has(row.id))return null;
@@ -33,10 +37,12 @@ export function summariseLaptopRecords(rows:LaptopRecord[]) {
  const unique=new Map<string,NonNullable<ReturnType<typeof laptopRecord>>>();
  for(const entry of parsed)if(!unique.has(entry.dedupeKey))unique.set(entry.dedupeKey,entry);
  const records=[...unique.values()];
- const reviewedOtherRequests:Record<string,string>={'8bd33849-eba2-49b3-b32a-9a290d2491f9':'South Africa','596c7a0c-e763-423f-90d4-5a1a3e15bee8':'Oyo'};
+ const reviewedOtherRequests:Record<string,string>={'8bd33849-eba2-49b3-b32a-9a290d2491f9':'South Africa','596c7a0c-e763-423f-90d4-5a1a3e15bee8':'Oyo','8b2e4226-ec9f-48a6-8f81-47b8a4423697':'Bauchi'};
  const studentEmails=new Set(records.filter(r=>r.kind==='student').map(r=>r.email));
- const otherRecords=rows.filter(row=>reviewedOtherRequests[row.id]).filter(row=>!studentEmails.has((row.payload?.email || row.email || '').toLowerCase()));
- const otherLocations=Object.entries(otherRecords.reduce<Record<string,number>>((result,row)=>{const location=reviewedOtherRequests[row.id];result[location]=(result[location]||0)+1;return result;},{})).map(([state,count])=>({state,count}));
+ const others=new Map<string,LaptopRecord>();
+ for(const row of rows){const email=(row.payload?.email || row.email || '').trim().toLowerCase();if(!email || studentEmails.has(email) || laptopRecord(row) || !(reviewedOtherRequests[row.id] || isOtherLaptopRequest(row)))continue;if(!others.has(email))others.set(email,row);}
+ const otherRecords=[...others.values()];
+ const otherLocations=Object.entries(otherRecords.reduce<Record<string,number>>((result,row)=>{const location=reviewedOtherRequests[row.id] || 'Location to confirm';result[location]=(result[location]||0)+1;return result;},{})).map(([state,count])=>({state,count}));
  function groups(kind:string){const result:Record<string,number>={};for(const entry of records.filter(r=>r.kind===kind))result[entry.state]=(result[entry.state]||0)+1;return Object.entries(result).map(([state,count])=>({state,count})).sort((a,b)=>b.count-a.count || a.state.localeCompare(b.state));}
  const requests=records.filter(r=>r.kind==='student').length;
  return {records,otherRecords,publicCounts:{requests,totalRequests:requests+otherRecords.length,otherLaptopEnquiries:otherRecords.length,otherRequestLocations:otherLocations,donorOffers:records.filter(r=>r.kind==='donor').length,requestLocations:groups('student'),donorLocations:groups('donor'),delivered:3,deliveredByState:[{state:'Lagos',count:2},{state:'Ogun',count:1}]},rawRequests:parsed.filter(r=>r.kind==='student').length,duplicates:parsed.length-records.length};

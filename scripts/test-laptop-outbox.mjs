@@ -17,5 +17,10 @@ try {
  assert.equal((await db.query('select public.forge_laptop_reply_claim() as result')).rows[0].result,null);
  const acl=(await db.query(`select has_function_privilege('anon','public.forge_laptop_reply_enqueue(uuid)','EXECUTE') as anonymous,has_function_privilege('authenticated','public.forge_laptop_reply_claim()','EXECUTE') as signedin`)).rows[0];
  assert.equal(acl.anonymous,false);assert.equal(acl.signedin,false);
+ await db.exec(fs.readFileSync('supabase/migrations/20261106062000_general_laptop_enquiry_acknowledgments.sql','utf8'));
+ const otherId='00000000-0000-4000-8000-000000000002';
+ await db.query(`insert into forge_redesign_test.participation_submissions values ($1,'contact',$2::jsonb)`,[otherId,JSON.stringify({name:'Sample enquiry',email:'other@example.invalid',subject:'Forge enquiry — Earn with Forge',submissionSource:'general',message:'I need a laptop to complete my course.'})]);
+ await db.query('select public.forge_laptop_reply_enqueue($1)',[otherId]);
+ assert.equal((await db.query('select public.forge_laptop_reply_claim() as result')).rows[0].result.kind,'enquiry');
  console.log('PASS: outbox SQL, duplicate protection, exclusive lease, receipt ownership, accepted-send suppression, private permissions. No live writes or email.');
 } finally {await db.close();}

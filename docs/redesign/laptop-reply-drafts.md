@@ -61,3 +61,20 @@ Reference: [request reference]
 We can forge it, together.
 The Forge team
 admin@forgeintellitech.com
+
+## General-form laptop enquiry — approved 6 November 2026
+
+Subject: About your laptop enquiry — Forge
+
+Hello [name],
+
+Thank you for telling us what you hope to do with a laptop. We have received your enquiry.
+
+Our current programme supports SS1–SS3 students in Nigerian public and low-income private secondary schools, with parent or guardian involvement and a year of learning with Forge. If this describes you or the child you are helping, please complete the guided student request at https://www.forgeintellitech.com/endless-possibilities/give-a-child-a-laptop/request-support so we have the details needed for review. If you have already completed that form, please do not submit it again.
+
+Requests for university study, work or community projects fall outside the programme’s current criteria, so we cannot promise a device for those purposes. You can reply to admin@forgeintellitech.com if you would like to clarify your situation.
+
+Thank you for your determination to keep building.
+
+We can forge it, together.
+The Forge team

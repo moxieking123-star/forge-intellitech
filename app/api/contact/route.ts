@@ -8,9 +8,19 @@ import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin as supabase } from "@/lib/supabase-admin";
 import { resend, FROM_EMAIL } from "@/lib/resend";
 import { contactNotificationEmail } from "@/lib/email-templates";
+import {isOtherLaptopRequest} from '@/lib/laptop-records';
+import {enqueueLaptopReply,deliverNextLaptopReply} from '@/lib/server/laptop-replies';
 
 export async function POST(request: NextRequest) {
-  if(participationBackendEnabled())return submitParticipation(request,"contact");
+  if(participationBackendEnabled()){
+    const result=await submitParticipation(request.clone(),"contact");
+    const input=result.status===201?await request.json().catch(()=>null):null;
+    if(result.status===201 && input && isOtherLaptopRequest({id:'new',payload:input})){
+      const receipt=await result.clone().json();
+      if(typeof receipt.id==='string')try{if(await enqueueLaptopReply(receipt.id))await deliverNextLaptopReply();}catch{/* The saved enquiry remains available for staff reconciliation. */}
+    }
+    return result;
+  }
   if(backendEnvironmentEnabled())return NextResponse.json({error:"Enquiry services are not enabled. Your details have not been submitted."},{status:503,headers:{"Cache-Control":"no-store"}});
   try {
     const body = await request.json().catch(() => null);

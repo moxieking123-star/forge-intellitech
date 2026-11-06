@@ -18,6 +18,11 @@ test('reviewed requests from other forms remain separate from student applicatio
  assert.equal(summary.publicCounts.requests,1);assert.equal(summary.publicCounts.otherLaptopEnquiries,1);assert.equal(summary.publicCounts.totalRequests,2);
  assert.deepEqual(summary.publicCounts.otherRequestLocations,[{state:'Oyo',count:1}]);
 });
+test('new laptop requests through general forms are included without treating curriculum descriptions as requests',()=>{
+ const other={id:'general',payload:{email:'general@example.invalid',subject:'Forge enquiry — Giving a laptop',message:'I really need a laptop to complete my cybersecurity course.'}};
+ const summary=summariseLaptopRecords([other,{...other,id:'repeat'},{id:'school',payload:{email:'school@example.invalid',subject:'School programme',message:'Our curriculum teaches technology and laptop skills.'}}]);
+ assert.equal(summary.publicCounts.requests,0);assert.equal(summary.publicCounts.otherLaptopEnquiries,1);assert.equal(summary.publicCounts.totalRequests,1);
+});
 test('structured and old form requests reconcile without exposing details',()=>{
  const summary=summariseLaptopRecords([make('one'),make('two',{message:JSON.stringify({initiative:'give-a-child-a-laptop',version:1,kind:'student',values:{studentName:'Fictional Child',school:'Sample School',location:'Ilorin South'}})})]);
  assert.equal(summary.publicCounts.requests,1);
@@ -32,4 +37,6 @@ test('replies explain review and route responses to Forge without promising allo
   assert(!content.text.includes('Hello Example\nName'));
   if(kind!=='donor')assert(content.text.includes('does not mean a laptop has been allocated'));
  }
+ const enquiry=laptopReply('enquiry','Example','reference');
+ assert(enquiry.text.includes('SS1–SS3'));assert(enquiry.text.includes('/request-support'));assert(enquiry.text.includes('please do not submit it again'));
 });

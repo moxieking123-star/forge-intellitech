@@ -23,7 +23,7 @@
 .fg-impact-grid strong { display:block; font-size:clamp(3rem,6vw,5rem); line-height:1.1; color:#f1c78b; }
 .fg-impact-grid h3 { font-size:1.15rem; margin:16px 0 8px; }
 .fg-laptop-impact .fg-fine { color:#e4e9df; }
-.forge-site .fg-laptop-impact :is(p,.fg-eyebrow) { color:#e4e9df; }
+.forge-site .fg-laptop-impact.fg-section :is(p,.fg-eyebrow) { color:#e4e9df; }
 .fg-review dd,.fg-review dt,.fg-form-panel label,.fg-application label { min-width:0; overflow-wrap:anywhere; }
 .fg-review dd { margin:0; }
 .fg-laptop-impact ul { padding-left:1.25rem; margin-top:16px; line-height:1.9; }
