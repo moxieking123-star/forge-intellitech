@@ -21,3 +21,7 @@ preview/
 .next-training/
 supabase/.temp/
 
+
+.next-final-audit/
+.next-referral-audit/
+output/

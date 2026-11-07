@@ -54,7 +54,8 @@
 .faq details { border-top:1px solid #96a18e; padding:22px 0; }
 .faq summary { font-size:18px; font-weight:750; cursor:pointer; line-height:1.5; }
 .faq details p { margin-top:18px; font-size:16px; }
-.closing { background:#eb6e31; }
+.closing { background: #f4d8c5; color: #142c25; --fg-muted: #384c43; }
+.closing .eyebrow { color: #3d5045; }
 .closing h2 { max-width:850px; }
 .closing p { font-size:20px; max-width:690px; margin-top:24px; }
 .closing .textLink { color:#142c25; }

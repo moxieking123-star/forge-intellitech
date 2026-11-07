@@ -214,13 +214,13 @@ export default function ReferralAccount({ enabled }: { enabled: boolean }) {
           location: location.trim(),
         }),
       });
-      if (response.status !== 201) throw new Error("Link unavailable");
+      if (response.status !== 201) { const detail=await response.json().catch(()=>null);throw new Error(typeof detail?.error === "string" ? detail.error.slice(0,350) : "We could not confirm that the school link was created. Refresh your records before trying again."); }
       setSchoolName("");
       setLocation("");
       await loadAccount();
-    } catch {
+    } catch (failure) {
       setCreateError(
-        "We could not confirm that the school link was created. Refresh your records before trying again, to avoid a duplicate.",
+        failure instanceof Error && !/fetch|network/i.test(failure.message) ? failure.message : "We could not confirm that the school link was created. Refresh your records before trying again, to avoid a duplicate.",
       );
     } finally {
       setCreating(false);

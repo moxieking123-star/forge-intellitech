@@ -6,6 +6,7 @@ import { ArrowRight } from "@phosphor-icons/react/dist/csr/ArrowRight";
 import { ArrowLeft } from "@phosphor-icons/react/dist/csr/ArrowLeft";
 import { CheckCircle } from "@phosphor-icons/react/dist/csr/CheckCircle";
 import { frontendPreview, sendContact, type ContactPayload } from "@/lib/frontend-preview";
+import {contactInterests,contactRoute} from '@/lib/contact-interests';
 
 export const supportPath = "/endless-possibilities/give-a-child-a-laptop/request-support";
 export const donorPath = "/endless-possibilities/give-a-child-a-laptop/donate";
@@ -59,10 +60,10 @@ export function EnquiryForm({initialInterest = "School partnership"}: {initialIn
     const data = new FormData(event.currentTarget);
     const value = (key: string) => String(data.get(key) || "").trim();
     const interest = value("interest");
-    await delivery.deliver({name:value("name"),email:value("email"),phone:value("phone"),subject:`Forge enquiry — ${interest}`,inquiryType:interest === "School partnership" ? "schools" : interest === "Giving a laptop" ? "support" : interest === "Volunteering or partnering" ? "partnership" : "general",submissionSource:interest === "School partnership" ? "programmes" : interest === "Giving a laptop" ? "endless-possibilities" : "general",message:[`Interest: ${interest}`,`School or organisation: ${value("organisation") || "Not provided"}`,value("message")].join("\n\n")});
+    await delivery.deliver({name:value("name"),email:value("email"),phone:value("phone"),subject:`Forge enquiry — ${interest}`,...contactRoute(interest),message:[`Interest: ${interest}`,`School or organisation: ${value("organisation") || "Not provided"}`,value("message")].join("\n\n")});
   }
   return <div className="fg-form-panel" id="enquire"><p className="fg-eyebrow">A conversation is a beginning</p><h2>Find your place at Forge.</h2>{delivery.done ? <Received kind="enquiry" reset={delivery.reset}/> : <form data-forge-form onSubmit={submit} aria-busy={delivery.busy}>
-    <label>I am here for…<select name="interest" defaultValue={initialInterest}>{["School partnership","Products & technology","Giving a laptop","Volunteering or partnering","Earn with Forge","Something else"].map(option=><option key={option}>{option}</option>)}</select></label>
+    <label>I am here for…<select name="interest" defaultValue={initialInterest}>{contactInterests.map(option=><option key={option}>{option}</option>)}</select></label>
     <label>Your name<input name="name" required maxLength={120} autoComplete="name" placeholder="What should we call you?" pattern=".*\S.*"/></label>
     <label>School or organisation <span className="fg-optional">(optional)</span><input name="organisation" maxLength={160} autoComplete="organization" placeholder="Where are you joining us from?"/></label>
     <div className="fg-form-grid"><label>Email<input name="email" required type="email" maxLength={254} autoComplete="email" placeholder="you@example.com"/></label><label>WhatsApp <span className="fg-optional">(optional)</span><input name="phone" type="tel" maxLength={80} autoComplete="tel" placeholder="Your number"/></label></div>

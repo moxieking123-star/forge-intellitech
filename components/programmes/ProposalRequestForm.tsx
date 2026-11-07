@@ -23,7 +23,7 @@ export default function ProposalRequestForm() {
     } catch (error) { setMessage(error instanceof Error ? error.message : "We could not send the proposal. Please try again."); }
     finally { setBusy(false); }
   }
-  return <section className={s.panel} id="proposal" aria-labelledby="proposal-title">
+  return <section className={`${s.panel} fg-proposal-panel`} id="proposal" aria-labelledby="proposal-title">
     <div><p className={s.kicker}>A beginning worth discussing</p><h2 id="proposal-title">The full picture.<br />In your inbox.</h2><p>Our school proposal explains the learning journey, devices, support and term fees in plain language. Leave your email and we’ll send you a copy to read with your team.</p><p>Schools can join for next term until <strong>31 December 2026</strong>.</p></div>
     <form onSubmit={submit} className={s.form}>
       <label>Your name<input name="name" autoComplete="name" maxLength={100} required /></label>

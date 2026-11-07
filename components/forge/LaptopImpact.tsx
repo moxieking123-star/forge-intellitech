@@ -1,11 +1,13 @@
 "use client";
 import {useEffect,useState} from 'react';
 import {deliveredLaptops} from '@/lib/laptop-initiative';
+import Link from 'next/link';
 
-export function LaptopImpact() {
+export function LaptopImpact({compact=false}:{compact?:boolean}) {
   const [counts,setCounts]=useState<{requests:number;totalRequests:number;otherLaptopEnquiries:number;otherRequestLocations:{state:string;count:number}[];donorOffers:number;requestLocations:{state:string;count:number}[];donorLocations:{state:string;count:number}[]}|null>(null);
   useEffect(()=>{let active=true;const controller=new AbortController();async function refresh(){try{const response=await fetch('/api/laptop-impact',{signal:controller.signal});if(!response.ok)return;const data=await response.json();if(active&&Number.isInteger(data.requests)&&Number.isInteger(data.donorOffers))setCounts(data);}catch{/* Do not turn a failed count request into a misleading zero. */}}void refresh();const timer=setInterval(refresh,60000);return()=>{active=false;controller.abort();clearInterval(timer);};},[]);
-  return <section className="fg-section fg-laptop-impact" aria-labelledby="laptop-impact-title"><div className="fg-container">
+  if(compact)return <aside className="fg-impact-mini" aria-label="Live laptop initiative counts"><p><span className="fg-live-dot"/>A beginning we can count</p><dl aria-live="polite"><div><dd>{counts?.totalRequests??'…'}</dd><dt>Requests received</dt></div><div><dd>{counts?.donorOffers??'…'}</dd><dt>Donor interest</dt></div><div><dd>{deliveredLaptops.total}</dd><dt>Laptops delivered</dt></div></dl><Link href="/endless-possibilities/give-a-child-a-laptop#laptop-counts">See the locations and progress →</Link></aside>;
+  return <section className="fg-section fg-laptop-impact" id="laptop-counts" aria-labelledby="laptop-impact-title"><div className="fg-container">
     <p className="fg-eyebrow">A beginning we can account for</p>
     <h2 id="laptop-impact-title">Three devices.<br/>Three chances to keep building.</h2>
     <p>These laptops have already reached their learners. Every next handover should be another beginning we can stand behind.</p>

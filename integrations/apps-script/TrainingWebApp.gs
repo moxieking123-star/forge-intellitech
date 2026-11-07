@@ -10,6 +10,17 @@ function forgeTrainingConnectionCheck() {
 }
 /** Owner-run setup aid. Logs only booleans and the environment, never secrets. */
 function forgeTrainingReportReadiness(){var result=forgeTrainingConnectionCheck();console.log(JSON.stringify(result));return result;}
+/** Owner-run release action for the separate production training workbook only. */
+function forgeTrainingActivateProduction(){
+ var readiness=forgeTrainingConnectionCheck();
+ if(readiness.environment!=='production'||!readiness.signingKeyReady)throw new Error('Production workbook and signing key must be configured before activation.');
+ var props=PropertiesService.getScriptProperties();
+ var sheet=SpreadsheetApp.openById(props.getProperty('TRAINING_SPREADSHEET_ID')).getSheetByName('Training_Config');
+ sheet.getRange(4,2).setValue(true);
+ SpreadsheetApp.flush();
+ props.setProperty('TRAINING_BRIDGE_ENABLED','true');
+ return forgeTrainingReportReadiness();
+}
 function doPost(e) {
   var result;
   try {
@@ -21,6 +32,8 @@ function doPost(e) {
     // Reject unauthenticated traffic before any spreadsheet reads.
     var now=Math.floor(Date.now()/1000);
     if (!(action === 'trainee.provision' ? forgeTrainingVerify_(envelope,config.secret,now) : action === 'trainee.session' ? forgeTrainingVerifySession_(envelope,config.secret,now) : action === 'trainee.workspace' ? forgeTrainingVerifyWorkspace_(envelope,config.secret,now) : forgeTrainingVerifyReview_(envelope,config.secret,now))) throw new Error('Unavailable');
+    // A reserved, signed health request reads configuration only; it creates no trainee or event.
+    if(action==='trainee.provision' && envelope.eventId==='00000000-0000-4000-8000-000000000000' && envelope.payload.applicantId===envelope.eventId && envelope.payload.assessmentReceiptId===envelope.eventId && envelope.payload.verifiedEmail==='connection-check@forge.invalid' && envelope.payload.displayName==='Forge connection check')return ContentService.createTextOutput(JSON.stringify(forgeTrainingConnectionCheck())).setMimeType(ContentService.MimeType.JSON);
     var environment=props.TRAINING_ENVIRONMENT||'test';
     if(['test','production'].indexOf(environment)<0||(environment==='production'&&props.TRAINING_SPREADSHEET_ID==='1o6P25drEjtvG1dizKwhshA1csv02wf0sC40fqAbEn5s'))throw new Error('Unavailable');
     var store=forgeTrainingCreateStore_({enabled:true,spreadsheetId:props.TRAINING_SPREADSHEET_ID,environment:environment,deferValidation:true});

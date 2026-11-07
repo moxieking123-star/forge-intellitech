@@ -10,3 +10,7 @@ node_modules/
 preview/
 docs/
 tests/
+
+.next-final-audit/
+.next-referral-audit/
+output/

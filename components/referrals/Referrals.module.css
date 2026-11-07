@@ -52,6 +52,7 @@
   font-weight: 800;
   text-decoration: none;
 }
+.page a.button { color: #fff9ef; }
 .button:hover {
   background: #28513f;
 }

@@ -1,4 +1,6 @@
 // Supply approved real destinations here. Empty entries are displayed as Coming soon without a link.
+export const whatsappNumber = "07078378525";
+export const whatsappUrl = "https://wa.me/2347078378525";
 export const socialChannels = [
   { label: "Facebook", url: "https://www.facebook.com/profile.php?id=61576776552817" },
   { label: "TikTok", url: "https://www.tiktok.com/@forge.its" },

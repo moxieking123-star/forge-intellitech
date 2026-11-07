@@ -253,4 +253,7 @@
 .row:nth-child(3n){border-top-color:var(--forge-brand-gold)}
 .row>*{min-width:0}.row h3{line-height:1.2;margin:0 0 14px}.row p{margin:0;max-width:65ch}.row a{display:inline-block;line-height:1.6}.number,.eyebrow{color:var(--forge-brand-blue)}
 .campaign .eyebrow{color:inherit}
+.campaign { background: linear-gradient(135deg, #80361f, #98421f); color: #fff8ed; --fg-muted: #fff0e2; }
+.campaign :is(p, a) { color: #fff8ed; }
+:global(.forge-site) .campaign p.eyebrow { color: #ffe5c9 !important; }
 @media(max-width:700px){.row{grid-template-columns:26px minmax(0,1fr);gap:14px;padding:24px 20px}.row>p{grid-column:2}.split h2,.section>h2{margin-bottom:18px}}

@@ -182,6 +182,7 @@
   background: #142c25;
   color: #f8f5ed;
 }
+:global(.forge-site) .overview p.eyebrow { color: #f2cf99 !important; }
 .overview h2 {
   margin: 22px 0;
 }
