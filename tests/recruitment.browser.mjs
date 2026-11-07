@@ -30,16 +30,29 @@ async function setup({signedIn=true,remaining=3,history=[],correct=23,seconds=30
  await page.goto(base+'/join/apply',{waitUntil:'domcontentloaded',timeout:120000});
  return {page,context,calls};
 }
+async function assertReadableHeading(heading){
+ const ratio=await heading.evaluate(node=>{
+  const luminance=color=>color.match(/[\d.]+/g).slice(0,3).map(Number).map(n=>n/255).map(n=>n<=.04045?n/12.92:((n+.055)/1.055)**2.4).reduce((sum,n,i)=>sum+n*[.2126,.7152,.0722][i],0);
+  const foreground=luminance(getComputedStyle(node).color);
+  let background=1;
+  for(let parent=node;parent;parent=parent.parentElement){
+   const color=getComputedStyle(parent).backgroundColor;
+   if(color.startsWith('rgb(')){background=luminance(color);break;}
+  }
+  return (Math.max(foreground,background)+.05)/(Math.min(foreground,background)+.05);
+ });
+ assert.ok(ratio>=4.5,`Heading contrast was ${ratio.toFixed(2)}:1`);
+}
 try{
  const login=await setup({signedIn:false});await login.page.getByRole('heading',{name:'A person, not just a CV.'}).waitFor();assert.equal(await login.page.getByRole('button',{name:'Email my sign-in link'}).isDisabled(),true);await login.context.close();
  const main=await setup({failSave:true});const {page,calls}=main;
  await page.getByRole('heading',{name:'Tell us what you bring.'}).waitFor();
- assert.equal(await page.getByRole('heading',{level:1}).evaluate(node=>getComputedStyle(node).color),'rgb(17, 43, 35)');
+ await assertReadableHeading(page.getByRole('heading',{level:1}));
  for(const width of [1440,768,390]){await page.setViewportSize({width,height:1000});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`form overflow at ${width}`);}
  await page.screenshot({path:'private-assets/recruitment-application-mobile.png',fullPage:true});
  await page.getByRole('checkbox').check();await page.getByRole('button',{name:/Save and start my five-minute assessment/}).click();
  await page.getByRole('heading',{name:'Show us the basics.'}).waitFor();assert.equal(calls.filter(c=>c.action==='start').length,1);
- assert.equal(await page.getByRole('heading',{name:'Show us the basics.'}).evaluate(node=>getComputedStyle(node).color),'rgb(17, 43, 35)');
+ await assertReadableHeading(page.getByRole('heading',{name:'Show us the basics.'}));
  await page.getByLabel('A clear plan',{exact:true}).check();await page.getByRole('alert').filter({hasText:'Some answers'}).waitFor();await page.getByRole('button',{name:'Retry saving'}).click();await page.getByRole('status').filter({hasText:'All selected answers saved'}).waitFor();
  for(const width of [1440,768,390]){await page.setViewportSize({width,height:1000});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`assessment overflow at ${width}`);}
  await page.setViewportSize({width:1440,height:1000});await page.screenshot({path:'private-assets/recruitment-assessment-desktop.png',fullPage:true});
